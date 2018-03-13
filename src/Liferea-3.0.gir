@@ -1,0 +1,1537 @@
+<?xml version="1.0"?>
+<!-- This file was automatically generated from C sources - DO NOT EDIT!
+To affect the contents of this file, edit the original C definitions,
+and/or use gtk-doc annotations.  -->
+<repository version="1.2"
+            xmlns="http://www.gtk.org/introspection/core/1.0"
+            xmlns:c="http://www.gtk.org/introspection/c/1.0"
+            xmlns:glib="http://www.gtk.org/introspection/glib/1.0">
+  <include name="Gtk" version="3.0"/>
+  <namespace name="Liferea"
+             version="3.0"
+             shared-library=""
+             c:identifier-prefixes="Liferea"
+             c:symbol-prefixes="liferea">
+    <interface name="AuthActivatable"
+               c:symbol-prefix="auth_activatable"
+               c:type="LifereaAuthActivatable"
+               glib:type-name="LifereaAuthActivatable"
+               glib:get-type="liferea_auth_activatable_get_type"
+               glib:type-struct="AuthActivatableInterface">
+      <virtual-method name="activate" invoker="activate">
+        <doc xml:space="preserve">Activates the extension.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">A #LifereaAuthActivatable.</doc>
+            <type name="AuthActivatable" c:type="LifereaAuthActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="deactivate" invoker="deactivate">
+        <doc xml:space="preserve">Deactivates the extension.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">A #LifereaAuthActivatable.</doc>
+            <type name="AuthActivatable" c:type="LifereaAuthActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="query" invoker="query">
+        <doc xml:space="preserve">Triggers a query for authentication infos for a given subscription.
+Expects triggered plugins to use liferea_auth_info_add() to provide
+any matches.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">a #LifereaAuthActivatable.</doc>
+            <type name="AuthActivatable" c:type="LifereaAuthActivatable*"/>
+          </instance-parameter>
+          <parameter name="authId" transfer-ownership="none">
+            <doc xml:space="preserve">a unique auth info id</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="store" invoker="store">
+        <doc xml:space="preserve">Triggers a query for authentication infos for a given subscription.
+Expects triggered plugins to use liferea_auth_info_add() to provide
+any matches.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">a #LifereaAuthActivatable.</doc>
+            <type name="AuthActivatable" c:type="LifereaAuthActivatable*"/>
+          </instance-parameter>
+          <parameter name="authId" transfer-ownership="none">
+            <doc xml:space="preserve">a unique auth info id</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="username" transfer-ownership="none">
+            <doc xml:space="preserve">the username to store</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="password" transfer-ownership="none">
+            <doc xml:space="preserve">the password to store</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <method name="activate" c:identifier="liferea_auth_activatable_activate">
+        <doc xml:space="preserve">Activates the extension.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">A #LifereaAuthActivatable.</doc>
+            <type name="AuthActivatable" c:type="LifereaAuthActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="deactivate"
+              c:identifier="liferea_auth_activatable_deactivate">
+        <doc xml:space="preserve">Deactivates the extension.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">A #LifereaAuthActivatable.</doc>
+            <type name="AuthActivatable" c:type="LifereaAuthActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="query" c:identifier="liferea_auth_activatable_query">
+        <doc xml:space="preserve">Triggers a query for authentication infos for a given subscription.
+Expects triggered plugins to use liferea_auth_info_add() to provide
+any matches.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">a #LifereaAuthActivatable.</doc>
+            <type name="AuthActivatable" c:type="LifereaAuthActivatable*"/>
+          </instance-parameter>
+          <parameter name="authId" transfer-ownership="none">
+            <doc xml:space="preserve">a unique auth info id</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="store" c:identifier="liferea_auth_activatable_store">
+        <doc xml:space="preserve">Triggers a query for authentication infos for a given subscription.
+Expects triggered plugins to use liferea_auth_info_add() to provide
+any matches.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">a #LifereaAuthActivatable.</doc>
+            <type name="AuthActivatable" c:type="LifereaAuthActivatable*"/>
+          </instance-parameter>
+          <parameter name="authId" transfer-ownership="none">
+            <doc xml:space="preserve">a unique auth info id</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="username" transfer-ownership="none">
+            <doc xml:space="preserve">the username to store</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="password" transfer-ownership="none">
+            <doc xml:space="preserve">the password to store</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </method>
+    </interface>
+    <record name="AuthActivatableInterface"
+            c:type="LifereaAuthActivatableInterface"
+            glib:is-gtype-struct-for="AuthActivatable">
+      <field name="g_iface">
+        <type name="GObject.TypeInterface" c:type="GTypeInterface"/>
+      </field>
+      <field name="activate">
+        <callback name="activate">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="activatable" transfer-ownership="none">
+              <doc xml:space="preserve">A #LifereaAuthActivatable.</doc>
+              <type name="AuthActivatable" c:type="LifereaAuthActivatable*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="deactivate">
+        <callback name="deactivate">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="activatable" transfer-ownership="none">
+              <doc xml:space="preserve">A #LifereaAuthActivatable.</doc>
+              <type name="AuthActivatable" c:type="LifereaAuthActivatable*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="query">
+        <callback name="query">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="activatable" transfer-ownership="none">
+              <doc xml:space="preserve">a #LifereaAuthActivatable.</doc>
+              <type name="AuthActivatable" c:type="LifereaAuthActivatable*"/>
+            </parameter>
+            <parameter name="authId" transfer-ownership="none">
+              <doc xml:space="preserve">a unique auth info id</doc>
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="store">
+        <callback name="store">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="activatable" transfer-ownership="none">
+              <doc xml:space="preserve">a #LifereaAuthActivatable.</doc>
+              <type name="AuthActivatable" c:type="LifereaAuthActivatable*"/>
+            </parameter>
+            <parameter name="authId" transfer-ownership="none">
+              <doc xml:space="preserve">a unique auth info id</doc>
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+            <parameter name="username" transfer-ownership="none">
+              <doc xml:space="preserve">the username to store</doc>
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+            <parameter name="password" transfer-ownership="none">
+              <doc xml:space="preserve">the password to store</doc>
+              <type name="utf8" c:type="const gchar*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+    </record>
+    <class name="ItemView"
+           c:symbol-prefix="itemview"
+           c:type="ItemView"
+           parent="GObject.Object"
+           glib:type-name="ItemView"
+           glib:get-type="itemview_get_type"
+           glib:type-struct="ItemViewClass">
+      <function name="add_item"
+                c:identifier="itemview_add_item"
+                introspectable="0">
+        <doc xml:space="preserve">Adds an item to the view for rendering. The item must belong
+to the item set that was announced with itemview_set_displayed_node().
+
+@param item		the item to add
+
+TODO: use item merger signal instead</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="item" transfer-ownership="none">
+            <type c:type="itemPtr"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="clear" c:identifier="itemview_clear">
+        <doc xml:space="preserve">Removes all currently loaded items from the item view.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </function>
+      <function name="create" c:identifier="itemview_create">
+        <doc xml:space="preserve">Creates the item view singleton instance.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the item view instance</doc>
+          <type name="ItemView" c:type="ItemView*"/>
+        </return-value>
+        <parameters>
+          <parameter name="window" transfer-ownership="none">
+            <doc xml:space="preserve">parent window widget</doc>
+            <type name="Gtk.Widget" c:type="GtkWidget*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="display_info" c:identifier="itemview_display_info">
+        <doc xml:space="preserve">Sets an info display in the item view HTML widget.
+Used for special functionality like search result info.
+
+@param html	HTML to present</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="html" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="do_zoom" c:identifier="itemview_do_zoom">
+        <doc xml:space="preserve">Requests the item view to change zoom level.
+
+@param in	TRUE if zooming in, FALSE for zooming out</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="in" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="find_unread_item"
+                c:identifier="itemview_find_unread_item"
+                introspectable="0">
+        <doc xml:space="preserve">Finds the next unread item.
+
+@param startId	the item id to start at (or NULL for starting at the top)
+
+@results the item found (or NULL)</doc>
+        <return-value>
+          <type c:type="itemPtr"/>
+        </return-value>
+        <parameters>
+          <parameter name="startId" transfer-ownership="none">
+            <type name="gulong" c:type="gulong"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="launch_URL" c:identifier="itemview_launch_URL">
+        <doc xml:space="preserve">Launch the given URL in the currently active HTML view.
+
+@param url		the link to load
+@param forceInternal	TRUE if internal browsing is to be enforced</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="url" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="internal" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="move_cursor" c:identifier="itemview_move_cursor">
+        <doc xml:space="preserve">Moves the cursor in the item list step times.
+Negative value means moving backwards.
+
+@param step	moving steps</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="step" transfer-ownership="none">
+            <type name="gint" c:type="int"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="move_cursor_to_first"
+                c:identifier="itemview_move_cursor_to_first">
+        <doc xml:space="preserve">Moves the cursor in the item list to the first element.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </function>
+      <function name="remove_item"
+                c:identifier="itemview_remove_item"
+                introspectable="0">
+        <doc xml:space="preserve">Removes a given item from the view.
+
+@param item	the item to remove
+
+TODO: use item merger signal instead</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="item" transfer-ownership="none">
+            <type c:type="itemPtr"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="scroll" c:identifier="itemview_scroll">
+        <doc xml:space="preserve">Paging/skimming the item view. If possible scrolls
+down otherwise it triggers Next-Unread.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </function>
+      <function name="select_enclosure"
+                c:identifier="itemview_select_enclosure">
+        <doc xml:space="preserve">Selects the nth enclosure in the enclosure list view currently presented.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="position" transfer-ownership="none">
+            <doc xml:space="preserve">the position to select</doc>
+            <type name="guint" c:type="guint"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="select_item"
+                c:identifier="itemview_select_item"
+                introspectable="0">
+        <doc xml:space="preserve">Selects a given item in the view. The item must be
+added using itemview_add_item before selecting.
+
+@param item the item to select</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="item" transfer-ownership="none">
+            <type c:type="itemPtr"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="set_displayed_node"
+                c:identifier="itemview_set_displayed_node"
+                introspectable="0">
+        <doc xml:space="preserve">Prepares the view for displaying items of the given node.
+
+@param node	the node whose items are to be presented</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="node" transfer-ownership="none">
+            <type c:type="nodePtr"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="set_layout"
+                c:identifier="itemview_set_layout"
+                introspectable="0">
+        <doc xml:space="preserve">Switches the layout for the given viewing mode.
+
+@param newMode	new view mode (NODE_VIEW_MODE_*)</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="newMode" transfer-ownership="none">
+            <type c:type="nodeViewType"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="set_mode" c:identifier="itemview_set_mode">
+        <doc xml:space="preserve">Set/unset the display mode of the item view.
+
+@param mode		item view mode constant</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="mode" transfer-ownership="none">
+            <type name="itemViewMode" c:type="itemViewMode"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="update" c:identifier="itemview_update">
+        <doc xml:space="preserve">Refreshes the item view. Needs to be called after each
+add, remove or update of one or more items.
+
+TODO: register for signal at item merger instead</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </function>
+      <function name="update_all_items"
+                c:identifier="itemview_update_all_items">
+        <doc xml:space="preserve">Requests updating the rendering of a all displayed items.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </function>
+      <function name="update_item"
+                c:identifier="itemview_update_item"
+                introspectable="0">
+        <doc xml:space="preserve">Requests updating the rendering of a given item.
+
+@param item	the item to update</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="item" transfer-ownership="none">
+            <type c:type="itemPtr"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="update_node_info"
+                c:identifier="itemview_update_node_info">
+        <doc xml:space="preserve">Requests updating the rendering of the node info view.
+
+@node node	the node whose info view is to be updated
+
+TODO: register for signal at feed merger instead</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="node"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <type name="gpointer" c:type="node*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="ItemViewPrivate" c:type="ItemViewPrivate*"/>
+      </field>
+    </class>
+    <record name="ItemViewClass"
+            c:type="ItemViewClass"
+            glib:is-gtype-struct-for="ItemView">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="ItemViewPrivate" c:type="ItemViewPrivate" disguised="1">
+    </record>
+    <interface name="MediaPlayerActivatable"
+               c:symbol-prefix="media_player_activatable"
+               c:type="LifereaMediaPlayerActivatable"
+               glib:type-name="LifereaMediaPlayerActivatable"
+               glib:get-type="liferea_media_player_activatable_get_type"
+               glib:type-struct="MediaPlayerActivatableInterface">
+      <virtual-method name="activate" invoker="activate">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <type name="MediaPlayerActivatable"
+                  c:type="LifereaMediaPlayerActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="deactivate" invoker="deactivate">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <type name="MediaPlayerActivatable"
+                  c:type="LifereaMediaPlayerActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="load" invoker="load">
+        <doc xml:space="preserve">Triggers the creation of a suitable media player and loads a list of
+enclosures into it.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <type name="MediaPlayerActivatable"
+                  c:type="LifereaMediaPlayerActivatable*"/>
+          </instance-parameter>
+          <parameter name="parentWidget" transfer-ownership="none">
+            <doc xml:space="preserve">the parent widget for the media player</doc>
+            <type name="Gtk.Widget" c:type="GtkWidget*"/>
+          </parameter>
+          <parameter name="enclosures" transfer-ownership="none">
+            <doc xml:space="preserve">a list of enclosures</doc>
+            <type name="GLib.SList" c:type="GSList*">
+              <type name="utf8"/>
+            </type>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <method name="activate"
+              c:identifier="liferea_media_player_activatable_activate">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <type name="MediaPlayerActivatable"
+                  c:type="LifereaMediaPlayerActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="deactivate"
+              c:identifier="liferea_media_player_activatable_deactivate">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <type name="MediaPlayerActivatable"
+                  c:type="LifereaMediaPlayerActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="load" c:identifier="liferea_media_player_activatable_load">
+        <doc xml:space="preserve">Triggers the creation of a suitable media player and loads a list of
+enclosures into it.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <type name="MediaPlayerActivatable"
+                  c:type="LifereaMediaPlayerActivatable*"/>
+          </instance-parameter>
+          <parameter name="parentWidget" transfer-ownership="none">
+            <doc xml:space="preserve">the parent widget for the media player</doc>
+            <type name="Gtk.Widget" c:type="GtkWidget*"/>
+          </parameter>
+          <parameter name="enclosures" transfer-ownership="none">
+            <doc xml:space="preserve">a list of enclosures</doc>
+            <type name="GLib.SList" c:type="GSList*">
+              <type name="utf8"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
+    </interface>
+    <record name="MediaPlayerActivatableInterface"
+            c:type="LifereaMediaPlayerActivatableInterface"
+            glib:is-gtype-struct-for="MediaPlayerActivatable">
+      <field name="g_iface">
+        <type name="GObject.TypeInterface" c:type="GTypeInterface"/>
+      </field>
+      <field name="activate">
+        <callback name="activate">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="activatable" transfer-ownership="none">
+              <type name="MediaPlayerActivatable"
+                    c:type="LifereaMediaPlayerActivatable*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="deactivate">
+        <callback name="deactivate">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="activatable" transfer-ownership="none">
+              <type name="MediaPlayerActivatable"
+                    c:type="LifereaMediaPlayerActivatable*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="load">
+        <callback name="load">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="activatable" transfer-ownership="none">
+              <type name="MediaPlayerActivatable"
+                    c:type="LifereaMediaPlayerActivatable*"/>
+            </parameter>
+            <parameter name="parentWidget" transfer-ownership="none">
+              <doc xml:space="preserve">the parent widget for the media player</doc>
+              <type name="Gtk.Widget" c:type="GtkWidget*"/>
+            </parameter>
+            <parameter name="enclosures" transfer-ownership="none">
+              <doc xml:space="preserve">a list of enclosures</doc>
+              <type name="GLib.SList" c:type="GSList*">
+                <type name="utf8"/>
+              </type>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+    </record>
+    <class name="Shell"
+           c:symbol-prefix="shell"
+           c:type="LifereaShell"
+           parent="GObject.Object"
+           glib:type-name="LifereaShell"
+           glib:get-type="liferea_shell_get_type"
+           glib:type-struct="ShellClass">
+      <function name="create" c:identifier="liferea_shell_create">
+        <doc xml:space="preserve">Set up the Liferea main window.
+
+@param app	the GtkApplication to attach the main window to
+@param overrideWindowState	optional parameter for window state (or NULL)</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="app" transfer-ownership="none">
+            <type name="Gtk.Application" c:type="GtkApplication*"/>
+          </parameter>
+          <parameter name="overrideWindowState" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="destroy" c:identifier="liferea_shell_destroy">
+        <doc xml:space="preserve">Destroys the global liferea_shell object.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </function>
+      <function name="get_window" c:identifier="liferea_shell_get_window">
+        <doc xml:space="preserve">Returns the Liferea main window.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the main window widget found or NULL</doc>
+          <type name="Gtk.Widget" c:type="GtkWidget*"/>
+        </return-value>
+      </function>
+      <function name="lookup" c:identifier="liferea_shell_lookup">
+        <doc xml:space="preserve">Searches the glade XML UI tree for the given widget
+name and returns the found widget.</doc>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve">the widget found or NULL</doc>
+          <type name="Gtk.Widget" c:type="GtkWidget*"/>
+        </return-value>
+        <parameters>
+          <parameter name="name" transfer-ownership="none">
+            <doc xml:space="preserve">the widget name</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="present" c:identifier="liferea_shell_present">
+        <doc xml:space="preserve">Presents the main window if it is hidden.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </function>
+      <function name="set_important_status_bar"
+                c:identifier="liferea_shell_set_important_status_bar"
+                introspectable="0">
+        <doc xml:space="preserve">Similar to liferea_shell_set_status_message(), but ensures
+that messages stay visible and avoids that those messages
+are overwritten by unimportant ones.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="format" transfer-ownership="none">
+            <type name="utf8" c:type="const char*"/>
+          </parameter>
+          <parameter name="..." transfer-ownership="none">
+            <varargs/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="set_status_bar"
+                c:identifier="liferea_shell_set_status_bar"
+                introspectable="0">
+        <doc xml:space="preserve">Sets the status bar text. Takes printf() like parameters.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="format" transfer-ownership="none">
+            <type name="utf8" c:type="const char*"/>
+          </parameter>
+          <parameter name="..." transfer-ownership="none">
+            <varargs/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="set_toolbar_style"
+                c:identifier="liferea_shell_set_toolbar_style">
+        <doc xml:space="preserve">Sets the toolbar to a particular style
+
+@param toolbar_style text string containing the type of style to use</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="toolbar_style" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="set_view_mode"
+                c:identifier="liferea_shell_set_view_mode"
+                introspectable="0">
+        <doc xml:space="preserve">Update the mode selection in the menu</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="newMode" transfer-ownership="none">
+            <doc xml:space="preserve">the new mode</doc>
+            <type c:type="nodeViewType"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="toggle_visibility"
+                c:identifier="liferea_shell_toggle_visibility">
+        <doc xml:space="preserve">Toggles main window visibility.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </function>
+      <function name="update_allitems_actions"
+                c:identifier="liferea_shell_update_allitems_actions">
+        <doc xml:space="preserve">Update the sensitivity of options affecting item sets.
+
+@param isNotEmpty	TRUE if there is a non-empty item set active
+@param isRead	TRUE if there are no unread items in the item set
+
+TODO: use signal instead</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="isNotEmpty" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+          <parameter name="isRead" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="update_feed_menu"
+                c:identifier="liferea_shell_update_feed_menu">
+        <doc xml:space="preserve">Update the sensitivity of options affecting single feeds.
+
+@param add           TRUE if subscribing is to be enabled
+@param enabled	TRUE if feed actions are to be enabled
+@param readWrite	TRUE if feed list modifying actions are enabled
+
+TODO: use signal instead</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="add" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+          <parameter name="enabled" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+          <parameter name="readWrite" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="update_history_actions"
+                c:identifier="liferea_shell_update_history_actions">
+        <doc xml:space="preserve">Update item history menu actions and toolbar buttons.
+
+TODO: use signal instead</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </function>
+      <function name="update_item_menu"
+                c:identifier="liferea_shell_update_item_menu">
+        <doc xml:space="preserve">Update the sensitivity of options affecting single items.
+
+@param enabled	TRUE if item actions are to be enabled
+
+TODO: use signal instead</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="enabled" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="update_toolbar"
+                c:identifier="liferea_shell_update_toolbar">
+        <doc xml:space="preserve">According to the preferences this function enables/disables the toolbar.
+
+TODO: use signal instead</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </function>
+      <function name="update_unread_stats"
+                c:identifier="liferea_shell_update_unread_stats">
+        <doc xml:space="preserve">Updates the unread/new item count right beneath the status bar.
+
+TODO: use signal instead</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </function>
+      <function name="update_update_menu"
+                c:identifier="liferea_shell_update_update_menu">
+        <doc xml:space="preserve">Set the sensitivity of items in the update menu.
+
+@param enabled	TRUE if menu options are to be enabled
+
+TODO: use signal instead</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="enabled" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </function>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+      <field name="priv" readable="0" private="1">
+        <type name="ShellPrivate" c:type="LifereaShellPrivate*"/>
+      </field>
+    </class>
+    <interface name="ShellActivatable"
+               c:symbol-prefix="shell_activatable"
+               c:type="LifereaShellActivatable"
+               glib:type-name="LifereaShellActivatable"
+               glib:get-type="liferea_shell_activatable_get_type"
+               glib:type-struct="ShellActivatableInterface">
+      <virtual-method name="activate" invoker="activate">
+        <doc xml:space="preserve">Activates the extension on the shell property.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">A #LifereaShellActivatable.</doc>
+            <type name="ShellActivatable" c:type="LifereaShellActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="deactivate" invoker="deactivate">
+        <doc xml:space="preserve">Deactivates the extension on the shell property.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">A #LifereaShellActivatable.</doc>
+            <type name="ShellActivatable" c:type="LifereaShellActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="update_state" invoker="update_state">
+        <doc xml:space="preserve">Triggers an update of the extension internal state to take into account
+state changes in the window, due to some event or user action.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">A #LifereaShellActivatable.</doc>
+            <type name="ShellActivatable" c:type="LifereaShellActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </virtual-method>
+      <method name="activate"
+              c:identifier="liferea_shell_activatable_activate">
+        <doc xml:space="preserve">Activates the extension on the shell property.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">A #LifereaShellActivatable.</doc>
+            <type name="ShellActivatable" c:type="LifereaShellActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="deactivate"
+              c:identifier="liferea_shell_activatable_deactivate">
+        <doc xml:space="preserve">Deactivates the extension on the shell property.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">A #LifereaShellActivatable.</doc>
+            <type name="ShellActivatable" c:type="LifereaShellActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="update_state"
+              c:identifier="liferea_shell_activatable_update_state">
+        <doc xml:space="preserve">Triggers an update of the extension internal state to take into account
+state changes in the window, due to some event or user action.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="activatable" transfer-ownership="none">
+            <doc xml:space="preserve">A #LifereaShellActivatable.</doc>
+            <type name="ShellActivatable" c:type="LifereaShellActivatable*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <property name="shell"
+                writable="1"
+                construct-only="1"
+                transfer-ownership="none">
+        <type name="Shell"/>
+      </property>
+    </interface>
+    <record name="ShellActivatableInterface"
+            c:type="LifereaShellActivatableInterface"
+            glib:is-gtype-struct-for="ShellActivatable">
+      <field name="g_iface">
+        <type name="GObject.TypeInterface" c:type="GTypeInterface"/>
+      </field>
+      <field name="activate">
+        <callback name="activate">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="activatable" transfer-ownership="none">
+              <doc xml:space="preserve">A #LifereaShellActivatable.</doc>
+              <type name="ShellActivatable" c:type="LifereaShellActivatable*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="deactivate">
+        <callback name="deactivate">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="activatable" transfer-ownership="none">
+              <doc xml:space="preserve">A #LifereaShellActivatable.</doc>
+              <type name="ShellActivatable" c:type="LifereaShellActivatable*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+      <field name="update_state">
+        <callback name="update_state">
+          <return-value transfer-ownership="none">
+            <type name="none" c:type="void"/>
+          </return-value>
+          <parameters>
+            <parameter name="activatable" transfer-ownership="none">
+              <doc xml:space="preserve">A #LifereaShellActivatable.</doc>
+              <type name="ShellActivatable" c:type="LifereaShellActivatable*"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
+    </record>
+    <record name="ShellClass"
+            c:type="LifereaShellClass"
+            glib:is-gtype-struct-for="Shell">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <record name="ShellPrivate" c:type="LifereaShellPrivate" disguised="1">
+    </record>
+    <function name="auth_has_active_store"
+              c:identifier="liferea_auth_has_active_store">
+      <doc xml:space="preserve">Method to query whether there is an active password store.
+
+@returns TRUE if there is a password store</doc>
+      <return-value transfer-ownership="none">
+        <type name="gboolean" c:type="gboolean"/>
+      </return-value>
+    </function>
+    <function name="auth_info_from_store"
+              c:identifier="liferea_auth_info_from_store">
+      <doc xml:space="preserve">@param authId		a node id
+@param username
+@param password
+
+Allow plugins to provide authentication infos</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="authId" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="username" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="password" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="auth_info_query" c:identifier="liferea_auth_info_query">
+      <doc xml:space="preserve">Return auth information for a given node. Each extension able to
+supply a user name and password for the given id is to synchronously call
+liferea_auth_info_from_store() to set them.
+
+@param authId		a node id
+@param username		reference to return username
+@param password		reference to return password</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="authId" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="auth_info_store" c:identifier="liferea_auth_info_store">
+      <doc xml:space="preserve">@param subscription		pointer to a subscription
+
+Save given authentication info of a given subscription into password store (if available).</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="subscription"
+                   transfer-ownership="none"
+                   nullable="1"
+                   allow-none="1">
+          <type name="gpointer" c:type="gpointer"/>
+        </parameter>
+      </parameters>
+    </function>
+    <record name="encType" c:type="encType">
+      <field name="mime" writable="1">
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+      <field name="extension" writable="1">
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+      <field name="cmd" writable="1">
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+      <field name="permanent" writable="1">
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+    </record>
+    <record name="encTypePtr" c:type="encTypePtr" disguised="1">
+    </record>
+    <record name="enclosure" c:type="enclosure">
+      <field name="url" writable="1">
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+      <field name="mime" writable="1">
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+      <field name="size" writable="1">
+        <type name="gssize" c:type="gssize"/>
+      </field>
+      <field name="downloaded" writable="1">
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <function name="download" c:identifier="enclosure_download">
+        <doc xml:space="preserve">Downloads a given enclosure URL into a file</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="type" transfer-ownership="none">
+            <doc xml:space="preserve">ULL or pointer to type structure</doc>
+            <type name="encTypePtr" c:type="encTypePtr"/>
+          </parameter>
+          <parameter name="url" transfer-ownership="none">
+            <doc xml:space="preserve">valid HTTP URL</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="interactive" transfer-ownership="none">
+            <doc xml:space="preserve">TRUE if triggered by user interaction</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="free" c:identifier="enclosure_free">
+        <doc xml:space="preserve">Free all memory associated with the enclosure.
+
+@oparam enclosure	the enclosure</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="enclosure" transfer-ownership="none">
+            <type name="enclosurePtr" c:type="enclosurePtr"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="from_string"
+                c:identifier="enclosure_from_string"
+                introspectable="0">
+        <doc xml:space="preserve">Parses enclosure description.
+
+@param str		the enclosure description
+
+@returns new enclosure structure (to be free'd using enclosure_free)</doc>
+        <return-value>
+          <type name="enclosurePtr" c:type="enclosurePtr"/>
+        </return-value>
+        <parameters>
+          <parameter name="str" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="get_mime" c:identifier="enclosure_get_mime">
+        <doc xml:space="preserve">Get MIME type from enclosure string</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">MIME type string, free after use</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <parameter name="str" transfer-ownership="none">
+            <doc xml:space="preserve">enclosure string to parse</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="get_url" c:identifier="enclosure_get_url">
+        <doc xml:space="preserve">Get URL from enclosure string</doc>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve">URL string, free after use</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <parameter name="str" transfer-ownership="none">
+            <doc xml:space="preserve">enclosure string to parse</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="mime_type_add" c:identifier="enclosure_mime_type_add">
+        <doc xml:space="preserve">Adds a new MIME type handling definition.
+
+@param type	the new definition</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="type" transfer-ownership="none">
+            <type name="encTypePtr" c:type="encTypePtr"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="mime_type_remove"
+                c:identifier="enclosure_mime_type_remove">
+        <doc xml:space="preserve">Removes an existing MIME type handling definition.
+The definition will be free'd by this function.
+
+@param type	the definition to remove</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="type" transfer-ownership="none">
+            <type name="encTypePtr" c:type="encTypePtr"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="mime_types_get"
+                c:identifier="enclosure_mime_types_get"
+                introspectable="0">
+        <doc xml:space="preserve">Returns all configured enclosure types.
+
+@returns list of encType structures</doc>
+        <return-value transfer-ownership="none">
+          <type name="GLib.SList" c:type="const GSList*">
+            <type name="gpointer" c:type="gpointer"/>
+          </type>
+        </return-value>
+      </function>
+      <function name="mime_types_save"
+                c:identifier="enclosure_mime_types_save">
+        <doc xml:space="preserve">Save all MIME type definitions.</doc>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </function>
+      <function name="to_string" c:identifier="enclosure_to_string">
+        <doc xml:space="preserve">Serialize enclosure to string.
+
+@param enclosure	the enclosure
+
+@returns new string (to be free'd using g_free)</doc>
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <parameter name="enclosure" transfer-ownership="none">
+            <type name="enclosurePtr" c:type="const enclosurePtr"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="values_to_string"
+                c:identifier="enclosure_values_to_string">
+        <doc xml:space="preserve">Serialize enclosure infos to string.
+
+@param url		the enclosure URL
+@param mime		the MIME type (optional, can be NULL)
+@param size  	the enclosure size (optional, can be 0, and also -1)
+@param downloaded	downloading state (TRUE=downloaded)
+
+@returns new string (to be free'd using g_free)</doc>
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <parameter name="url" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="mime" transfer-ownership="none">
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+          <parameter name="size" transfer-ownership="none">
+            <type name="gssize" c:type="gssize"/>
+          </parameter>
+          <parameter name="downloaded" transfer-ownership="none">
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+        </parameters>
+      </function>
+    </record>
+    <record name="enclosurePtr" c:type="enclosurePtr" disguised="1">
+    </record>
+    <function name="enclosure_download"
+              c:identifier="enclosure_download"
+              moved-to="enclosure.download">
+      <doc xml:space="preserve">Downloads a given enclosure URL into a file</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="type" transfer-ownership="none">
+          <doc xml:space="preserve">ULL or pointer to type structure</doc>
+          <type name="encTypePtr" c:type="encTypePtr"/>
+        </parameter>
+        <parameter name="url" transfer-ownership="none">
+          <doc xml:space="preserve">valid HTTP URL</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="interactive" transfer-ownership="none">
+          <doc xml:space="preserve">TRUE if triggered by user interaction</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="enclosure_free"
+              c:identifier="enclosure_free"
+              moved-to="enclosure.free">
+      <doc xml:space="preserve">Free all memory associated with the enclosure.
+
+@oparam enclosure	the enclosure</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="enclosure" transfer-ownership="none">
+          <type name="enclosurePtr" c:type="enclosurePtr"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="enclosure_from_string"
+              c:identifier="enclosure_from_string"
+              moved-to="enclosure.from_string"
+              introspectable="0">
+      <doc xml:space="preserve">Parses enclosure description.
+
+@param str		the enclosure description
+
+@returns new enclosure structure (to be free'd using enclosure_free)</doc>
+      <return-value>
+        <type name="enclosurePtr" c:type="enclosurePtr"/>
+      </return-value>
+      <parameters>
+        <parameter name="str" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="enclosure_get_mime"
+              c:identifier="enclosure_get_mime"
+              moved-to="enclosure.get_mime">
+      <doc xml:space="preserve">Get MIME type from enclosure string</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">MIME type string, free after use</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="str" transfer-ownership="none">
+          <doc xml:space="preserve">enclosure string to parse</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="enclosure_get_url"
+              c:identifier="enclosure_get_url"
+              moved-to="enclosure.get_url">
+      <doc xml:space="preserve">Get URL from enclosure string</doc>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve">URL string, free after use</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="str" transfer-ownership="none">
+          <doc xml:space="preserve">enclosure string to parse</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="enclosure_mime_type_add"
+              c:identifier="enclosure_mime_type_add"
+              moved-to="enclosure.mime_type_add">
+      <doc xml:space="preserve">Adds a new MIME type handling definition.
+
+@param type	the new definition</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="type" transfer-ownership="none">
+          <type name="encTypePtr" c:type="encTypePtr"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="enclosure_mime_type_remove"
+              c:identifier="enclosure_mime_type_remove"
+              moved-to="enclosure.mime_type_remove">
+      <doc xml:space="preserve">Removes an existing MIME type handling definition.
+The definition will be free'd by this function.
+
+@param type	the definition to remove</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="type" transfer-ownership="none">
+          <type name="encTypePtr" c:type="encTypePtr"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="enclosure_mime_types_get"
+              c:identifier="enclosure_mime_types_get"
+              moved-to="enclosure.mime_types_get"
+              introspectable="0">
+      <doc xml:space="preserve">Returns all configured enclosure types.
+
+@returns list of encType structures</doc>
+      <return-value transfer-ownership="none">
+        <type name="GLib.SList" c:type="const GSList*">
+          <type name="gpointer" c:type="gpointer"/>
+        </type>
+      </return-value>
+    </function>
+    <function name="enclosure_mime_types_save"
+              c:identifier="enclosure_mime_types_save"
+              moved-to="enclosure.mime_types_save">
+      <doc xml:space="preserve">Save all MIME type definitions.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+    </function>
+    <function name="enclosure_to_string"
+              c:identifier="enclosure_to_string"
+              moved-to="enclosure.to_string">
+      <doc xml:space="preserve">Serialize enclosure to string.
+
+@param enclosure	the enclosure
+
+@returns new string (to be free'd using g_free)</doc>
+      <return-value transfer-ownership="full">
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="enclosure" transfer-ownership="none">
+          <type name="enclosurePtr" c:type="const enclosurePtr"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="enclosure_values_to_string"
+              c:identifier="enclosure_values_to_string"
+              moved-to="enclosure.values_to_string">
+      <doc xml:space="preserve">Serialize enclosure infos to string.
+
+@param url		the enclosure URL
+@param mime		the MIME type (optional, can be NULL)
+@param size  	the enclosure size (optional, can be 0, and also -1)
+@param downloaded	downloading state (TRUE=downloaded)
+
+@returns new string (to be free'd using g_free)</doc>
+      <return-value transfer-ownership="full">
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="url" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="mime" transfer-ownership="none">
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+        <parameter name="size" transfer-ownership="none">
+          <type name="gssize" c:type="gssize"/>
+        </parameter>
+        <parameter name="downloaded" transfer-ownership="none">
+          <type name="gboolean" c:type="gboolean"/>
+        </parameter>
+      </parameters>
+    </function>
+    <enumeration name="itemViewMode" c:type="itemViewMode">
+      <member name="single_item" value="0" c:identifier="ITEMVIEW_SINGLE_ITEM">
+      </member>
+      <member name="all_items" value="1" c:identifier="ITEMVIEW_ALL_ITEMS">
+      </member>
+      <member name="node_info" value="2" c:identifier="ITEMVIEW_NODE_INFO">
+      </member>
+    </enumeration>
+    <function name="media_player_load"
+              c:identifier="liferea_media_player_load">
+      <doc xml:space="preserve">Triggers the creation of a suitable media player and loads a list of
+enclosures into it.</doc>
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+      <parameters>
+        <parameter name="parentWidget" transfer-ownership="none">
+          <doc xml:space="preserve">the parent widget for the media player</doc>
+          <type name="Gtk.Widget" c:type="GtkWidget*"/>
+        </parameter>
+        <parameter name="enclosures" transfer-ownership="none">
+          <doc xml:space="preserve">a list of enclosure strings</doc>
+          <type name="GLib.SList" c:type="GSList*">
+            <type name="utf8"/>
+          </type>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="shutdown" c:identifier="liferea_shutdown">
+      <return-value transfer-ownership="none">
+        <type name="none" c:type="void"/>
+      </return-value>
+    </function>
+  </namespace>
+</repository>

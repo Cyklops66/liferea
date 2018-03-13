@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <id type="desktop">liferea.desktop</id>
+  <licence>CC0</licence>
+  <description>
+    <p>Liferea is an abbreviation for Linux Feed Reader. It is a news aggregator for online news feeds. It supports a number of different feed formats including RSS/RDF, CDF and Atom. There are many other news readers available, but these others are not available for Linux or require many extra libraries to be installed. Liferea tries to fill this gap by creating a fast, easy to use, easy to install news aggregator for GTK/GNOME.</p>
+    <p xml:lang="ar">لايفريا هو مجمّع أخبار لتلقيمات الأخبار. يدعم عددًا من أنساق التلقيمات مثل RSS/RDF و CDF و Atom. يوجد العديد من قارئات تلقيمات الأخبار لكنها إما غير متوفرة على لينكس أو تتطلب الكثير من المكتبات الإضافية. يحاول لايفريا سد هذه الهوّة بتوفير مجمّع أخبار سهل الاستخدام و التثبيت لجنوم.</p>
+    <p xml:lang="he">‏Liferea הינו קיצור של Linux Feed Reader (קורא ערוצים של Linux). זהו מאגד חדשות עבור ערוצי חדשות מקוונים. זה תומך במספר של פורמטים שונים של ערוצים כולל RSS/RDF, ‏CDF וגם Atom. קיימים קוראי חדשות רבים אחרים זמינים, אך אלו לא זמינים עבור Linux או מצריכים ספריות חיצוניות רבות על מנת שיותקנו. Liferea מנסה לגשר על פער זה על ידי יצירת מאגד חדשות עבור GTK/GNOME מהיר, קל לשימוש, קל להתקנה.</p>
+    <p>Distinguishing features:</p>
+    <p xml:lang="ar">الخصائص المميزة:</p>
+    <p xml:lang="he">תכונות מיוחדות:</p>
+    <ul>
+     <li>Read articles when offline</li>
+     <li xml:lang="ar">قراءة المقالات دون اتصال</li>
+     <li xml:lang="he">קרא מאמרים כאשר לא־מקוון</li>
+     <li>Synchronizes with TheOldReader</li>
+     <li xml:lang="ar">المزامنة مع قارئ TheOldReader</li>
+     <li xml:lang="he">סנכרן עם TheOldReader</li>
+     <li>Synchronizes with TinyTinyRSS</li>
+     <li xml:lang="ar">المزامنة مع TinyTinyRSS</li>
+     <li xml:lang="he">סנכרן עם TinyTinyRSS</li>
+     <li>Permanently save headlines in news bins</li>
+     <li xml:lang="ar">حفظ عناوين الأخبار بشكل دائم في سلة الأخبار</li>
+     <li xml:lang="he">אחסן כותרות לצמיתה בתוך סלי איסוף</li>
+     <li>Match items using search folders</li>
+     <li xml:lang="ar">تجميع العناصر باستخدام مجلدات البحث</li>
+     <li xml:lang="he">התאם פריטים באמצעות תיקיות חיפוש</li>
+     <li>Play Podcasts</li>
+     <li xml:lang="ar">تشغيل التدوين صوتي</li>
+     <li xml:lang="he">נגן פודקסטים</li>
+    </ul>
+  </description>
+  <screenshots>
+    <screenshot width="837" type="default" height="657">http://lzone.de/liferea/screenshots/screenshot1.png</screenshot>
+    <screenshot width="833" type="default" height="656">http://lzone.de/liferea/screenshots/screenshot2.png</screenshot>
+    <screenshot width="837" type="default" height="657">http://lzone.de/liferea/screenshots/screenshot3.png</screenshot>
+    <screenshot width="837" type="default" height="657">http://lzone.de/liferea/screenshots/screenshot4.png</screenshot>
+    <screenshot width="837" type="default" height="657">http://lzone.de/liferea/screenshots/screenshot5.png</screenshot>
+    <screenshot width="837" type="default" height="657">http://lzone.de/liferea/screenshots/screenshot6.png</screenshot>
+    <screenshot width="642" type="default" height="438">http://lzone.de/liferea/screenshots/screenshot7.png</screenshot>
+    <screenshot width="834" type="default" height="657">http://lzone.de/liferea/screenshots/screenshot8.png</screenshot>
+    <screenshot width="837" type="default" height="657">http://lzone.de/liferea/screenshots/screenshot9.png</screenshot>
+  </screenshots>
+  <url type="homepage">http://lzone.de/liferea/</url>
+  <updatecontact>liferea-devel@lists.sf.net</updatecontact>
+</application>
