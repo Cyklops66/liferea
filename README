@@ -2,4 +2,4 @@ For building instructions visit the original liferea github repository.
 
 This is a fork of liferea 1.10.19. The only purpose of this fork is to build the last unboring (considering of the wideview with these ultra big Favicons and the other optical bugs) liferea 1.10.19 build with actual icu/60 and newer versions of Webkit.
 
-Testet under Gentoo with dev-libs/icu-60.2 and net-libs/webkit-gtk-2.18.6
+Tested under Gentoo with dev-libs/icu-60.2 and net-libs/webkit-gtk-2.18.6
