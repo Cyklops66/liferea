@@ -15,7 +15,7 @@ with the Versions in the gentoo repositorys. So i made small changes and deleted
 nasty code, but it is fully working. When i have time, i clean up the unused "playing" code snippets.
 
 
-![screenshot](https://imgur.com/a/kcISm)
+![screenshot](https://i.imgur.com/sCT5E9b.png)
 
 
 
