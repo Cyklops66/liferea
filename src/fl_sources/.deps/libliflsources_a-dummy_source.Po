@@ -647,7 +647,10 @@ libliflsources_a-dummy_source.o: dummy_source.c \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h ../../src/ui/icons.h
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h \
+ ../../src/subscription_type.h ../../src/subscription.h \
+ ../../src/update.h ../../src/fl_sources/google_reader_api.h \
+ ../../src/ui/icons.h
 
 /usr/include/stdc-predef.h:
 
@@ -2142,5 +2145,13 @@ libliflsources_a-dummy_source.o: dummy_source.c \
 /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
 
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
+
+../../src/subscription_type.h:
+
+../../src/subscription.h:
+
+../../src/update.h:
+
+../../src/fl_sources/google_reader_api.h:
 
 ../../src/ui/icons.h:

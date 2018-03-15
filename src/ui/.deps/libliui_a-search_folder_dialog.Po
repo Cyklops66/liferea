@@ -651,7 +651,7 @@ libliui_a-search_folder_dialog.o: search_folder_dialog.c \
  /usr/include/bits/stdlib.h /usr/include/libxml2/libxml/xlink.h \
  /usr/include/libxml2/libxml/SAX2.h ../../src/ui/itemview.h \
  ../../src/item.h ../../src/itemset.h ../../src/ui/liferea_htmlview.h \
- ../../src/ui/liferea_dialog.h ../../src/ui/rule_editor.h \
+ ../../src/net.h ../../src/ui/liferea_dialog.h ../../src/ui/rule_editor.h \
  ../../src/rule.h ../../src/ui/feed_list_node.h
 
 /usr/include/stdc-predef.h:
@@ -2163,6 +2163,8 @@ libliui_a-search_folder_dialog.o: search_folder_dialog.c \
 ../../src/itemset.h:
 
 ../../src/ui/liferea_htmlview.h:
+
+../../src/net.h:
 
 ../../src/ui/liferea_dialog.h:
 

@@ -19,7 +19,7 @@
 
 GETTEXT_PACKAGE = liferea
 PACKAGE = liferea
-VERSION = 1.10.19
+VERSION = 1.12.2
 
 SHELL = /bin/sh
 
@@ -35,7 +35,7 @@ datarootdir = ${prefix}/share
 libdir = ${exec_prefix}/lib
 localedir = ${datarootdir}/locale
 subdir = po
-install_sh = ${SHELL} /home/unixjunkie/liferea-1.10.19/install-sh
+install_sh = ${SHELL} /home/unixjunkie/liferea-1.12.2/install-sh
 # Automake >= 1.8 provides $(MKDIR_P).
 # Until it can be supposed, use the safe fallback:
 mkdir_p = $(install_sh) -d
@@ -66,7 +66,7 @@ EXTRA_DISTFILES = ChangeLog POTFILES.skip Makevars LINGUAS
 
 POTFILES = \
 	../liferea.appdata.xml.in \
-	../liferea.desktop.in \
+	../net.sourceforge.liferea.desktop.in \
 	../xslt/feed.xml.in \
 	../xslt/source.xml.in \
 	../xslt/folder.xml.in \
@@ -114,6 +114,7 @@ POTFILES = \
 	../src/itemlist.h \
 	../src/itemset.c \
 	../src/itemset.h \
+	../src/liferea_application.c \
 	../src/main.c \
 	../src/metadata.c \
 	../src/metadata.h \
@@ -182,8 +183,6 @@ POTFILES = \
 	../src/ui/subscription_dialog.h \
 	../src/ui/browser_tabs.c \
 	../src/ui/browser_tabs.h \
-	../src/ui/ui_tray.c \
-	../src/ui/ui_tray.h \
 	../src/ui/ui_update.c \
 	../src/ui/ui_update.h \
 	../src/parsers/atom10.c \
@@ -218,7 +217,6 @@ POTFILES = \
 	../src/parsers/rss_channel.h \
 	../src/parsers/rss_item.c \
 	../src/parsers/rss_item.h \
-	../src/fl_sources/aol_source.c \
 	../src/fl_sources/default_source.c \
 	../src/fl_sources/default_source.h \
 	../src/fl_sources/dummy_source.c \
@@ -243,28 +241,35 @@ POTFILES = \
 	../src/fl_sources/ttrss_source_feed_list.h \
 	../src/fl_sources/theoldreader_source.c \
 	../src/fl_sources/theoldreader_source.h \
-	../src/fl_sources/theoldreader_source_edit.c \
 	../src/fl_sources/theoldreader_source_feed.c \
 	../src/fl_sources/theoldreader_source_feed_list.c \
 	../src/fl_sources/theoldreader_source_feed_list.h \
-	../src/notification/libnotify.c \
-	../src/notification.c \
-	../src/notification.h \
 	../src/webkit/webkit.c \
+	../src/webkit/liferea_web_view.c \
+	../src/webkit/web_extension/liferea_web_extension.c \
+	../src/webkit/web_extension/web_extension_main.c \
+	../glade/about.ui \
 	../glade/auth.ui \
+	../glade/enclosure_handler.ui \
 	../glade/google_source.ui \
 	../glade/inoreader_source.ui \
-	../glade/liferea.ui \
+	../glade/mainwindow.ui \
+	../glade/new_folder.ui \
+	../glade/new_newsbin.ui \
 	../glade/new_subscription.ui \
 	../glade/node_source.ui \
 	../glade/opml_source.ui \
 	../glade/prefs.ui \
+	../glade/properties.ui \
 	../glade/reedah_source.ui \
-	../glade/simple_subscription.ui \
-	../glade/search.ui \
+	../glade/rename_node.ui \
 	../glade/search_folder.ui \
+	../glade/search.ui \
+	../glade/simple_search.ui \
+	../glade/simple_subscription.ui \
+	../glade/theoldreader_source.ui \
 	../glade/ttrss_source.ui \
-	../glade/theoldreader_source.ui
+	../glade/update_monitor.ui
 
 CATALOGS=$(shell LINGUAS="$(USE_LINGUAS)"; for lang in $$LINGUAS; do printf "$$lang.gmo "; done)
 

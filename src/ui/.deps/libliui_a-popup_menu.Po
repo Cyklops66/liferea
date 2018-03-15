@@ -656,12 +656,13 @@ libliui_a-popup_menu.o: popup_menu.c /usr/include/stdc-predef.h \
  ../../src/subscription.h ../../src/update.h ../../src/feedlist.h \
  ../../src/folder.h ../../src/net_monitor.h ../../src/newsbin.h \
  ../../src/node.h ../../src/social.h ../../src/vfolder.h \
- ../../src/ui/enclosure_list_view.h ../../src/ui/feed_list_view.h \
- ../../src/ui/item_list_view.h ../../src/node_view.h \
- ../../src/ui/itemview.h ../../src/itemset.h \
- ../../src/ui/liferea_htmlview.h ../../src/ui/liferea_shell.h \
- ../../src/ui/preferences_dialog.h ../../src/fl_sources/node_source.h \
- ../../src/node_type.h
+ ../../src/ui/enclosure_list_view.h ../../src/ui/feed_list_node.h \
+ ../../src/ui/feed_list_view.h ../../src/ui/item_list_view.h \
+ ../../src/node_view.h ../../src/ui/itemview.h ../../src/itemset.h \
+ ../../src/ui/liferea_htmlview.h ../../src/net.h \
+ ../../src/ui/liferea_shell.h ../../src/ui/preferences_dialog.h \
+ ../../src/fl_sources/node_source.h ../../src/node_type.h \
+ ../../src/subscription_type.h ../../src/fl_sources/google_reader_api.h
 
 /usr/include/stdc-predef.h:
 
@@ -2201,6 +2202,8 @@ libliui_a-popup_menu.o: popup_menu.c /usr/include/stdc-predef.h \
 
 ../../src/ui/enclosure_list_view.h:
 
+../../src/ui/feed_list_node.h:
+
 ../../src/ui/feed_list_view.h:
 
 ../../src/ui/item_list_view.h:
@@ -2213,6 +2216,8 @@ libliui_a-popup_menu.o: popup_menu.c /usr/include/stdc-predef.h \
 
 ../../src/ui/liferea_htmlview.h:
 
+../../src/net.h:
+
 ../../src/ui/liferea_shell.h:
 
 ../../src/ui/preferences_dialog.h:
@@ -2220,3 +2225,7 @@ libliui_a-popup_menu.o: popup_menu.c /usr/include/stdc-predef.h \
 ../../src/fl_sources/node_source.h:
 
 ../../src/node_type.h:
+
+../../src/subscription_type.h:
+
+../../src/fl_sources/google_reader_api.h:

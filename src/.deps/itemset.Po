@@ -130,12 +130,7 @@ itemset.o: itemset.c /usr/include/stdc-predef.h /usr/include/string.h \
  /usr/include/sched.h /usr/include/bits/sched.h \
  /usr/include/bits/setjmp.h \
  /usr/include/glib-2.0/glib/glib-autocleanups.h /usr/include/libintl.h \
- /usr/include/locale.h /usr/include/bits/locale.h db.h item.h itemset.h \
- rule.h subscription.h node.h node_view.h update.h debug.h enclosure.h \
- feed.h node_type.h /usr/include/gtk-3.0/gtk/gtk.h \
- /usr/include/gtk-3.0/gdk/gdk.h /usr/include/gtk-3.0/gdk/gdkconfig.h \
- /usr/include/gtk-3.0/gdk/gdkversionmacros.h \
- /usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h \
+ /usr/include/locale.h /usr/include/bits/locale.h conf.h \
  /usr/include/glib-2.0/gio/gio.h /usr/include/glib-2.0/gio/giotypes.h \
  /usr/include/glib-2.0/gio/gioenums.h /usr/include/glib-2.0/glib-object.h \
  /usr/include/glib-2.0/gobject/gbinding.h \
@@ -299,7 +294,12 @@ itemset.o: itemset.c /usr/include/stdc-predef.h /usr/include/string.h \
  /usr/include/glib-2.0/gio/gnotification.h \
  /usr/include/glib-2.0/gio/glistmodel.h \
  /usr/include/glib-2.0/gio/gliststore.h \
- /usr/include/glib-2.0/gio/gio-autocleanups.h \
+ /usr/include/glib-2.0/gio/gio-autocleanups.h db.h item.h itemset.h \
+ rule.h subscription.h node.h node_view.h update.h debug.h enclosure.h \
+ feed.h node_type.h /usr/include/gtk-3.0/gtk/gtk.h \
+ /usr/include/gtk-3.0/gdk/gdk.h /usr/include/gtk-3.0/gdk/gdkconfig.h \
+ /usr/include/gtk-3.0/gdk/gdkversionmacros.h \
+ /usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h \
  /usr/include/gtk-3.0/gdk/gdktypes.h /usr/include/pango-1.0/pango/pango.h \
  /usr/include/pango-1.0/pango/pango-attributes.h \
  /usr/include/pango-1.0/pango/pango-font.h \
@@ -651,7 +651,8 @@ itemset.o: itemset.c /usr/include/stdc-predef.h /usr/include/string.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  /usr/include/gtk-3.0/gtk/gtk-autocleanups.h subscription_type.h \
  itemlist.h item_loader.h metadata.h feed_parser.h vfolder.h \
- fl_sources/node_source.h node.h node_type.h
+ fl_sources/node_source.h node.h node_type.h subscription_type.h \
+ fl_sources/google_reader_api.h
 
 /usr/include/stdc-predef.h:
 
@@ -1057,39 +1058,7 @@ common.h:
 
 /usr/include/bits/locale.h:
 
-db.h:
-
-item.h:
-
-itemset.h:
-
-rule.h:
-
-subscription.h:
-
-node.h:
-
-node_view.h:
-
-update.h:
-
-debug.h:
-
-enclosure.h:
-
-feed.h:
-
-node_type.h:
-
-/usr/include/gtk-3.0/gtk/gtk.h:
-
-/usr/include/gtk-3.0/gdk/gdk.h:
-
-/usr/include/gtk-3.0/gdk/gdkconfig.h:
-
-/usr/include/gtk-3.0/gdk/gdkversionmacros.h:
-
-/usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h:
+conf.h:
 
 /usr/include/glib-2.0/gio/gio.h:
 
@@ -1440,6 +1409,40 @@ node_type.h:
 /usr/include/glib-2.0/gio/gliststore.h:
 
 /usr/include/glib-2.0/gio/gio-autocleanups.h:
+
+db.h:
+
+item.h:
+
+itemset.h:
+
+rule.h:
+
+subscription.h:
+
+node.h:
+
+node_view.h:
+
+update.h:
+
+debug.h:
+
+enclosure.h:
+
+feed.h:
+
+node_type.h:
+
+/usr/include/gtk-3.0/gtk/gtk.h:
+
+/usr/include/gtk-3.0/gdk/gdk.h:
+
+/usr/include/gtk-3.0/gdk/gdkconfig.h:
+
+/usr/include/gtk-3.0/gdk/gdkversionmacros.h:
+
+/usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h:
 
 /usr/include/gtk-3.0/gdk/gdktypes.h:
 
@@ -2190,3 +2193,7 @@ fl_sources/node_source.h:
 node.h:
 
 node_type.h:
+
+subscription_type.h:
+
+fl_sources/google_reader_api.h:

@@ -1,7 +1,7 @@
 /**
  * @file feed_list_view.h  the feed list in a GtkTreeView
  * 
- * Copyright (C) 2004-2010 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2004-2010 Lars Windolf <lars.windolf@gmx.de>
  * Copyright (C) 2004-2005 Nathan J. Conrad <t98502@users.sourceforge.net>
  * Copyright (C) 2005 Raphael Slinckx <raphael@slinckx.net>
  *
@@ -51,16 +51,6 @@ void feed_list_view_select (nodePtr node);
  * columns and renderers needed to show the list.
  */
 void feed_list_view_init (GtkTreeView *treeview);
-
-/**
- * Prompt the user for confirmation of a folder or feed, and
- * recursively remove the feed or folder if the user accepts. This
- * function does not block, so the folder/feeds will not have
- * been deleted when this function returns.
- *
- * @param ptr the node to delete
- */
-void feed_list_view_delete_prompt (nodePtr ptr);
 
 /**
  * Sort the feeds of the given folder node.

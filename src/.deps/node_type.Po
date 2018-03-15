@@ -645,7 +645,8 @@ node_type.o: node_type.c /usr/include/stdc-predef.h node_type.h node.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  /usr/include/gtk-3.0/gtk/gtk-autocleanups.h feed.h subscription_type.h \
  subscription.h update.h feed_parser.h feedlist.h folder.h newsbin.h \
- vfolder.h fl_sources/node_source.h node.h node_type.h
+ vfolder.h fl_sources/node_source.h node.h node_type.h \
+ subscription_type.h fl_sources/google_reader_api.h
 
 /usr/include/stdc-predef.h:
 
@@ -2158,3 +2159,7 @@ fl_sources/node_source.h:
 node.h:
 
 node_type.h:
+
+subscription_type.h:
+
+fl_sources/google_reader_api.h:

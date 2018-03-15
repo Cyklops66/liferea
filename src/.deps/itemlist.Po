@@ -653,9 +653,9 @@ itemlist.o: itemlist.c /usr/include/stdc-predef.h /usr/include/string.h \
  /usr/include/gtk-3.0/gtk/gtk-autocleanups.h subscription_type.h \
  feedlist.h folder.h item_history.h item_state.h itemlist.h item_loader.h \
  metadata.h feed_parser.h vfolder.h ui/item_list_view.h item.h \
- node_view.h ui/itemview.h itemset.h node.h ui/liferea_htmlview.h \
- ui/liferea_shell.h ui/feed_list_view.h feed.h ui/liferea_htmlview.h \
- ui/feed_list_node.h
+ node_view.h ui/itemview.h itemset.h node.h ui/liferea_htmlview.h net.h \
+ update.h ui/liferea_shell.h ui/feed_list_view.h feed.h \
+ ui/liferea_htmlview.h ui/feed_list_node.h
 
 /usr/include/stdc-predef.h:
 
@@ -2212,6 +2212,10 @@ itemset.h:
 node.h:
 
 ui/liferea_htmlview.h:
+
+net.h:
+
+update.h:
 
 ui/liferea_shell.h:
 

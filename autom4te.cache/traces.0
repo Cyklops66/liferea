@@ -3409,94 +3409,72 @@ m4trace:configure.ac:23: -1- m4_pattern_allow([^GLIB_COMPILE_SCHEMAS$])
 m4trace:configure.ac:23: -1- _GSETTINGS_SUBST([GSETTINGS_RULES])
 m4trace:configure.ac:23: -1- m4_pattern_allow([^GSETTINGS_RULES$])
 m4trace:configure.ac:23: -1- _AM_SUBST_NOTMAKE([GSETTINGS_RULES])
-m4trace:configure.ac:28: -1- m4_pattern_allow([^HAVE_STRSEP$])
-m4trace:configure.ac:30: -1- PKG_PROG_PKG_CONFIG([])
-m4trace:configure.ac:30: -1- m4_pattern_forbid([^_?PKG_[A-Z_]+$])
-m4trace:configure.ac:30: -1- m4_pattern_allow([^PKG_CONFIG(_(PATH|LIBDIR|SYSROOT_DIR|ALLOW_SYSTEM_(CFLAGS|LIBS)))?$])
-m4trace:configure.ac:30: -1- m4_pattern_allow([^PKG_CONFIG_(DISABLE_UNINSTALLED|TOP_BUILD_DIR|DEBUG_SPEW)$])
-m4trace:configure.ac:30: -1- m4_pattern_allow([^PKG_CONFIG$])
-m4trace:configure.ac:30: -1- m4_pattern_allow([^PKG_CONFIG_PATH$])
-m4trace:configure.ac:30: -1- m4_pattern_allow([^PKG_CONFIG_LIBDIR$])
-m4trace:configure.ac:30: -1- m4_pattern_allow([^PKG_CONFIG$])
-m4trace:configure.ac:37: -1- PKG_CHECK_MODULES([LIBNOTIFY], [libnotify >= 0.7], [enable_libnotify=yes], [enable_libnotify=no])
-m4trace:configure.ac:37: -1- m4_pattern_allow([^LIBNOTIFY_CFLAGS$])
-m4trace:configure.ac:37: -1- m4_pattern_allow([^LIBNOTIFY_LIBS$])
-m4trace:configure.ac:37: -1- PKG_CHECK_EXISTS([libnotify >= 0.7], [pkg_cv_[]LIBNOTIFY_CFLAGS=`$PKG_CONFIG --[]cflags "libnotify >= 0.7" 2>/dev/null`
+m4trace:configure.ac:25: -1- m4_pattern_allow([^HAVE_STRSEP$])
+m4trace:configure.ac:27: -1- PKG_PROG_PKG_CONFIG([])
+m4trace:configure.ac:27: -1- m4_pattern_forbid([^_?PKG_[A-Z_]+$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^PKG_CONFIG(_(PATH|LIBDIR|SYSROOT_DIR|ALLOW_SYSTEM_(CFLAGS|LIBS)))?$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^PKG_CONFIG_(DISABLE_UNINSTALLED|TOP_BUILD_DIR|DEBUG_SPEW)$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^PKG_CONFIG$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^PKG_CONFIG_PATH$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^PKG_CONFIG_LIBDIR$])
+m4trace:configure.ac:27: -1- m4_pattern_allow([^PKG_CONFIG$])
+m4trace:configure.ac:51: -1- PKG_CHECK_MODULES([PACKAGE], [$pkg_modules])
+m4trace:configure.ac:51: -1- m4_pattern_allow([^PACKAGE_CFLAGS$])
+m4trace:configure.ac:51: -1- m4_pattern_allow([^PACKAGE_LIBS$])
+m4trace:configure.ac:51: -1- PKG_CHECK_EXISTS([$pkg_modules], [pkg_cv_[]PACKAGE_CFLAGS=`$PKG_CONFIG --[]cflags "$pkg_modules" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:37: -1- PKG_CHECK_EXISTS([libnotify >= 0.7], [pkg_cv_[]LIBNOTIFY_LIBS=`$PKG_CONFIG --[]libs "libnotify >= 0.7" 2>/dev/null`
+m4trace:configure.ac:51: -1- PKG_CHECK_EXISTS([$pkg_modules], [pkg_cv_[]PACKAGE_LIBS=`$PKG_CONFIG --[]libs "$pkg_modules" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:37: -1- _PKG_SHORT_ERRORS_SUPPORTED
-m4trace:configure.ac:39: -1- m4_pattern_allow([^HAVE_LIBNOTIFY$])
-m4trace:configure.ac:41: -1- m4_pattern_allow([^LIBNOTIFY_CFLAGS$])
-m4trace:configure.ac:42: -1- m4_pattern_allow([^LIBNOTIFY_LIBS$])
-m4trace:configure.ac:47: -1- AM_CONDITIONAL([WITH_LIBNOTIFY], [test "x$enable_libnotify" = "xyes"])
-m4trace:configure.ac:47: -1- m4_pattern_allow([^WITH_LIBNOTIFY_TRUE$])
-m4trace:configure.ac:47: -1- m4_pattern_allow([^WITH_LIBNOTIFY_FALSE$])
-m4trace:configure.ac:47: -1- _AM_SUBST_NOTMAKE([WITH_LIBNOTIFY_TRUE])
-m4trace:configure.ac:47: -1- _AM_SUBST_NOTMAKE([WITH_LIBNOTIFY_FALSE])
-m4trace:configure.ac:55: -1- PKG_CHECK_MODULES([LIBINDICATE], [indicate-0.7 indicate-gtk3-0.7], [enable_libindicate=yes], [enable_libindicate=no])
-m4trace:configure.ac:55: -1- m4_pattern_allow([^LIBINDICATE_CFLAGS$])
-m4trace:configure.ac:55: -1- m4_pattern_allow([^LIBINDICATE_LIBS$])
-m4trace:configure.ac:55: -1- PKG_CHECK_EXISTS([indicate-0.7 indicate-gtk3-0.7], [pkg_cv_[]LIBINDICATE_CFLAGS=`$PKG_CONFIG --[]cflags "indicate-0.7 indicate-gtk3-0.7" 2>/dev/null`
+m4trace:configure.ac:51: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:53: -1- m4_pattern_allow([^PACKAGE_CFLAGS$])
+m4trace:configure.ac:54: -1- m4_pattern_allow([^PACKAGE_LIBS$])
+m4trace:configure.ac:56: -1- PKG_CHECK_MODULES([WEB_EXTENSION], [
+                  webkit2gtk-web-extension-4.0
+                  ])
+m4trace:configure.ac:56: -1- m4_pattern_allow([^WEB_EXTENSION_CFLAGS$])
+m4trace:configure.ac:56: -1- m4_pattern_allow([^WEB_EXTENSION_LIBS$])
+m4trace:configure.ac:56: -1- PKG_CHECK_EXISTS([
+                  webkit2gtk-web-extension-4.0
+                  ], [pkg_cv_[]WEB_EXTENSION_CFLAGS=`$PKG_CONFIG --[]cflags "
+                  webkit2gtk-web-extension-4.0
+                  " 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:55: -1- PKG_CHECK_EXISTS([indicate-0.7 indicate-gtk3-0.7], [pkg_cv_[]LIBINDICATE_LIBS=`$PKG_CONFIG --[]libs "indicate-0.7 indicate-gtk3-0.7" 2>/dev/null`
+m4trace:configure.ac:56: -1- PKG_CHECK_EXISTS([
+                  webkit2gtk-web-extension-4.0
+                  ], [pkg_cv_[]WEB_EXTENSION_LIBS=`$PKG_CONFIG --[]libs "
+                  webkit2gtk-web-extension-4.0
+                  " 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:55: -1- _PKG_SHORT_ERRORS_SUPPORTED
-m4trace:configure.ac:56: -1- m4_pattern_allow([^LIBINDICATE_CFLAGS$])
-m4trace:configure.ac:57: -1- m4_pattern_allow([^LIBINDICATE_LIBS$])
-m4trace:configure.ac:61: -1- PKG_CHECK_MODULES([LIBINDICATE], [indicate-0.6 indicate-gtk3-0.6], [enable_libindicate=yes], [enable_libindicate=no])
-m4trace:configure.ac:61: -1- m4_pattern_allow([^LIBINDICATE_CFLAGS$])
-m4trace:configure.ac:61: -1- m4_pattern_allow([^LIBINDICATE_LIBS$])
-m4trace:configure.ac:61: -1- PKG_CHECK_EXISTS([indicate-0.6 indicate-gtk3-0.6], [pkg_cv_[]LIBINDICATE_CFLAGS=`$PKG_CONFIG --[]cflags "indicate-0.6 indicate-gtk3-0.6" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:61: -1- PKG_CHECK_EXISTS([indicate-0.6 indicate-gtk3-0.6], [pkg_cv_[]LIBINDICATE_LIBS=`$PKG_CONFIG --[]libs "indicate-0.6 indicate-gtk3-0.6" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:61: -1- _PKG_SHORT_ERRORS_SUPPORTED
-m4trace:configure.ac:62: -1- m4_pattern_allow([^LIBINDICATE_CFLAGS$])
-m4trace:configure.ac:63: -1- m4_pattern_allow([^LIBINDICATE_LIBS$])
-m4trace:configure.ac:70: -1- m4_pattern_allow([^HAVE_LIBINDICATE$])
-m4trace:configure.ac:73: -1- AM_CONDITIONAL([WITH_LIBINDICATE], [test "x$enable_libindicate" = "xyes"])
-m4trace:configure.ac:73: -1- m4_pattern_allow([^WITH_LIBINDICATE_TRUE$])
-m4trace:configure.ac:73: -1- m4_pattern_allow([^WITH_LIBINDICATE_FALSE$])
-m4trace:configure.ac:73: -1- _AM_SUBST_NOTMAKE([WITH_LIBINDICATE_TRUE])
-m4trace:configure.ac:73: -1- _AM_SUBST_NOTMAKE([WITH_LIBINDICATE_FALSE])
-m4trace:configure.ac:97: -1- PKG_CHECK_MODULES([PACKAGE], [$pkg_modules])
-m4trace:configure.ac:97: -1- m4_pattern_allow([^PACKAGE_CFLAGS$])
-m4trace:configure.ac:97: -1- m4_pattern_allow([^PACKAGE_LIBS$])
-m4trace:configure.ac:97: -1- PKG_CHECK_EXISTS([$pkg_modules], [pkg_cv_[]PACKAGE_CFLAGS=`$PKG_CONFIG --[]cflags "$pkg_modules" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:97: -1- PKG_CHECK_EXISTS([$pkg_modules], [pkg_cv_[]PACKAGE_LIBS=`$PKG_CONFIG --[]libs "$pkg_modules" 2>/dev/null`
-		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:97: -1- _PKG_SHORT_ERRORS_SUPPORTED
-m4trace:configure.ac:99: -1- m4_pattern_allow([^PACKAGE_CFLAGS$])
-m4trace:configure.ac:100: -1- m4_pattern_allow([^PACKAGE_LIBS$])
-m4trace:configure.ac:103: -1- m4_pattern_allow([^OS$])
-m4trace:configure.ac:104: -1- m4_pattern_allow([^OSNAME$])
-m4trace:configure.ac:110: -1- GOBJECT_INTROSPECTION_CHECK([0.9.3])
-m4trace:configure.ac:110: -1- PKG_CHECK_EXISTS([gobject-introspection-1.0], [], [as_fn_error $? "gobject-introspection-1.0 is not installed" "$LINENO" 5])
-m4trace:configure.ac:110: -1- PKG_CHECK_EXISTS([gobject-introspection-1.0 >= 0.9.3], [found_introspection=yes], [as_fn_error $? "You need to have gobject-introspection >= 0.9.3 installed to build liferea" "$LINENO" 5])
-m4trace:configure.ac:110: -1- PKG_CHECK_EXISTS([gobject-introspection-1.0 >= 0.9.3], [found_introspection=yes], [found_introspection=no])
-m4trace:configure.ac:110: -1- m4_pattern_allow([^INTROSPECTION_SCANNER$])
-m4trace:configure.ac:110: -1- m4_pattern_allow([^INTROSPECTION_COMPILER$])
-m4trace:configure.ac:110: -1- m4_pattern_allow([^INTROSPECTION_GENERATE$])
-m4trace:configure.ac:110: -1- m4_pattern_allow([^INTROSPECTION_GIRDIR$])
-m4trace:configure.ac:110: -1- m4_pattern_allow([^INTROSPECTION_TYPELIBDIR$])
-m4trace:configure.ac:110: -1- m4_pattern_allow([^INTROSPECTION_CFLAGS$])
-m4trace:configure.ac:110: -1- m4_pattern_allow([^INTROSPECTION_LIBS$])
-m4trace:configure.ac:110: -1- m4_pattern_allow([^INTROSPECTION_MAKEFILE$])
-m4trace:configure.ac:110: -1- AM_CONDITIONAL([HAVE_INTROSPECTION], [test "x$found_introspection" = "xyes"])
-m4trace:configure.ac:110: -1- m4_pattern_allow([^HAVE_INTROSPECTION_TRUE$])
-m4trace:configure.ac:110: -1- m4_pattern_allow([^HAVE_INTROSPECTION_FALSE$])
-m4trace:configure.ac:110: -1- _AM_SUBST_NOTMAKE([HAVE_INTROSPECTION_TRUE])
-m4trace:configure.ac:110: -1- _AM_SUBST_NOTMAKE([HAVE_INTROSPECTION_FALSE])
-m4trace:configure.ac:114: -1- AM_GLIB_GNU_GETTEXT
-m4trace:configure.ac:114: -1- GLIB_GNU_GETTEXT([])
-m4trace:configure.ac:114: -1- _m4_warn([obsolete], [The macro `GLIB_GNU_GETTEXT' is obsolete.
+m4trace:configure.ac:56: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:59: -1- m4_pattern_allow([^WEB_EXTENSION_CFLAGS$])
+m4trace:configure.ac:60: -1- m4_pattern_allow([^WEB_EXTENSION_LIBS$])
+m4trace:configure.ac:63: -1- m4_pattern_allow([^OS$])
+m4trace:configure.ac:64: -1- m4_pattern_allow([^OSNAME$])
+m4trace:configure.ac:70: -1- GOBJECT_INTROSPECTION_CHECK([0.9.3])
+m4trace:configure.ac:70: -1- PKG_CHECK_EXISTS([gobject-introspection-1.0], [], [as_fn_error $? "gobject-introspection-1.0 is not installed" "$LINENO" 5])
+m4trace:configure.ac:70: -1- PKG_CHECK_EXISTS([gobject-introspection-1.0 >= 0.9.3], [found_introspection=yes], [as_fn_error $? "You need to have gobject-introspection >= 0.9.3 installed to build liferea" "$LINENO" 5])
+m4trace:configure.ac:70: -1- PKG_CHECK_EXISTS([gobject-introspection-1.0 >= 0.9.3], [found_introspection=yes], [found_introspection=no])
+m4trace:configure.ac:70: -1- m4_pattern_allow([^INTROSPECTION_SCANNER$])
+m4trace:configure.ac:70: -1- m4_pattern_allow([^INTROSPECTION_COMPILER$])
+m4trace:configure.ac:70: -1- m4_pattern_allow([^INTROSPECTION_GENERATE$])
+m4trace:configure.ac:70: -1- m4_pattern_allow([^INTROSPECTION_GIRDIR$])
+m4trace:configure.ac:70: -1- m4_pattern_allow([^INTROSPECTION_TYPELIBDIR$])
+m4trace:configure.ac:70: -1- m4_pattern_allow([^INTROSPECTION_CFLAGS$])
+m4trace:configure.ac:70: -1- m4_pattern_allow([^INTROSPECTION_LIBS$])
+m4trace:configure.ac:70: -1- m4_pattern_allow([^INTROSPECTION_MAKEFILE$])
+m4trace:configure.ac:70: -1- AM_CONDITIONAL([HAVE_INTROSPECTION], [test "x$found_introspection" = "xyes"])
+m4trace:configure.ac:70: -1- m4_pattern_allow([^HAVE_INTROSPECTION_TRUE$])
+m4trace:configure.ac:70: -1- m4_pattern_allow([^HAVE_INTROSPECTION_FALSE$])
+m4trace:configure.ac:70: -1- _AM_SUBST_NOTMAKE([HAVE_INTROSPECTION_TRUE])
+m4trace:configure.ac:70: -1- _AM_SUBST_NOTMAKE([HAVE_INTROSPECTION_FALSE])
+m4trace:configure.ac:74: -1- AM_GLIB_GNU_GETTEXT
+m4trace:configure.ac:74: -1- GLIB_GNU_GETTEXT([])
+m4trace:configure.ac:74: -1- _m4_warn([obsolete], [The macro `GLIB_GNU_GETTEXT' is obsolete.
 You should run autoupdate.], [/usr/share/aclocal/glib-gettext.m4:363: GLIB_GNU_GETTEXT is expanded from...
 /usr/share/aclocal/glib-gettext.m4:463: AM_GLIB_GNU_GETTEXT is expanded from...
-configure.ac:114: the top level])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^HAVE_LOCALE_H$])
-m4trace:configure.ac:114: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+configure.ac:74: the top level])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^HAVE_LOCALE_H$])
+m4trace:configure.ac:74: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
 You should run autoupdate.], [../../lib/autoconf/general.m4:2687: AC_TRY_LINK is expanded from...
 ../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
 ../../lib/autoconf/general.m4:2031: AC_CACHE_VAL is expanded from...
@@ -3504,13 +3482,13 @@ You should run autoupdate.], [../../lib/autoconf/general.m4:2687: AC_TRY_LINK is
 /usr/share/aclocal/glib-gettext.m4:48: GLIB_LC_MESSAGES is expanded from...
 /usr/share/aclocal/glib-gettext.m4:363: GLIB_GNU_GETTEXT is expanded from...
 /usr/share/aclocal/glib-gettext.m4:463: AM_GLIB_GNU_GETTEXT is expanded from...
-configure.ac:114: the top level])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^HAVE_LC_MESSAGES$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^USE_NLS$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^HAVE_CFPREFERENCESCOPYAPPVALUE$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^HAVE_CFLOCALECOPYCURRENT$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^INTL_MACOSX_LIBS$])
-m4trace:configure.ac:114: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+configure.ac:74: the top level])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^HAVE_LC_MESSAGES$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^USE_NLS$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^HAVE_CFPREFERENCESCOPYAPPVALUE$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^HAVE_CFLOCALECOPYCURRENT$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^INTL_MACOSX_LIBS$])
+m4trace:configure.ac:74: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
 You should run autoupdate.], [../../lib/autoconf/general.m4:2687: AC_TRY_LINK is expanded from...
 ../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
 ../../lib/autoconf/general.m4:2031: AC_CACHE_VAL is expanded from...
@@ -3521,8 +3499,8 @@ You should run autoupdate.], [../../lib/autoconf/general.m4:2687: AC_TRY_LINK is
 /usr/share/aclocal/glib-gettext.m4:147: GLIB_WITH_NLS is expanded from...
 /usr/share/aclocal/glib-gettext.m4:363: GLIB_GNU_GETTEXT is expanded from...
 /usr/share/aclocal/glib-gettext.m4:463: AM_GLIB_GNU_GETTEXT is expanded from...
-configure.ac:114: the top level])
-m4trace:configure.ac:114: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+configure.ac:74: the top level])
+m4trace:configure.ac:74: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
 You should run autoupdate.], [../../lib/autoconf/general.m4:2687: AC_TRY_LINK is expanded from...
 ../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
 ../../lib/autoconf/general.m4:2031: AC_CACHE_VAL is expanded from...
@@ -3533,13 +3511,13 @@ You should run autoupdate.], [../../lib/autoconf/general.m4:2687: AC_TRY_LINK is
 /usr/share/aclocal/glib-gettext.m4:147: GLIB_WITH_NLS is expanded from...
 /usr/share/aclocal/glib-gettext.m4:363: GLIB_GNU_GETTEXT is expanded from...
 /usr/share/aclocal/glib-gettext.m4:463: AM_GLIB_GNU_GETTEXT is expanded from...
-configure.ac:114: the top level])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^HAVE_BIND_TEXTDOMAIN_CODESET$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^HAVE_BIND_TEXTDOMAIN_CODESET$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^HAVE_GETTEXT$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^MSGFMT$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^HAVE_DCGETTEXT$])
-m4trace:configure.ac:114: -1- GLIB_RUN_PROG([$MSGFMT -c -o /dev/null], [
+configure.ac:74: the top level])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^HAVE_BIND_TEXTDOMAIN_CODESET$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^HAVE_BIND_TEXTDOMAIN_CODESET$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^HAVE_GETTEXT$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^MSGFMT$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^HAVE_DCGETTEXT$])
+m4trace:configure.ac:74: -1- GLIB_RUN_PROG([$MSGFMT -c -o /dev/null], [
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3550,10 +3528,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 ], [MSGFMT_OPTS=-c; AC_MSG_RESULT([yes])], [AC_MSG_RESULT([no])])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^MSGFMT_OPTS$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^GMSGFMT$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^XGETTEXT$])
-m4trace:configure.ac:114: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
+m4trace:configure.ac:74: -1- m4_pattern_allow([^MSGFMT_OPTS$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^GMSGFMT$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^XGETTEXT$])
+m4trace:configure.ac:74: -1- _m4_warn([obsolete], [The macro `AC_TRY_LINK' is obsolete.
 You should run autoupdate.], [../../lib/autoconf/general.m4:2687: AC_TRY_LINK is expanded from...
 ../../lib/m4sugar/m4sh.m4:639: AS_IF is expanded from...
 ../../lib/autoconf/headers.m4:129: _AC_CHECK_HEADER_MONGREL is expanded from...
@@ -3561,34 +3539,34 @@ You should run autoupdate.], [../../lib/autoconf/general.m4:2687: AC_TRY_LINK is
 /usr/share/aclocal/glib-gettext.m4:147: GLIB_WITH_NLS is expanded from...
 /usr/share/aclocal/glib-gettext.m4:363: GLIB_GNU_GETTEXT is expanded from...
 /usr/share/aclocal/glib-gettext.m4:463: AM_GLIB_GNU_GETTEXT is expanded from...
-configure.ac:114: the top level])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^ENABLE_NLS$])
-m4trace:configure.ac:114: -1- _m4_warn([obsolete], [The macro `AC_OUTPUT_COMMANDS' is obsolete.
+configure.ac:74: the top level])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^ENABLE_NLS$])
+m4trace:configure.ac:74: -1- _m4_warn([obsolete], [The macro `AC_OUTPUT_COMMANDS' is obsolete.
 You should run autoupdate.], [../../lib/autoconf/status.m4:1026: AC_OUTPUT_COMMANDS is expanded from...
 /usr/share/aclocal/glib-gettext.m4:147: GLIB_WITH_NLS is expanded from...
 /usr/share/aclocal/glib-gettext.m4:363: GLIB_GNU_GETTEXT is expanded from...
 /usr/share/aclocal/glib-gettext.m4:463: AM_GLIB_GNU_GETTEXT is expanded from...
-configure.ac:114: the top level])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^CATALOGS$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^CATOBJEXT$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^DATADIRNAME$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^GMOFILES$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^INSTOBJEXT$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^INTLLIBS$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^PO_IN_DATADIR_TRUE$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^PO_IN_DATADIR_FALSE$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^POFILES$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^POSUB$])
-m4trace:configure.ac:114: -1- m4_pattern_allow([^MKINSTALLDIRS$])
-m4trace:configure.ac:117: -1- m4_pattern_allow([^GETTEXT_PACKAGE$])
-m4trace:configure.ac:118: -1- m4_pattern_allow([^GETTEXT_PACKAGE$])
-m4trace:configure.ac:147: -1- m4_pattern_allow([^LIB@&t@OBJS$])
-m4trace:configure.ac:147: -1- m4_pattern_allow([^LTLIBOBJS$])
-m4trace:configure.ac:147: -1- AM_CONDITIONAL([am__EXEEXT], [test -n "$EXEEXT"])
-m4trace:configure.ac:147: -1- m4_pattern_allow([^am__EXEEXT_TRUE$])
-m4trace:configure.ac:147: -1- m4_pattern_allow([^am__EXEEXT_FALSE$])
-m4trace:configure.ac:147: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_TRUE])
-m4trace:configure.ac:147: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_FALSE])
-m4trace:configure.ac:147: -1- _AC_AM_CONFIG_HEADER_HOOK(["$ac_file"])
-m4trace:configure.ac:147: -1- _AM_OUTPUT_DEPENDENCY_COMMANDS
-m4trace:configure.ac:147: -1- _LT_PROG_LTMAIN
+configure.ac:74: the top level])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^CATALOGS$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^CATOBJEXT$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^DATADIRNAME$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^GMOFILES$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^INSTOBJEXT$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^INTLLIBS$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^PO_IN_DATADIR_TRUE$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^PO_IN_DATADIR_FALSE$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^POFILES$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^POSUB$])
+m4trace:configure.ac:74: -1- m4_pattern_allow([^MKINSTALLDIRS$])
+m4trace:configure.ac:77: -1- m4_pattern_allow([^GETTEXT_PACKAGE$])
+m4trace:configure.ac:78: -1- m4_pattern_allow([^GETTEXT_PACKAGE$])
+m4trace:configure.ac:108: -1- m4_pattern_allow([^LIB@&t@OBJS$])
+m4trace:configure.ac:108: -1- m4_pattern_allow([^LTLIBOBJS$])
+m4trace:configure.ac:108: -1- AM_CONDITIONAL([am__EXEEXT], [test -n "$EXEEXT"])
+m4trace:configure.ac:108: -1- m4_pattern_allow([^am__EXEEXT_TRUE$])
+m4trace:configure.ac:108: -1- m4_pattern_allow([^am__EXEEXT_FALSE$])
+m4trace:configure.ac:108: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_TRUE])
+m4trace:configure.ac:108: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_FALSE])
+m4trace:configure.ac:108: -1- _AC_AM_CONFIG_HEADER_HOOK(["$ac_file"])
+m4trace:configure.ac:108: -1- _AM_OUTPUT_DEPENDENCY_COMMANDS
+m4trace:configure.ac:108: -1- _LT_PROG_LTMAIN

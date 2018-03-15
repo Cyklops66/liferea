@@ -210,10 +210,6 @@ INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
-LIBINDICATE_CFLAGS = @LIBINDICATE_CFLAGS@
-LIBINDICATE_LIBS = @LIBINDICATE_LIBS@
-LIBNOTIFY_CFLAGS = @LIBNOTIFY_CFLAGS@
-LIBNOTIFY_LIBS = @LIBNOTIFY_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
@@ -258,6 +254,8 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
+WEB_EXTENSION_CFLAGS = @WEB_EXTENSION_CFLAGS@
+WEB_EXTENSION_LIBS = @WEB_EXTENSION_LIBS@
 XGETTEXT = @XGETTEXT@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
@@ -315,20 +313,29 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 gladedir = $(pkgdatadir)
-glade_DATA = liferea.ui \
+glade_DATA = about.ui \
 	auth.ui \
-	new_subscription.ui \
-	simple_subscription.ui \
+	enclosure_handler.ui \
 	google_source.ui \
 	inoreader_source.ui \
+	mainwindow.ui \
+	new_folder.ui \
+	new_newsbin.ui \
+	new_subscription.ui \
 	node_source.ui \
 	opml_source.ui \
 	prefs.ui \
+	properties.ui \
 	reedah_source.ui \
-	search.ui \
+	rename_node.ui \
 	search_folder.ui \
+	search.ui \
+	simple_search.ui \
+	simple_subscription.ui \
+	theoldreader_source.ui \
 	ttrss_source.ui \
-	theoldreader_source.ui
+	update_monitor.ui \
+	liferea.css
 
 EXTRA_DIST = \
 	$(glade_DATA)

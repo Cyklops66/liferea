@@ -1,7 +1,7 @@
-/**
+/*
  * @file node_source.c  generic node source provider implementation
  * 
- * Copyright (C) 2005-2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2005-2016 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,11 +33,11 @@
 #include "item_state.h"
 #include "node.h"
 #include "node_type.h"
+#include "plugins_engine.h"
 #include "ui/icons.h"
 #include "ui/liferea_dialog.h"
 #include "ui/ui_common.h"
 #include "ui/feed_list_node.h"
-#include "fl_sources/aol_source.h"
 #include "fl_sources/default_source.h"
 #include "fl_sources/dummy_source.h"
 #include "fl_sources/google_source.h"
@@ -46,8 +46,10 @@
 #include "fl_sources/reedah_source.h"
 #include "fl_sources/theoldreader_source.h"
 #include "fl_sources/ttrss_source.h"
+#include "fl_sources/node_source_activatable.h"
 
-static GSList	*nodeSourceTypes = NULL;
+static GSList		*nodeSourceTypes = NULL;
+static PeasExtensionSet	*extensions = NULL;
 
 nodePtr
 node_source_root_from_node (nodePtr node)
@@ -71,15 +73,34 @@ node_source_type_find (const gchar *typeStr, guint capabilities)
 		iter = g_slist_next (iter);
 	}
 	
-	g_warning ("Could not find source type \"%s\"\n!", typeStr);
+	g_print ("Could not find source type \"%s\"\n!", typeStr);
 	return NULL;
 }
 
-static gboolean
+gboolean
 node_source_type_register (nodeSourceTypePtr type)
 {
+	debug1 (DEBUG_PARSING, "Registering node source type %s", type->name);
+
 	/* allow the plugin to initialize */
 	type->source_type_init ();
+
+	/* Check if Google reader clones provide all API methods */
+	if(type->capabilities & NODE_SOURCE_CAPABILITY_GOOGLE_READER_API) {
+		g_assert (type->api.unread_count);
+		g_assert (type->api.subscription_list);
+		g_assert (type->api.add_subscription);
+		g_assert (type->api.add_subscription_post);
+		g_assert (type->api.remove_subscription);
+		g_assert (type->api.remove_subscription_post);
+		g_assert (type->api.edit_add_label);
+		g_assert (type->api.edit_add_label_post);
+		g_assert (type->api.edit_tag);
+		g_assert (type->api.edit_tag_add_post);
+		g_assert (type->api.edit_tag_remove_post);
+		g_assert (type->api.edit_tag_ar_tag_post);
+		g_assert (type->api.token);
+	}
 
 	nodeSourceTypes = g_slist_append (nodeSourceTypes, type);
 	
@@ -95,15 +116,18 @@ node_source_setup_root (void)
 	debug_enter ("node_source_setup_root");
 	
 	/* we need to register all source types once before doing anything... */
-	//node_source_type_register (aol_source_get_type ());
 	node_source_type_register (default_source_get_type ());
 	node_source_type_register (dummy_source_get_type ());
 	node_source_type_register (opml_source_get_type ());
 	node_source_type_register (google_source_get_type ());
-//	node_source_type_register (inoreader_source_get_type ());
+	node_source_type_register (inoreader_source_get_type ());
 	node_source_type_register (reedah_source_get_type ());
 	node_source_type_register (ttrss_source_get_type ());
 	node_source_type_register (theoldreader_source_get_type ());
+
+	extensions = peas_extension_set_new (PEAS_ENGINE (liferea_plugins_engine_get_default ()),
+		                             LIFEREA_NODE_SOURCE_ACTIVATABLE_TYPE, NULL);
+	liferea_plugins_engine_set_default_signals (extensions, NULL);
 
 	type = node_source_type_find (NULL, NODE_SOURCE_CAPABILITY_IS_ROOT);
 	if (!type) 
@@ -119,6 +143,22 @@ node_source_setup_root (void)
 	debug_exit ("node_source_setup_root");
 	
 	return rootNode;
+}
+
+static void
+node_source_set_feed_subscription_type (nodePtr folder, subscriptionTypePtr type)
+{
+	GSList *iter;
+
+	for (iter = folder->children; iter; iter = g_slist_next(iter)) {
+		nodePtr node = (nodePtr) iter->data;
+
+		if (node->subscription)
+			node->subscription->type = type;
+
+		/* Recurse for hierarchic nodes... */
+		node_source_set_feed_subscription_type (node, type);
+	}
 }
 
 static void
@@ -154,17 +194,20 @@ node_source_import (nodePtr node, nodePtr parent, xmlNodePtr xml, gboolean trust
 		
 		node->available = TRUE;
 		node->source = NULL;
-		node_source_new (node, type);
+		node_source_new (node, type, NULL);
 		node_set_subscription (node, subscription_import (xml, trusted));
 	
-		type->source_import (node);	// FIXME: pass trusted flag?
+		type->source_import (node);
+
+		/* Set subscription type for all child nodes imported */
+		node_source_set_feed_subscription_type (node, type->feedSubscriptionType);
 
 		if (!strcmp (typeStr, "fl_bloglines")) {
-			g_warning ("Removing obsolete Bloglines subscription.");
+			g_print ("Removing obsolete Bloglines subscription.");
 			feedlist_node_removed (node);
 		}
 	} else {
-		g_warning ("No source type given for node \"%s\". Ignoring it.", node_get_title (node));
+		g_print ("No source type given for node \"%s\". Ignoring it.", node_get_title (node));
 	}	
 
 	debug_exit ("node_source_import");
@@ -191,12 +234,57 @@ node_source_export (nodePtr node, xmlNodePtr xml, gboolean trusted)
 }
 
 void
-node_source_new (nodePtr node, nodeSourceTypePtr type)
+node_source_new (nodePtr node, nodeSourceTypePtr type, const gchar *url)
 { 
+	subscriptionPtr	subscription;
+
 	g_assert (NULL == node->source);
+
 	node->source = g_new0 (struct nodeSource, 1);
 	node->source->root = node;
 	node->source->type = type;
+	node->source->loginState = NODE_SOURCE_STATE_NONE;
+	node->source->actionQueue = g_queue_new ();
+
+	node_set_title (node, type->name);
+
+	if (url) {
+		subscription = subscription_new (url, NULL, NULL);
+		node_set_subscription (node, subscription);
+
+		subscription->type = node->source->type->sourceSubscriptionType;
+	}
+}
+
+void
+node_source_set_state (nodePtr node, gint newState)
+{
+	debug3 (DEBUG_UPDATE, "node source '%s' now in state %d (was %d)", node->id, newState, node->source->loginState);
+
+	/* State transition actions below... */
+	if (newState == NODE_SOURCE_STATE_ACTIVE)
+		node->source->authFailures = 0;
+
+	if (newState == NODE_SOURCE_STATE_NONE) {
+		node->source->authFailures++;
+		node->available = FALSE;
+	}
+
+	if (node->source->authFailures >= NODE_SOURCE_MAX_AUTH_FAILURES)
+		newState = NODE_SOURCE_STATE_NO_AUTH;
+
+	node->source->loginState = newState;
+}
+
+void
+node_source_set_auth_token (nodePtr node, gchar *token)
+{
+	g_assert (!node->source->authToken);
+
+	debug2 (DEBUG_UPDATE, "node source \"%s\" Auth token found: %s", node->id, token);
+	node->source->authToken = token;
+
+	node_source_set_state (node, NODE_SOURCE_STATE_ACTIVE);
 }
 
 /* source instance creation dialog */
@@ -250,7 +338,7 @@ feed_list_node_source_type_dialog (void)
 	}		
 
 	/* set up the dialog */
-	dialog = liferea_dialog_new ("node_source.ui", "node_source_type_dialog");
+	dialog = liferea_dialog_new ("node_source");
 
 	treestore = gtk_tree_store_new (2, G_TYPE_STRING, G_TYPE_POINTER);
 	
@@ -261,8 +349,7 @@ feed_list_node_source_type_dialog (void)
 
 			gtk_tree_store_append (treestore, &treeiter, NULL);
 			gtk_tree_store_set (treestore, &treeiter, 
-			                               // FIXME: this leaks memory!
-			                               0, g_strdup_printf("<b>%s</b>\n<i>%s</i>", type->name, _(type->description)),
+			                               0, type->name,
 			                               1, type,
 						       -1);
 		}
@@ -296,7 +383,21 @@ feed_list_node_source_type_dialog (void)
 void
 node_source_update (nodePtr node)
 {
-	NODE_SOURCE_TYPE (node)->source_update (node);
+	if (node->subscription) {
+		/* Reset NODE_SOURCE_STATE_NO_AUTH as this is a manual
+		   user interaction and no auto-update so we can query
+		   for credentials again. */
+		if (node->source->loginState == NODE_SOURCE_STATE_NO_AUTH)
+			node_source_set_state (node, NODE_SOURCE_STATE_NONE);
+
+		subscription_update (node->subscription, 0);
+
+		/* Note that node sources are required to auto-update child
+		   nodes themselves once login and feed list update is fine. */
+	} else {
+		/* for default source */
+		node_foreach_child_data (node, node_update_subscription, GUINT_TO_POINTER (0));
+	}
 }
 
 void
@@ -305,13 +406,28 @@ node_source_auto_update (nodePtr node)
 	NODE_SOURCE_TYPE (node)->source_auto_update (node);
 }
 
+static gboolean
+node_source_is_logged_in (nodePtr node)
+{
+	if (FALSE == (NODE_SOURCE_TYPE (node)->capabilities & NODE_SOURCE_CAPABILITY_CAN_LOGIN))
+		return TRUE;
+
+	if (node->source->loginState != NODE_SOURCE_STATE_ACTIVE)
+		ui_show_error_box (_("Login for '%s' has not yet completed! Please wait until login is done."), node->title);
+
+	return node->source->loginState == NODE_SOURCE_STATE_ACTIVE;
+}
+
 nodePtr
 node_source_add_subscription (nodePtr node, subscriptionPtr subscription)
 {
+	if (!node_source_is_logged_in (node))
+		return NULL;
+
 	if (NODE_SOURCE_TYPE (node)->add_subscription)
 		return NODE_SOURCE_TYPE (node)->add_subscription (node, subscription);
 	else
-		g_warning ("node_source_add_subscription(): called on node source type that doesn't implement me!");
+		g_print ("node_source_add_subscription(): called on node source type that doesn't implement me!");
 		
 	return NULL;
 }
@@ -319,24 +435,68 @@ node_source_add_subscription (nodePtr node, subscriptionPtr subscription)
 nodePtr
 node_source_add_folder (nodePtr node, const gchar *title)
 {
+	if (!node_source_is_logged_in (node))
+		return NULL;
+
 	if (NODE_SOURCE_TYPE (node)->add_folder)
 		return NODE_SOURCE_TYPE (node)->add_folder (node, title);
 	else
-		g_warning ("node_source_add_folder(): called on node source type that doesn't implement me!");
+		g_print ("node_source_add_folder(): called on node source type that doesn't implement me!");
 
 	return NULL;
 }
 
 void
+node_source_update_folder (nodePtr node, nodePtr folder)
+{
+	if (!node_source_is_logged_in (node))
+		return;
+
+	if (!folder)
+		folder = node->source->root;
+
+	if (node->parent != folder) {
+		debug2 (DEBUG_UPDATE, "Moving node \"%s\" to folder \"%s\"", node->title, folder->title);
+		node_reparent (node, folder);
+	}
+}
+
+nodePtr
+node_source_find_or_create_folder (nodePtr parent, const gchar *id, const gchar *name)
+{
+	nodePtr		folder = NULL;
+	gchar		*folderNodeId;
+
+	if (!id)
+		return parent->source->root;	/* No id means folder is root node */
+
+	folderNodeId = g_strdup_printf ("%s-folder-%s", NODE_SOURCE_TYPE (parent->source->root)->id, id);
+	folder = node_from_id (folderNodeId);
+	if (!folder) {
+		folder = node_new (folder_get_node_type ());
+		node_set_id (folder, folderNodeId);
+		node_set_title (folder, name);
+		node_set_parent (folder, parent, -1);
+		feedlist_node_imported (folder);
+		subscription_update (folder->subscription, FEED_REQ_RESET_TITLE | FEED_REQ_PRIORITY_HIGH);
+	}
+
+	return folder;
+}
+
+void
 node_source_remove_node (nodePtr node, nodePtr child)
 {
+	if (!node_source_is_logged_in (node))
+		return;
+
 	g_assert (child != node);
 	g_assert (child != child->source->root);
 	
 	if (NODE_SOURCE_TYPE (node)->remove_node)
 		NODE_SOURCE_TYPE (node)->remove_node (node, child);
 	else
-		g_warning ("node_source_remove_node(): called on node source type that doesn't implement me!");
+		g_print ("node_source_remove_node(): called on node source type that doesn't implement me!");
 }
 
 void
@@ -427,6 +587,9 @@ node_source_convert_to_local (nodePtr node)
 static void
 node_source_remove (nodePtr node)
 {
+	if (!node_source_is_logged_in (node))
+		return;
+
 	g_assert (node == node->source->root);
 	
 	if (NULL != NODE_SOURCE_TYPE (node)->source_delete)
@@ -446,7 +609,8 @@ node_source_free (nodePtr node)
 {
 	if (NULL != NODE_SOURCE_TYPE (node)->free)
 		NODE_SOURCE_TYPE (node)->free (node);
-		
+
+	g_free (node->source->authToken);		
 	g_free (node->source);
 	node->source = NULL;
 }

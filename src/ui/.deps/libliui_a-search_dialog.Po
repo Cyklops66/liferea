@@ -655,7 +655,7 @@ libliui_a-search_dialog.o: search_dialog.c /usr/include/stdc-predef.h \
  ../../src/subscription.h ../../src/update.h ../../src/feedlist.h \
  ../../src/htmlview.h ../../src/ui/itemview.h ../../src/item.h \
  ../../src/itemset.h ../../src/node.h ../../src/ui/liferea_htmlview.h \
- ../../src/ui/liferea_htmlview.h ../../src/itemlist.h \
+ ../../src/net.h ../../src/ui/liferea_htmlview.h ../../src/itemlist.h \
  ../../src/item_loader.h ../../src/node_view.h ../../src/rule.h \
  ../../src/vfolder.h ../../src/vfolder_loader.h \
  ../../src/ui/item_list_view.h ../../src/ui/itemview.h \
@@ -2193,6 +2193,8 @@ libliui_a-search_dialog.o: search_dialog.c /usr/include/stdc-predef.h \
 ../../src/node.h:
 
 ../../src/ui/liferea_htmlview.h:
+
+../../src/net.h:
 
 ../../src/ui/liferea_htmlview.h:
 

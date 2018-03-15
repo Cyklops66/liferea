@@ -7,73 +7,34 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
  /usr/include/xlocale.h /usr/include/bits/string.h \
  /usr/include/bits/string2.h /usr/include/stdlib.h \
  /usr/include/bits/string3.h /usr/include/bits/strings_fortified.h \
- ../../src/common.h ../../config.h /usr/include/time.h \
+ ../../src/conf.h /usr/include/glib-2.0/glib.h \
+ /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
+ /usr/lib64/glib-2.0/include/glibconfig.h \
+ /usr/include/glib-2.0/glib/gmacros.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include-fixed/limits.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include-fixed/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/float.h \
+ /usr/include/glib-2.0/glib/gversionmacros.h /usr/include/time.h \
  /usr/include/bits/time.h /usr/include/bits/types.h \
  /usr/include/bits/typesizes.h /usr/include/bits/types/clock_t.h \
  /usr/include/bits/types/time_t.h /usr/include/bits/types/struct_tm.h \
  /usr/include/bits/types/struct_timespec.h \
  /usr/include/bits/types/clockid_t.h /usr/include/bits/types/timer_t.h \
  /usr/include/bits/types/struct_itimerspec.h \
- /usr/include/libxml2/libxml/xmlmemory.h /usr/include/stdio.h \
- /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stdarg.h \
- /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
- /usr/include/bits/stdio.h /usr/include/bits/stdio2.h \
- /usr/include/libxml2/libxml/xmlversion.h \
- /usr/include/libxml2/libxml/xmlexports.h \
- /usr/include/libxml2/libxml/threads.h \
- /usr/include/libxml2/libxml/globals.h \
- /usr/include/libxml2/libxml/parser.h /usr/include/libxml2/libxml/tree.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include-fixed/limits.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include-fixed/syslimits.h \
- /usr/include/limits.h /usr/include/bits/posix1_lim.h \
- /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
- /usr/include/bits/posix2_lim.h /usr/include/libxml2/libxml/xmlstring.h \
- /usr/include/libxml2/libxml/xmlregexp.h \
- /usr/include/libxml2/libxml/dict.h /usr/include/libxml2/libxml/hash.h \
- /usr/include/libxml2/libxml/valid.h \
- /usr/include/libxml2/libxml/xmlerror.h \
- /usr/include/libxml2/libxml/list.h \
- /usr/include/libxml2/libxml/xmlautomata.h \
- /usr/include/libxml2/libxml/entities.h \
- /usr/include/libxml2/libxml/encoding.h /usr/include/iconv.h \
- /usr/include/unicode/ucnv.h /usr/include/unicode/ucnv_err.h \
- /usr/include/unicode/utypes.h /usr/include/unicode/umachine.h \
- /usr/include/unicode/ptypes.h /usr/include/unicode/platform.h \
- /usr/include/unicode/uconfig.h /usr/include/unicode/uvernum.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/wchar.h \
- /usr/include/unicode/urename.h /usr/include/unicode/uversion.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/float.h \
- /usr/include/unicode/utf.h /usr/include/unicode/utf8.h \
- /usr/include/unicode/utf16.h /usr/include/unicode/utf_old.h \
- /usr/include/unicode/uenum.h /usr/include/unicode/localpointer.h \
- /usr/include/libxml2/libxml/xmlIO.h /usr/include/libxml2/libxml/SAX.h \
- /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
- /usr/include/sys/types.h /usr/include/endian.h \
- /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
- /usr/include/bits/byteswap-16.h /usr/include/bits/uintn-identity.h \
- /usr/include/sys/select.h /usr/include/bits/select.h \
- /usr/include/bits/sigset.h /usr/include/bits/types/struct_timeval.h \
- /usr/include/bits/select2.h /usr/include/sys/sysmacros.h \
- /usr/include/bits/sysmacros.h /usr/include/bits/pthreadtypes.h \
- /usr/include/alloca.h /usr/include/bits/stdlib-bsearch.h \
- /usr/include/bits/stdlib-float.h /usr/include/bits/stdlib.h \
- /usr/include/libxml2/libxml/xlink.h /usr/include/libxml2/libxml/SAX2.h \
- /usr/include/glib-2.0/glib.h /usr/include/glib-2.0/glib/galloca.h \
- /usr/include/glib-2.0/glib/gtypes.h \
- /usr/lib64/glib-2.0/include/glibconfig.h \
- /usr/include/glib-2.0/glib/gmacros.h \
- /usr/include/glib-2.0/glib/gversionmacros.h \
  /usr/include/glib-2.0/glib/garray.h \
  /usr/include/glib-2.0/glib/gasyncqueue.h \
  /usr/include/glib-2.0/glib/gthread.h \
  /usr/include/glib-2.0/glib/gatomic.h /usr/include/glib-2.0/glib/gerror.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stdarg.h \
  /usr/include/glib-2.0/glib/gquark.h /usr/include/glib-2.0/glib/gutils.h \
  /usr/include/glib-2.0/glib/gbacktrace.h /usr/include/signal.h \
- /usr/include/bits/signum.h /usr/include/bits/siginfo.h \
- /usr/include/bits/sigaction.h /usr/include/bits/sigcontext.h \
- /usr/include/bits/sigstack.h /usr/include/sys/ucontext.h \
+ /usr/include/bits/sigset.h /usr/include/bits/signum.h \
+ /usr/include/bits/siginfo.h /usr/include/bits/sigaction.h \
+ /usr/include/bits/sigcontext.h /usr/include/bits/sigstack.h \
+ /usr/include/sys/ucontext.h /usr/include/bits/pthreadtypes.h \
  /usr/include/bits/sigthread.h /usr/include/glib-2.0/glib/gbase64.h \
  /usr/include/glib-2.0/glib/gbitlock.h \
  /usr/include/glib-2.0/glib/gbookmarkfile.h \
@@ -126,11 +87,16 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
  /usr/include/glib-2.0/glib/deprecated/gcompletion.h \
  /usr/include/glib-2.0/glib/deprecated/gmain.h \
  /usr/include/glib-2.0/glib/deprecated/grel.h \
- /usr/include/glib-2.0/glib/deprecated/gthread.h /usr/include/pthread.h \
+ /usr/include/glib-2.0/glib/deprecated/gthread.h /usr/include/sys/types.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/byteswap-16.h \
+ /usr/include/bits/uintn-identity.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/types/struct_timeval.h \
+ /usr/include/bits/select2.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/sysmacros.h /usr/include/pthread.h \
  /usr/include/sched.h /usr/include/bits/sched.h \
  /usr/include/bits/setjmp.h \
- /usr/include/glib-2.0/glib/glib-autocleanups.h /usr/include/libintl.h \
- /usr/include/locale.h /usr/include/bits/locale.h ../../src/conf.h \
+ /usr/include/glib-2.0/glib/glib-autocleanups.h \
  /usr/include/glib-2.0/gio/gio.h /usr/include/glib-2.0/gio/giotypes.h \
  /usr/include/glib-2.0/gio/gioenums.h /usr/include/glib-2.0/glib-object.h \
  /usr/include/glib-2.0/gobject/gbinding.h \
@@ -297,8 +263,41 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
  /usr/include/glib-2.0/gio/gio-autocleanups.h ../../src/debug.h \
  ../../src/folder.h ../../src/node_type.h ../../src/node.h \
  ../../src/itemset.h ../../src/item.h ../../src/rule.h \
- ../../src/node_view.h /usr/include/gtk-3.0/gtk/gtk.h \
- /usr/include/gtk-3.0/gdk/gdk.h /usr/include/gtk-3.0/gdk/gdkconfig.h \
+ ../../src/node_view.h /usr/include/libxml2/libxml/xmlmemory.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/bits/stdio2.h /usr/include/libxml2/libxml/xmlversion.h \
+ /usr/include/libxml2/libxml/xmlexports.h \
+ /usr/include/libxml2/libxml/threads.h \
+ /usr/include/libxml2/libxml/globals.h \
+ /usr/include/libxml2/libxml/parser.h /usr/include/libxml2/libxml/tree.h \
+ /usr/include/libxml2/libxml/xmlstring.h \
+ /usr/include/libxml2/libxml/xmlregexp.h \
+ /usr/include/libxml2/libxml/dict.h /usr/include/libxml2/libxml/hash.h \
+ /usr/include/libxml2/libxml/valid.h \
+ /usr/include/libxml2/libxml/xmlerror.h \
+ /usr/include/libxml2/libxml/list.h \
+ /usr/include/libxml2/libxml/xmlautomata.h \
+ /usr/include/libxml2/libxml/entities.h \
+ /usr/include/libxml2/libxml/encoding.h /usr/include/iconv.h \
+ /usr/include/unicode/ucnv.h /usr/include/unicode/ucnv_err.h \
+ /usr/include/unicode/utypes.h /usr/include/unicode/umachine.h \
+ /usr/include/unicode/ptypes.h /usr/include/unicode/platform.h \
+ /usr/include/unicode/uconfig.h /usr/include/unicode/uvernum.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ /usr/include/unicode/urename.h /usr/include/unicode/uversion.h \
+ /usr/include/unicode/utf.h /usr/include/unicode/utf8.h \
+ /usr/include/unicode/utf16.h /usr/include/unicode/utf_old.h \
+ /usr/include/unicode/uenum.h /usr/include/unicode/localpointer.h \
+ /usr/include/libxml2/libxml/xmlIO.h /usr/include/libxml2/libxml/SAX.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-bsearch.h \
+ /usr/include/bits/stdlib-float.h /usr/include/bits/stdlib.h \
+ /usr/include/libxml2/libxml/xlink.h /usr/include/libxml2/libxml/SAX2.h \
+ /usr/include/gtk-3.0/gtk/gtk.h /usr/include/gtk-3.0/gdk/gdk.h \
+ /usr/include/gtk-3.0/gdk/gdkconfig.h \
  /usr/include/gtk-3.0/gdk/gdkversionmacros.h \
  /usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h \
  /usr/include/gtk-3.0/gdk/gdktypes.h /usr/include/pango-1.0/pango/pango.h \
@@ -652,10 +651,10 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  /usr/include/gtk-3.0/gtk/gtk-autocleanups.h ../../src/htmlview.h \
  ../../src/ui/itemview.h ../../src/item.h ../../src/itemset.h \
- ../../src/node.h ../../src/ui/liferea_htmlview.h \
- ../../src/ui/liferea_htmlview.h ../../src/item_history.h \
- ../../src/itemlist.h ../../src/item_loader.h itemview.h \
- ../../src/ui/ui_common.h ../../src/ui/enclosure_list_view.h \
+ ../../src/node.h ../../src/ui/liferea_htmlview.h ../../src/net.h \
+ ../../src/update.h ../../src/ui/liferea_htmlview.h \
+ ../../src/item_history.h ../../src/itemlist.h ../../src/item_loader.h \
+ itemview.h ../../src/ui/ui_common.h ../../src/ui/enclosure_list_view.h \
  ../../src/enclosure.h ../../src/ui/liferea_shell.h \
  ../../src/ui/item_list_view.h ../../src/node_view.h
 
@@ -691,9 +690,35 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
 
 /usr/include/bits/strings_fortified.h:
 
-../../src/common.h:
+../../src/conf.h:
 
-../../config.h:
+/usr/include/glib-2.0/glib.h:
+
+/usr/include/glib-2.0/glib/galloca.h:
+
+/usr/include/glib-2.0/glib/gtypes.h:
+
+/usr/lib64/glib-2.0/include/glibconfig.h:
+
+/usr/include/glib-2.0/glib/gmacros.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include-fixed/limits.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include-fixed/syslimits.h:
+
+/usr/include/limits.h:
+
+/usr/include/bits/posix1_lim.h:
+
+/usr/include/bits/local_lim.h:
+
+/usr/include/linux/limits.h:
+
+/usr/include/bits/posix2_lim.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/float.h:
+
+/usr/include/glib-2.0/glib/gversionmacros.h:
 
 /usr/include/time.h:
 
@@ -717,174 +742,6 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
 
 /usr/include/bits/types/struct_itimerspec.h:
 
-/usr/include/libxml2/libxml/xmlmemory.h:
-
-/usr/include/stdio.h:
-
-/usr/include/libio.h:
-
-/usr/include/_G_config.h:
-
-/usr/include/wchar.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stdarg.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/bits/sys_errlist.h:
-
-/usr/include/bits/stdio.h:
-
-/usr/include/bits/stdio2.h:
-
-/usr/include/libxml2/libxml/xmlversion.h:
-
-/usr/include/libxml2/libxml/xmlexports.h:
-
-/usr/include/libxml2/libxml/threads.h:
-
-/usr/include/libxml2/libxml/globals.h:
-
-/usr/include/libxml2/libxml/parser.h:
-
-/usr/include/libxml2/libxml/tree.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include-fixed/limits.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include-fixed/syslimits.h:
-
-/usr/include/limits.h:
-
-/usr/include/bits/posix1_lim.h:
-
-/usr/include/bits/local_lim.h:
-
-/usr/include/linux/limits.h:
-
-/usr/include/bits/posix2_lim.h:
-
-/usr/include/libxml2/libxml/xmlstring.h:
-
-/usr/include/libxml2/libxml/xmlregexp.h:
-
-/usr/include/libxml2/libxml/dict.h:
-
-/usr/include/libxml2/libxml/hash.h:
-
-/usr/include/libxml2/libxml/valid.h:
-
-/usr/include/libxml2/libxml/xmlerror.h:
-
-/usr/include/libxml2/libxml/list.h:
-
-/usr/include/libxml2/libxml/xmlautomata.h:
-
-/usr/include/libxml2/libxml/entities.h:
-
-/usr/include/libxml2/libxml/encoding.h:
-
-/usr/include/iconv.h:
-
-/usr/include/unicode/ucnv.h:
-
-/usr/include/unicode/ucnv_err.h:
-
-/usr/include/unicode/utypes.h:
-
-/usr/include/unicode/umachine.h:
-
-/usr/include/unicode/ptypes.h:
-
-/usr/include/unicode/platform.h:
-
-/usr/include/unicode/uconfig.h:
-
-/usr/include/unicode/uvernum.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stdint.h:
-
-/usr/include/stdint.h:
-
-/usr/include/bits/wchar.h:
-
-/usr/include/unicode/urename.h:
-
-/usr/include/unicode/uversion.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/float.h:
-
-/usr/include/unicode/utf.h:
-
-/usr/include/unicode/utf8.h:
-
-/usr/include/unicode/utf16.h:
-
-/usr/include/unicode/utf_old.h:
-
-/usr/include/unicode/uenum.h:
-
-/usr/include/unicode/localpointer.h:
-
-/usr/include/libxml2/libxml/xmlIO.h:
-
-/usr/include/libxml2/libxml/SAX.h:
-
-/usr/include/bits/waitflags.h:
-
-/usr/include/bits/waitstatus.h:
-
-/usr/include/sys/types.h:
-
-/usr/include/endian.h:
-
-/usr/include/bits/endian.h:
-
-/usr/include/bits/byteswap.h:
-
-/usr/include/bits/byteswap-16.h:
-
-/usr/include/bits/uintn-identity.h:
-
-/usr/include/sys/select.h:
-
-/usr/include/bits/select.h:
-
-/usr/include/bits/sigset.h:
-
-/usr/include/bits/types/struct_timeval.h:
-
-/usr/include/bits/select2.h:
-
-/usr/include/sys/sysmacros.h:
-
-/usr/include/bits/sysmacros.h:
-
-/usr/include/bits/pthreadtypes.h:
-
-/usr/include/alloca.h:
-
-/usr/include/bits/stdlib-bsearch.h:
-
-/usr/include/bits/stdlib-float.h:
-
-/usr/include/bits/stdlib.h:
-
-/usr/include/libxml2/libxml/xlink.h:
-
-/usr/include/libxml2/libxml/SAX2.h:
-
-/usr/include/glib-2.0/glib.h:
-
-/usr/include/glib-2.0/glib/galloca.h:
-
-/usr/include/glib-2.0/glib/gtypes.h:
-
-/usr/lib64/glib-2.0/include/glibconfig.h:
-
-/usr/include/glib-2.0/glib/gmacros.h:
-
-/usr/include/glib-2.0/glib/gversionmacros.h:
-
 /usr/include/glib-2.0/glib/garray.h:
 
 /usr/include/glib-2.0/glib/gasyncqueue.h:
@@ -895,6 +752,8 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
 
 /usr/include/glib-2.0/glib/gerror.h:
 
+/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stdarg.h:
+
 /usr/include/glib-2.0/glib/gquark.h:
 
 /usr/include/glib-2.0/glib/gutils.h:
@@ -902,6 +761,8 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
 /usr/include/glib-2.0/glib/gbacktrace.h:
 
 /usr/include/signal.h:
+
+/usr/include/bits/sigset.h:
 
 /usr/include/bits/signum.h:
 
@@ -914,6 +775,8 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
 /usr/include/bits/sigstack.h:
 
 /usr/include/sys/ucontext.h:
+
+/usr/include/bits/pthreadtypes.h:
 
 /usr/include/bits/sigthread.h:
 
@@ -1047,6 +910,30 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
 
 /usr/include/glib-2.0/glib/deprecated/gthread.h:
 
+/usr/include/sys/types.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/byteswap.h:
+
+/usr/include/bits/byteswap-16.h:
+
+/usr/include/bits/uintn-identity.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/types/struct_timeval.h:
+
+/usr/include/bits/select2.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/bits/sysmacros.h:
+
 /usr/include/pthread.h:
 
 /usr/include/sched.h:
@@ -1056,14 +943,6 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
 /usr/include/bits/setjmp.h:
 
 /usr/include/glib-2.0/glib/glib-autocleanups.h:
-
-/usr/include/libintl.h:
-
-/usr/include/locale.h:
-
-/usr/include/bits/locale.h:
-
-../../src/conf.h:
 
 /usr/include/glib-2.0/gio/gio.h:
 
@@ -1430,6 +1309,116 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
 ../../src/rule.h:
 
 ../../src/node_view.h:
+
+/usr/include/libxml2/libxml/xmlmemory.h:
+
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
+/usr/include/bits/stdio2.h:
+
+/usr/include/libxml2/libxml/xmlversion.h:
+
+/usr/include/libxml2/libxml/xmlexports.h:
+
+/usr/include/libxml2/libxml/threads.h:
+
+/usr/include/libxml2/libxml/globals.h:
+
+/usr/include/libxml2/libxml/parser.h:
+
+/usr/include/libxml2/libxml/tree.h:
+
+/usr/include/libxml2/libxml/xmlstring.h:
+
+/usr/include/libxml2/libxml/xmlregexp.h:
+
+/usr/include/libxml2/libxml/dict.h:
+
+/usr/include/libxml2/libxml/hash.h:
+
+/usr/include/libxml2/libxml/valid.h:
+
+/usr/include/libxml2/libxml/xmlerror.h:
+
+/usr/include/libxml2/libxml/list.h:
+
+/usr/include/libxml2/libxml/xmlautomata.h:
+
+/usr/include/libxml2/libxml/entities.h:
+
+/usr/include/libxml2/libxml/encoding.h:
+
+/usr/include/iconv.h:
+
+/usr/include/unicode/ucnv.h:
+
+/usr/include/unicode/ucnv_err.h:
+
+/usr/include/unicode/utypes.h:
+
+/usr/include/unicode/umachine.h:
+
+/usr/include/unicode/ptypes.h:
+
+/usr/include/unicode/platform.h:
+
+/usr/include/unicode/uconfig.h:
+
+/usr/include/unicode/uvernum.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/bits/wchar.h:
+
+/usr/include/unicode/urename.h:
+
+/usr/include/unicode/uversion.h:
+
+/usr/include/unicode/utf.h:
+
+/usr/include/unicode/utf8.h:
+
+/usr/include/unicode/utf16.h:
+
+/usr/include/unicode/utf_old.h:
+
+/usr/include/unicode/uenum.h:
+
+/usr/include/unicode/localpointer.h:
+
+/usr/include/libxml2/libxml/xmlIO.h:
+
+/usr/include/libxml2/libxml/SAX.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/alloca.h:
+
+/usr/include/bits/stdlib-bsearch.h:
+
+/usr/include/bits/stdlib-float.h:
+
+/usr/include/bits/stdlib.h:
+
+/usr/include/libxml2/libxml/xlink.h:
+
+/usr/include/libxml2/libxml/SAX2.h:
 
 /usr/include/gtk-3.0/gtk/gtk.h:
 
@@ -2184,6 +2173,10 @@ libliui_a-itemview.o: itemview.c /usr/include/stdc-predef.h \
 ../../src/node.h:
 
 ../../src/ui/liferea_htmlview.h:
+
+../../src/net.h:
+
+../../src/update.h:
 
 ../../src/ui/liferea_htmlview.h:
 

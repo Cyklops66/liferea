@@ -127,8 +127,7 @@ am_libliui_a_OBJECTS = libliui_a-auth_dialog.$(OBJEXT) \
 	libliui_a-search_folder_dialog.$(OBJEXT) \
 	libliui_a-subscription_dialog.$(OBJEXT) \
 	libliui_a-ui_common.$(OBJEXT) libliui_a-ui_dnd.$(OBJEXT) \
-	libliui_a-ui_folder.$(OBJEXT) libliui_a-ui_indicator.$(OBJEXT) \
-	libliui_a-ui_tray.$(OBJEXT) libliui_a-ui_update.$(OBJEXT)
+	libliui_a-ui_folder.$(OBJEXT) libliui_a-ui_update.$(OBJEXT)
 libliui_a_OBJECTS = $(am_libliui_a_OBJECTS)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
@@ -196,14 +195,14 @@ ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing aclocal-1.15
 ALL_LINGUAS = 
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 AR = ar
-AUTOCONF = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing autoconf
-AUTOHEADER = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing autoheader
-AUTOMAKE = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing automake-1.15
+AUTOCONF = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing autoconf
+AUTOHEADER = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing autoheader
+AUTOMAKE = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing automake-1.15
 AWK = gawk
 CATALOGS = 
 CATOBJEXT = .gmo
@@ -257,10 +256,6 @@ INTROSPECTION_SCANNER = /usr/bin/g-ir-scanner
 INTROSPECTION_TYPELIBDIR = /usr/lib64/girepository-1.0
 LD = /usr/x86_64-pc-linux-gnu/bin/ld -m elf_x86_64
 LDFLAGS = 
-LIBINDICATE_CFLAGS = -pthread -I/usr/include/libindicate-gtk3-0.7 -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libdrm -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/libindicate-0.7 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/libdbusmenu-glib-0.4
-LIBINDICATE_LIBS = -lindicate-gtk3 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lindicate -lgobject-2.0 -lglib-2.0 -ldbusmenu-glib
-LIBNOTIFY_CFLAGS = -pthread -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include
-LIBNOTIFY_LIBS = -lnotify -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0
 LIBOBJS = 
 LIBS = 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
@@ -268,7 +263,7 @@ LIPO =
 LN_S = ln -s
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
-MAKEINFO = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing makeinfo
+MAKEINFO = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
 MKINSTALLDIRS = ./mkinstalldirs
@@ -286,10 +281,10 @@ PACKAGE_BUGREPORT = liferea-devel@lists.sourceforge.net
 PACKAGE_CFLAGS = -pthread -I/usr/include/webkitgtk-4.0 -I/usr/include/libsoup-2.4 -I/usr/include/libxml2 -I/usr/include/webkitgtk-4.0 -I/usr/include/json-glib-1.0 -I/usr/include/libpeas-1.0 -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libdrm -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/libpeas-1.0 -I/usr/include/gobject-introspection-1.0 -I/usr/lib64/libffi-3.2.1/include -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/gsettings-desktop-schemas
 PACKAGE_LIBS = -lxslt -lxml2 -lm -lxml2 -lsqlite3 -lgthread-2.0 -pthread -lwebkit2gtk-4.0 -lsoup-2.4 -ljavascriptcoregtk-4.0 -ljson-glib-1.0 -lpeas-gtk-1.0 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lpeas-1.0 -Wl,--export-dynamic -lgmodule-2.0 -pthread -lgio-2.0 -lgirepository-1.0 -lgobject-2.0 -lglib-2.0
 PACKAGE_NAME = liferea
-PACKAGE_STRING = liferea 1.10.19
+PACKAGE_STRING = liferea 1.12.2
 PACKAGE_TARNAME = liferea
 PACKAGE_URL = 
-PACKAGE_VERSION = 1.10.19
+PACKAGE_VERSION = 1.12.2
 PATH_SEPARATOR = :
 PKG_CONFIG = /usr/bin/pkg-config
 PKG_CONFIG_LIBDIR = 
@@ -304,12 +299,14 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 USE_NLS = yes
-VERSION = 1.10.19
+VERSION = 1.12.2
+WEB_EXTENSION_CFLAGS = -pthread -I/usr/include/webkitgtk-4.0 -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libdrm -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/libsoup-2.4 -I/usr/include/libxml2 -I/usr/include/webkitgtk-4.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include
+WEB_EXTENSION_LIBS = -lwebkit2gtk-4.0 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lsoup-2.4 -lgio-2.0 -lgobject-2.0 -ljavascriptcoregtk-4.0 -lglib-2.0
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /home/unixjunkie/liferea-1.10.19/src/ui
-abs_srcdir = /home/unixjunkie/liferea-1.10.19/src/ui
-abs_top_builddir = /home/unixjunkie/liferea-1.10.19
-abs_top_srcdir = /home/unixjunkie/liferea-1.10.19
+abs_builddir = /home/unixjunkie/liferea-1.12.2/src/ui
+abs_srcdir = /home/unixjunkie/liferea-1.12.2/src/ui
+abs_top_builddir = /home/unixjunkie/liferea-1.12.2
+abs_top_srcdir = /home/unixjunkie/liferea-1.12.2
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_DUMPBIN = 
@@ -339,7 +336,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/unixjunkie/liferea-1.10.19/install-sh
+install_sh = ${SHELL} /home/unixjunkie/liferea-1.12.2/install-sh
 intltool__v_merge_options_ = $(intltool__v_merge_options_$(AM_DEFAULT_VERBOSITY))
 intltool__v_merge_options_0 = -q
 libdir = ${exec_prefix}/lib
@@ -394,8 +391,6 @@ libliui_a_SOURCES = \
 	ui_common.c ui_common.h \
 	ui_dnd.c ui_dnd.h \
 	ui_folder.c ui_folder.h \
-	ui_indicator.c ui_indicator.h \
-	ui_tray.c ui_tray.h \
 	ui_update.c ui_update.h 
 
 all: all-am
@@ -470,8 +465,6 @@ include ./$(DEPDIR)/libliui_a-subscription_dialog.Po
 include ./$(DEPDIR)/libliui_a-ui_common.Po
 include ./$(DEPDIR)/libliui_a-ui_dnd.Po
 include ./$(DEPDIR)/libliui_a-ui_folder.Po
-include ./$(DEPDIR)/libliui_a-ui_indicator.Po
-include ./$(DEPDIR)/libliui_a-ui_tray.Po
 include ./$(DEPDIR)/libliui_a-ui_update.Po
 
 .c.o:
@@ -830,34 +823,6 @@ libliui_a-ui_folder.obj: ui_folder.c
 #	$(AM_V_CC)source='ui_folder.c' object='libliui_a-ui_folder.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -c -o libliui_a-ui_folder.obj `if test -f 'ui_folder.c'; then $(CYGPATH_W) 'ui_folder.c'; else $(CYGPATH_W) '$(srcdir)/ui_folder.c'; fi`
-
-libliui_a-ui_indicator.o: ui_indicator.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -MT libliui_a-ui_indicator.o -MD -MP -MF $(DEPDIR)/libliui_a-ui_indicator.Tpo -c -o libliui_a-ui_indicator.o `test -f 'ui_indicator.c' || echo '$(srcdir)/'`ui_indicator.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libliui_a-ui_indicator.Tpo $(DEPDIR)/libliui_a-ui_indicator.Po
-#	$(AM_V_CC)source='ui_indicator.c' object='libliui_a-ui_indicator.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -c -o libliui_a-ui_indicator.o `test -f 'ui_indicator.c' || echo '$(srcdir)/'`ui_indicator.c
-
-libliui_a-ui_indicator.obj: ui_indicator.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -MT libliui_a-ui_indicator.obj -MD -MP -MF $(DEPDIR)/libliui_a-ui_indicator.Tpo -c -o libliui_a-ui_indicator.obj `if test -f 'ui_indicator.c'; then $(CYGPATH_W) 'ui_indicator.c'; else $(CYGPATH_W) '$(srcdir)/ui_indicator.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libliui_a-ui_indicator.Tpo $(DEPDIR)/libliui_a-ui_indicator.Po
-#	$(AM_V_CC)source='ui_indicator.c' object='libliui_a-ui_indicator.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -c -o libliui_a-ui_indicator.obj `if test -f 'ui_indicator.c'; then $(CYGPATH_W) 'ui_indicator.c'; else $(CYGPATH_W) '$(srcdir)/ui_indicator.c'; fi`
-
-libliui_a-ui_tray.o: ui_tray.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -MT libliui_a-ui_tray.o -MD -MP -MF $(DEPDIR)/libliui_a-ui_tray.Tpo -c -o libliui_a-ui_tray.o `test -f 'ui_tray.c' || echo '$(srcdir)/'`ui_tray.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libliui_a-ui_tray.Tpo $(DEPDIR)/libliui_a-ui_tray.Po
-#	$(AM_V_CC)source='ui_tray.c' object='libliui_a-ui_tray.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -c -o libliui_a-ui_tray.o `test -f 'ui_tray.c' || echo '$(srcdir)/'`ui_tray.c
-
-libliui_a-ui_tray.obj: ui_tray.c
-	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -MT libliui_a-ui_tray.obj -MD -MP -MF $(DEPDIR)/libliui_a-ui_tray.Tpo -c -o libliui_a-ui_tray.obj `if test -f 'ui_tray.c'; then $(CYGPATH_W) 'ui_tray.c'; else $(CYGPATH_W) '$(srcdir)/ui_tray.c'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libliui_a-ui_tray.Tpo $(DEPDIR)/libliui_a-ui_tray.Po
-#	$(AM_V_CC)source='ui_tray.c' object='libliui_a-ui_tray.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -c -o libliui_a-ui_tray.obj `if test -f 'ui_tray.c'; then $(CYGPATH_W) 'ui_tray.c'; else $(CYGPATH_W) '$(srcdir)/ui_tray.c'; fi`
 
 libliui_a-ui_update.o: ui_update.c
 	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -MT libliui_a-ui_update.o -MD -MP -MF $(DEPDIR)/libliui_a-ui_update.Tpo -c -o libliui_a-ui_update.o `test -f 'ui_update.c' || echo '$(srcdir)/'`ui_update.c

@@ -1,7 +1,7 @@
 /**
  * @file json_api_mapper.c   data mapper for JSON APIs
  * 
- * Copyright (C) 2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2013 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -54,10 +54,13 @@ json_api_get_string (JsonNode *parent, const gchar *mapping)
 	JsonNode	*node;
 	const gchar	*field;
 
-	if (!node || !mapping)
+	if (!parent || !mapping)
 		return NULL;
 
 	node = json_api_get_node (parent, mapping);
+	if (!node)
+		return NULL;
+
 	field = strrchr (mapping, '/');
 	if (!field)
 		field = mapping;
@@ -73,10 +76,13 @@ json_api_get_int (JsonNode *parent, const gchar *mapping)
 	JsonNode	*node;
 	const gchar	*field;
 
-	if (!node || !mapping)
+	if (!parent || !mapping)
 		return 0;
 
 	node = json_api_get_node (parent, mapping);
+	if (!node)
+		return 0;
+
 	field = strrchr (mapping, '/');
 	if (!field)
 		field = mapping;
@@ -92,10 +98,13 @@ json_api_get_bool (JsonNode *parent, const gchar *mapping)
 	JsonNode	*node;
 	const gchar	*field;
 
-	if (!node || !mapping)
+	if (!parent || !mapping)
 		return FALSE;
 
 	node = json_api_get_node (parent, mapping);
+	if (!node)
+		return FALSE;
+
 	field = strrchr (mapping, '/');
 	if (!field)
 		field = mapping;

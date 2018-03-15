@@ -2,7 +2,7 @@
  * @file theoldreader_source_feed.c  TheOldReader feed subscription routines
  * 
  * Copyright (C) 2008  Arnold Noronha <arnstein87@gmail.com>
- * Copyright (C) 2013  Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2014  Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,10 +29,10 @@
 #include "xml.h"
 
 #include "feedlist.h"
+#include "google_reader_api_edit.h"
 #include "theoldreader_source.h"
 #include "subscription.h"
 #include "node.h"
-#include "theoldreader_source_edit.h"
 #include "metadata.h"
 #include "db.h"
 #include "item_state.h"
@@ -91,7 +91,7 @@ theoldreader_source_load_item_from_sourceid (nodePtr node, gchar *sourceId, GHas
 		}
 	}
 
-	g_warning ("Could not find item for %s!", sourceId);
+	g_print ("Could not find item for %s!", sourceId);
 	itemset_free (itemset);
 	return NULL;
 }
@@ -99,7 +99,6 @@ theoldreader_source_load_item_from_sourceid (nodePtr node, gchar *sourceId, GHas
 static void
 theoldreader_source_item_retrieve_status (const xmlNodePtr entry, subscriptionPtr subscription, GHashTable *cache)
 {
-	TheOldReaderSourcePtr gsource = (TheOldReaderSourcePtr) node_source_root_from_node (subscription->node)->data ;
 	xmlNodePtr      xml;
 	nodePtr         node = subscription->node;
 	xmlChar         *id = NULL;
@@ -130,13 +129,13 @@ theoldreader_source_item_retrieve_status (const xmlNodePtr entry, subscriptionPt
 	}
 
 	if (!id) {
-		g_warning ("Skipping item without id in theoldreader_source_item_retrieve_status()!");
+		g_print ("Skipping item without id in theoldreader_source_item_retrieve_status()!");
 		return;
 	}
 	
 	itemPtr item = theoldreader_source_load_item_from_sourceid (node, id, cache);
 	if (item && item->sourceId) {
-		if (g_str_equal (item->sourceId, id) && !theoldreader_source_edit_is_in_queue(gsource, id)) {
+		if (g_str_equal (item->sourceId, id) && !google_reader_api_edit_is_in_queue(node->source, id)) {
 			
 			if (item->readStatus != read)
 				item_read_state_changed (item, read);
@@ -169,12 +168,6 @@ theoldreader_feed_subscription_process_update_result (subscriptionPtr subscripti
 	if (!result->data)
 		return;
 
-	/* FIXME: The following workaround ensure that the code below,
-	   that uses UI callbacks item_*_state_changed(), does not 
-	   reset the newCount of the feed list (see SF #2666478)
-	   by getting the newCount first and setting it again later. */
-	guint newCount = feedlist_get_new_item_count ();
-
 	xmlDocPtr doc = xml_parse (result->data, result->size, NULL);
 	if (doc) {		
 		xmlNodePtr root = xmlDocGetRootElement (doc);
@@ -195,11 +188,8 @@ theoldreader_feed_subscription_process_update_result (subscriptionPtr subscripti
 		xmlFreeDoc (doc);
 	} else { 
 		debug0 (DEBUG_UPDATE, "theoldreader_feed_subscription_process_update_result(): Couldn't parse XML!");
-		g_warning ("theoldreader_feed_subscription_process_update_result(): Couldn't parse XML!");
+		g_print ("theoldreader_feed_subscription_process_update_result(): Couldn't parse XML!");
 	}
-
-	// FIXME: part 2 of the newCount workaround
-	feedlist_update_new_item_count (newCount);
 	
 	debug_end_measurement (DEBUG_UPDATE, "theoldreader_feed_subscription_process_update_result");
 }
@@ -212,13 +202,13 @@ theoldreader_feed_subscription_prepare_update_request (subscriptionPtr subscript
 	TheOldReaderSourcePtr source = (TheOldReaderSourcePtr) node_source_root_from_node (subscription->node)->data; 
 	
 	g_assert (source); 
-	if (source->loginState == THEOLDREADER_SOURCE_STATE_NONE) { 
+	if (source->root->source->loginState == NODE_SOURCE_STATE_NONE) { 
 		subscription_update (node_source_root_from_node (subscription->node)->subscription, 0) ;
 		return FALSE;
 	}
 
 	if (!metadata_list_get (subscription->metadata, "theoldreader-feed-id")) {
-		g_warning ("Skipping TheOldReader feed '%s' (%s) without id!", subscription->source, subscription->node->id);
+		g_print ("Skipping TheOldReader feed '%s' (%s) without id!", subscription->source, subscription->node->id);
 		return FALSE;
 	}
 
@@ -229,7 +219,7 @@ theoldreader_feed_subscription_prepare_update_request (subscriptionPtr subscript
 	g_free (newUrl);
 	g_free (source_escaped);
 
-	update_request_set_auth_value (request, source->authHeaderValue);
+	update_request_set_auth_value (request, subscription->node->source->authToken);
 	return TRUE;
 }
 

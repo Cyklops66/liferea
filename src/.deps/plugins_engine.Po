@@ -284,7 +284,9 @@ plugins_engine.o: plugins_engine.c /usr/include/stdc-predef.h ../config.h \
  /usr/include/gobject-introspection-1.0/givfuncinfo.h plugins_engine.h \
  /usr/include/libpeas-1.0/libpeas/peas-engine.h \
  /usr/include/libpeas-1.0/libpeas/peas-plugin-info.h \
- /usr/include/libpeas-1.0/libpeas/peas-extension.h
+ /usr/include/libpeas-1.0/libpeas/peas-extension.h \
+ /usr/include/libpeas-1.0/libpeas/peas-extension-set.h \
+ /usr/include/libpeas-1.0/libpeas/peas-engine.h
 
 /usr/include/stdc-predef.h:
 
@@ -977,3 +979,7 @@ plugins_engine.h:
 /usr/include/libpeas-1.0/libpeas/peas-plugin-info.h:
 
 /usr/include/libpeas-1.0/libpeas/peas-extension.h:
+
+/usr/include/libpeas-1.0/libpeas/peas-extension-set.h:
+
+/usr/include/libpeas-1.0/libpeas/peas-engine.h:

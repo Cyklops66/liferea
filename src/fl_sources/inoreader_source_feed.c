@@ -2,7 +2,7 @@
  * @file inoreader_source_feed.c  InoReader feed subscription routines
  * 
  * Copyright (C) 2008 Arnold Noronha <arnstein87@gmail.com>
- * Copyright (C) 2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2014 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,10 +29,10 @@
 #include "xml.h"
 
 #include "feedlist.h"
+#include "google_reader_api_edit.h"
 #include "inoreader_source.h"
 #include "subscription.h"
 #include "node.h"
-#include "inoreader_source_edit.h"
 #include "metadata.h"
 #include "db.h"
 #include "item_state.h"
@@ -87,23 +87,6 @@ inoreader_source_xml_unlink_node (xmlNodePtr node, gpointer data)
 	xmlFreeNode (node);
 }
 
-static void
-inoreader_source_set_shared_by (xmlNodePtr node, gpointer userdata) 
-{
-	itemPtr     item    = (itemPtr) userdata;
-	xmlChar     *value  = xmlNodeGetContent (node);
-	xmlChar     *apos   = strrchr (value, '\'');
-	gchar       *name;
-
-	if (!apos) return;
-	name = g_strndup (value, apos-value);
-
-	metadata_list_set (&item->metadata, "sharedby", name);
-	
-	g_free (name);
-	xmlFree (value);
-}
-
 static itemPtr
 inoreader_source_load_item_from_sourceid (nodePtr node, gchar *sourceId, GHashTable *cache) 
 {
@@ -135,7 +118,7 @@ inoreader_source_load_item_from_sourceid (nodePtr node, gchar *sourceId, GHashTa
 		}
 	}
 
-	g_warning ("Could not find item for %s!", sourceId);
+	g_print ("Could not find item for %s!", sourceId);
 	itemset_free (itemset);
 	return NULL;
 }
@@ -143,7 +126,6 @@ inoreader_source_load_item_from_sourceid (nodePtr node, gchar *sourceId, GHashTa
 static void
 inoreader_source_item_retrieve_status (const xmlNodePtr entry, subscriptionPtr subscription, GHashTable *cache)
 {
-	InoreaderSourcePtr gsource = (InoreaderSourcePtr) node_source_root_from_node (subscription->node)->data ;
 	xmlNodePtr      xml;
 	nodePtr         node = subscription->node;
 	xmlChar         *id = NULL;
@@ -172,13 +154,13 @@ inoreader_source_item_retrieve_status (const xmlNodePtr entry, subscriptionPtr s
 	}
 	
 	if (!id) {
-		g_warning ("Fatal: could not extract item id from InoReader Atom feed!");
+		g_print ("Fatal: could not extract item id from InoReader Atom feed!");
 		return;
 	}
 
 	itemPtr item = inoreader_source_load_item_from_sourceid (node, id, cache);
 	if (item && item->sourceId) {
-		if (g_str_equal (item->sourceId, id) && !inoreader_source_edit_is_in_queue (gsource, id)) {
+		if (g_str_equal (item->sourceId, id) && !google_reader_api_edit_is_in_queue (node->source, id)) {
 			
 			if (item->readStatus != read)
 				item_read_state_changed (item, read);
@@ -213,12 +195,6 @@ inoreader_feed_subscription_process_update_result (subscriptionPtr subscription,
 		xmlXPathContextPtr xpathCtxt = xmlXPathNewContext (doc) ;
 		xmlXPathRegisterNs (xpathCtxt, "atom", "http://www.w3.org/2005/Atom");
 		inoreader_source_xpath_foreach_match ("/atom:feed/atom:entry/atom:category[@scheme='http://www.inoreader.com/reader/']", xpathCtxt, inoreader_source_xml_unlink_node, NULL);
-
-
-		/* delete the via link for broadcast subscription */
-		if (g_str_equal (subscription->source, INOREADER_BROADCAST_FRIENDS_URL)) 
-			inoreader_source_xpath_foreach_match ("/atom:feed/atom:entry/atom:link[@rel='via']/@href", xpathCtxt, inoreader_source_xml_unlink_node, NULL);
-		
 		xmlXPathFreeContext (xpathCtxt);
 		
 		/* good now we have removed the read and unread labels. */
@@ -240,12 +216,6 @@ inoreader_feed_subscription_process_update_result (subscriptionPtr subscription,
 		feed_get_subscription_type ()->process_update_result (subscription, result, flags);
 		return ; 
 	}
-	
-	/* FIXME: The following workaround ensure that the code below,
-	   that uses UI callbacks item_*_state_changed(), does not 
-	   reset the newCount of the feed list (see SF #2666478)
-	   by getting the newCount first and setting it again later. */
-	guint newCount = feedlist_get_new_item_count ();
 
 	xmlDocPtr doc = xml_parse (result->data, result->size, NULL);
 	if (doc) {		
@@ -267,11 +237,8 @@ inoreader_feed_subscription_process_update_result (subscriptionPtr subscription,
 		xmlFreeDoc (doc);
 	} else { 
 		debug0 (DEBUG_UPDATE, "google_feed_subscription_process_update_result(): Couldn't parse XML!");
-		g_warning ("google_feed_subscription_process_update_result(): Couldn't parse XML!");
+		g_print ("google_feed_subscription_process_update_result(): Couldn't parse XML!");
 	}
-
-	// FIXME: part 2 of the newCount workaround
-	feedlist_update_new_item_count (newCount);
 	
 	debug_end_measurement (DEBUG_UPDATE, "time taken to update statuses");
 }
@@ -281,23 +248,21 @@ inoreader_feed_subscription_prepare_update_request (subscriptionPtr subscription
                                                  struct updateRequest *request)
 {
 	debug0 (DEBUG_UPDATE, "preparing InoReader feed subscription for update\n");
-	InoreaderSourcePtr gsource = (InoreaderSourcePtr) node_source_root_from_node (subscription->node)->data; 
+	nodePtr node = subscription->node; 
 	
-	g_assert(gsource); 
-	if (gsource->loginState == INOREADER_SOURCE_STATE_NONE) { 
-		subscription_update (node_source_root_from_node (subscription->node)->subscription, 0) ;
+	if (node->source->loginState == NODE_SOURCE_STATE_NONE) { 
+		subscription_update (node_source_root_from_node (node)->subscription, 0) ;
 		return FALSE;
 	}
 	debug0 (DEBUG_UPDATE, "Setting cookies for a InoReader subscription");
 
-	if (!g_str_equal (request->source, INOREADER_BROADCAST_FRIENDS_URL)) { 
-		gchar* source_escaped = g_uri_escape_string(request->source, NULL, TRUE);
-		gchar* newUrl = g_strdup_printf ("http://www.inoreader.com/reader/atom/feed/%s", source_escaped);
-		update_request_set_source (request, newUrl);
-		g_free (newUrl);
-		g_free (source_escaped);
-	}
-	update_request_set_auth_value (request, gsource->authHeaderValue);
+	gchar* source_escaped = g_uri_escape_string(request->source, NULL, TRUE);
+	gchar* newUrl = g_strdup_printf ("http://www.inoreader.com/reader/atom/feed/%s", source_escaped);
+	update_request_set_source (request, newUrl);
+	g_free (newUrl);
+	g_free (source_escaped);
+
+	update_request_set_auth_value (request, node->source->authToken);
 	return TRUE;
 }
 

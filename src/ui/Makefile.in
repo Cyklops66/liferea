@@ -127,8 +127,7 @@ am_libliui_a_OBJECTS = libliui_a-auth_dialog.$(OBJEXT) \
 	libliui_a-search_folder_dialog.$(OBJEXT) \
 	libliui_a-subscription_dialog.$(OBJEXT) \
 	libliui_a-ui_common.$(OBJEXT) libliui_a-ui_dnd.$(OBJEXT) \
-	libliui_a-ui_folder.$(OBJEXT) libliui_a-ui_indicator.$(OBJEXT) \
-	libliui_a-ui_tray.$(OBJEXT) libliui_a-ui_update.$(OBJEXT)
+	libliui_a-ui_folder.$(OBJEXT) libliui_a-ui_update.$(OBJEXT)
 libliui_a_OBJECTS = $(am_libliui_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -257,10 +256,6 @@ INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
-LIBINDICATE_CFLAGS = @LIBINDICATE_CFLAGS@
-LIBINDICATE_LIBS = @LIBINDICATE_LIBS@
-LIBNOTIFY_CFLAGS = @LIBNOTIFY_CFLAGS@
-LIBNOTIFY_LIBS = @LIBNOTIFY_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
@@ -305,6 +300,8 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
+WEB_EXTENSION_CFLAGS = @WEB_EXTENSION_CFLAGS@
+WEB_EXTENSION_LIBS = @WEB_EXTENSION_LIBS@
 XGETTEXT = @XGETTEXT@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
@@ -394,8 +391,6 @@ libliui_a_SOURCES = \
 	ui_common.c ui_common.h \
 	ui_dnd.c ui_dnd.h \
 	ui_folder.c ui_folder.h \
-	ui_indicator.c ui_indicator.h \
-	ui_tray.c ui_tray.h \
 	ui_update.c ui_update.h 
 
 all: all-am
@@ -470,8 +465,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliui_a-ui_common.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliui_a-ui_dnd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliui_a-ui_folder.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliui_a-ui_indicator.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliui_a-ui_tray.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliui_a-ui_update.Po@am__quote@
 
 .c.o:
@@ -830,34 +823,6 @@ libliui_a-ui_folder.obj: ui_folder.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ui_folder.c' object='libliui_a-ui_folder.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -c -o libliui_a-ui_folder.obj `if test -f 'ui_folder.c'; then $(CYGPATH_W) 'ui_folder.c'; else $(CYGPATH_W) '$(srcdir)/ui_folder.c'; fi`
-
-libliui_a-ui_indicator.o: ui_indicator.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -MT libliui_a-ui_indicator.o -MD -MP -MF $(DEPDIR)/libliui_a-ui_indicator.Tpo -c -o libliui_a-ui_indicator.o `test -f 'ui_indicator.c' || echo '$(srcdir)/'`ui_indicator.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliui_a-ui_indicator.Tpo $(DEPDIR)/libliui_a-ui_indicator.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ui_indicator.c' object='libliui_a-ui_indicator.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -c -o libliui_a-ui_indicator.o `test -f 'ui_indicator.c' || echo '$(srcdir)/'`ui_indicator.c
-
-libliui_a-ui_indicator.obj: ui_indicator.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -MT libliui_a-ui_indicator.obj -MD -MP -MF $(DEPDIR)/libliui_a-ui_indicator.Tpo -c -o libliui_a-ui_indicator.obj `if test -f 'ui_indicator.c'; then $(CYGPATH_W) 'ui_indicator.c'; else $(CYGPATH_W) '$(srcdir)/ui_indicator.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliui_a-ui_indicator.Tpo $(DEPDIR)/libliui_a-ui_indicator.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ui_indicator.c' object='libliui_a-ui_indicator.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -c -o libliui_a-ui_indicator.obj `if test -f 'ui_indicator.c'; then $(CYGPATH_W) 'ui_indicator.c'; else $(CYGPATH_W) '$(srcdir)/ui_indicator.c'; fi`
-
-libliui_a-ui_tray.o: ui_tray.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -MT libliui_a-ui_tray.o -MD -MP -MF $(DEPDIR)/libliui_a-ui_tray.Tpo -c -o libliui_a-ui_tray.o `test -f 'ui_tray.c' || echo '$(srcdir)/'`ui_tray.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliui_a-ui_tray.Tpo $(DEPDIR)/libliui_a-ui_tray.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ui_tray.c' object='libliui_a-ui_tray.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -c -o libliui_a-ui_tray.o `test -f 'ui_tray.c' || echo '$(srcdir)/'`ui_tray.c
-
-libliui_a-ui_tray.obj: ui_tray.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -MT libliui_a-ui_tray.obj -MD -MP -MF $(DEPDIR)/libliui_a-ui_tray.Tpo -c -o libliui_a-ui_tray.obj `if test -f 'ui_tray.c'; then $(CYGPATH_W) 'ui_tray.c'; else $(CYGPATH_W) '$(srcdir)/ui_tray.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliui_a-ui_tray.Tpo $(DEPDIR)/libliui_a-ui_tray.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ui_tray.c' object='libliui_a-ui_tray.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -c -o libliui_a-ui_tray.obj `if test -f 'ui_tray.c'; then $(CYGPATH_W) 'ui_tray.c'; else $(CYGPATH_W) '$(srcdir)/ui_tray.c'; fi`
 
 libliui_a-ui_update.o: ui_update.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliui_a_CFLAGS) $(CFLAGS) -MT libliui_a-ui_update.o -MD -MP -MF $(DEPDIR)/libliui_a-ui_update.Tpo -c -o libliui_a-ui_update.o `test -f 'ui_update.c' || echo '$(srcdir)/'`ui_update.c

@@ -1,7 +1,7 @@
 /**
  * @file htmlview.c  item view interface for HTML rendering
  * 
- * Copyright (C) 2006-2010 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2006-2010 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -99,6 +99,16 @@ htmlview_set_displayed_node (nodePtr node)
 {
 	g_assert (0 == g_hash_table_size (htmlView_priv.chunkHash));
 	htmlView_priv.node = node;
+}
+
+gboolean
+htmlview_contains_id (gulong id)
+{
+	gpointer	chunk;
+
+	chunk = g_hash_table_lookup (htmlView_priv.chunkHash, GUINT_TO_POINTER (id));
+
+	return (chunk?TRUE:FALSE);
 }
 
 void
@@ -202,8 +212,8 @@ htmlview_render_item (itemPtr item,
 	isMergedItemset = (node != htmlView_priv.node);
 
 	/* do the XML serialization */
-	doc = xmlNewDoc ("1.0");
-	xmlNode = xmlNewDocNode (doc, NULL, "itemset", NULL);
+	doc = xmlNewDoc (BAD_CAST "1.0");
+	xmlNode = xmlNewDocNode (doc, NULL, BAD_CAST "itemset", NULL);
 	xmlDocSetRootElement (doc, xmlNode);
 				
 	item_to_xml(item, xmlDocGetRootElement (doc));
@@ -212,7 +222,7 @@ htmlview_render_item (itemPtr item,
 			
 	if (IS_FEED (node)) {
 		xmlNodePtr feed;
-		feed = xmlNewChild (xmlDocGetRootElement (doc), NULL, "feed", NULL);
+		feed = xmlNewChild (xmlDocGetRootElement (doc), NULL, BAD_CAST "feed", NULL);
 		feed_to_xml (node, feed);
 	}
 	
@@ -220,7 +230,7 @@ htmlview_render_item (itemPtr item,
 	params = render_parameter_new ();
 	
 	if (NULL != node_get_base_url (node)) {
-		baseUrl = common_uri_escape (node_get_base_url (node));
+		baseUrl = (gchar *) common_uri_escape ( BAD_CAST node_get_base_url (node));
 		render_parameter_add (params, "baseUrl='%s'", baseUrl);
 	}
 

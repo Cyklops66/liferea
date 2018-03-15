@@ -653,11 +653,12 @@ libliui_a-feed_list_node.o: feed_list_node.c /usr/include/stdc-predef.h \
  /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
  ../../src/debug.h ../../src/feedlist.h ../../src/node.h \
  ../../src/update.h ../../src/fl_sources/node_source.h \
- ../../src/node_type.h ../../src/folder.h ../../src/node_type.h \
- ../../src/render.h ../../src/vfolder.h ../../src/ui/icons.h \
- ../../src/ui/liferea_dialog.h ../../src/ui/liferea_shell.h \
- ../../src/ui/feed_list_view.h ../../src/feed.h \
- ../../src/subscription_type.h ../../src/subscription.h
+ ../../src/node_type.h ../../src/subscription_type.h \
+ ../../src/subscription.h ../../src/fl_sources/google_reader_api.h \
+ ../../src/folder.h ../../src/node_type.h ../../src/render.h \
+ ../../src/vfolder.h ../../src/ui/icons.h ../../src/ui/liferea_dialog.h \
+ ../../src/ui/liferea_shell.h ../../src/ui/feed_list_view.h \
+ ../../src/feed.h ../../src/subscription_type.h
 
 /usr/include/stdc-predef.h:
 
@@ -2179,6 +2180,12 @@ libliui_a-feed_list_node.o: feed_list_node.c /usr/include/stdc-predef.h \
 
 ../../src/node_type.h:
 
+../../src/subscription_type.h:
+
+../../src/subscription.h:
+
+../../src/fl_sources/google_reader_api.h:
+
 ../../src/folder.h:
 
 ../../src/node_type.h:
@@ -2198,5 +2205,3 @@ libliui_a-feed_list_node.o: feed_list_node.c /usr/include/stdc-predef.h \
 ../../src/feed.h:
 
 ../../src/subscription_type.h:
-
-../../src/subscription.h:

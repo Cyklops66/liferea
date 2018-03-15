@@ -649,7 +649,7 @@ comments.o: comments.c /usr/include/stdc-predef.h /usr/include/string.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  /usr/include/gtk-3.0/gtk/gtk-autocleanups.h subscription_type.h \
  metadata.h feed_parser.h net.h net_monitor.h ui/itemview.h item.h \
- itemset.h node.h ui/liferea_htmlview.h
+ itemset.h node.h ui/liferea_htmlview.h net.h
 
 /usr/include/stdc-predef.h:
 
@@ -2190,3 +2190,5 @@ itemset.h:
 node.h:
 
 ui/liferea_htmlview.h:
+
+net.h:

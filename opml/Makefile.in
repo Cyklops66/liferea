@@ -210,10 +210,6 @@ INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
-LIBINDICATE_CFLAGS = @LIBINDICATE_CFLAGS@
-LIBINDICATE_LIBS = @LIBINDICATE_LIBS@
-LIBNOTIFY_CFLAGS = @LIBNOTIFY_CFLAGS@
-LIBNOTIFY_LIBS = @LIBNOTIFY_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
@@ -258,6 +254,8 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
+WEB_EXTENSION_CFLAGS = @WEB_EXTENSION_CFLAGS@
+WEB_EXTENSION_LIBS = @WEB_EXTENSION_LIBS@
 XGETTEXT = @XGETTEXT@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
@@ -325,13 +323,15 @@ EXTRA_DIST = \
 	feedlist_he.opml \
 	feedlist_hu.opml \
 	feedlist_gl.opml \
+	feedlist_id.opml \
 	feedlist_it.opml \
 	feedlist_pl.opml \
 	feedlist_pt.opml \
 	feedlist_pt_BR.opml \
 	feedlist_sk.opml \
 	feedlist_sv.opml \
-	feedlist_nl.opml
+	feedlist_nl.opml \
+	feedlist_no.opml
 
 lifereadistopmldir = $(datadir)/liferea/opml
 lifereadistopml_DATA = $(EXTRA_DIST)

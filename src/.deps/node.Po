@@ -295,7 +295,7 @@ node.o: node.c /usr/include/stdc-predef.h /usr/include/string.h \
  /usr/include/glib-2.0/gio/glistmodel.h \
  /usr/include/glib-2.0/gio/gliststore.h \
  /usr/include/glib-2.0/gio/gio-autocleanups.h db.h item.h itemset.h \
- rule.h subscription.h node.h node_view.h update.h debug.h itemlist.h \
+ rule.h subscription.h node.h node_view.h update.h debug.h favicon.h \
  /usr/include/gtk-3.0/gtk/gtk.h /usr/include/gtk-3.0/gdk/gdk.h \
  /usr/include/gtk-3.0/gdk/gdkconfig.h \
  /usr/include/gtk-3.0/gdk/gdkversionmacros.h \
@@ -649,9 +649,11 @@ node.o: node.c /usr/include/stdc-predef.h /usr/include/string.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h item_loader.h item_state.h \
- render.h vfolder.h node_type.h fl_sources/node_source.h node.h \
- node_type.h ui/liferea_shell.h ui/feed_list_node.h ui/ui_tray.h
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h feedlist.h itemlist.h \
+ item_loader.h item_state.h render.h vfolder.h node_type.h \
+ fl_sources/node_source.h node.h node_type.h subscription_type.h \
+ subscription.h fl_sources/google_reader_api.h ui/liferea_shell.h \
+ ui/feed_list_node.h
 
 /usr/include/stdc-predef.h:
 
@@ -1427,7 +1429,7 @@ update.h:
 
 debug.h:
 
-itemlist.h:
+favicon.h:
 
 /usr/include/gtk-3.0/gtk/gtk.h:
 
@@ -2171,6 +2173,10 @@ itemlist.h:
 
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
 
+feedlist.h:
+
+itemlist.h:
+
 item_loader.h:
 
 item_state.h:
@@ -2187,8 +2193,12 @@ node.h:
 
 node_type.h:
 
+subscription_type.h:
+
+subscription.h:
+
+fl_sources/google_reader_api.h:
+
 ui/liferea_shell.h:
 
 ui/feed_list_node.h:
-
-ui/ui_tray.h:

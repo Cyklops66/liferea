@@ -613,33 +613,10 @@ main.o: main.c /usr/include/stdc-predef.h ../config.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h /usr/include/string.h \
- /usr/include/bits/string.h /usr/include/bits/string2.h \
- /usr/include/stdlib.h /usr/include/bits/string3.h \
- /usr/include/bits/strings_fortified.h /usr/include/bits/waitflags.h \
- /usr/include/bits/waitstatus.h /usr/include/alloca.h \
- /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
- /usr/include/bits/stdlib.h \
- /usr/include/gobject-introspection-1.0/girepository.h \
- /usr/include/gobject-introspection-1.0/giarginfo.h \
- /usr/include/gobject-introspection-1.0/gitypes.h \
- /usr/include/gobject-introspection-1.0/giversionmacros.h \
- /usr/include/gobject-introspection-1.0/gibaseinfo.h \
- /usr/include/gobject-introspection-1.0/gitypelib.h \
- /usr/include/gobject-introspection-1.0/gicallableinfo.h \
- /usr/include/gobject-introspection-1.0/giconstantinfo.h \
- /usr/include/gobject-introspection-1.0/gienuminfo.h \
- /usr/include/gobject-introspection-1.0/gifieldinfo.h \
- /usr/include/gobject-introspection-1.0/gifunctioninfo.h \
- /usr/include/gobject-introspection-1.0/giinterfaceinfo.h \
- /usr/include/gobject-introspection-1.0/giobjectinfo.h \
- /usr/include/gobject-introspection-1.0/gipropertyinfo.h \
- /usr/include/gobject-introspection-1.0/giregisteredtypeinfo.h \
- /usr/include/gobject-introspection-1.0/gisignalinfo.h \
- /usr/include/gobject-introspection-1.0/gistructinfo.h \
- /usr/include/gobject-introspection-1.0/gitypeinfo.h \
- /usr/include/gobject-introspection-1.0/giunioninfo.h \
- /usr/include/gobject-introspection-1.0/givfuncinfo.h conf.h common.h \
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h /usr/include/stdlib.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/alloca.h /usr/include/bits/stdlib-bsearch.h \
+ /usr/include/bits/stdlib-float.h /usr/include/bits/stdlib.h common.h \
  /usr/include/libxml2/libxml/xmlmemory.h \
  /usr/include/libxml2/libxml/xmlversion.h \
  /usr/include/libxml2/libxml/xmlexports.h \
@@ -667,10 +644,10 @@ main.o: main.c /usr/include/stdc-predef.h ../config.h \
  /usr/include/unicode/uenum.h /usr/include/unicode/localpointer.h \
  /usr/include/libxml2/libxml/xmlIO.h /usr/include/libxml2/libxml/SAX.h \
  /usr/include/libxml2/libxml/xlink.h /usr/include/libxml2/libxml/SAX2.h \
- /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
- db.h item.h itemset.h rule.h subscription.h node.h node_view.h update.h \
- dbus.h debug.h feedlist.h social.h xml.h feed_parser.h feed.h \
- node_type.h subscription_type.h ui/liferea_shell.h node.h notification.h
+ /usr/include/string.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/bits/string3.h \
+ /usr/include/bits/strings_fortified.h /usr/include/libintl.h \
+ /usr/include/locale.h /usr/include/bits/locale.h liferea_application.h
 
 /usr/include/stdc-predef.h:
 
@@ -2054,17 +2031,7 @@ main.o: main.c /usr/include/stdc-predef.h ../config.h \
 
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
 
-/usr/include/string.h:
-
-/usr/include/bits/string.h:
-
-/usr/include/bits/string2.h:
-
 /usr/include/stdlib.h:
-
-/usr/include/bits/string3.h:
-
-/usr/include/bits/strings_fortified.h:
 
 /usr/include/bits/waitflags.h:
 
@@ -2077,48 +2044,6 @@ main.o: main.c /usr/include/stdc-predef.h ../config.h \
 /usr/include/bits/stdlib-float.h:
 
 /usr/include/bits/stdlib.h:
-
-/usr/include/gobject-introspection-1.0/girepository.h:
-
-/usr/include/gobject-introspection-1.0/giarginfo.h:
-
-/usr/include/gobject-introspection-1.0/gitypes.h:
-
-/usr/include/gobject-introspection-1.0/giversionmacros.h:
-
-/usr/include/gobject-introspection-1.0/gibaseinfo.h:
-
-/usr/include/gobject-introspection-1.0/gitypelib.h:
-
-/usr/include/gobject-introspection-1.0/gicallableinfo.h:
-
-/usr/include/gobject-introspection-1.0/giconstantinfo.h:
-
-/usr/include/gobject-introspection-1.0/gienuminfo.h:
-
-/usr/include/gobject-introspection-1.0/gifieldinfo.h:
-
-/usr/include/gobject-introspection-1.0/gifunctioninfo.h:
-
-/usr/include/gobject-introspection-1.0/giinterfaceinfo.h:
-
-/usr/include/gobject-introspection-1.0/giobjectinfo.h:
-
-/usr/include/gobject-introspection-1.0/gipropertyinfo.h:
-
-/usr/include/gobject-introspection-1.0/giregisteredtypeinfo.h:
-
-/usr/include/gobject-introspection-1.0/gisignalinfo.h:
-
-/usr/include/gobject-introspection-1.0/gistructinfo.h:
-
-/usr/include/gobject-introspection-1.0/gitypeinfo.h:
-
-/usr/include/gobject-introspection-1.0/giunioninfo.h:
-
-/usr/include/gobject-introspection-1.0/givfuncinfo.h:
-
-conf.h:
 
 common.h:
 
@@ -2204,48 +2129,20 @@ common.h:
 
 /usr/include/libxml2/libxml/SAX2.h:
 
+/usr/include/string.h:
+
+/usr/include/bits/string.h:
+
+/usr/include/bits/string2.h:
+
+/usr/include/bits/string3.h:
+
+/usr/include/bits/strings_fortified.h:
+
 /usr/include/libintl.h:
 
 /usr/include/locale.h:
 
 /usr/include/bits/locale.h:
 
-db.h:
-
-item.h:
-
-itemset.h:
-
-rule.h:
-
-subscription.h:
-
-node.h:
-
-node_view.h:
-
-update.h:
-
-dbus.h:
-
-debug.h:
-
-feedlist.h:
-
-social.h:
-
-xml.h:
-
-feed_parser.h:
-
-feed.h:
-
-node_type.h:
-
-subscription_type.h:
-
-ui/liferea_shell.h:
-
-node.h:
-
-notification.h:
+liferea_application.h:

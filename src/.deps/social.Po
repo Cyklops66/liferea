@@ -614,7 +614,8 @@ social.o: social.c /usr/include/stdc-predef.h social.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h ui/liferea_htmlview.h
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h ui/liferea_htmlview.h net.h \
+ update.h
 
 /usr/include/stdc-predef.h:
 
@@ -2007,3 +2008,7 @@ ui/browser_tabs.h:
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
 
 ui/liferea_htmlview.h:
+
+net.h:
+
+update.h:

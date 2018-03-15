@@ -2,7 +2,7 @@
  * @file atom10.c  Atom 1.0 Parser
  * 
  * Copyright (C) 2005-2006 Nathan Conrad <t98502@users.sourceforge.net>
- * Copyright (C) 2003-2010 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2003-2014 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -246,10 +246,9 @@ atom10_parse_person_construct (xmlNodePtr cur)
 		}
 		cur = cur->next;
 	}
-	if (!name) {
+
+	if (!name)
 		invalid = TRUE;
-		name = g_strdup (_("Invalid Atom feed: unknown author"));
-	}
 
 	if (!invalid)
 		tmp = g_strdup_printf ("%s%s%s", name, uri?uri:"", email?email:"");
@@ -284,9 +283,11 @@ atom10_parse_link (xmlNodePtr cur, feedParserCtxtPtr ctxt, struct atom10ParserSt
 		if (title)
 			escTitle = g_markup_escape_text (title, -1);
 		
-		if (!xmlHasNsProp (cur, BAD_CAST"rel", NULL) || !relation || g_str_equal (relation, BAD_CAST"alternate"))
+		if (!xmlHasNsProp (cur, BAD_CAST"rel", NULL) || !relation || g_str_equal (relation, BAD_CAST"alternate")) {
 			alternate = g_strdup (url);
-		else if (g_str_equal (relation, "replies")) {
+		} else if (g_str_equal (relation, "self")) {
+			alternate = g_strdup (url);
+		} else if (g_str_equal (relation, "replies")) {
 			if (!type || g_str_equal (type, BAD_CAST"application/atom+xml")) {
 				gchar *commentUri = (gchar *)common_build_url ((gchar *)url, subscription_get_homepage (ctxt->subscription));
 				if (ctxt->item)
@@ -349,7 +350,14 @@ atom10_parse_entry_category (xmlNodePtr cur, feedParserCtxtPtr ctxt, struct atom
 
 	if (category) {
 		gchar *escaped = g_markup_escape_text (category, -1);
-		ctxt->item->metadata = metadata_list_append (ctxt->item->metadata, "category", escaped);
+
+		/* Black-list some categories used by Google Reader clone online 
+		   readers that should not be visible to the end-user */
+		if (!g_str_equal (category, "reading-list") &&
+		    !g_str_equal (category, "read") &&
+		    !strstr(category, "user/-/label/"))
+			ctxt->item->metadata = metadata_list_append (ctxt->item->metadata, "category", escaped);
+
 		g_free (escaped);
 		xmlFree (category);
 	}

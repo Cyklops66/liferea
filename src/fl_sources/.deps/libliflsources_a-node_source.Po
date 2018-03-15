@@ -646,23 +646,49 @@ libliflsources_a-node_source.o: node_source.c /usr/include/stdc-predef.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h /usr/include/string.h \
- /usr/include/bits/string.h /usr/include/bits/string2.h \
- /usr/include/bits/string3.h /usr/include/bits/strings_fortified.h \
- ../../src/common.h ../../config.h /usr/include/libintl.h \
- /usr/include/locale.h /usr/include/bits/locale.h ../../src/db.h \
- ../../src/subscription.h ../../src/update.h ../../src/debug.h \
- ../../src/feed.h ../../src/node_type.h ../../src/subscription_type.h \
- ../../src/feedlist.h ../../src/folder.h ../../src/item_state.h \
- ../../src/ui/icons.h ../../src/ui/liferea_dialog.h \
- ../../src/ui/ui_common.h ../../src/ui/feed_list_node.h \
- ../../src/fl_sources/aol_source.h ../../src/fl_sources/default_source.h \
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h \
+ ../../src/subscription_type.h ../../src/subscription.h \
+ ../../src/update.h ../../src/fl_sources/google_reader_api.h \
+ /usr/include/string.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/bits/string3.h \
+ /usr/include/bits/strings_fortified.h ../../src/common.h ../../config.h \
+ /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
+ ../../src/db.h ../../src/debug.h ../../src/feed.h ../../src/node_type.h \
+ ../../src/subscription_type.h ../../src/feedlist.h ../../src/folder.h \
+ ../../src/item_state.h ../../src/plugins_engine.h \
+ /usr/include/libpeas-1.0/libpeas/peas-engine.h \
+ /usr/include/libpeas-1.0/libpeas/peas-plugin-info.h \
+ /usr/include/libpeas-1.0/libpeas/peas-extension.h \
+ /usr/include/gobject-introspection-1.0/girepository.h \
+ /usr/include/gobject-introspection-1.0/giarginfo.h \
+ /usr/include/gobject-introspection-1.0/gitypes.h \
+ /usr/include/gobject-introspection-1.0/giversionmacros.h \
+ /usr/include/gobject-introspection-1.0/gibaseinfo.h \
+ /usr/include/gobject-introspection-1.0/gitypelib.h \
+ /usr/include/gobject-introspection-1.0/gicallableinfo.h \
+ /usr/include/gobject-introspection-1.0/giconstantinfo.h \
+ /usr/include/gobject-introspection-1.0/gienuminfo.h \
+ /usr/include/gobject-introspection-1.0/gifieldinfo.h \
+ /usr/include/gobject-introspection-1.0/gifunctioninfo.h \
+ /usr/include/gobject-introspection-1.0/giinterfaceinfo.h \
+ /usr/include/gobject-introspection-1.0/giobjectinfo.h \
+ /usr/include/gobject-introspection-1.0/gipropertyinfo.h \
+ /usr/include/gobject-introspection-1.0/giregisteredtypeinfo.h \
+ /usr/include/gobject-introspection-1.0/gisignalinfo.h \
+ /usr/include/gobject-introspection-1.0/gistructinfo.h \
+ /usr/include/gobject-introspection-1.0/gitypeinfo.h \
+ /usr/include/gobject-introspection-1.0/giunioninfo.h \
+ /usr/include/gobject-introspection-1.0/givfuncinfo.h \
+ /usr/include/libpeas-1.0/libpeas/peas-extension-set.h \
+ /usr/include/libpeas-1.0/libpeas/peas-engine.h ../../src/ui/icons.h \
+ ../../src/ui/liferea_dialog.h ../../src/ui/ui_common.h \
+ ../../src/ui/feed_list_node.h ../../src/fl_sources/default_source.h \
  ../../src/fl_sources/dummy_source.h ../../src/fl_sources/google_source.h \
  ../../src/fl_sources/inoreader_source.h \
- ../../src/fl_sources/opml_source.h ../../src/subscription_type.h \
- ../../src/fl_sources/reedah_source.h \
+ ../../src/fl_sources/opml_source.h ../../src/fl_sources/reedah_source.h \
  ../../src/fl_sources/theoldreader_source.h \
- ../../src/fl_sources/ttrss_source.h
+ ../../src/fl_sources/ttrss_source.h \
+ ../../src/fl_sources/node_source_activatable.h
 
 /usr/include/stdc-predef.h:
 
@@ -2156,6 +2182,14 @@ libliflsources_a-node_source.o: node_source.c /usr/include/stdc-predef.h \
 
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
 
+../../src/subscription_type.h:
+
+../../src/subscription.h:
+
+../../src/update.h:
+
+../../src/fl_sources/google_reader_api.h:
+
 /usr/include/string.h:
 
 /usr/include/bits/string.h:
@@ -2178,10 +2212,6 @@ libliflsources_a-node_source.o: node_source.c /usr/include/stdc-predef.h \
 
 ../../src/db.h:
 
-../../src/subscription.h:
-
-../../src/update.h:
-
 ../../src/debug.h:
 
 ../../src/feed.h:
@@ -2196,6 +2226,58 @@ libliflsources_a-node_source.o: node_source.c /usr/include/stdc-predef.h \
 
 ../../src/item_state.h:
 
+../../src/plugins_engine.h:
+
+/usr/include/libpeas-1.0/libpeas/peas-engine.h:
+
+/usr/include/libpeas-1.0/libpeas/peas-plugin-info.h:
+
+/usr/include/libpeas-1.0/libpeas/peas-extension.h:
+
+/usr/include/gobject-introspection-1.0/girepository.h:
+
+/usr/include/gobject-introspection-1.0/giarginfo.h:
+
+/usr/include/gobject-introspection-1.0/gitypes.h:
+
+/usr/include/gobject-introspection-1.0/giversionmacros.h:
+
+/usr/include/gobject-introspection-1.0/gibaseinfo.h:
+
+/usr/include/gobject-introspection-1.0/gitypelib.h:
+
+/usr/include/gobject-introspection-1.0/gicallableinfo.h:
+
+/usr/include/gobject-introspection-1.0/giconstantinfo.h:
+
+/usr/include/gobject-introspection-1.0/gienuminfo.h:
+
+/usr/include/gobject-introspection-1.0/gifieldinfo.h:
+
+/usr/include/gobject-introspection-1.0/gifunctioninfo.h:
+
+/usr/include/gobject-introspection-1.0/giinterfaceinfo.h:
+
+/usr/include/gobject-introspection-1.0/giobjectinfo.h:
+
+/usr/include/gobject-introspection-1.0/gipropertyinfo.h:
+
+/usr/include/gobject-introspection-1.0/giregisteredtypeinfo.h:
+
+/usr/include/gobject-introspection-1.0/gisignalinfo.h:
+
+/usr/include/gobject-introspection-1.0/gistructinfo.h:
+
+/usr/include/gobject-introspection-1.0/gitypeinfo.h:
+
+/usr/include/gobject-introspection-1.0/giunioninfo.h:
+
+/usr/include/gobject-introspection-1.0/givfuncinfo.h:
+
+/usr/include/libpeas-1.0/libpeas/peas-extension-set.h:
+
+/usr/include/libpeas-1.0/libpeas/peas-engine.h:
+
 ../../src/ui/icons.h:
 
 ../../src/ui/liferea_dialog.h:
@@ -2203,8 +2285,6 @@ libliflsources_a-node_source.o: node_source.c /usr/include/stdc-predef.h \
 ../../src/ui/ui_common.h:
 
 ../../src/ui/feed_list_node.h:
-
-../../src/fl_sources/aol_source.h:
 
 ../../src/fl_sources/default_source.h:
 
@@ -2216,10 +2296,10 @@ libliflsources_a-node_source.o: node_source.c /usr/include/stdc-predef.h \
 
 ../../src/fl_sources/opml_source.h:
 
-../../src/subscription_type.h:
-
 ../../src/fl_sources/reedah_source.h:
 
 ../../src/fl_sources/theoldreader_source.h:
 
 ../../src/fl_sources/ttrss_source.h:
+
+../../src/fl_sources/node_source_activatable.h:

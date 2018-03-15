@@ -649,10 +649,9 @@ feed.o: feed.c /usr/include/stdc-predef.h feed.h \
  /usr/include/bits/string2.h /usr/include/bits/string3.h \
  /usr/include/bits/strings_fortified.h conf.h common.h ../config.h \
  /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
- db.h debug.h favicon.h feedlist.h itemlist.h item_loader.h metadata.h \
- feed_parser.h render.h xml.h ui/icons.h ui/liferea_shell.h node.h \
- ui/subscription_dialog.h subscription.h ui/feed_list_node.h \
- notification.h
+ db.h debug.h favicon.h feedlist.h html.h itemlist.h item_loader.h \
+ metadata.h feed_parser.h render.h xml.h ui/icons.h ui/liferea_shell.h \
+ node.h ui/subscription_dialog.h subscription.h ui/feed_list_node.h
 
 /usr/include/stdc-predef.h:
 
@@ -2180,6 +2179,8 @@ favicon.h:
 
 feedlist.h:
 
+html.h:
+
 itemlist.h:
 
 item_loader.h:
@@ -2203,5 +2204,3 @@ ui/subscription_dialog.h:
 subscription.h:
 
 ui/feed_list_node.h:
-
-notification.h:

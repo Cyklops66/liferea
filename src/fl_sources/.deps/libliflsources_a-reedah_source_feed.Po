@@ -154,13 +154,11 @@ libliflsources_a-reedah_source_feed.o: reedah_source_feed.c \
  /usr/include/glib-2.0/gobject/gvaluearray.h \
  /usr/include/glib-2.0/gobject/gvaluetypes.h \
  /usr/include/glib-2.0/gobject/gobject-autocleanups.h \
- ../../src/item_state.h ../../src/json.h \
- /usr/include/json-glib-1.0/json-glib/json-glib.h \
- /usr/include/json-glib-1.0/json-glib/json-types.h \
- /usr/include/json-glib-1.0/json-glib/json-version-macros.h \
- /usr/include/json-glib-1.0/json-glib/json-version.h \
- /usr/include/json-glib-1.0/json-glib/json-builder.h \
- /usr/include/json-glib-1.0/json-glib/json-generator.h \
+ ../../src/item_state.h ../../src/itemlist.h \
+ /usr/include/gtk-3.0/gtk/gtk.h /usr/include/gtk-3.0/gdk/gdk.h \
+ /usr/include/gtk-3.0/gdk/gdkconfig.h \
+ /usr/include/gtk-3.0/gdk/gdkversionmacros.h \
+ /usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h \
  /usr/include/glib-2.0/gio/gio.h /usr/include/glib-2.0/gio/giotypes.h \
  /usr/include/glib-2.0/gio/gioenums.h /usr/include/glib-2.0/gio/gaction.h \
  /usr/include/glib-2.0/gio/gactiongroup.h \
@@ -306,19 +304,6 @@ libliflsources_a-reedah_source_feed.o: reedah_source_feed.c \
  /usr/include/glib-2.0/gio/glistmodel.h \
  /usr/include/glib-2.0/gio/gliststore.h \
  /usr/include/glib-2.0/gio/gio-autocleanups.h \
- /usr/include/json-glib-1.0/json-glib/json-parser.h \
- /usr/include/json-glib-1.0/json-glib/json-path.h \
- /usr/include/json-glib-1.0/json-glib/json-reader.h \
- /usr/include/json-glib-1.0/json-glib/json-utils.h \
- /usr/include/json-glib-1.0/json-glib/json-version.h \
- /usr/include/json-glib-1.0/json-glib/json-enum-types.h \
- /usr/include/json-glib-1.0/json-glib/json-gobject.h \
- /usr/include/json-glib-1.0/json-glib/json-gvariant.h json_api_mapper.h \
- ../../src/item.h ../../src/metadata.h ../../src/feed_parser.h \
- ../../src/feed.h ../../src/node_type.h /usr/include/gtk-3.0/gtk/gtk.h \
- /usr/include/gtk-3.0/gdk/gdk.h /usr/include/gtk-3.0/gdk/gdkconfig.h \
- /usr/include/gtk-3.0/gdk/gdkversionmacros.h \
- /usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h \
  /usr/include/gtk-3.0/gdk/gdktypes.h /usr/include/pango-1.0/pango/pango.h \
  /usr/include/pango-1.0/pango/pango-attributes.h \
  /usr/include/pango-1.0/pango/pango-font.h \
@@ -668,10 +653,27 @@ libliflsources_a-reedah_source_feed.o: reedah_source_feed.c \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h \
- ../../src/subscription_type.h ../../src/node.h reedah_source_edit.h \
- reedah_source.h ../../src/fl_sources/node_source.h ../../src/node_type.h \
- ../../src/subscription.h ../../src/xml.h
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h ../../src/item_loader.h \
+ ../../src/json.h /usr/include/json-glib-1.0/json-glib/json-glib.h \
+ /usr/include/json-glib-1.0/json-glib/json-types.h \
+ /usr/include/json-glib-1.0/json-glib/json-version-macros.h \
+ /usr/include/json-glib-1.0/json-glib/json-version.h \
+ /usr/include/json-glib-1.0/json-glib/json-builder.h \
+ /usr/include/json-glib-1.0/json-glib/json-generator.h \
+ /usr/include/json-glib-1.0/json-glib/json-parser.h \
+ /usr/include/json-glib-1.0/json-glib/json-path.h \
+ /usr/include/json-glib-1.0/json-glib/json-reader.h \
+ /usr/include/json-glib-1.0/json-glib/json-utils.h \
+ /usr/include/json-glib-1.0/json-glib/json-version.h \
+ /usr/include/json-glib-1.0/json-glib/json-enum-types.h \
+ /usr/include/json-glib-1.0/json-glib/json-gobject.h \
+ /usr/include/json-glib-1.0/json-glib/json-gvariant.h json_api_mapper.h \
+ ../../src/item.h ../../src/metadata.h ../../src/feed_parser.h \
+ ../../src/feed.h ../../src/node_type.h ../../src/subscription_type.h \
+ ../../src/node.h reedah_source.h ../../src/fl_sources/node_source.h \
+ ../../src/node_type.h ../../src/subscription_type.h \
+ ../../src/fl_sources/google_reader_api.h ../../src/subscription.h \
+ ../../src/xml.h
 
 /usr/include/stdc-predef.h:
 
@@ -1141,19 +1143,17 @@ libliflsources_a-reedah_source_feed.o: reedah_source_feed.c \
 
 ../../src/item_state.h:
 
-../../src/json.h:
+../../src/itemlist.h:
 
-/usr/include/json-glib-1.0/json-glib/json-glib.h:
+/usr/include/gtk-3.0/gtk/gtk.h:
 
-/usr/include/json-glib-1.0/json-glib/json-types.h:
+/usr/include/gtk-3.0/gdk/gdk.h:
 
-/usr/include/json-glib-1.0/json-glib/json-version-macros.h:
+/usr/include/gtk-3.0/gdk/gdkconfig.h:
 
-/usr/include/json-glib-1.0/json-glib/json-version.h:
+/usr/include/gtk-3.0/gdk/gdkversionmacros.h:
 
-/usr/include/json-glib-1.0/json-glib/json-builder.h:
-
-/usr/include/json-glib-1.0/json-glib/json-generator.h:
+/usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h:
 
 /usr/include/glib-2.0/gio/gio.h:
 
@@ -1466,44 +1466,6 @@ libliflsources_a-reedah_source_feed.o: reedah_source_feed.c \
 /usr/include/glib-2.0/gio/gliststore.h:
 
 /usr/include/glib-2.0/gio/gio-autocleanups.h:
-
-/usr/include/json-glib-1.0/json-glib/json-parser.h:
-
-/usr/include/json-glib-1.0/json-glib/json-path.h:
-
-/usr/include/json-glib-1.0/json-glib/json-reader.h:
-
-/usr/include/json-glib-1.0/json-glib/json-utils.h:
-
-/usr/include/json-glib-1.0/json-glib/json-version.h:
-
-/usr/include/json-glib-1.0/json-glib/json-enum-types.h:
-
-/usr/include/json-glib-1.0/json-glib/json-gobject.h:
-
-/usr/include/json-glib-1.0/json-glib/json-gvariant.h:
-
-json_api_mapper.h:
-
-../../src/item.h:
-
-../../src/metadata.h:
-
-../../src/feed_parser.h:
-
-../../src/feed.h:
-
-../../src/node_type.h:
-
-/usr/include/gtk-3.0/gtk/gtk.h:
-
-/usr/include/gtk-3.0/gdk/gdk.h:
-
-/usr/include/gtk-3.0/gdk/gdkconfig.h:
-
-/usr/include/gtk-3.0/gdk/gdkversionmacros.h:
-
-/usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h:
 
 /usr/include/gtk-3.0/gdk/gdktypes.h:
 
@@ -2237,17 +2199,63 @@ json_api_mapper.h:
 
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
 
+../../src/item_loader.h:
+
+../../src/json.h:
+
+/usr/include/json-glib-1.0/json-glib/json-glib.h:
+
+/usr/include/json-glib-1.0/json-glib/json-types.h:
+
+/usr/include/json-glib-1.0/json-glib/json-version-macros.h:
+
+/usr/include/json-glib-1.0/json-glib/json-version.h:
+
+/usr/include/json-glib-1.0/json-glib/json-builder.h:
+
+/usr/include/json-glib-1.0/json-glib/json-generator.h:
+
+/usr/include/json-glib-1.0/json-glib/json-parser.h:
+
+/usr/include/json-glib-1.0/json-glib/json-path.h:
+
+/usr/include/json-glib-1.0/json-glib/json-reader.h:
+
+/usr/include/json-glib-1.0/json-glib/json-utils.h:
+
+/usr/include/json-glib-1.0/json-glib/json-version.h:
+
+/usr/include/json-glib-1.0/json-glib/json-enum-types.h:
+
+/usr/include/json-glib-1.0/json-glib/json-gobject.h:
+
+/usr/include/json-glib-1.0/json-glib/json-gvariant.h:
+
+json_api_mapper.h:
+
+../../src/item.h:
+
+../../src/metadata.h:
+
+../../src/feed_parser.h:
+
+../../src/feed.h:
+
+../../src/node_type.h:
+
 ../../src/subscription_type.h:
 
 ../../src/node.h:
-
-reedah_source_edit.h:
 
 reedah_source.h:
 
 ../../src/fl_sources/node_source.h:
 
 ../../src/node_type.h:
+
+../../src/subscription_type.h:
+
+../../src/fl_sources/google_reader_api.h:
 
 ../../src/subscription.h:
 

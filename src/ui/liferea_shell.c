@@ -2,7 +2,7 @@
  * @file liferea_shell.c  UI layout handling
  *
  * Copyright (C) 2004-2006 Nathan J. Conrad <t98502@users.sourceforge.net>
- * Copyright (C) 2007-2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2007-2018 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -54,7 +54,6 @@
 #include "ui/preferences_dialog.h"
 #include "ui/search_dialog.h"
 #include "ui/ui_common.h"
-#include "ui/ui_tray.h"
 #include "ui/ui_update.h"
 
 extern gboolean searchFolderRebuild; /* db.c */
@@ -63,31 +62,42 @@ extern gboolean searchFolderRebuild; /* db.c */
 
 struct LifereaShellPrivate {
 	GtkBuilder	*xml;
+	GtkUIManager	*ui_manager;
 
-	GtkWindow	*window;		/**< Liferea main window */
+	GtkWindow	*window;		/*<< Liferea main window */
 	GtkWidget	*menubar;
 	GtkWidget	*toolbar;
 	GtkTreeView	*feedlistView;
 	
-	GtkStatusbar	*statusbar;		/**< main window status bar */
-	gboolean	statusbarLocked;	/**< flag locking important message on status bar */
-	guint		statusbarLockTimer;	/**< timer id for status bar lock reset timer */
+	GtkStatusbar	*statusbar;		/*<< main window status bar */
+	gboolean	statusbarLocked;	/*<< flag locking important message on status bar */
+	guint		statusbarLockTimer;	/*<< timer id for status bar lock reset timer */
 
 	GtkWidget	*statusbar_feedsinfo;
+	GtkWidget	*statusbar_feedsinfo_evbox;
 	GtkActionGroup	*generalActions;
-	GtkActionGroup	*addActions;		/**< all types of "New" options */
-	GtkActionGroup	*feedActions;		/**< update and mark read */
-	GtkActionGroup	*readWriteActions;	/**< node remove and properties, node itemset items remove */
-	GtkActionGroup	*itemActions;		/**< item state toggline, single item remove */
+	GtkActionGroup	*addActions;		/*<< all types of "New" options */
+	GtkActionGroup	*feedActions;		/*<< update and mark read */
+	GtkActionGroup	*readWriteActions;	/*<< node remove and properties, node itemset items remove */
+	GtkActionGroup	*itemActions;		/*<< item state toggline, single item remove */
 
 	ItemList	*itemlist;	
 	FeedList	*feedlist;
 	ItemView	*itemview;
 	BrowserTabs	*tabs;
 
-	PeasExtensionSet *extensions;		/**< Plugin management */
+	PeasExtensionSet *extensions;		/*<< Plugin management */
 
-	gboolean	fullscreen;		/**< track fullscreen */
+	gboolean	fullscreen;		/*<< track fullscreen */
+};
+
+enum {
+	PROP_NONE,
+	PROP_FEED_LIST,
+	PROP_ITEM_LIST,
+	PROP_ITEM_VIEW,
+	PROP_BROWSER_TABS,
+	PROP_UI_MANAGER
 };
 
 static GObjectClass *parent_class = NULL;
@@ -106,13 +116,86 @@ liferea_shell_finalize (GObject *object)
 }
 
 static void
+liferea_shell_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
+{
+        LifereaShell *shell = LIFEREA_SHELL (object);
+
+        switch (prop_id) {
+	        case PROP_FEED_LIST:
+			g_value_set_object (value, shell->priv->feedlist);
+			break;
+	        case PROP_ITEM_LIST:
+			g_value_set_object (value, shell->priv->itemlist);
+			break;
+	        case PROP_ITEM_VIEW:
+			g_value_set_object (value, shell->priv->itemview);
+			break;
+	        case PROP_BROWSER_TABS:
+			g_value_set_object (value, shell->priv->tabs);
+			break;
+	        case PROP_UI_MANAGER:
+			g_value_set_object (value, shell->priv->ui_manager);
+			break;
+		default:
+		        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+		        break;
+        }
+}
+
+static void
 liferea_shell_class_init (LifereaShellClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	parent_class = g_type_class_peek_parent (klass);
 
+	object_class->get_property = liferea_shell_get_property;
 	object_class->finalize = liferea_shell_finalize;
+
+	/* LifereaShell:feed-list: */
+	g_object_class_install_property (object_class,
+		                         PROP_FEED_LIST,
+		                         g_param_spec_object ("feed-list",
+		                                              "LifereaFeedList",
+		                                              "LifereaFeedList object",
+		                                              FEEDLIST_TYPE,
+		                                              G_PARAM_READABLE));
+
+	/* LifereaShell:item-list: */
+	g_object_class_install_property (object_class,
+		                         PROP_ITEM_LIST,
+		                         g_param_spec_object ("item-list",
+		                                              "LifereaItemList",
+		                                              "LifereaItemList object",
+		                                              ITEMLIST_TYPE,
+		                                              G_PARAM_READABLE));
+
+	/* LifereaShell:item-view: */
+	g_object_class_install_property (object_class,
+		                         PROP_ITEM_VIEW,
+		                         g_param_spec_object ("item-view",
+		                                              "LifereaItemView",
+		                                              "LifereaItemView object",
+		                                              ITEMVIEW_TYPE,
+		                                              G_PARAM_READABLE));
+
+	/* LifereaShell:browser-tabs: */
+	g_object_class_install_property (object_class,
+		                         PROP_BROWSER_TABS,
+		                         g_param_spec_object ("browser-tabs",
+		                                              "LifereaBrowserTabs",
+		                                              "LifereaBrowserTabs object",
+		                                              BROWSER_TABS_TYPE,
+		                                              G_PARAM_READABLE));
+
+	/* LifereaShell:ui-manager: */
+	g_object_class_install_property (object_class,
+		                         PROP_UI_MANAGER,
+		                         g_param_spec_object ("ui-manager",
+		                                              "GtkUIManager",
+		                                              "Liferea user interfaces definitions",
+		                                              GTK_TYPE_UI_MANAGER,
+		                                              G_PARAM_READABLE));
 
 	g_type_class_add_private (object_class, sizeof(LifereaShellPrivate));
 }
@@ -129,20 +212,13 @@ liferea_shell_lookup (const gchar *name)
 static void
 liferea_shell_init (LifereaShell *ls)
 {
-	/* FIXME: we should only need to load mainwindow, but GtkBuilder won't
-	 * load the other required objects, so we need to do it manually...
-	 * See fixme in liferea_dialog_new()
-	 * http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=508585
-	 */
-	gchar *objs[] = { "adjustment6", "mainwindow", NULL };
 	/* globally accessible singleton */
 	g_assert (NULL == shell);
-	shell = ls;
-	
+	shell = ls;	
 	shell->priv = LIFEREA_SHELL_GET_PRIVATE (ls);
-	shell->priv->xml = gtk_builder_new ();
-	if (!gtk_builder_add_objects_from_file (shell->priv->xml, PACKAGE_DATA_DIR G_DIR_SEPARATOR_S PACKAGE G_DIR_SEPARATOR_S "liferea.ui", objs, NULL))
-		g_error ("Loading " PACKAGE_DATA_DIR G_DIR_SEPARATOR_S PACKAGE G_DIR_SEPARATOR_S  "liferea.ui failed");
+	shell->priv->xml = gtk_builder_new_from_file (PACKAGE_DATA_DIR G_DIR_SEPARATOR_S PACKAGE G_DIR_SEPARATOR_S "mainwindow.ui");
+	if (!shell->priv->xml)
+		g_error ("Loading " PACKAGE_DATA_DIR G_DIR_SEPARATOR_S PACKAGE G_DIR_SEPARATOR_S "mainwindow.ui failed");
 
 	gtk_builder_connect_signals (shell->priv->xml, NULL);
 }
@@ -312,8 +388,8 @@ liferea_shell_update_history_actions (void)
 	gtk_action_set_sensitive (gtk_action_group_get_action (shell->priv->generalActions, "NextReadItem"), item_history_has_next ());
 }
 
-void
-liferea_shell_update_unread_stats (void)
+static void
+liferea_shell_update_unread_stats (gpointer user_data)
 {
 	gint	new_items, unread_items;
 	gchar	*msg, *tmp;
@@ -367,6 +443,7 @@ static gboolean
 liferea_shell_unlock_status_bar_cb (gpointer user_data)
 {
 	shell->priv->statusbarLocked = FALSE;
+	shell->priv->statusbarLockTimer = 0;
 	
 	return FALSE;
 }
@@ -492,18 +569,11 @@ on_notebook_scroll_event_null_cb (GtkWidget *widget, GdkEventScroll *event)
 static gboolean
 on_close (GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
-	gboolean dont_maximize_to_tray;
+	guint signal_id = g_signal_lookup ("delete_event",  GTK_TYPE_WINDOW);
 
-	conf_get_bool_value (DONT_MINIMIZE_TO_TRAY, &dont_maximize_to_tray);
-
-	if ((ui_tray_get_count() == 0) || dont_maximize_to_tray) {
-		liferea_shutdown ();
-		return TRUE;
-	}
-		
-	liferea_shell_save_position ();
-	gtk_widget_hide (GTK_WIDGET (shell->priv->window));
-	
+	if (g_signal_has_handler_pending(widget, signal_id, (GQuark) 0, TRUE))
+		return FALSE;
+	liferea_shutdown ();
 	return TRUE;
 }
 
@@ -514,10 +584,15 @@ on_window_state_event (GtkWidget *widget, GdkEvent *event, gpointer user_data)
 		GdkWindowState changed = ((GdkEventWindowState*)event)->changed_mask, state = ((GdkEventWindowState*)event)->new_window_state;
 
 		if (changed == GDK_WINDOW_STATE_MAXIMIZED && !(state & GDK_WINDOW_STATE_WITHDRAWN)) {
-			if (state & GDK_WINDOW_STATE_MAXIMIZED)
+			if (state & GDK_WINDOW_STATE_MAXIMIZED) {
 				conf_set_bool_value (LAST_WINDOW_MAXIMIZED, TRUE);
-			else
+			} else {
 				conf_set_bool_value (LAST_WINDOW_MAXIMIZED, FALSE);
+				gtk_container_child_set (GTK_CONTAINER (liferea_shell_lookup ("normalViewPane")), liferea_shell_lookup ("normalViewItems"),
+					"resize", TRUE, NULL);
+				gtk_container_child_set (GTK_CONTAINER (liferea_shell_lookup ("wideViewPane")), liferea_shell_lookup ("wideViewItems"),
+					"resize", TRUE, NULL);
+			}
 		}
 		if (state & GDK_WINDOW_STATE_ICONIFIED)
 			conf_set_int_value (LAST_WINDOW_STATE, MAINWINDOW_ICONIFIED);
@@ -540,8 +615,8 @@ on_key_press_event (GtkWidget *widget, GdkEventKey *event, gpointer data)
 {
 	gboolean	modifier_matches = FALSE;
 	guint		default_modifiers;
-	const gchar	*type;
-	GtkWidget	*focusw;
+	const gchar	*type = NULL;
+	GtkWidget	*focusw = NULL;
 	gint		browse_key_setting;
 
 	if (event->type == GDK_KEY_PRESS) {
@@ -562,7 +637,14 @@ on_key_press_event (GtkWidget *widget, GdkEventKey *event, gpointer data)
 						   By ignoring the space here it will be passed to the HTML
 						   widget which in turn will pass it back if it is not eaten by
 						   any input field currently focussed. */
-						return FALSE;
+
+						/* pass through space keys only if HTML widget has the focus */
+						focusw = gtk_window_get_focus (GTK_WINDOW (widget));
+						if (focusw)
+							type = g_type_name (G_OBJECT_TYPE (focusw));
+						if (type && (g_str_equal (type, "LifereaWebView")))
+							return FALSE;
+						break;
 					case 1:
 						modifier_matches = ((event->state & GDK_CONTROL_MASK) == GDK_CONTROL_MASK);
 						break;
@@ -602,7 +684,7 @@ on_key_press_event (GtkWidget *widget, GdkEventKey *event, gpointer data)
 
 		/* prevent usage of navigation keys in HTML view */
 		type = g_type_name (G_OBJECT_TYPE (focusw));
-		if (type && (g_str_equal (type, "WebKitWebView")))
+		if (type && (g_str_equal (type, "LifereaWebView")))
 			return FALSE;
 		
 		/* check for treeview navigation */
@@ -677,23 +759,11 @@ on_searchbtn_clicked (GtkButton *button, gpointer user_data)
 }
 
 static void
-on_onlinebtn_clicked (GtkButton *button, gpointer user_data)
-{
-	network_monitor_set_online (!network_monitor_is_online ());
-}
-
-static void
-on_work_offline_activate (GtkToggleAction *menuitem, gpointer user_data)
-{
-	network_monitor_set_online (!gtk_toggle_action_get_active (menuitem));
-}
-
-static void
 on_about_activate (GtkMenuItem *menuitem, gpointer user_data)
 {
 	GtkWidget *dialog;
 
-	dialog = liferea_dialog_new (NULL, "aboutdialog");
+	dialog = liferea_dialog_new ("about");
 	gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (dialog), VERSION);
 	g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_hide), NULL);
 	gtk_widget_show (dialog);
@@ -767,50 +837,6 @@ static void
 on_menu_export (gpointer callback_data, guint callback_action, GtkWidget *widget)
 {
 	export_OPML_file ();
-}
-
-static void
-on_extension_added (PeasExtensionSet *extensions,
-                    PeasPluginInfo   *info,
-                    PeasExtension    *exten,
-                    LifereaShell     *shell)
-{
-	peas_extension_call (exten, "activate");
-}
-
-static void
-on_extension_removed (PeasExtensionSet *extensions,
-                      PeasPluginInfo   *info,
-                      PeasExtension    *exten,
-                      LifereaShell     *shell)
-{
-	peas_extension_call (exten, "deactivate");
-}
-
-static void
-liferea_shell_set_online_icon (gboolean online)
-{
-	GtkWidget	*widget;
-
-	widget = liferea_shell_lookup ("onlineimage");
-
-	if (online) {
-		liferea_shell_set_status_bar (_("Liferea is now online"));
-		gtk_image_set_from_pixbuf (GTK_IMAGE (widget), (GdkPixbuf *)icon_get (ICON_ONLINE));
-		atk_object_set_name (gtk_widget_get_accessible (widget), _("Work Offline"));	
-	} else {
-		liferea_shell_set_status_bar (_("Liferea is now offline"));
-		gtk_image_set_from_pixbuf (GTK_IMAGE (widget), (GdkPixbuf *)icon_get (ICON_OFFLINE));
-		atk_object_set_name (gtk_widget_get_accessible (widget), _("Work Online"));	
-	}
-	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (gtk_action_group_get_action (shell->priv->generalActions, "ToggleOfflineMode")), !online);
-}
-
-static void
-liferea_shell_online_status_changed (NetworkMonitor *nm, gboolean online, gpointer userdata)
-{
-	liferea_shell_set_online_icon (online);
-	ui_tray_update ();
 }
 
 /* methods to receive URLs which were dropped anywhere in the main window */
@@ -897,46 +923,46 @@ liferea_shell_setup_URL_receiver (void)
 }
 
 static const GtkActionEntry liferea_shell_action_entries[] = {
-	{"SubscriptionsMenu", NULL, N_("_Subscriptions")},
+	{"SubscriptionsMenu", NULL, N_("_Subscriptions"), NULL, NULL, NULL},
 	{"UpdateAll", "gtk-refresh", N_("Update _All"), "<control>U", N_("Updates all subscriptions."),
 	 G_CALLBACK(on_menu_update_all)},
 	{"MarkAllFeedsAsRead", "gtk-apply", N_("Mark All As _Read"), NULL, N_("Marks read every item of every subscription."),
 	 G_CALLBACK(on_menu_allfeedsread)},
 	{"ImportFeedList", "gtk-open", N_("_Import Feed List..."), NULL, N_("Imports an OPML feed list."), G_CALLBACK(on_menu_import)},
 	{"ExportFeedList", "gtk-save-as", N_("_Export Feed List..."), NULL, N_("Exports the feed list as OPML."), G_CALLBACK(on_menu_export)},
-	{"Quit",GTK_STOCK_QUIT, N_("_Quit"), "<control>Q", NULL, G_CALLBACK(on_menu_quit)},
+	{"Quit", "application-exit", N_("_Quit"), "<control>Q", NULL, G_CALLBACK(on_menu_quit)},
 
-	{"FeedMenu", NULL, N_("_Feed")},
+	{"FeedMenu", NULL, N_("_Feed"), NULL, NULL, NULL},
 	{"RemoveAllItems", "gtk-delete", N_("Remove _All Items"), NULL, N_("Removes all items of the currently selected feed."),
 	 G_CALLBACK(on_remove_items_activate)},
 
-	{"ItemMenu", NULL, N_("_Item")},
-	{"PrevReadItem", GTK_STOCK_GO_BACK, N_("Previous Item"), "<control><shift>N", NULL,	
+	{"ItemMenu", NULL, N_("_Item"), NULL, NULL, NULL},
+	{"PrevReadItem", "go-previous", N_("Previous Item"), "<control><shift>N", NULL,	
 	 G_CALLBACK(on_prev_read_item_activate)},
-	{"NextReadItem", GTK_STOCK_GO_FORWARD, N_("Next Item"), NULL, NULL,	
+	{"NextReadItem", "go-next", N_("Next Item"), NULL, NULL,	
 	 G_CALLBACK(on_next_read_item_activate)},
 
 	/* No tooltip here as it really hinders usability to have it flashing
 	   when skimming through items using "Next Unread"! */
-	{"NextUnreadItem", GTK_STOCK_JUMP_TO, N_("_Next Unread Item"), "<control>N", NULL,	
+	{"NextUnreadItem", "go-jump", N_("_Next Unread Item"), "<control>N", NULL,	
 	 G_CALLBACK(on_next_unread_item_activate)},
 
-	{"ViewMenu", NULL, N_("_View")},
+	{"ViewMenu", NULL, N_("_View"), NULL, NULL, NULL},
 	{"ZoomIn", "gtk-zoom-in", N_("_Increase Text Size"), "<control>plus", N_("Increases the text size of the item view."),
 	 G_CALLBACK(on_menu_zoomin_selected)},
 	{"ZoomOut", "gtk-zoom-out", N_("_Decrease Text Size"), "<control>minus", N_("Decreases the text size of the item view."),
 	 G_CALLBACK(on_menu_zoomout_selected)},
 
-	{"ToolsMenu", NULL, N_("_Tools")},
+	{"ToolsMenu", NULL, N_("_Tools"), NULL, NULL, NULL},
 	{"ShowUpdateMonitor", NULL, N_("_Update Monitor"), NULL, N_("Show a list of all feeds currently in the update queue"),
 	 G_CALLBACK(on_menu_show_update_monitor)},
-	{"ShowPreferences", GTK_STOCK_PREFERENCES, N_("_Preferences"), NULL, N_("Edit Preferences."),
+	{"ShowPreferences", "preferences-system", N_("_Preferences"), NULL, N_("Edit Preferences."),
 	 G_CALLBACK(on_prefbtn_clicked)},
 
-	{"SearchMenu", NULL, N_("S_earch")},
+	{"SearchMenu", NULL, N_("S_earch"), NULL, NULL, NULL},
 	{"SearchFeeds", "gtk-find", N_("Search All Feeds..."), "<control>F", N_("Show the search dialog."), G_CALLBACK(on_searchbtn_clicked)},
 
-	{"HelpMenu", NULL, N_("_Help")},
+	{"HelpMenu", NULL, N_("_Help"), NULL, NULL, NULL},
 	{"ShowHelpContents", "gtk-help", N_("_Contents"), "F1", N_("View help for this application."), G_CALLBACK(on_topics_activate)},
 	{"ShowHelpQuickReference", NULL, N_("_Quick Reference"), NULL, N_("View a list of all Liferea shortcuts."),
 	 G_CALLBACK(on_quick_reference_activate)},
@@ -955,7 +981,7 @@ static const GtkRadioActionEntry liferea_shell_view_radio_entries[] = {
 
 static GtkToggleActionEntry liferea_shell_feedlist_toggle_entries[] = {
 	{"ReducedFeedList", NULL, N_("_Reduced Feed List"), NULL, N_("Hide feeds with no unread items."),
-	G_CALLBACK(on_feedlist_reduced_activate)}
+	G_CALLBACK(on_feedlist_reduced_activate), FALSE}
 };
 
 static const GtkActionEntry liferea_shell_add_action_entries[] = {
@@ -995,10 +1021,8 @@ static const GtkActionEntry liferea_shell_item_action_entries[] = {
 };
 
 static const GtkToggleActionEntry liferea_shell_action_toggle_entries[] = {
-	{"ToggleOfflineMode", NULL, N_("_Work Offline"), NULL, N_("This option allows you to disable subscription updating."),
-	 G_CALLBACK(on_work_offline_activate)},
 	{"FullScreen", NULL, N_("_Fullscreen"), "F11", N_("Browse at full screen"),
-	 G_CALLBACK(on_menu_fullscreen_activate)},
+	 G_CALLBACK(on_menu_fullscreen_activate), FALSE},
 };
 
 static const char *liferea_shell_ui_desc =
@@ -1016,8 +1040,6 @@ static const char *liferea_shell_ui_desc =
 "      <separator/>"
 "      <menuitem action='ImportFeedList'/>"
 "      <menuitem action='ExportFeedList'/>"
-"      <separator/>"
-"      <menuitem action='ToggleOfflineMode'/>"
 "      <separator/>"
 "      <menuitem action='Quit'/>"
 "    </menu>"
@@ -1071,6 +1093,10 @@ static const char *liferea_shell_ui_desc =
 "      <menuitem action='ShowAbout'/>"
 "    </menu>"
 "  </menubar>"
+"</ui>";
+
+static const char *liferea_shell_tb_desc =
+"<ui>"
 "  <toolbar action='maintoolbar'>"
 "    <separator/>"
 "    <toolitem name='newFeedButton' action='NewSubscription'/>"
@@ -1084,14 +1110,29 @@ static const char *liferea_shell_ui_desc =
 "  </toolbar>"
 "</ui>";
 
+/* same like above just with Next/Prev ordered for RTL */
+static const char *liferea_shell_tb_rtl_desc =
+"<ui>"
+"  <toolbar action='maintoolbar'>"
+"    <separator/>"
+"    <toolitem name='newFeedButton' action='NewSubscription'/>"
+"    <toolitem name='MarkAsReadButton' action='MarkFeedAsRead'/>"
+"    <toolitem name='nextReadButton' action='NextReadItem'/>"
+"    <toolitem name='prevReadButton' action='PrevReadItem'/>"
+"    <toolitem name='nextUnreadButton' action='NextUnreadItem'/>"
+"    <toolitem name='UpdateAllButton' action='UpdateAll'/>"
+"    <toolitem name='SearchButton' action='SearchFeeds'/>"
+"    <separator/>"
+"  </toolbar>"
+"</ui>";
+
 static void
 liferea_shell_restore_state (const gchar *overrideWindowState)
 {
 	gchar		*toolbar_style, *accels_file;
 	gint		last_vpane_pos, last_hpane_pos, last_wpane_pos;
 	gint		resultState;
-	gboolean	show_tray_icon, start_in_tray;
-
+	gboolean 	last_window_maximized;
 	
 	debug0 (DEBUG_GUI, "Setting toolbar style");
 	
@@ -1109,45 +1150,25 @@ liferea_shell_restore_state (const gchar *overrideWindowState)
 	
 	liferea_shell_restore_position ();
 
-	conf_get_bool_value (SHOW_TRAY_ICON, &show_tray_icon);
-	conf_get_bool_value (START_IN_TRAY, &start_in_tray);
-
 	/* Apply horrible window state parameter logic:
 	   -> overrideWindowState provides optional command line flags passed by
 	      user or the session manager (prio 1)
 	   -> lastState provides last shutdown preference (prio 2)
-	   -> show_tray_icon and start_in_tray are overriding preferences
-	      (prio 1 only overridden by 'shown' from command line)
 	 */
 
 	/* Initialize with last saved state */
 	conf_get_int_value (LAST_WINDOW_STATE, &resultState);
 
+	debug2 (DEBUG_GUI, "Previous window state indicators: dconf=%d, CLI switch=%s", resultState, overrideWindowState);
+
 	/* Override with command line options */
-	if (!g_strcmp0 (overrideWindowState, "iconfied"))
-		resultState = MAINWINDOW_ICONIFIED;
 	if (!g_strcmp0 (overrideWindowState, "hidden"))
 		resultState = MAINWINDOW_HIDDEN;
 	if (!g_strcmp0 (overrideWindowState, "shown"))
 		resultState = MAINWINDOW_SHOWN;
 
-	/* Change hidden to iconify if we have no tray to avoid loosing the window */
-	if (!show_tray_icon && resultState == MAINWINDOW_HIDDEN)
-		resultState = MAINWINDOW_ICONIFIED;
-
-	/* Apply tray hiding preference */
-	if (show_tray_icon && start_in_tray && g_strcmp0 (overrideWindowState, "shown")) {
-		debug0 (DEBUG_GUI, "Ignoring last window state due to hide-in-tray preference");
-		resultState = MAINWINDOW_HIDDEN;
-	}
-
 	/* And set the window to the resulting state */
 	switch (resultState) {
-		case MAINWINDOW_ICONIFIED:
-			debug0 (DEBUG_GUI, "Restoring window state 'hidden (no tray)' / 'iconified'");
-			gtk_window_iconify (shell->priv->window);
-			gtk_widget_show (GTK_WIDGET (shell->priv->window));
-			break;
 		case MAINWINDOW_HIDDEN:
 			debug0 (DEBUG_GUI, "Restoring window state 'hidden (to tray)'");
 			/* Realize needed so that the window structure can be
@@ -1164,9 +1185,9 @@ liferea_shell_restore_state (const gchar *overrideWindowState)
 			gtk_widget_show (GTK_WIDGET (shell->priv->window));
 	}
 
+	/* This only works after the window has been restored, so we do it last. */
 	debug0 (DEBUG_GUI, "Loading pane proportions");
 
-	/* This only works after the window has been restored, so we do it last. */
 	conf_get_int_value (LAST_VPANE_POS, &last_vpane_pos);
 	if (last_vpane_pos)
 		gtk_paned_set_position (GTK_PANED (liferea_shell_lookup ("leftpane")), last_vpane_pos);
@@ -1176,15 +1197,22 @@ liferea_shell_restore_state (const gchar *overrideWindowState)
 	conf_get_int_value (LAST_WPANE_POS, &last_wpane_pos);
 	if (last_wpane_pos)
 		gtk_paned_set_position (GTK_PANED (liferea_shell_lookup ("wideViewPane")), last_wpane_pos);
+
+	conf_get_bool_value (LAST_WINDOW_MAXIMIZED, &last_window_maximized);
+	if (!last_window_maximized) {
+		gtk_container_child_set (GTK_CONTAINER (liferea_shell_lookup ("normalViewPane")), liferea_shell_lookup ("normalViewItems"),
+			"resize", TRUE, NULL);
+		gtk_container_child_set (GTK_CONTAINER (liferea_shell_lookup ("wideViewPane")), liferea_shell_lookup ("wideViewItems"),
+			"resize", TRUE, NULL);
+	}
 }
 
 void
-liferea_shell_create (GtkApplication *app, const gchar *overrideWindowState)
+liferea_shell_create (GtkApplication *app, const gchar *overrideWindowState, gint pluginsDisabled)
 {
-	GtkUIManager	*ui_manager;
 	GtkAccelGroup	*accel_group;
 	GError		*error = NULL;	
-	gboolean	show_tray_icon, toggle;
+	gboolean	toggle;
 	gchar		*id;
 	
 	debug_enter ("liferea_shell_create");
@@ -1197,7 +1225,7 @@ liferea_shell_create (GtkApplication *app, const gchar *overrideWindowState)
 	
 	/* 1.) menu creation */
 	
-	debug0 (DEBUG_GUI, "Setting up menues");
+	debug0 (DEBUG_GUI, "Setting up menus");
 
 	shell->priv->itemlist = itemlist_create ();
 
@@ -1205,7 +1233,7 @@ liferea_shell_create (GtkApplication *app, const gchar *overrideWindowState)
 	conf_get_bool_value (REDUCED_FEEDLIST, &toggle);
 	liferea_shell_feedlist_toggle_entries[0].is_active = toggle;
 
-	ui_manager = gtk_ui_manager_new ();
+	shell->priv->ui_manager = gtk_ui_manager_new ();
 
 	shell->priv->generalActions = gtk_action_group_new ("GeneralActions");
 	gtk_action_group_set_translation_domain (shell->priv->generalActions, PACKAGE);
@@ -1213,58 +1241,64 @@ liferea_shell_create (GtkApplication *app, const gchar *overrideWindowState)
 	gtk_action_group_add_toggle_actions (shell->priv->generalActions, liferea_shell_action_toggle_entries, G_N_ELEMENTS (liferea_shell_action_toggle_entries), shell->priv);
 	gtk_action_group_add_radio_actions (shell->priv->generalActions, liferea_shell_view_radio_entries, G_N_ELEMENTS (liferea_shell_view_radio_entries), itemlist_get_view_mode (), (GCallback)on_view_activate, (gpointer)TRUE);
 	gtk_action_group_add_toggle_actions (shell->priv->generalActions, liferea_shell_feedlist_toggle_entries, G_N_ELEMENTS (liferea_shell_feedlist_toggle_entries), shell->priv);
-	gtk_ui_manager_insert_action_group (ui_manager, shell->priv->generalActions, 0);
+	gtk_ui_manager_insert_action_group (shell->priv->ui_manager, shell->priv->generalActions, 0);
 
 	shell->priv->addActions = gtk_action_group_new ("AddActions");
 	gtk_action_group_set_translation_domain (shell->priv->addActions, PACKAGE);
 	gtk_action_group_add_actions (shell->priv->addActions, liferea_shell_add_action_entries, G_N_ELEMENTS (liferea_shell_add_action_entries), shell->priv);
-	gtk_ui_manager_insert_action_group (ui_manager, shell->priv->addActions, 0);
+	gtk_ui_manager_insert_action_group (shell->priv->ui_manager, shell->priv->addActions, 0);
 
 	shell->priv->feedActions = gtk_action_group_new ("FeedActions");
 	gtk_action_group_set_translation_domain (shell->priv->feedActions, PACKAGE);
 	gtk_action_group_add_actions (shell->priv->feedActions, liferea_shell_feed_action_entries, G_N_ELEMENTS (liferea_shell_feed_action_entries), shell->priv);
-	gtk_ui_manager_insert_action_group (ui_manager, shell->priv->feedActions, 0);
+	gtk_ui_manager_insert_action_group (shell->priv->ui_manager, shell->priv->feedActions, 0);
 
 	shell->priv->readWriteActions = gtk_action_group_new("ReadWriteActions");
 	gtk_action_group_set_translation_domain (shell->priv->readWriteActions, PACKAGE);
 	gtk_action_group_add_actions (shell->priv->readWriteActions, liferea_shell_read_write_action_entries, G_N_ELEMENTS (liferea_shell_read_write_action_entries), shell->priv);
-	gtk_ui_manager_insert_action_group (ui_manager, shell->priv->readWriteActions, 0);
+	gtk_ui_manager_insert_action_group (shell->priv->ui_manager, shell->priv->readWriteActions, 0);
 
 	shell->priv->itemActions = gtk_action_group_new ("ItemActions");
 	gtk_action_group_set_translation_domain (shell->priv->itemActions, PACKAGE);
 	gtk_action_group_add_actions (shell->priv->itemActions, liferea_shell_item_action_entries, G_N_ELEMENTS (liferea_shell_item_action_entries), shell->priv);
-	gtk_ui_manager_insert_action_group (ui_manager, shell->priv->itemActions, 0);
+	gtk_ui_manager_insert_action_group (shell->priv->ui_manager, shell->priv->itemActions, 0);
 
-	accel_group = gtk_ui_manager_get_accel_group (ui_manager);
+	accel_group = gtk_ui_manager_get_accel_group (shell->priv->ui_manager);
 	gtk_window_add_accel_group (GTK_WINDOW (shell->priv->window), accel_group);
 	g_object_unref (accel_group);
 
 	g_signal_connect (gtk_accel_map_get (), "changed", G_CALLBACK (on_accel_change), NULL);
 
-	if (!gtk_ui_manager_add_ui_from_string (ui_manager, liferea_shell_ui_desc, -1, &error))
+	if (!gtk_ui_manager_add_ui_from_string (shell->priv->ui_manager, liferea_shell_ui_desc, -1, &error))
 		g_error ("building menus failed: %s", error->message);
 
-	shell->priv->menubar = gtk_ui_manager_get_widget (ui_manager, "/MainwindowMenubar");
-	shell->priv->toolbar = gtk_ui_manager_get_widget (ui_manager, "/maintoolbar");
+	if (gtk_widget_get_default_direction () != GTK_TEXT_DIR_RTL) {
+		if (!gtk_ui_manager_add_ui_from_string (shell->priv->ui_manager, liferea_shell_tb_desc, -1, &error))
+			g_error ("building menus failed: %s", error->message);
+	} else {
+		if (!gtk_ui_manager_add_ui_from_string (shell->priv->ui_manager, liferea_shell_tb_rtl_desc, -1, &error))
+			g_error ("building menus failed: %s", error->message);
+	}
+
+	shell->priv->menubar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/MainwindowMenubar");
+	shell->priv->toolbar = gtk_ui_manager_get_widget (shell->priv->ui_manager, "/maintoolbar");
 
 	/* Ensure GTK3 toolbar shadows... */
 	gtk_style_context_add_class (gtk_widget_get_style_context (shell->priv->toolbar), "primary-toolbar");
 
 	/* what a pain, why is there no markup for this option? */
-	g_object_set (G_OBJECT (gtk_ui_manager_get_widget (ui_manager, "/maintoolbar/newFeedButton")), "is_important", TRUE, NULL);
-	g_object_set (G_OBJECT (gtk_ui_manager_get_widget (ui_manager, "/maintoolbar/nextUnreadButton")), "is_important", TRUE, NULL);
-	g_object_set (G_OBJECT (gtk_ui_manager_get_widget (ui_manager, "/maintoolbar/MarkAsReadButton")), "is_important", TRUE, NULL);
-	g_object_set (G_OBJECT (gtk_ui_manager_get_widget (ui_manager, "/maintoolbar/UpdateAllButton")), "is_important", TRUE, NULL);
-	g_object_set (G_OBJECT (gtk_ui_manager_get_widget (ui_manager, "/maintoolbar/SearchButton")), "is_important", TRUE, NULL);
+	g_object_set (G_OBJECT (gtk_ui_manager_get_widget (shell->priv->ui_manager, "/maintoolbar/newFeedButton")), "is_important", TRUE, NULL);
+	g_object_set (G_OBJECT (gtk_ui_manager_get_widget (shell->priv->ui_manager, "/maintoolbar/nextUnreadButton")), "is_important", TRUE, NULL);
+	g_object_set (G_OBJECT (gtk_ui_manager_get_widget (shell->priv->ui_manager, "/maintoolbar/MarkAsReadButton")), "is_important", TRUE, NULL);
+	g_object_set (G_OBJECT (gtk_ui_manager_get_widget (shell->priv->ui_manager, "/maintoolbar/UpdateAllButton")), "is_important", TRUE, NULL);
+	g_object_set (G_OBJECT (gtk_ui_manager_get_widget (shell->priv->ui_manager, "/maintoolbar/SearchButton")), "is_important", TRUE, NULL);
 
 	/* 2.) setup containers */
 	
 	debug0 (DEBUG_GUI, "Setting up widget containers");
 
-	gtk_box_pack_start (GTK_BOX (liferea_shell_lookup ("vbox1")), shell->priv->toolbar, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (liferea_shell_lookup ("vbox1")), shell->priv->toolbar, 0);
-	gtk_box_pack_start (GTK_BOX (liferea_shell_lookup ("vbox1")), shell->priv->menubar, FALSE, FALSE, 0);
-	gtk_box_reorder_child (GTK_BOX (liferea_shell_lookup ("vbox1")), shell->priv->menubar, 0);
+	gtk_grid_attach_next_to (GTK_GRID (liferea_shell_lookup ("vbox1")), shell->priv->toolbar, NULL, GTK_POS_TOP, 1,1);
+	gtk_grid_attach_next_to (GTK_GRID (liferea_shell_lookup ("vbox1")), shell->priv->menubar, NULL, GTK_POS_TOP, 1,1);
 
 	gtk_widget_show_all(GTK_WIDGET(shell->priv->toolbar));
 
@@ -1288,13 +1322,13 @@ liferea_shell_create (GtkApplication *app, const gchar *overrideWindowState)
 	shell->priv->statusbar = GTK_STATUSBAR (liferea_shell_lookup ("statusbar"));
 	shell->priv->statusbarLocked = FALSE;
 	shell->priv->statusbarLockTimer = 0;
+	shell->priv->statusbar_feedsinfo_evbox = gtk_event_box_new ();
 	shell->priv->statusbar_feedsinfo = gtk_label_new("");
-	gtk_widget_show(shell->priv->statusbar_feedsinfo);
-	gtk_box_pack_start (GTK_BOX (shell->priv->statusbar), shell->priv->statusbar_feedsinfo, FALSE, FALSE, 5);
+	gtk_container_add (GTK_CONTAINER (shell->priv->statusbar_feedsinfo_evbox), shell->priv->statusbar_feedsinfo);
+	gtk_widget_show_all (shell->priv->statusbar_feedsinfo_evbox);
+	gtk_box_pack_start (GTK_BOX (shell->priv->statusbar), shell->priv->statusbar_feedsinfo_evbox, FALSE, FALSE, 5);
+	g_signal_connect (G_OBJECT (shell->priv->statusbar_feedsinfo_evbox), "button_release_event", G_CALLBACK (on_next_unread_item_activate), NULL);
 
-	g_signal_connect ((gpointer) liferea_shell_lookup ("onlinebtn"), "clicked",
-	                  G_CALLBACK (on_onlinebtn_clicked), NULL);
-	
 	/* 4.) setup tabs */
 	
 	debug0 (DEBUG_GUI, "Setting up tabbed browsing");	
@@ -1308,7 +1342,7 @@ liferea_shell_create (GtkApplication *app, const gchar *overrideWindowState)
 
 	/* 6.) setup menu sensivity */
 	
-	debug0 (DEBUG_GUI, "Initialising menues");
+	debug0 (DEBUG_GUI, "Initialising menus");
 		
 	/* On start, no item or feed is selected, so Item menu should be insensitive: */
 	liferea_shell_update_item_menu (FALSE);
@@ -1322,12 +1356,12 @@ liferea_shell_create (GtkApplication *app, const gchar *overrideWindowState)
 	debug0 (DEBUG_GUI, "Setting up item view");
 
 	shell->priv->itemview = itemview_create (GTK_WIDGET (shell->priv->window));
-	
-	/* 8.) load icons as required */
-	
-	debug0 (DEBUG_GUI, "Loading icons");
-	
-	icons_load ();
+
+        /* 8.) load icons as required */
+        
+        debug0 (DEBUG_GUI, "Loading icons");
+        
+        icons_load ();
 	
 	/* 9.) update and restore all menu elements */
 
@@ -1343,9 +1377,8 @@ liferea_shell_create (GtkApplication *app, const gchar *overrideWindowState)
 	render_init_theme_colors (GTK_WIDGET (shell->priv->window));
 
 	shell->priv->feedlist = feedlist_create ();
-
-	conf_get_bool_value (SHOW_TRAY_ICON, &show_tray_icon);
-	ui_tray_enable (show_tray_icon);
+	g_signal_connect (shell->priv->feedlist, "new-items",
+	                  G_CALLBACK (liferea_shell_update_unread_stats), shell->priv->feedlist);
 
 	/* 11.) Restore latest selection */
 
@@ -1353,35 +1386,15 @@ liferea_shell_create (GtkApplication *app, const gchar *overrideWindowState)
 	if (conf_get_str_value (LAST_NODE_SELECTED, &id)) {
 		feed_list_view_select (node_from_id (id));
 		g_free (id);
-
-		// FIXME: Move to item list view code
-		// FIXME: Deactivated due to races causing crashes (see SF #1142, #1137)
-		/*gint item_id;
-		if (conf_get_int_value (LAST_ITEM_SELECTED, &item_id)) {
-			itemPtr item = db_item_load ((gulong)item_id);
-			if (item) {
-				itemview_select_item (item);
-				item_unload (item);
-			}
-		}*/
 	}
-		
-	/* 12. Connect network monitoring and set icon*/
-	
-	g_signal_connect (network_monitor_get (), "online-status-changed",
-	                  G_CALLBACK (liferea_shell_online_status_changed), shell);
 
-	liferea_shell_set_online_icon (network_monitor_is_online ());
+	/* 12. Setup shell plugins */
+	if(0 == pluginsDisabled) {
+		shell->priv->extensions = peas_extension_set_new (PEAS_ENGINE (liferea_plugins_engine_get_default ()),
+				                     LIFEREA_TYPE_SHELL_ACTIVATABLE, "shell", shell, NULL);
 
-	/* 13. Setup shell plugins */
-
-	shell->priv->extensions = peas_extension_set_new (PEAS_ENGINE (liferea_plugins_engine_get_default ()),
-		                             LIFEREA_TYPE_SHELL_ACTIVATABLE, "shell", shell, NULL);
-
-	g_signal_connect (shell->priv->extensions, "extension-added", G_CALLBACK (on_extension_added), shell);
-	g_signal_connect (shell->priv->extensions, "extension-removed",	G_CALLBACK (on_extension_removed), shell);
-
-	peas_extension_set_call (shell->priv->extensions, "activate");
+		liferea_plugins_engine_set_default_signals (shell->priv->extensions, shell);
+	}
 
 	/* 14. Rebuild search folders if needed */
 	if (searchFolderRebuild)
@@ -1393,29 +1406,13 @@ liferea_shell_create (GtkApplication *app, const gchar *overrideWindowState)
 void
 liferea_shell_destroy (void)
 {
-	nodePtr	node;
-	itemPtr	item;
-
-	/* Save last selection for next start */
-	// FIXME: Move to feed list handling
-	node = feedlist_get_selected ();
-	if (node)
-		conf_set_str_value (LAST_NODE_SELECTED, node->id);
-
-	// FIXME: Move to item list handling
-	item = itemlist_get_selected ();
-	if (item)
-		conf_set_int_value (LAST_ITEM_SELECTED, item->id);
-
-	feed_list_view_select (NULL);	// FIXME: Move to feed list handling
-
 	liferea_shell_save_position ();
-	ui_tray_enable (FALSE);
+	g_object_unref (shell->priv->extensions);
 	g_object_unref (shell->priv->tabs);
 	g_object_unref (shell->priv->feedlist);
 	g_object_unref (shell->priv->itemview);
-	g_object_unref (shell->priv->extensions);
 
+	g_signal_handlers_block_by_func (shell, G_CALLBACK (on_window_state_event), shell->priv);
 	gtk_widget_destroy (GTK_WIDGET (shell->priv->window));
 
 	g_object_unref (shell);
@@ -1454,6 +1451,7 @@ liferea_shell_toggle_visibility (void)
 	else if (!gtk_widget_get_visible (mainwindow)) {
 		/* The window is neither iconified nor on another workspace, but is not visible */
 		liferea_shell_restore_position ();
+		gtk_window_deiconify (GTK_WINDOW (mainwindow));
 		gtk_window_present (shell->priv->window);
 	} else {
 		liferea_shell_save_position ();

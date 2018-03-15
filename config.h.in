@@ -32,12 +32,6 @@
 /* Define if your <locale.h> file defines LC_MESSAGES. */
 #undef HAVE_LC_MESSAGES
 
-/* Define if libindicate support is enabled */
-#undef HAVE_LIBINDICATE
-
-/* Define if libnotify support is enabled */
-#undef HAVE_LIBNOTIFY
-
 /* Define to 1 if you have the <locale.h> header file. */
 #undef HAVE_LOCALE_H
 

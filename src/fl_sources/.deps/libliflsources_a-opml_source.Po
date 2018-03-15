@@ -649,7 +649,8 @@ libliflsources_a-opml_source.o: opml_source.c /usr/include/stdc-predef.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h ../../src/common.h \
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h \
+ ../../src/fl_sources/google_reader_api.h ../../src/common.h \
  ../../config.h /usr/include/string.h /usr/include/bits/string.h \
  /usr/include/bits/string2.h /usr/include/bits/string3.h \
  /usr/include/bits/strings_fortified.h /usr/include/libintl.h \
@@ -2159,6 +2160,8 @@ libliflsources_a-opml_source.o: opml_source.c /usr/include/stdc-predef.h \
 /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
 
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
+
+../../src/fl_sources/google_reader_api.h:
 
 ../../src/common.h:
 

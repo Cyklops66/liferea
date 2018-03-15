@@ -639,9 +639,9 @@ libliui_a-media_player.o: media_player.c /usr/include/stdc-predef.h \
  /usr/include/gobject-introspection-1.0/gitypeinfo.h \
  /usr/include/gobject-introspection-1.0/giunioninfo.h \
  /usr/include/gobject-introspection-1.0/givfuncinfo.h \
- /usr/include/libpeas-1.0/libpeas/peas-activatable.h \
  /usr/include/libpeas-1.0/libpeas/peas-extension-set.h \
- /usr/include/libpeas-1.0/libpeas/peas-engine.h
+ /usr/include/libpeas-1.0/libpeas/peas-engine.h \
+ /usr/include/libpeas-1.0/libpeas/peas-activatable.h
 
 /usr/include/stdc-predef.h:
 
@@ -2075,8 +2075,8 @@ media_player_activatable.h:
 
 /usr/include/gobject-introspection-1.0/givfuncinfo.h:
 
-/usr/include/libpeas-1.0/libpeas/peas-activatable.h:
-
 /usr/include/libpeas-1.0/libpeas/peas-extension-set.h:
 
 /usr/include/libpeas-1.0/libpeas/peas-engine.h:
+
+/usr/include/libpeas-1.0/libpeas/peas-activatable.h:

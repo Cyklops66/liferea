@@ -61,9 +61,12 @@ conf.o: conf.c /usr/include/stdc-predef.h \
  /usr/include/bits/string2.h /usr/include/bits/string3.h \
  /usr/include/bits/strings_fortified.h /usr/include/time.h \
  /usr/include/bits/time.h /usr/include/bits/types/struct_tm.h \
- /usr/include/bits/types/struct_itimerspec.h common.h ../config.h \
- /usr/include/glib-2.0/glib.h /usr/include/glib-2.0/glib/galloca.h \
- /usr/include/glib-2.0/glib/gtypes.h \
+ /usr/include/bits/types/struct_itimerspec.h \
+ /usr/include/webkitgtk-4.0/webkit2/webkit2.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitApplicationInfo.h \
+ /usr/include/glib-2.0/glib-object.h \
+ /usr/include/glib-2.0/gobject/gbinding.h /usr/include/glib-2.0/glib.h \
+ /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
  /usr/lib64/glib-2.0/include/glibconfig.h \
  /usr/include/glib-2.0/glib/gmacros.h \
  /usr/include/glib-2.0/glib/gversionmacros.h \
@@ -131,11 +134,7 @@ conf.o: conf.c /usr/include/stdc-predef.h \
  /usr/include/glib-2.0/glib/deprecated/gthread.h /usr/include/pthread.h \
  /usr/include/sched.h /usr/include/bits/sched.h \
  /usr/include/bits/setjmp.h \
- /usr/include/glib-2.0/glib/glib-autocleanups.h /usr/include/libintl.h \
- /usr/include/locale.h /usr/include/bits/locale.h conf.h \
- /usr/include/glib-2.0/gio/gio.h /usr/include/glib-2.0/gio/giotypes.h \
- /usr/include/glib-2.0/gio/gioenums.h /usr/include/glib-2.0/glib-object.h \
- /usr/include/glib-2.0/gobject/gbinding.h \
+ /usr/include/glib-2.0/glib/glib-autocleanups.h \
  /usr/include/glib-2.0/gobject/gobject.h \
  /usr/include/glib-2.0/gobject/gtype.h \
  /usr/include/glib-2.0/gobject/gvalue.h \
@@ -153,7 +152,14 @@ conf.o: conf.c /usr/include/stdc-predef.h \
  /usr/include/glib-2.0/gobject/gvaluearray.h \
  /usr/include/glib-2.0/gobject/gvaluetypes.h \
  /usr/include/glib-2.0/gobject/gobject-autocleanups.h \
- /usr/include/glib-2.0/gio/gaction.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitDefines.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitAuthenticationRequest.h \
+ /usr/include/gtk-3.0/gtk/gtk.h /usr/include/gtk-3.0/gdk/gdk.h \
+ /usr/include/gtk-3.0/gdk/gdkconfig.h \
+ /usr/include/gtk-3.0/gdk/gdkversionmacros.h \
+ /usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h \
+ /usr/include/glib-2.0/gio/gio.h /usr/include/glib-2.0/gio/giotypes.h \
+ /usr/include/glib-2.0/gio/gioenums.h /usr/include/glib-2.0/gio/gaction.h \
  /usr/include/glib-2.0/gio/gactiongroup.h \
  /usr/include/glib-2.0/gio/gactiongroupexporter.h \
  /usr/include/glib-2.0/gio/gactionmap.h \
@@ -296,11 +302,7 @@ conf.o: conf.c /usr/include/stdc-predef.h \
  /usr/include/glib-2.0/gio/gnotification.h \
  /usr/include/glib-2.0/gio/glistmodel.h \
  /usr/include/glib-2.0/gio/gliststore.h \
- /usr/include/glib-2.0/gio/gio-autocleanups.h debug.h net.h update.h \
- ui/liferea_shell.h /usr/include/gtk-3.0/gtk/gtk.h \
- /usr/include/gtk-3.0/gdk/gdk.h /usr/include/gtk-3.0/gdk/gdkconfig.h \
- /usr/include/gtk-3.0/gdk/gdkversionmacros.h \
- /usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h \
+ /usr/include/glib-2.0/gio/gio-autocleanups.h \
  /usr/include/gtk-3.0/gdk/gdktypes.h /usr/include/pango-1.0/pango/pango.h \
  /usr/include/pango-1.0/pango/pango-attributes.h \
  /usr/include/pango-1.0/pango/pango-font.h \
@@ -650,8 +652,124 @@ conf.o: conf.c /usr/include/stdc-predef.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h node.h itemset.h item.h \
- rule.h node_view.h ui/ui_tray.h
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitCredential.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitAutomationSession.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitBackForwardList.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitBackForwardListItem.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitContextMenu.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitContextMenuItem.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitContextMenuActions.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitForwardDeclarations.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitCookieManager.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitDownload.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitURIRequest.h \
+ /usr/include/libsoup-2.4/libsoup/soup.h \
+ /usr/include/libsoup-2.4/libsoup/soup-address.h \
+ /usr/include/libsoup-2.4/libsoup/soup-types.h \
+ /usr/include/libsoup-2.4/libsoup/soup-version.h \
+ /usr/include/libsoup-2.4/libsoup/soup-status.h \
+ /usr/include/libsoup-2.4/libsoup/soup-auth.h \
+ /usr/include/libsoup-2.4/libsoup/soup-headers.h \
+ /usr/include/libsoup-2.4/libsoup/soup-message.h \
+ /usr/include/libsoup-2.4/libsoup/soup-message-body.h \
+ /usr/include/libsoup-2.4/libsoup/soup-message-headers.h \
+ /usr/include/libsoup-2.4/libsoup/soup-method.h \
+ /usr/include/libsoup-2.4/libsoup/soup-misc.h \
+ /usr/include/libsoup-2.4/libsoup/soup-auth-domain.h \
+ /usr/include/libsoup-2.4/libsoup/soup-auth-domain-basic.h \
+ /usr/include/libsoup-2.4/libsoup/soup-auth-domain-digest.h \
+ /usr/include/libsoup-2.4/libsoup/soup-auth-manager.h \
+ /usr/include/libsoup-2.4/libsoup/soup-types.h \
+ /usr/include/libsoup-2.4/libsoup/soup-auth.h \
+ /usr/include/libsoup-2.4/libsoup/soup-cache.h \
+ /usr/include/libsoup-2.4/libsoup/soup-content-decoder.h \
+ /usr/include/libsoup-2.4/libsoup/soup-content-sniffer.h \
+ /usr/include/libsoup-2.4/libsoup/soup-cookie.h \
+ /usr/include/libsoup-2.4/libsoup/soup-cookie-jar.h \
+ /usr/include/libsoup-2.4/libsoup/soup-cookie-jar-db.h \
+ /usr/include/libsoup-2.4/libsoup/soup-cookie-jar-text.h \
+ /usr/include/libsoup-2.4/libsoup/soup-date.h \
+ /usr/include/libsoup-2.4/libsoup/soup-enum-types.h \
+ /usr/include/libsoup-2.4/libsoup/soup-form.h \
+ /usr/include/libsoup-2.4/libsoup/soup-multipart.h \
+ /usr/include/libsoup-2.4/libsoup/soup-logger.h \
+ /usr/include/libsoup-2.4/libsoup/soup-multipart-input-stream.h \
+ /usr/include/libsoup-2.4/libsoup/soup-proxy-resolver.h \
+ /usr/include/libsoup-2.4/libsoup/soup-proxy-resolver-default.h \
+ /usr/include/libsoup-2.4/libsoup/soup-proxy-uri-resolver.h \
+ /usr/include/libsoup-2.4/libsoup/soup-request.h \
+ /usr/include/libsoup-2.4/libsoup/soup-request-data.h \
+ /usr/include/libsoup-2.4/libsoup/soup-request.h \
+ /usr/include/libsoup-2.4/libsoup/soup-request-file.h \
+ /usr/include/libsoup-2.4/libsoup/soup-request-http.h \
+ /usr/include/libsoup-2.4/libsoup/soup-server.h \
+ /usr/include/libsoup-2.4/libsoup/soup-uri.h \
+ /usr/include/libsoup-2.4/libsoup/soup-websocket-connection.h \
+ /usr/include/libsoup-2.4/libsoup/soup-websocket.h \
+ /usr/include/libsoup-2.4/libsoup/soup-session-async.h \
+ /usr/include/libsoup-2.4/libsoup/soup-session.h \
+ /usr/include/libsoup-2.4/libsoup/soup-session-feature.h \
+ /usr/include/libsoup-2.4/libsoup/soup-session-sync.h \
+ /usr/include/libsoup-2.4/libsoup/soup-socket.h \
+ /usr/include/libsoup-2.4/libsoup/soup-tld.h \
+ /usr/include/libsoup-2.4/libsoup/soup-value-utils.h \
+ /usr/include/glib-2.0/gobject/gvaluecollector.h \
+ /usr/include/libsoup-2.4/libsoup/soup-xmlrpc.h \
+ /usr/include/libsoup-2.4/libsoup/soup-xmlrpc-old.h \
+ /usr/include/libsoup-2.4/libsoup/soup-autocleanups.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitURIResponse.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitEditingCommands.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitEditorState.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitEnumTypes.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitError.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitFaviconDatabase.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitColorChooserRequest.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitFileChooserRequest.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitFindController.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitFormSubmissionRequest.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitGeolocationPermissionRequest.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitHitTestResult.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitInstallMissingMediaPluginsPermissionRequest.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitJavascriptResult.h \
+ /usr/include/webkitgtk-4.0/JavaScriptCore/JSBase.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stdbool.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitMimeInfo.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitNavigationAction.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitNavigationPolicyDecision.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitPolicyDecision.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitNetworkProxySettings.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitNotification.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitNotificationPermissionRequest.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitOptionMenu.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitOptionMenuItem.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitPermissionRequest.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitPlugin.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitPrintCustomWidget.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitPrintOperation.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitWebView.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitScriptDialog.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitSettings.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitUserContentManager.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitUserContent.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitWebContext.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitSecurityManager.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitURISchemeRequest.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitWebsiteDataManager.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitWebsiteData.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitWebInspector.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitWebViewBase.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitWebResource.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitWebViewSessionState.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitWindowProperties.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitResponsePolicyDecision.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitSecurityOrigin.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitUserMediaPermissionRequest.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitVersion.h \
+ /usr/include/webkitgtk-4.0/webkit2/WebKitAutocleanups.h common.h \
+ ../config.h /usr/include/libintl.h /usr/include/locale.h \
+ /usr/include/bits/locale.h conf.h debug.h net.h update.h \
+ ui/liferea_shell.h node.h itemset.h item.h rule.h node_view.h
 
 /usr/include/stdc-predef.h:
 
@@ -865,9 +983,13 @@ conf.o: conf.c /usr/include/stdc-predef.h \
 
 /usr/include/bits/types/struct_itimerspec.h:
 
-common.h:
+/usr/include/webkitgtk-4.0/webkit2/webkit2.h:
 
-../config.h:
+/usr/include/webkitgtk-4.0/webkit2/WebKitApplicationInfo.h:
+
+/usr/include/glib-2.0/glib-object.h:
+
+/usr/include/glib-2.0/gobject/gbinding.h:
 
 /usr/include/glib-2.0/glib.h:
 
@@ -1053,24 +1175,6 @@ common.h:
 
 /usr/include/glib-2.0/glib/glib-autocleanups.h:
 
-/usr/include/libintl.h:
-
-/usr/include/locale.h:
-
-/usr/include/bits/locale.h:
-
-conf.h:
-
-/usr/include/glib-2.0/gio/gio.h:
-
-/usr/include/glib-2.0/gio/giotypes.h:
-
-/usr/include/glib-2.0/gio/gioenums.h:
-
-/usr/include/glib-2.0/glib-object.h:
-
-/usr/include/glib-2.0/gobject/gbinding.h:
-
 /usr/include/glib-2.0/gobject/gobject.h:
 
 /usr/include/glib-2.0/gobject/gtype.h:
@@ -1104,6 +1208,26 @@ conf.h:
 /usr/include/glib-2.0/gobject/gvaluetypes.h:
 
 /usr/include/glib-2.0/gobject/gobject-autocleanups.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitDefines.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitAuthenticationRequest.h:
+
+/usr/include/gtk-3.0/gtk/gtk.h:
+
+/usr/include/gtk-3.0/gdk/gdk.h:
+
+/usr/include/gtk-3.0/gdk/gdkconfig.h:
+
+/usr/include/gtk-3.0/gdk/gdkversionmacros.h:
+
+/usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h:
+
+/usr/include/glib-2.0/gio/gio.h:
+
+/usr/include/glib-2.0/gio/giotypes.h:
+
+/usr/include/glib-2.0/gio/gioenums.h:
 
 /usr/include/glib-2.0/gio/gaction.h:
 
@@ -1410,24 +1534,6 @@ conf.h:
 /usr/include/glib-2.0/gio/gliststore.h:
 
 /usr/include/glib-2.0/gio/gio-autocleanups.h:
-
-debug.h:
-
-net.h:
-
-update.h:
-
-ui/liferea_shell.h:
-
-/usr/include/gtk-3.0/gtk/gtk.h:
-
-/usr/include/gtk-3.0/gdk/gdk.h:
-
-/usr/include/gtk-3.0/gdk/gdkconfig.h:
-
-/usr/include/gtk-3.0/gdk/gdkversionmacros.h:
-
-/usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h:
 
 /usr/include/gtk-3.0/gdk/gdktypes.h:
 
@@ -2161,6 +2267,254 @@ ui/liferea_shell.h:
 
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
 
+/usr/include/webkitgtk-4.0/webkit2/WebKitCredential.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitAutomationSession.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitBackForwardList.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitBackForwardListItem.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitContextMenu.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitContextMenuItem.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitContextMenuActions.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitForwardDeclarations.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitCookieManager.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitDownload.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitURIRequest.h:
+
+/usr/include/libsoup-2.4/libsoup/soup.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-address.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-types.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-version.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-status.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-auth.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-headers.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-message.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-message-body.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-message-headers.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-method.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-misc.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-auth-domain.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-auth-domain-basic.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-auth-domain-digest.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-auth-manager.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-types.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-auth.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-cache.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-content-decoder.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-content-sniffer.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-cookie.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-cookie-jar.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-cookie-jar-db.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-cookie-jar-text.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-date.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-enum-types.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-form.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-multipart.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-logger.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-multipart-input-stream.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-proxy-resolver.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-proxy-resolver-default.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-proxy-uri-resolver.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-request.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-request-data.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-request.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-request-file.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-request-http.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-server.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-uri.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-websocket-connection.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-websocket.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-session-async.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-session.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-session-feature.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-session-sync.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-socket.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-tld.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-value-utils.h:
+
+/usr/include/glib-2.0/gobject/gvaluecollector.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-xmlrpc.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-xmlrpc-old.h:
+
+/usr/include/libsoup-2.4/libsoup/soup-autocleanups.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitURIResponse.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitEditingCommands.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitEditorState.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitEnumTypes.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitError.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitFaviconDatabase.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitColorChooserRequest.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitFileChooserRequest.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitFindController.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitFormSubmissionRequest.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitGeolocationPermissionRequest.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitHitTestResult.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitInstallMissingMediaPluginsPermissionRequest.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitJavascriptResult.h:
+
+/usr/include/webkitgtk-4.0/JavaScriptCore/JSBase.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stdbool.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitMimeInfo.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitNavigationAction.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitNavigationPolicyDecision.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitPolicyDecision.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitNetworkProxySettings.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitNotification.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitNotificationPermissionRequest.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitOptionMenu.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitOptionMenuItem.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitPermissionRequest.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitPlugin.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitPrintCustomWidget.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitPrintOperation.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebView.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitScriptDialog.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitSettings.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitUserContentManager.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitUserContent.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebContext.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitSecurityManager.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitURISchemeRequest.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebsiteDataManager.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebsiteData.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebInspector.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebViewBase.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebResource.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitWebViewSessionState.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitWindowProperties.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitResponsePolicyDecision.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitSecurityOrigin.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitUserMediaPermissionRequest.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitVersion.h:
+
+/usr/include/webkitgtk-4.0/webkit2/WebKitAutocleanups.h:
+
+common.h:
+
+../config.h:
+
+/usr/include/libintl.h:
+
+/usr/include/locale.h:
+
+/usr/include/bits/locale.h:
+
+conf.h:
+
+debug.h:
+
+net.h:
+
+update.h:
+
+ui/liferea_shell.h:
+
 node.h:
 
 itemset.h:
@@ -2170,5 +2524,3 @@ item.h:
 rule.h:
 
 node_view.h:
-
-ui/ui_tray.h:

@@ -62,9 +62,16 @@ render.o: render.c /usr/include/stdc-predef.h ../config.h \
  /usr/include/libxslt/xsltutils.h /usr/include/libxslt/xsltconfig.h \
  /usr/include/x86_64-pc-linux-gnu/libxslt/xsltconfig.h \
  /usr/include/libxslt/xsltInternals.h /usr/include/locale.h \
- /usr/include/bits/locale.h /usr/include/xlocale.h /usr/include/string.h \
- /usr/include/bits/string.h /usr/include/bits/string2.h \
- /usr/include/bits/string3.h /usr/include/bits/strings_fortified.h conf.h \
+ /usr/include/bits/locale.h /usr/include/xlocale.h /usr/include/math.h \
+ /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
+ /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
+ /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
+ /usr/include/bits/nan.h /usr/include/bits/flt-eval-method.h \
+ /usr/include/bits/fp-logb.h /usr/include/bits/fp-fast.h \
+ /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
+ /usr/include/string.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/bits/string3.h \
+ /usr/include/bits/strings_fortified.h conf.h \
  /usr/include/glib-2.0/glib.h /usr/include/glib-2.0/glib/galloca.h \
  /usr/include/glib-2.0/glib/gtypes.h \
  /usr/lib64/glib-2.0/include/glibconfig.h \
@@ -657,7 +664,7 @@ render.o: render.c /usr/include/stdc-predef.h ../config.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  /usr/include/gtk-3.0/gtk/gtk-autocleanups.h xml.h feed_parser.h feed.h \
  node_type.h node.h node_view.h subscription_type.h subscription.h \
- update.h ui/liferea_htmlview.h
+ update.h ui/liferea_htmlview.h net.h update.h
 
 /usr/include/stdc-predef.h:
 
@@ -878,6 +885,32 @@ render.o: render.c /usr/include/stdc-predef.h ../config.h \
 /usr/include/bits/locale.h:
 
 /usr/include/xlocale.h:
+
+/usr/include/math.h:
+
+/usr/include/bits/math-vector.h:
+
+/usr/include/bits/libm-simd-decl-stubs.h:
+
+/usr/include/bits/huge_val.h:
+
+/usr/include/bits/huge_valf.h:
+
+/usr/include/bits/huge_vall.h:
+
+/usr/include/bits/inf.h:
+
+/usr/include/bits/nan.h:
+
+/usr/include/bits/flt-eval-method.h:
+
+/usr/include/bits/fp-logb.h:
+
+/usr/include/bits/fp-fast.h:
+
+/usr/include/bits/mathcalls.h:
+
+/usr/include/bits/mathinline.h:
 
 /usr/include/string.h:
 
@@ -2208,3 +2241,7 @@ subscription.h:
 update.h:
 
 ui/liferea_htmlview.h:
+
+net.h:
+
+update.h:

@@ -2,7 +2,7 @@
  * @file conf.c Liferea configuration (GSettings access)
  *
  * Copyright (C) 2011 Mikel Olasagasti Uranga <mikel@olasagasti.info>
- * Copyright (C) 2003-2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2003-2015 Lars Windolf <lars.windolf@gmx.de>
  * Copyright (C) 2004,2005 Nathan J. Conrad <t98502@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -23,6 +23,7 @@
 #include <libxml/uri.h>
 #include <string.h>
 #include <time.h>
+#include <webkit2/webkit2.h>
 
 #include "common.h"
 #include "conf.h"
@@ -30,7 +31,6 @@
 #include "net.h"
 #include "update.h"
 #include "ui/liferea_shell.h"
-#include "ui/ui_tray.h"
 
 #define MAX_GCONF_PATHLEN	256
 
@@ -42,7 +42,6 @@ static GSettings *desktop_settings;
 
 /* Function prototypes */
 static void conf_proxy_reset_settings_cb(GSettings *settings, guint cnxn_id, gchar *key, gpointer user_data);
-static void conf_tray_settings_cb(GSettings *settings, guint cnxn_id, gchar *key, gpointer user_data);
 static void conf_toolbar_style_settings_cb(GSettings *settings, guint cnxn_id, gchar *key, gpointer user_data);
 
 static void
@@ -96,13 +95,6 @@ conf_init (void)
 
 	g_signal_connect (
 		settings,
-		"changed::" SHOW_TRAY_ICON,
-		G_CALLBACK (conf_tray_settings_cb),
-		NULL
-	);
-
-	g_signal_connect (
-		settings,
 		"changed::" PROXY_DETECT_MODE,
 		G_CALLBACK (conf_proxy_reset_settings_cb),
 		NULL
@@ -150,18 +142,6 @@ conf_deinit (void)
 }
 
 static void
-conf_tray_settings_cb (GSettings *settings, guint cnxn_id, gchar *key, gpointer user_data)
-{
-	GVariant *gv;
-
-	if (key) {
-		gv = g_settings_get_value (settings, key);
-		if (gv && g_variant_get_type(gv) == G_VARIANT_TYPE_BOOLEAN)
-			ui_tray_enable (g_settings_get_boolean (settings,key));
-	}
-}
-
-static void
 conf_toolbar_style_settings_cb (GSettings *settings,
                                 guint cnxn_id,
                                 gchar *key,
@@ -185,13 +165,29 @@ conf_proxy_reset_settings_cb (GSettings *settings,
 	gint		proxyport;
 	gint		proxydetectmode;
 	gboolean	proxyuseauth;
+	GtkWidget 	*dialog = NULL;
 
 	proxyname = NULL;
 	proxyport = 0;
 	proxyusername = NULL;
 	proxypassword = NULL;
-
 	conf_get_int_value (PROXY_DETECT_MODE, &proxydetectmode);
+
+#if !WEBKIT_CHECK_VERSION (2, 15, 3)
+	if (proxydetectmode != PROXY_DETECT_MODE_AUTO)
+	{
+		dialog = gtk_message_dialog_new (NULL,
+			0,
+			GTK_MESSAGE_INFO,
+			GTK_BUTTONS_CLOSE,
+			_("Your version of WebKitGTK+ doesn't support changing the proxy settings from Liferea. The system's default proxy settings will be used."));
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+
+		conf_set_int_value (PROXY_DETECT_MODE, PROXY_DETECT_MODE_AUTO);
+		return;
+	}
+#endif
 	switch (proxydetectmode) {
 		default:
 		case 0:
@@ -218,7 +214,7 @@ conf_proxy_reset_settings_cb (GSettings *settings,
 		  proxyusername != NULL ? proxyusername : "NULL",
 		  proxypassword != NULL ? proxypassword : "NULL");
 
-	network_set_proxy (proxyname, proxyport, proxyusername, proxypassword);
+	network_set_proxy (proxydetectmode, proxyname, proxyport, proxyusername, proxypassword);
 }
 
 /*----------------------------------------------------------------------*/

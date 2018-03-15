@@ -70,7 +70,7 @@ favicon_download_ctxt_free (faviconDownloadCtxtPtr ctxt)
 static void favicon_download_run(faviconDownloadCtxtPtr ctxt);
 
 GdkPixbuf *
-favicon_load_from_cache (const gchar *id)
+favicon_load_from_cache (const gchar *id, guint size)
 {
 	struct stat	statinfo;
 	gchar		*filename;
@@ -82,7 +82,7 @@ favicon_load_from_cache (const gchar *id)
 	if (0 == stat ((const char*)filename, &statinfo)) {
 		pixbuf = gdk_pixbuf_new_from_file (filename, &error);
 		if (pixbuf && !error) {
-			result = gdk_pixbuf_scale_simple (pixbuf, 16, 16, GDK_INTERP_BILINEAR);
+			result = gdk_pixbuf_scale_simple (pixbuf, size, size, GDK_INTERP_BILINEAR);
 			g_object_unref (pixbuf);
 		} else { /* Error */
 			fprintf (stderr, "Failed to load pixbuf file: %s: %s\n",
@@ -123,6 +123,21 @@ void favicon_remove_from_cache(const gchar *id) {
 	debug_exit("favicon_remove");
 }
 
+/**
+ * prevent saving huge favicons loaded from net
+ *
+ */
+static void
+favicon_pixbuf_size_prepared_cb (GdkPixbufLoader *loader, gint width, gint height, gpointer user_data)
+{
+	gint max_size = 256;
+	if (width > max_size || height > max_size) {
+		width = width < max_size ? width : max_size;
+		height = height < max_size ? height : max_size;
+		gdk_pixbuf_loader_set_size(loader, width, height);
+	}
+}
+
 static void
 favicon_download_icon_cb (const struct updateResult * const result, gpointer user_data, updateFlags flags)
 {
@@ -140,6 +155,8 @@ favicon_download_icon_cb (const struct updateResult * const result, gpointer use
 	   /*(!strncmp("image", result->contentType, 5))*/) {
 		GdkPixbufLoader *loader = gdk_pixbuf_loader_new ();
 		GdkPixbuf *pixbuf;
+		g_signal_connect (loader, "size-prepared",
+			G_CALLBACK (favicon_pixbuf_size_prepared_cb), NULL);
 		if (gdk_pixbuf_loader_write (loader, (guchar *)result->data, (gsize)result->size, &err)) {
 			if (gdk_pixbuf_loader_close (loader, &err)) {
 				pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);

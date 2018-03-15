@@ -349,7 +349,7 @@ net.o: net.c /usr/include/stdc-predef.h net.h \
  /usr/include/libxml2/libxml/xmlIO.h /usr/include/libxml2/libxml/SAX.h \
  /usr/include/libxml2/libxml/xlink.h /usr/include/libxml2/libxml/SAX2.h \
  /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
- debug.h
+ conf.h debug.h
 
 /usr/include/stdc-predef.h:
 
@@ -1216,5 +1216,7 @@ common.h:
 /usr/include/locale.h:
 
 /usr/include/bits/locale.h:
+
+conf.h:
 
 debug.h:

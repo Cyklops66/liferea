@@ -649,14 +649,16 @@ libliflsources_a-theoldreader_source_feed_list.o: \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h /usr/include/string.h \
- /usr/include/bits/string.h /usr/include/bits/string2.h \
- /usr/include/bits/string3.h /usr/include/bits/strings_fortified.h \
- ../../src/common.h ../../config.h /usr/include/libintl.h \
- /usr/include/locale.h /usr/include/bits/locale.h ../../src/db.h \
- ../../src/subscription.h ../../src/update.h ../../src/debug.h \
- ../../src/feedlist.h ../../src/folder.h ../../src/node_type.h \
- ../../src/json.h /usr/include/json-glib-1.0/json-glib/json-glib.h \
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h \
+ ../../src/subscription_type.h ../../src/subscription.h \
+ ../../src/update.h ../../src/fl_sources/google_reader_api.h \
+ /usr/include/string.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/bits/string3.h \
+ /usr/include/bits/strings_fortified.h ../../src/common.h ../../config.h \
+ /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
+ ../../src/db.h ../../src/debug.h ../../src/feedlist.h ../../src/folder.h \
+ ../../src/node_type.h ../../src/json.h \
+ /usr/include/json-glib-1.0/json-glib/json-glib.h \
  /usr/include/json-glib-1.0/json-glib/json-types.h \
  /usr/include/json-glib-1.0/json-glib/json-version-macros.h \
  /usr/include/json-glib-1.0/json-glib/json-version.h \
@@ -672,9 +674,7 @@ libliflsources_a-theoldreader_source_feed_list.o: \
  /usr/include/json-glib-1.0/json-glib/json-gvariant.h \
  ../../src/metadata.h ../../src/feed_parser.h ../../src/feed.h \
  ../../src/subscription_type.h ../../src/subscription.h ../../src/xml.h \
- ../../src/fl_sources/opml_source.h ../../src/subscription_type.h \
- ../../src/fl_sources/theoldreader_source_edit.h \
- ../../src/fl_sources/theoldreader_source.h
+ ../../src/fl_sources/opml_source.h
 
 /usr/include/stdc-predef.h:
 
@@ -2172,6 +2172,14 @@ theoldreader_source_feed_list.h:
 
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
 
+../../src/subscription_type.h:
+
+../../src/subscription.h:
+
+../../src/update.h:
+
+../../src/fl_sources/google_reader_api.h:
+
 /usr/include/string.h:
 
 /usr/include/bits/string.h:
@@ -2193,10 +2201,6 @@ theoldreader_source_feed_list.h:
 /usr/include/bits/locale.h:
 
 ../../src/db.h:
-
-../../src/subscription.h:
-
-../../src/update.h:
 
 ../../src/debug.h:
 
@@ -2249,9 +2253,3 @@ theoldreader_source_feed_list.h:
 ../../src/xml.h:
 
 ../../src/fl_sources/opml_source.h:
-
-../../src/subscription_type.h:
-
-../../src/fl_sources/theoldreader_source_edit.h:
-
-../../src/fl_sources/theoldreader_source.h:

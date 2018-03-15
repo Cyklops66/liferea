@@ -647,19 +647,21 @@ libliflsources_a-inoreader_source.o: inoreader_source.c \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h /usr/include/string.h \
- /usr/include/bits/string.h /usr/include/bits/string2.h \
- /usr/include/bits/string3.h /usr/include/bits/strings_fortified.h \
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h \
+ ../../src/subscription_type.h ../../src/subscription.h \
+ ../../src/update.h ../../src/fl_sources/google_reader_api.h \
+ /usr/include/string.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/bits/string3.h \
+ /usr/include/bits/strings_fortified.h \
  /usr/include/libxml2/libxml/xpath.h ../../src/common.h ../../config.h \
  /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
- ../../src/debug.h ../../src/feedlist.h ../../src/update.h \
- ../../src/item_state.h ../../src/metadata.h ../../src/feed_parser.h \
- ../../src/feed.h ../../src/node_type.h ../../src/subscription_type.h \
- ../../src/subscription.h ../../src/subscription.h ../../src/update.h \
- ../../src/xml.h ../../src/ui/auth_dialog.h ../../src/ui/liferea_dialog.h \
- ../../src/fl_sources/opml_source.h ../../src/subscription_type.h \
- ../../src/fl_sources/inoreader_source_edit.h \
- ../../src/fl_sources/inoreader_source.h \
+ ../../src/debug.h ../../src/feedlist.h ../../src/item_state.h \
+ ../../src/metadata.h ../../src/feed_parser.h ../../src/feed.h \
+ ../../src/node_type.h ../../src/subscription_type.h \
+ ../../src/subscription.h ../../src/update.h ../../src/xml.h \
+ ../../src/ui/auth_dialog.h ../../src/ui/liferea_dialog.h \
+ ../../src/fl_sources/google_reader_api_edit.h \
+ ../../src/fl_sources/opml_source.h \
  ../../src/fl_sources/inoreader_source_feed_list.h
 
 /usr/include/stdc-predef.h:
@@ -2156,6 +2158,14 @@ libliflsources_a-inoreader_source.o: inoreader_source.c \
 
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
 
+../../src/subscription_type.h:
+
+../../src/subscription.h:
+
+../../src/update.h:
+
+../../src/fl_sources/google_reader_api.h:
+
 /usr/include/string.h:
 
 /usr/include/bits/string.h:
@@ -2182,8 +2192,6 @@ libliflsources_a-inoreader_source.o: inoreader_source.c \
 
 ../../src/feedlist.h:
 
-../../src/update.h:
-
 ../../src/item_state.h:
 
 ../../src/metadata.h:
@@ -2198,8 +2206,6 @@ libliflsources_a-inoreader_source.o: inoreader_source.c \
 
 ../../src/subscription.h:
 
-../../src/subscription.h:
-
 ../../src/update.h:
 
 ../../src/xml.h:
@@ -2208,12 +2214,8 @@ libliflsources_a-inoreader_source.o: inoreader_source.c \
 
 ../../src/ui/liferea_dialog.h:
 
+../../src/fl_sources/google_reader_api_edit.h:
+
 ../../src/fl_sources/opml_source.h:
-
-../../src/subscription_type.h:
-
-../../src/fl_sources/inoreader_source_edit.h:
-
-../../src/fl_sources/inoreader_source.h:
 
 ../../src/fl_sources/inoreader_source_feed_list.h:

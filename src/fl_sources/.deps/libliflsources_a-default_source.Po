@@ -658,7 +658,8 @@ libliflsources_a-default_source.o: default_source.c \
  ../../src/update.h ../../src/feedlist.h ../../src/folder.h \
  ../../src/migrate.h ../../src/update.h \
  ../../src/fl_sources/default_source.h ../../src/fl_sources/node_source.h \
- ../../src/node.h ../../src/node_type.h
+ ../../src/node.h ../../src/node_type.h ../../src/subscription_type.h \
+ ../../src/fl_sources/google_reader_api.h
 
 /usr/include/stdc-predef.h:
 
@@ -2203,3 +2204,7 @@ libliflsources_a-default_source.o: default_source.c \
 ../../src/node.h:
 
 ../../src/node_type.h:
+
+../../src/subscription_type.h:
+
+../../src/fl_sources/google_reader_api.h:

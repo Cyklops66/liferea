@@ -654,8 +654,9 @@ feedlist.o: feedlist.c /usr/include/stdc-predef.h \
  /usr/include/gtk-3.0/gtk/gtk-autocleanups.h subscription_type.h \
  feedlist.h folder.h itemlist.h item_loader.h net_monitor.h vfolder.h \
  ui/feed_list_view.h feed.h ui/itemview.h item.h itemset.h node.h \
- ui/liferea_htmlview.h ui/liferea_shell.h ui/feed_list_node.h \
- ui/ui_tray.h fl_sources/node_source.h node_type.h
+ ui/liferea_htmlview.h net.h update.h ui/liferea_shell.h \
+ ui/feed_list_node.h fl_sources/node_source.h node_type.h \
+ subscription_type.h fl_sources/google_reader_api.h
 
 /usr/include/stdc-predef.h:
 
@@ -2209,12 +2210,18 @@ node.h:
 
 ui/liferea_htmlview.h:
 
+net.h:
+
+update.h:
+
 ui/liferea_shell.h:
 
 ui/feed_list_node.h:
 
-ui/ui_tray.h:
-
 fl_sources/node_source.h:
 
 node_type.h:
+
+subscription_type.h:
+
+fl_sources/google_reader_api.h:

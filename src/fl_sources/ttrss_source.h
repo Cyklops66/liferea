@@ -1,7 +1,7 @@
 /**
- * @file ttrss_source.h tt-rss feed list source support
+ * @file ttrss_source.h  Tiny Tiny RSS feed list source support
  * 
- * Copyright (C) 2010-2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2010-2014 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,41 +29,13 @@
  * A nodeSource specific for tt-rss
  */
 typedef struct ttrssSource {
-	nodePtr		root;		/**< the root node in the feed list */
-	gchar		*session_id;	/**< the current session id */
-	const gchar	*url;		/**< the API base URL */
-	GQueue		*actionQueue;
-	gint		apiLevel;	/**< The API level reported by the instance (or 0) */
-	gint		loginState;	/**< The current login state */
-	gint		authFailures;	/**< Number of authentication failures */
-	GHashTable	*categories;	/**< Lookup hash for feed id to category id */
-	GHashTable	*categoryNodes;	/**< Lookup hash for category id to folder node id */
+	nodePtr		root;			/**< the root node in the feed list */
+	gchar		*session_id;		/**< the current session id */
+	const gchar	*url;			/**< the API base URL */
+	gint		apiLevel;		/**< The API level reported by the instance (or 0) */
+	GHashTable	*categories;		/**< Lookup hash for TTRSS feed id to TTRSS category id */
+	GHashTable	*folderToCategory;	/**< Lookup hash for folder node id to TTRSS category id */
 } *ttrssSourcePtr;
- 
-enum { 
-	TTRSS_SOURCE_STATE_NONE = 0,		/**< no authentication tried so far */
-	TTRSS_SOURCE_STATE_IN_PROGRESS,		/**< authentication in progress */
-	TTRSS_SOURCE_STATE_ACTIVE,		/**< authentication succeeded */
-	TTRSS_SOURCE_STATE_NO_AUTH		/**< authentication has failed */
-};
-
-enum  { 
-	/**
-	 * Update only the subscription list, and not each node underneath it.
-	 * Note: Uses higher 16 bits to avoid conflict.
-	 */
-	TTRSS_SOURCE_UPDATE_ONLY_LIST = (1<<16),
-	/**
-	 * Only login, do not do any updates. 
-	 */
-	TTRSS_SOURCE_UPDATE_ONLY_LOGIN = (1<<17)
-};
-
-/**
- * Number of auth failures after which we stop bothering the user while
- * auto-updating until he manually updates again.
- */
-#define TTRSS_SOURCE_MAX_AUTH_FAILURES		3
 
 /**
  * TinyTinyRSS JSON API is documented here:
@@ -74,7 +46,7 @@ enum  {
 #define TTRSS_URL "%s/api/"
 
 /**
- * Tiny Tiny RSS Login API
+ * TinyTinyRSS Login API
  *
  * @param user		The tt-rss account id
  * @param passwd	The tt-rss account password
@@ -84,13 +56,32 @@ enum  {
 #define TTRSS_JSON_LOGIN "{\"op\":\"login\", \"user\":\"%s\", \"password\":\"%s\"}" 
 
 /**
- * Fetch tt-rss feed list.
+ * Fetch TinyTinyRSS feed list.
  *
  * @param sid	session id
  *
  * @returns JSON feed list
  */
 #define TTRSS_JSON_SUBSCRIPTION_LIST "{\"op\":\"getFeeds\", \"sid\":\"%s\", \"cat_id\":\"-3\", \"include_nested\":\"true\"}"
+
+/**
+ * Add a subscription to TinyTinyRSS
+ *
+ * @param sid		session id
+ * @param feed_url	URL
+ * @param category_id	category id (or 0)
+ * @param login		user name
+ * @param password	password
+ */
+#define TTRSS_JSON_SUBSCRIBE "{\"op\":\"subscribeToFeed\", \"sid\":\"%s\", \"feed_url\":\"%s\", \"category_id\":%d, \"login\":\"%s\", \"password\":\"%s\"}"
+
+/**
+ * Removes a subscription from TinyTinyRSS
+ *
+ * @param sid		session id
+ * @param feed_id	TinyTinyRSS feed id
+ */
+#define TTRSS_JSON_UNSUBSCRIBE "{\"op\":\"unsubscribeFeed\", \"sid\":\"%s\", \"feed_id\":\"%s\"}"
 
 /**
  * Fetch tt-rss categories list (default is fetching it tree like)
@@ -100,7 +91,7 @@ enum  {
 #define TTRSS_JSON_CATEGORIES_LIST "{\"op\":\"getFeedTree\", \"sid\":\"%s\", \"include_empty\":\"true\"}"
 
 /**
- * Fetch tt-rss headlines for a given feed.
+ * Fetch TinyTinyRSS headlines for a given feed.
  *
  * @param sid		session id
  * @param feed_id	tt-rss feed id
@@ -108,7 +99,7 @@ enum  {
  *
  * @returns JSON feed list
  */
-#define TTRSS_JSON_HEADLINES "{\"op\":\"getHeadlines\", \"sid\":\"%s\", \"feed_id\":\"%s\", \"limit\":\"%d\", \"show_content\":\"true\", \"view_mode\":\"all_articles\"}"
+#define TTRSS_JSON_HEADLINES "{\"op\":\"getHeadlines\", \"sid\":\"%s\", \"feed_id\":\"%s\", \"limit\":\"%d\", \"show_content\":\"true\", \"view_mode\":\"all_articles\", \"include_attachments\":\"true\"}"
 
 /**
  * Toggle item flag state.
@@ -134,8 +125,5 @@ enum  {
 nodeSourceTypePtr ttrss_source_get_type (void);
 
 void ttrss_source_login (ttrssSourcePtr source, guint32 flags);
-
-extern struct subscriptionType ttrssSourceFeedSubscriptionType;
-extern struct subscriptionType ttrssSourceSubscriptionType;
 
 #endif

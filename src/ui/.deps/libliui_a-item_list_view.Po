@@ -655,10 +655,12 @@ libliui_a-item_list_view.o: item_list_view.c /usr/include/stdc-predef.h \
  ../../src/subscription_type.h ../../src/subscription.h \
  ../../src/update.h ../../src/feedlist.h ../../src/itemlist.h \
  ../../src/item_loader.h itemview.h ../../src/itemset.h ../../src/node.h \
- ../../src/ui/liferea_htmlview.h ../../src/newsbin.h ../../src/social.h \
- ../../src/ui/browser_tabs.h ../../src/ui/liferea_htmlview.h \
- ../../src/ui/icons.h ../../src/ui/liferea_shell.h \
- ../../src/ui/popup_menu.h ../../src/enclosure.h ../../src/ui/ui_common.h
+ ../../src/ui/liferea_htmlview.h ../../src/net.h ../../src/newsbin.h \
+ ../../src/social.h ../../src/xml.h ../../src/feed_parser.h \
+ ../../src/feed.h ../../src/ui/browser_tabs.h \
+ ../../src/ui/liferea_htmlview.h ../../src/ui/icons.h \
+ ../../src/ui/liferea_shell.h ../../src/ui/popup_menu.h \
+ ../../src/enclosure.h ../../src/ui/ui_common.h
 
 /usr/include/stdc-predef.h:
 
@@ -2202,9 +2204,17 @@ itemview.h:
 
 ../../src/ui/liferea_htmlview.h:
 
+../../src/net.h:
+
 ../../src/newsbin.h:
 
 ../../src/social.h:
+
+../../src/xml.h:
+
+../../src/feed_parser.h:
+
+../../src/feed.h:
 
 ../../src/ui/browser_tabs.h:
 

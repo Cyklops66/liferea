@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT([liferea],[1.10.19],[liferea-devel@lists.sourceforge.net])
+AC_INIT([liferea],[1.12.2],[liferea-devel@lists.sourceforge.net])
 AC_CANONICAL_HOST
 AC_CONFIG_SRCDIR([src/feedlist.c])
 
@@ -22,55 +22,9 @@ AC_PROG_MAKE_SET
 AC_SYS_LARGEFILE
 GLIB_GSETTINGS
 
-AC_ARG_ENABLE(libnotify, AS_HELP_STRING([--disable-libnotify],[compile without libnotify support]),,enable_libnotify=yes)
-AC_ARG_ENABLE(libindicate, AS_HELP_STRING([--disable-libindicate],[compile without libindicate support]),,enable_libindicate=yes)
-
 AC_CHECK_FUNCS([strsep])
 
 PKG_PROG_PKG_CONFIG()
-
-dnl *********
-dnl libnotify
-dnl *********
-
-if test "x$enable_libnotify" = "xyes"; then
-  PKG_CHECK_MODULES([LIBNOTIFY], libnotify >= 0.7,enable_libnotify=yes,enable_libnotify=no)
-  if test "x$enable_libnotify" = "xyes"; then
-    AC_DEFINE(HAVE_LIBNOTIFY, 1, [Define if libnotify support is enabled])
-  fi
-  AC_SUBST(LIBNOTIFY_CFLAGS)
-  AC_SUBST(LIBNOTIFY_LIBS)
-else
-  enable_libnotify=no
-fi
-
-AM_CONDITIONAL(WITH_LIBNOTIFY, test "x$enable_libnotify" = "xyes")
-
-dnl *********
-dnl libindicate
-dnl *********
-
-if test "x$enable_libindicate" = "xyes"; then
-   dnl Try 0.7 first
-   PKG_CHECK_MODULES([LIBINDICATE], indicate-0.7 indicate-gtk3-0.7,enable_libindicate=yes,enable_libindicate=no)
-   AC_SUBST(LIBINDICATE_CFLAGS)
-   AC_SUBST(LIBINDICATE_LIBS)
-
-   dnl But 0.6 will also do...
-   if test "x$enable_libindicate" = "xno"; then
-      PKG_CHECK_MODULES([LIBINDICATE], indicate-0.6 indicate-gtk3-0.6,enable_libindicate=yes,enable_libindicate=no)
-      AC_SUBST(LIBINDICATE_CFLAGS)
-      AC_SUBST(LIBINDICATE_LIBS)
-   fi
-else
-   enable_libindicate=no
-fi
-
-if test "x$enable_libindicate" = "xyes"; then
-  AC_DEFINE(HAVE_LIBINDICATE, 1, [Define if libindicate support is enabled])
-fi
-
-AM_CONDITIONAL(WITH_LIBINDICATE, test "x$enable_libindicate" = "xyes")
 
 ################################################################################
 # Mandatory library dependencies
@@ -99,6 +53,12 @@ PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
 AC_SUBST(PACKAGE_CFLAGS)
 AC_SUBST(PACKAGE_LIBS)
 
+PKG_CHECK_MODULES([WEB_EXTENSION], [
+                  webkit2gtk-web-extension-4.0
+                  ])
+AC_SUBST([WEB_EXTENSION_CFLAGS])
+AC_SUBST([WEB_EXTENSION_LIBS])
+
 uname=`uname`
 AC_DEFINE_UNQUOTED(OS, $uname, [defines a OS version string, used for OS specific code])
 AC_DEFINE_UNQUOTED(OSNAME, "$uname", [defines a OS version string, used for the user agent string])
@@ -123,10 +83,11 @@ Makefile
 net.sf.liferea.gschema.xml
 src/Makefile
 src/webkit/Makefile
+src/webkit/web_extension/Makefile
 src/parsers/Makefile
 src/fl_sources/Makefile
-src/notification/Makefile
 src/ui/Makefile
+src/tests/Makefile
 doc/Makefile
 doc/html/Makefile
 xslt/Makefile
@@ -148,9 +109,6 @@ AC_OUTPUT
 
 echo
 echo "$PACKAGE $VERSION"
-echo
-echo "Use libnotify................... : $enable_libnotify"
-echo "Use libindicate................. : $enable_libindicate"
 echo
 eval eval echo Liferea will be installed in $bindir.
 echo

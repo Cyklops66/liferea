@@ -20,10 +20,6 @@
 </head>
 <xsl:element name="body">  
 
-<xsl:if test="item/attributes/attribute[ @name = 'point' ]">
-   <xsl:attribute name="onload">load()</xsl:attribute>
-</xsl:if>
-
 
 <div href="{$baseUrl}">
 
@@ -130,6 +126,7 @@
      <span xml:lang="gl">Fonte</span>
      <span xml:lang="he">מקור</span>
      <span xml:lang="hu">Forrás</span>
+     <span xml:lang="id">Sumber</span>
      <span xml:lang="it">Fonte</span>
      <span xml:lang="ja">ソース</span>
      <span xml:lang="lt">Šaltinis</span>
@@ -177,6 +174,7 @@
      <span xml:lang="gl">Fonte</span>
      <span xml:lang="he">ערוץ</span>
      <span xml:lang="hu">Hírforrás</span>
+     <span xml:lang="id">Feed</span>
      <span xml:lang="it">Notiziario</span>
      <span xml:lang="ja">配信元</span>
      <span xml:lang="ko">피드</span>
@@ -191,8 +189,8 @@
      <span xml:lang="ru">Лента</span>
      <span xml:lang="sk">Kanál</span>
      <span xml:lang="sq">Prurje</span>
-     <span xml:lang="sv">Kanal</span>
-     <span xml:lang="tr">Haber</span>
+     <span xml:lang="sv">Flöde</span>
+     <span xml:lang="tr">Besleme</span>
      <span xml:lang="uk">Подача</span>
      <span xml:lang="vi">Feed</span>
      <span xml:lang="zh_CN">Feed</span>
@@ -225,6 +223,7 @@
      <span xml:lang="gl">Arquivado en</span>
      <span xml:lang="he">תויק תחת</span>
      <span xml:lang="hu">Beküldve</span>
+     <span xml:lang="id">Berada di</span>
      <span xml:lang="it">Archiviato sotto</span>
      <span xml:lang="ja">カテゴリ:</span>
      <span xml:lang="lt">Etiketės:</span>
@@ -236,7 +235,7 @@
      <span xml:lang="ro">Clasat sub</span>
      <span xml:lang="ru">Опубликовано в</span>
      <span xml:lang="sk">Zaradené pod</span>
-     <span xml:lang="sq">Skeduar te:</span>
+     <span xml:lang="sq">Skeduar te</span>
      <span xml:lang="sv">Arkiverad under</span>
      <span xml:lang="tr">Dosyalandığı yer</span>
      <span xml:lang="uk">Додано до теки</span>
@@ -271,6 +270,7 @@
      <span xml:lang="gl">Autor</span>
      <span xml:lang="he">מחבר</span>
      <span xml:lang="hu">Szerző</span>
+     <span xml:lang="id">Penulis</span>
      <span xml:lang="it">Autore</span>
      <span xml:lang="ja">作者</span>
      <span xml:lang="lt">Autorius</span>
@@ -311,6 +311,7 @@
      <span xml:lang="gl">Compartido por</span>
      <span xml:lang="he">מומלץ על ידי</span>
      <span xml:lang="hu">Megosztotta</span>
+     <span xml:lang="id">Dibagikan oleh</span>
      <span xml:lang="it">Condiviso da</span>
      <span xml:lang="ja">共有</span>
      <span xml:lang="lt">Pasidalino</span>
@@ -322,8 +323,9 @@
      <span xml:lang="ro">Partajat de</span>
      <span xml:lang="ru">Опубликовано</span>
      <span xml:lang="sk">Zdielané cez</span>
-     <span xml:lang="sq">Ndarë nga</span>
+     <span xml:lang="sq">Ndarë me të tjerët nga</span>
      <span xml:lang="sv">Delad av</span>
+     <span xml:lang="tr">Paylaşan</span>
      <span xml:lang="uk">Спільно використовується</span>
      <span xml:lang="vi">Chia sẻ bởi</span>
      <span xml:lang="zh_CN">分享：</span>
@@ -352,6 +354,7 @@
      <span xml:lang="gl">Vía</span>
      <span xml:lang="he">דרך</span>
      <span xml:lang="hu">Forrás:</span>
+     <span xml:lang="id">Melalui</span>
      <span xml:lang="it">Tramite</span>
      <span xml:lang="ja">経由</span>
      <span xml:lang="lt">per</span>
@@ -361,10 +364,11 @@
      <span xml:lang="pt">Via</span>
      <span xml:lang="pt_BR">Via</span>
      <span xml:lang="ro">Via</span>
-     <span xml:lang="ru">Через</span>
+     <span xml:lang="ru">С помощью</span>
      <span xml:lang="sk">Cez</span>
      <span xml:lang="sq">Përmes</span>
      <span xml:lang="sv">Via</span>
+     <span xml:lang="tr">Aracılığıyla</span>
      <span xml:lang="uk">Проміжні</span>
      <span xml:lang="vi">Thông qua</span>
      <span xml:lang="zh_CN">通过</span>
@@ -394,6 +398,7 @@
      <span xml:lang="gl">Relacionado</span>
      <span xml:lang="he">קשורים</span>
      <span xml:lang="hu">Kapcsolódó</span>
+     <span xml:lang="id">Terkait</span>
      <span xml:lang="it">Correlato</span>
      <span xml:lang="ja">関連</span>
      <span xml:lang="lt">Susiję</span>
@@ -403,10 +408,11 @@
      <span xml:lang="pt">Relacionado</span>
      <span xml:lang="pt_BR">Relacionados</span>
      <span xml:lang="ro">Asociat</span>
-     <span xml:lang="ru">Сопутствующий</span>
+     <span xml:lang="ru">Похожие</span>
      <span xml:lang="sk">Príbuzné</span>
-     <span xml:lang="sq">Relatuar</span>
+     <span xml:lang="sq">Të afërta</span>
      <span xml:lang="sv">Relaterade</span>
+     <span xml:lang="tr">İlişkili</span>
      <span xml:lang="uk">Пов’язано з</span>
      <span xml:lang="vi">Quan hệ</span>
      <span xml:lang="zh_CN">相关</span>
@@ -439,6 +445,7 @@
      <span xml:lang="gl">Tamén publicado en</span>
      <span xml:lang="he">פורסם גם בערוץ</span>
      <span xml:lang="hu">Beküldve továbbá</span>
+     <span xml:lang="id">Juga diposkan di</span>
      <span xml:lang="it">Inserito anche in</span>
      <span xml:lang="ja">別の投稿先</span>
      <span xml:lang="lt">Taip pat paskelbė</span>
@@ -448,7 +455,7 @@
      <span xml:lang="pt">Também publicado em</span>
      <span xml:lang="pt_BR">Também publicado em</span>
      <span xml:lang="ro">Postat și în</span>
-     <span xml:lang="ru">Также размещён в</span>
+     <span xml:lang="ru">Доступно в</span>
      <span xml:lang="sk">Tiež poslané v</span>
      <span xml:lang="sq">Postuar edhe te</span>
      <span xml:lang="sv">Även postad i</span>
@@ -482,6 +489,7 @@
      <span xml:lang="gl">Creador</span>
      <span xml:lang="he">יוצר</span>
      <span xml:lang="hu">Létrehozó</span>
+     <span xml:lang="id">Pembuat</span>
      <span xml:lang="it">Creatore</span>
      <span xml:lang="ja">作者</span>
      <span xml:lang="lt">Sukūrė</span>
@@ -491,7 +499,7 @@
      <span xml:lang="pt">Criador</span>
      <span xml:lang="pt_BR">Criador</span>
      <span xml:lang="ro">Realizat de</span>
-     <span xml:lang="ru">Создатель</span>
+     <span xml:lang="ru">Создал</span>
      <span xml:lang="sk">Tvorca</span>
      <span xml:lang="sq">Krijues</span>
      <span xml:lang="sv">Skapare</span>
@@ -504,7 +512,42 @@
      </span></b>
    </td>
  </tr>
-</xsl:if>  
+</xsl:if>
+
+<xsl:if test="attributes/attribute[ @name = 'point' ]">
+ <xsl:variable select="substring-before(attributes/attribute[ @name = 'point' ],' ')" name="lat"/>
+ <xsl:variable select="substring-after(attributes/attribute[ @name = 'point' ],' ')" name="lng"/>
+ <tr>
+   <td valign="top" class='point'>
+     <span>Coordinates</span>
+     <span xml:lang="de">Koordinaten</span>
+     <span xml:lang="fi">Koordinaatit</span>
+     <span xml:lang="fr">Coordonnées</span>
+     <span xml:lang="it">Coordinate</span>
+     <span xml:lang="sv">Koordinerar</span>
+     <span xml:lang="tr">Koordinatlar</span>
+     <span xml:lang="uk">Координати</span>
+     <span xml:lang="vi">Tọa độ</span>
+     <b><span class='point'><xsl:value-of select="$lat"/>, <xsl:value-of select="$lng"/></span></b>
+   </td>
+ </tr>
+  <tr>
+   <td valign="top" class='point'>
+     <span>Map</span>
+     <span xml:lang="de">Karte</span>
+     <span xml:lang="fi">Kartta</span>
+     <span xml:lang="fr">Carte</span>
+     <span xml:lang="it">Mappa</span>
+     <span xml:lang="sv">Karta</span>
+     <span xml:lang="tr">Harita</span>
+     <span xml:lang="uk">Карта</span>
+     <span xml:lang="vi">Bản đồ</span>
+     <b><span class='point'>
+     <a href="https://www.openstreetmap.org/?mlat={$lat}&amp;mlon={$lng}#map=12/{$lat}/{$lng}">OpenStreeMap</a>
+     </span></b>
+   </td>
+ </tr>
+</xsl:if>
 
 </table> 
 
@@ -515,36 +558,6 @@
 
 <div id="shading" class="{$shading}">
 <div class='content'>
-  
-  <xsl:if test="attributes/attribute[ @name = 'point' ]">
-  	<p style="width:400px;height:200px;float:right; border: 1px solid #000;" id="mapdiv"/>
-  </xsl:if>
-  
-  
-  <xsl:if test="attributes/attribute[ @name = 'point' ]">  
-	  <script src="http://www.openlayers.org/api/OpenLayers.js"/>
-	  <script type="text/javascript">
-		  <![CDATA[var lat=]]><xsl:value-of select="substring-before(attributes/attribute[ @name = 'point' ],' ')"/><![CDATA[
-		  var lon=]]><xsl:value-of select="substring-after(attributes/attribute[ @name = 'point' ],' ')"/>
-		  var zoom=9
-
-		  var map;
-        	  function load() {
-			map = new OpenLayers.Map("mapdiv");
-			map.addLayer(new OpenLayers.Layer.OSM());
-			var lonLat = new OpenLayers.LonLat(lon,lat)
-			.transform(
-				new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-				map.getProjectionObject() // to Spherical Mercator Projection
-			);
-			var markers = new OpenLayers.Layer.Markers("Markers");
-			map.addLayer(markers);
-			markers.addMarker(new OpenLayers.Marker(lonLat));
-			map.setCenter (lonLat, zoom);
-        	  }
-	  </script>
-  </xsl:if>
-
   
   <p dir="{$txtDirection}">
     
@@ -588,6 +601,7 @@
 	   <span xml:lang="gl">Comentarios</span>
 	   <span xml:lang="he">תגובות‮</span>
 	   <span xml:lang="hu">Hozzászólások</span>
+	   <span xml:lang="id">Komentar</span>
 	   <span xml:lang="it">Commenti</span>
 	   <span xml:lang="ja">コメント</span>
 	   <span xml:lang="lt">Komentarai</span>
@@ -619,13 +633,14 @@
 	      <span xml:lang="da">Opdaterer ...</span>
 	      <span xml:lang="de">Aktualisiere...</span>
 	      <span xml:lang="el">Ενημέρωση...</span>
-	      <span xml:lang="es">Actualizando...</span>
+	      <span xml:lang="es">Actualizando…</span>
 	      <span xml:lang="eu">Eguneratzen...</span>
 	      <span xml:lang="fi">Päivitetään...</span>
-	      <span xml:lang="fr">Mise à jour …</span>
+	      <span xml:lang="fr">Mise à jour…</span>
 	      <span xml:lang="gl">Actualizando...</span>
 	      <span xml:lang="he">מעדכן כעת…</span>
 	      <span xml:lang="hu">Frissítés…</span>
+	      <span xml:lang="id">Memerbarui...</span>
 	      <span xml:lang="it">Aggiornamento...</span>
 	      <span xml:lang="ja">更新中...</span>
 	      <span xml:lang="lt">Atnaujinama...</span>
@@ -637,11 +652,11 @@
 	      <span xml:lang="ro">În curs de actualizare...</span>
 	      <span xml:lang="ru">Обновление...</span>
 	      <span xml:lang="sk">Aktualizuje sa...</span>
-	      <span xml:lang="sq">Po përditësohet...</span>
+	      <span xml:lang="sq">Po përditësohet…</span>
 	      <span xml:lang="sv">Uppdaterar...</span>
 	      <span xml:lang="tr">Güncelleniyor...</span>
 	      <span xml:lang="uk">Оновлення…</span>
-	      <span xml:lang="vi">Đang cập nhật...</span>
+	      <span xml:lang="vi">Đang cập nhật…</span>
 	      <span xml:lang="zh_CN">正在更新...</span>
 	    </span>)
 	</xsl:if>     
@@ -670,32 +685,6 @@
 </div> 
 </div> 
 
-
-<xsl:if test="attributes/attribute[ @name = 'point' ]">  
-	<script src="http://www.openlayers.org/api/OpenLayers.js"/>
-	<script type="text/javascript">
-		  <![CDATA[var lat=]]><xsl:value-of select="substring-before(attributes/attribute[ @name = 'point' ],' ')"/><![CDATA[
-		  var lon=]]><xsl:value-of select="substring-after(attributes/attribute[ @name = 'point' ],' ')"/>
-		  var zoom=9
-
-
-		  var map;
-        	  function load() {
-			map = new OpenLayers.Map("mapdiv");
-			map.addLayer(new OpenLayers.Layer.OSM());
-			var lonLat = new OpenLayers.LonLat(lon,lat)
-			.transform(
-				new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-				map.getProjectionObject() // to Spherical Mercator Projection
-			);
-			var markers = new OpenLayers.Layer.Markers("Markers");
-			map.addLayer(markers);
-			markers.addMarker(new OpenLayers.Marker(lonLat));
-			map.setCenter (lonLat, zoom);
-        	  }
-	</script>
-</xsl:if>
-
 </xsl:template>
 
 
@@ -716,8 +705,9 @@
   <span xml:lang="fi">Lohko</span>
   <span xml:lang="fr">Section</span>
   <span xml:lang="gl">Sección</span>
-  <span xml:lang="he">סעיף</span>
+  <span xml:lang="he">פלג</span>
   <span xml:lang="hu">Szakasz</span>
+  <span xml:lang="id">Bagian</span>
   <span xml:lang="it">Sezione</span>
   <span xml:lang="ja">セクション</span>
   <span xml:lang="lt">Sekcija</span>
@@ -750,8 +740,9 @@
   <span xml:lang="fi">Osasto</span>
   <span xml:lang="fr">Département</span>
   <span xml:lang="gl">Departamento</span>
-  <span xml:lang="he">מחלקה</span>
+  <span xml:lang="he">אגף</span>
   <span xml:lang="hu">Részleg</span>
+  <span xml:lang="id">Departemen</span>
   <span xml:lang="it">Reparto</span>
   <span xml:lang="ja">部門</span>
   <span xml:lang="lt">Padalinys</span>

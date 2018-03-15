@@ -679,7 +679,7 @@ libliui_a-liferea_shell.o: liferea_shell.c /usr/include/stdc-predef.h \
  ../../src/node.h ../../src/update.h ../../src/debug.h ../../src/export.h \
  ../../src/feedlist.h ../../src/htmlview.h ../../src/ui/itemview.h \
  ../../src/item.h ../../src/itemset.h ../../src/ui/liferea_htmlview.h \
- ../../src/ui/liferea_htmlview.h ../../src/item_history.h \
+ ../../src/net.h ../../src/ui/liferea_htmlview.h ../../src/item_history.h \
  ../../src/itemlist.h ../../src/item_loader.h ../../src/net_monitor.h \
  ../../src/plugins_engine.h \
  /usr/include/libpeas-1.0/libpeas/peas-engine.h ../../src/render.h \
@@ -691,7 +691,7 @@ libliui_a-liferea_shell.o: liferea_shell.c /usr/include/stdc-predef.h \
  ../../src/node_view.h ../../src/ui/liferea_dialog.h \
  ../../src/ui/liferea_shell_activatable.h \
  ../../src/ui/preferences_dialog.h ../../src/ui/search_dialog.h \
- ../../src/ui/ui_common.h ../../src/ui/ui_tray.h ../../src/ui/ui_update.h
+ ../../src/ui/ui_common.h ../../src/ui/ui_update.h
 
 /usr/include/stdc-predef.h:
 
@@ -2277,6 +2277,8 @@ libliui_a-liferea_shell.o: liferea_shell.c /usr/include/stdc-predef.h \
 
 ../../src/ui/liferea_htmlview.h:
 
+../../src/net.h:
+
 ../../src/ui/liferea_htmlview.h:
 
 ../../src/item_history.h:
@@ -2326,7 +2328,5 @@ libliui_a-liferea_shell.o: liferea_shell.c /usr/include/stdc-predef.h \
 ../../src/ui/search_dialog.h:
 
 ../../src/ui/ui_common.h:
-
-../../src/ui/ui_tray.h:
 
 ../../src/ui/ui_update.h:

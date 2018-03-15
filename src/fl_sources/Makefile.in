@@ -107,25 +107,20 @@ am__v_AR_1 =
 libliflsources_a_AR = $(AR) $(ARFLAGS)
 libliflsources_a_LIBADD =
 am_libliflsources_a_OBJECTS = libliflsources_a-node_source.$(OBJEXT) \
-	libliflsources_a-aol_source.$(OBJEXT) \
-	libliflsources_a-aol_source_edit.$(OBJEXT) \
-	libliflsources_a-aol_source_feed.$(OBJEXT) \
-	libliflsources_a-aol_source_opml.$(OBJEXT) \
+	libliflsources_a-node_source_activatable.$(OBJEXT) \
 	libliflsources_a-default_source.$(OBJEXT) \
 	libliflsources_a-dummy_source.$(OBJEXT) \
+	libliflsources_a-google_reader_api_edit.$(OBJEXT) \
 	libliflsources_a-google_source.$(OBJEXT) \
 	libliflsources_a-inoreader_source.$(OBJEXT) \
-	libliflsources_a-inoreader_source_edit.$(OBJEXT) \
 	libliflsources_a-inoreader_source_feed.$(OBJEXT) \
 	libliflsources_a-inoreader_source_feed_list.$(OBJEXT) \
 	libliflsources_a-json_api_mapper.$(OBJEXT) \
 	libliflsources_a-opml_source.$(OBJEXT) \
 	libliflsources_a-reedah_source.$(OBJEXT) \
-	libliflsources_a-reedah_source_edit.$(OBJEXT) \
 	libliflsources_a-reedah_source_feed.$(OBJEXT) \
 	libliflsources_a-reedah_source_feed_list.$(OBJEXT) \
 	libliflsources_a-theoldreader_source.$(OBJEXT) \
-	libliflsources_a-theoldreader_source_edit.$(OBJEXT) \
 	libliflsources_a-theoldreader_source_feed.$(OBJEXT) \
 	libliflsources_a-theoldreader_source_feed_list.$(OBJEXT) \
 	libliflsources_a-ttrss_source.$(OBJEXT) \
@@ -259,10 +254,6 @@ INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
-LIBINDICATE_CFLAGS = @LIBINDICATE_CFLAGS@
-LIBINDICATE_LIBS = @LIBINDICATE_LIBS@
-LIBNOTIFY_CFLAGS = @LIBNOTIFY_CFLAGS@
-LIBNOTIFY_LIBS = @LIBNOTIFY_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
@@ -307,6 +298,8 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
+WEB_EXTENSION_CFLAGS = @WEB_EXTENSION_CFLAGS@
+WEB_EXTENSION_LIBS = @WEB_EXTENSION_LIBS@
 XGETTEXT = @XGETTEXT@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
@@ -372,25 +365,21 @@ AM_CPPFLAGS = \
 
 noinst_LIBRARIES = libliflsources.a
 libliflsources_a_SOURCES = node_source.c node_source.h \
-                           aol_source.c aol_source.h \
-			   aol_source_edit.c aol_source_edit.h \
-			   aol_source_feed.c \
-			   aol_source_opml.c aol_source_opml.h \
+                           node_source_activatable.c node_source_activatable.h \
                            default_source.c default_source.h \
                            dummy_source.c dummy_source.h \
+                           google_reader_api_edit.c google_reader_api_edit.h \
+                           google_reader_api.h \
                            google_source.c google_source.h \
                            inoreader_source.c inoreader_source.h \
-			   inoreader_source_edit.c inoreader_source_edit.h \
 			   inoreader_source_feed.c \
 			   inoreader_source_feed_list.c inoreader_source_feed_list.h \
                            json_api_mapper.c json_api_mapper.h \
                            opml_source.c opml_source.h \
                            reedah_source.c reedah_source.h \
-			   reedah_source_edit.c reedah_source_edit.h \
 			   reedah_source_feed.c \
 			   reedah_source_feed_list.c reedah_source_feed_list.h \
                            theoldreader_source.c theoldreader_source.h \
-			   theoldreader_source_edit.c theoldreader_source_edit.h \
 			   theoldreader_source_feed.c \
 			   theoldreader_source_feed_list.c theoldreader_source_feed_list.h \
 			   ttrss_source.c ttrss_source.h  \
@@ -446,26 +435,21 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-aol_source.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-aol_source_edit.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-aol_source_feed.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-aol_source_opml.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-default_source.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-dummy_source.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-google_reader_api_edit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-google_source.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-inoreader_source.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-inoreader_source_edit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-inoreader_source_feed.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-inoreader_source_feed_list.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-json_api_mapper.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-node_source.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-node_source_activatable.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-opml_source.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-reedah_source.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-reedah_source_edit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-reedah_source_feed.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-reedah_source_feed_list.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-theoldreader_source.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-theoldreader_source_edit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-theoldreader_source_feed.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-theoldreader_source_feed_list.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libliflsources_a-ttrss_source.Po@am__quote@
@@ -507,61 +491,19 @@ libliflsources_a-node_source.obj: node_source.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-node_source.obj `if test -f 'node_source.c'; then $(CYGPATH_W) 'node_source.c'; else $(CYGPATH_W) '$(srcdir)/node_source.c'; fi`
 
-libliflsources_a-aol_source.o: aol_source.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-aol_source.o -MD -MP -MF $(DEPDIR)/libliflsources_a-aol_source.Tpo -c -o libliflsources_a-aol_source.o `test -f 'aol_source.c' || echo '$(srcdir)/'`aol_source.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-aol_source.Tpo $(DEPDIR)/libliflsources_a-aol_source.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='aol_source.c' object='libliflsources_a-aol_source.o' libtool=no @AMDEPBACKSLASH@
+libliflsources_a-node_source_activatable.o: node_source_activatable.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-node_source_activatable.o -MD -MP -MF $(DEPDIR)/libliflsources_a-node_source_activatable.Tpo -c -o libliflsources_a-node_source_activatable.o `test -f 'node_source_activatable.c' || echo '$(srcdir)/'`node_source_activatable.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-node_source_activatable.Tpo $(DEPDIR)/libliflsources_a-node_source_activatable.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='node_source_activatable.c' object='libliflsources_a-node_source_activatable.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-aol_source.o `test -f 'aol_source.c' || echo '$(srcdir)/'`aol_source.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-node_source_activatable.o `test -f 'node_source_activatable.c' || echo '$(srcdir)/'`node_source_activatable.c
 
-libliflsources_a-aol_source.obj: aol_source.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-aol_source.obj -MD -MP -MF $(DEPDIR)/libliflsources_a-aol_source.Tpo -c -o libliflsources_a-aol_source.obj `if test -f 'aol_source.c'; then $(CYGPATH_W) 'aol_source.c'; else $(CYGPATH_W) '$(srcdir)/aol_source.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-aol_source.Tpo $(DEPDIR)/libliflsources_a-aol_source.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='aol_source.c' object='libliflsources_a-aol_source.obj' libtool=no @AMDEPBACKSLASH@
+libliflsources_a-node_source_activatable.obj: node_source_activatable.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-node_source_activatable.obj -MD -MP -MF $(DEPDIR)/libliflsources_a-node_source_activatable.Tpo -c -o libliflsources_a-node_source_activatable.obj `if test -f 'node_source_activatable.c'; then $(CYGPATH_W) 'node_source_activatable.c'; else $(CYGPATH_W) '$(srcdir)/node_source_activatable.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-node_source_activatable.Tpo $(DEPDIR)/libliflsources_a-node_source_activatable.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='node_source_activatable.c' object='libliflsources_a-node_source_activatable.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-aol_source.obj `if test -f 'aol_source.c'; then $(CYGPATH_W) 'aol_source.c'; else $(CYGPATH_W) '$(srcdir)/aol_source.c'; fi`
-
-libliflsources_a-aol_source_edit.o: aol_source_edit.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-aol_source_edit.o -MD -MP -MF $(DEPDIR)/libliflsources_a-aol_source_edit.Tpo -c -o libliflsources_a-aol_source_edit.o `test -f 'aol_source_edit.c' || echo '$(srcdir)/'`aol_source_edit.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-aol_source_edit.Tpo $(DEPDIR)/libliflsources_a-aol_source_edit.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='aol_source_edit.c' object='libliflsources_a-aol_source_edit.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-aol_source_edit.o `test -f 'aol_source_edit.c' || echo '$(srcdir)/'`aol_source_edit.c
-
-libliflsources_a-aol_source_edit.obj: aol_source_edit.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-aol_source_edit.obj -MD -MP -MF $(DEPDIR)/libliflsources_a-aol_source_edit.Tpo -c -o libliflsources_a-aol_source_edit.obj `if test -f 'aol_source_edit.c'; then $(CYGPATH_W) 'aol_source_edit.c'; else $(CYGPATH_W) '$(srcdir)/aol_source_edit.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-aol_source_edit.Tpo $(DEPDIR)/libliflsources_a-aol_source_edit.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='aol_source_edit.c' object='libliflsources_a-aol_source_edit.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-aol_source_edit.obj `if test -f 'aol_source_edit.c'; then $(CYGPATH_W) 'aol_source_edit.c'; else $(CYGPATH_W) '$(srcdir)/aol_source_edit.c'; fi`
-
-libliflsources_a-aol_source_feed.o: aol_source_feed.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-aol_source_feed.o -MD -MP -MF $(DEPDIR)/libliflsources_a-aol_source_feed.Tpo -c -o libliflsources_a-aol_source_feed.o `test -f 'aol_source_feed.c' || echo '$(srcdir)/'`aol_source_feed.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-aol_source_feed.Tpo $(DEPDIR)/libliflsources_a-aol_source_feed.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='aol_source_feed.c' object='libliflsources_a-aol_source_feed.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-aol_source_feed.o `test -f 'aol_source_feed.c' || echo '$(srcdir)/'`aol_source_feed.c
-
-libliflsources_a-aol_source_feed.obj: aol_source_feed.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-aol_source_feed.obj -MD -MP -MF $(DEPDIR)/libliflsources_a-aol_source_feed.Tpo -c -o libliflsources_a-aol_source_feed.obj `if test -f 'aol_source_feed.c'; then $(CYGPATH_W) 'aol_source_feed.c'; else $(CYGPATH_W) '$(srcdir)/aol_source_feed.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-aol_source_feed.Tpo $(DEPDIR)/libliflsources_a-aol_source_feed.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='aol_source_feed.c' object='libliflsources_a-aol_source_feed.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-aol_source_feed.obj `if test -f 'aol_source_feed.c'; then $(CYGPATH_W) 'aol_source_feed.c'; else $(CYGPATH_W) '$(srcdir)/aol_source_feed.c'; fi`
-
-libliflsources_a-aol_source_opml.o: aol_source_opml.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-aol_source_opml.o -MD -MP -MF $(DEPDIR)/libliflsources_a-aol_source_opml.Tpo -c -o libliflsources_a-aol_source_opml.o `test -f 'aol_source_opml.c' || echo '$(srcdir)/'`aol_source_opml.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-aol_source_opml.Tpo $(DEPDIR)/libliflsources_a-aol_source_opml.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='aol_source_opml.c' object='libliflsources_a-aol_source_opml.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-aol_source_opml.o `test -f 'aol_source_opml.c' || echo '$(srcdir)/'`aol_source_opml.c
-
-libliflsources_a-aol_source_opml.obj: aol_source_opml.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-aol_source_opml.obj -MD -MP -MF $(DEPDIR)/libliflsources_a-aol_source_opml.Tpo -c -o libliflsources_a-aol_source_opml.obj `if test -f 'aol_source_opml.c'; then $(CYGPATH_W) 'aol_source_opml.c'; else $(CYGPATH_W) '$(srcdir)/aol_source_opml.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-aol_source_opml.Tpo $(DEPDIR)/libliflsources_a-aol_source_opml.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='aol_source_opml.c' object='libliflsources_a-aol_source_opml.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-aol_source_opml.obj `if test -f 'aol_source_opml.c'; then $(CYGPATH_W) 'aol_source_opml.c'; else $(CYGPATH_W) '$(srcdir)/aol_source_opml.c'; fi`
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-node_source_activatable.obj `if test -f 'node_source_activatable.c'; then $(CYGPATH_W) 'node_source_activatable.c'; else $(CYGPATH_W) '$(srcdir)/node_source_activatable.c'; fi`
 
 libliflsources_a-default_source.o: default_source.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-default_source.o -MD -MP -MF $(DEPDIR)/libliflsources_a-default_source.Tpo -c -o libliflsources_a-default_source.o `test -f 'default_source.c' || echo '$(srcdir)/'`default_source.c
@@ -591,6 +533,20 @@ libliflsources_a-dummy_source.obj: dummy_source.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-dummy_source.obj `if test -f 'dummy_source.c'; then $(CYGPATH_W) 'dummy_source.c'; else $(CYGPATH_W) '$(srcdir)/dummy_source.c'; fi`
 
+libliflsources_a-google_reader_api_edit.o: google_reader_api_edit.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-google_reader_api_edit.o -MD -MP -MF $(DEPDIR)/libliflsources_a-google_reader_api_edit.Tpo -c -o libliflsources_a-google_reader_api_edit.o `test -f 'google_reader_api_edit.c' || echo '$(srcdir)/'`google_reader_api_edit.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-google_reader_api_edit.Tpo $(DEPDIR)/libliflsources_a-google_reader_api_edit.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='google_reader_api_edit.c' object='libliflsources_a-google_reader_api_edit.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-google_reader_api_edit.o `test -f 'google_reader_api_edit.c' || echo '$(srcdir)/'`google_reader_api_edit.c
+
+libliflsources_a-google_reader_api_edit.obj: google_reader_api_edit.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-google_reader_api_edit.obj -MD -MP -MF $(DEPDIR)/libliflsources_a-google_reader_api_edit.Tpo -c -o libliflsources_a-google_reader_api_edit.obj `if test -f 'google_reader_api_edit.c'; then $(CYGPATH_W) 'google_reader_api_edit.c'; else $(CYGPATH_W) '$(srcdir)/google_reader_api_edit.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-google_reader_api_edit.Tpo $(DEPDIR)/libliflsources_a-google_reader_api_edit.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='google_reader_api_edit.c' object='libliflsources_a-google_reader_api_edit.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-google_reader_api_edit.obj `if test -f 'google_reader_api_edit.c'; then $(CYGPATH_W) 'google_reader_api_edit.c'; else $(CYGPATH_W) '$(srcdir)/google_reader_api_edit.c'; fi`
+
 libliflsources_a-google_source.o: google_source.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-google_source.o -MD -MP -MF $(DEPDIR)/libliflsources_a-google_source.Tpo -c -o libliflsources_a-google_source.o `test -f 'google_source.c' || echo '$(srcdir)/'`google_source.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-google_source.Tpo $(DEPDIR)/libliflsources_a-google_source.Po
@@ -618,20 +574,6 @@ libliflsources_a-inoreader_source.obj: inoreader_source.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='inoreader_source.c' object='libliflsources_a-inoreader_source.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-inoreader_source.obj `if test -f 'inoreader_source.c'; then $(CYGPATH_W) 'inoreader_source.c'; else $(CYGPATH_W) '$(srcdir)/inoreader_source.c'; fi`
-
-libliflsources_a-inoreader_source_edit.o: inoreader_source_edit.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-inoreader_source_edit.o -MD -MP -MF $(DEPDIR)/libliflsources_a-inoreader_source_edit.Tpo -c -o libliflsources_a-inoreader_source_edit.o `test -f 'inoreader_source_edit.c' || echo '$(srcdir)/'`inoreader_source_edit.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-inoreader_source_edit.Tpo $(DEPDIR)/libliflsources_a-inoreader_source_edit.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='inoreader_source_edit.c' object='libliflsources_a-inoreader_source_edit.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-inoreader_source_edit.o `test -f 'inoreader_source_edit.c' || echo '$(srcdir)/'`inoreader_source_edit.c
-
-libliflsources_a-inoreader_source_edit.obj: inoreader_source_edit.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-inoreader_source_edit.obj -MD -MP -MF $(DEPDIR)/libliflsources_a-inoreader_source_edit.Tpo -c -o libliflsources_a-inoreader_source_edit.obj `if test -f 'inoreader_source_edit.c'; then $(CYGPATH_W) 'inoreader_source_edit.c'; else $(CYGPATH_W) '$(srcdir)/inoreader_source_edit.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-inoreader_source_edit.Tpo $(DEPDIR)/libliflsources_a-inoreader_source_edit.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='inoreader_source_edit.c' object='libliflsources_a-inoreader_source_edit.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-inoreader_source_edit.obj `if test -f 'inoreader_source_edit.c'; then $(CYGPATH_W) 'inoreader_source_edit.c'; else $(CYGPATH_W) '$(srcdir)/inoreader_source_edit.c'; fi`
 
 libliflsources_a-inoreader_source_feed.o: inoreader_source_feed.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-inoreader_source_feed.o -MD -MP -MF $(DEPDIR)/libliflsources_a-inoreader_source_feed.Tpo -c -o libliflsources_a-inoreader_source_feed.o `test -f 'inoreader_source_feed.c' || echo '$(srcdir)/'`inoreader_source_feed.c
@@ -703,20 +645,6 @@ libliflsources_a-reedah_source.obj: reedah_source.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-reedah_source.obj `if test -f 'reedah_source.c'; then $(CYGPATH_W) 'reedah_source.c'; else $(CYGPATH_W) '$(srcdir)/reedah_source.c'; fi`
 
-libliflsources_a-reedah_source_edit.o: reedah_source_edit.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-reedah_source_edit.o -MD -MP -MF $(DEPDIR)/libliflsources_a-reedah_source_edit.Tpo -c -o libliflsources_a-reedah_source_edit.o `test -f 'reedah_source_edit.c' || echo '$(srcdir)/'`reedah_source_edit.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-reedah_source_edit.Tpo $(DEPDIR)/libliflsources_a-reedah_source_edit.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='reedah_source_edit.c' object='libliflsources_a-reedah_source_edit.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-reedah_source_edit.o `test -f 'reedah_source_edit.c' || echo '$(srcdir)/'`reedah_source_edit.c
-
-libliflsources_a-reedah_source_edit.obj: reedah_source_edit.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-reedah_source_edit.obj -MD -MP -MF $(DEPDIR)/libliflsources_a-reedah_source_edit.Tpo -c -o libliflsources_a-reedah_source_edit.obj `if test -f 'reedah_source_edit.c'; then $(CYGPATH_W) 'reedah_source_edit.c'; else $(CYGPATH_W) '$(srcdir)/reedah_source_edit.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-reedah_source_edit.Tpo $(DEPDIR)/libliflsources_a-reedah_source_edit.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='reedah_source_edit.c' object='libliflsources_a-reedah_source_edit.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-reedah_source_edit.obj `if test -f 'reedah_source_edit.c'; then $(CYGPATH_W) 'reedah_source_edit.c'; else $(CYGPATH_W) '$(srcdir)/reedah_source_edit.c'; fi`
-
 libliflsources_a-reedah_source_feed.o: reedah_source_feed.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-reedah_source_feed.o -MD -MP -MF $(DEPDIR)/libliflsources_a-reedah_source_feed.Tpo -c -o libliflsources_a-reedah_source_feed.o `test -f 'reedah_source_feed.c' || echo '$(srcdir)/'`reedah_source_feed.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-reedah_source_feed.Tpo $(DEPDIR)/libliflsources_a-reedah_source_feed.Po
@@ -758,20 +686,6 @@ libliflsources_a-theoldreader_source.obj: theoldreader_source.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='theoldreader_source.c' object='libliflsources_a-theoldreader_source.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-theoldreader_source.obj `if test -f 'theoldreader_source.c'; then $(CYGPATH_W) 'theoldreader_source.c'; else $(CYGPATH_W) '$(srcdir)/theoldreader_source.c'; fi`
-
-libliflsources_a-theoldreader_source_edit.o: theoldreader_source_edit.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-theoldreader_source_edit.o -MD -MP -MF $(DEPDIR)/libliflsources_a-theoldreader_source_edit.Tpo -c -o libliflsources_a-theoldreader_source_edit.o `test -f 'theoldreader_source_edit.c' || echo '$(srcdir)/'`theoldreader_source_edit.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-theoldreader_source_edit.Tpo $(DEPDIR)/libliflsources_a-theoldreader_source_edit.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='theoldreader_source_edit.c' object='libliflsources_a-theoldreader_source_edit.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-theoldreader_source_edit.o `test -f 'theoldreader_source_edit.c' || echo '$(srcdir)/'`theoldreader_source_edit.c
-
-libliflsources_a-theoldreader_source_edit.obj: theoldreader_source_edit.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-theoldreader_source_edit.obj -MD -MP -MF $(DEPDIR)/libliflsources_a-theoldreader_source_edit.Tpo -c -o libliflsources_a-theoldreader_source_edit.obj `if test -f 'theoldreader_source_edit.c'; then $(CYGPATH_W) 'theoldreader_source_edit.c'; else $(CYGPATH_W) '$(srcdir)/theoldreader_source_edit.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libliflsources_a-theoldreader_source_edit.Tpo $(DEPDIR)/libliflsources_a-theoldreader_source_edit.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='theoldreader_source_edit.c' object='libliflsources_a-theoldreader_source_edit.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -c -o libliflsources_a-theoldreader_source_edit.obj `if test -f 'theoldreader_source_edit.c'; then $(CYGPATH_W) 'theoldreader_source_edit.c'; else $(CYGPATH_W) '$(srcdir)/theoldreader_source_edit.c'; fi`
 
 libliflsources_a-theoldreader_source_feed.o: theoldreader_source_feed.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libliflsources_a_CFLAGS) $(CFLAGS) -MT libliflsources_a-theoldreader_source_feed.o -MD -MP -MF $(DEPDIR)/libliflsources_a-theoldreader_source_feed.Tpo -c -o libliflsources_a-theoldreader_source_feed.o `test -f 'theoldreader_source_feed.c' || echo '$(srcdir)/'`theoldreader_source_feed.c

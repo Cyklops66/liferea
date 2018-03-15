@@ -2,7 +2,7 @@
  * @file feed_list_node.c  Handling feed list nodes
  * 
  * Copyright (C) 2004-2006 Nathan J. Conrad <t98502@users.sourceforge.net>
- * Copyright (C) 2004-2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2004-2016 Lars Windolf <lars.windolf@gmx.de>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -197,7 +197,7 @@ feed_list_node_add (nodePtr node)
 	g_assert (NULL == feed_list_node_to_iter (node->id));
 
 	/* if parent is NULL we have the root folder and don't create a new row! */
-	iter = (GtkTreeIter *)g_new0 (GtkTreeIter, 1);
+	iter = g_new0 (GtkTreeIter, 1);
 	
 	/* if reduced feedlist, show flat treeview */
 	if (feedlist_reduced_unread)
@@ -313,20 +313,18 @@ feed_list_node_update (const gchar *nodeId)
 	if (node->unreadCount == 0 && (labeltype & NODE_CAPABILITY_SHOW_UNREAD_COUNT))
 		labeltype &= ~NODE_CAPABILITY_SHOW_UNREAD_COUNT;
 
+	label = g_markup_escape_text (node_get_title (node), -1);
 	switch (labeltype) {
 		case NODE_CAPABILITY_SHOW_UNREAD_COUNT |
 		     NODE_CAPABILITY_SHOW_ITEM_COUNT:
 	     		/* treat like show unread count */
 		case NODE_CAPABILITY_SHOW_UNREAD_COUNT:
-			label = g_markup_printf_escaped ("<span weight='bold'>%s</span>", node_get_title (node));
 			count = g_strdup_printf ("<span weight='bold' %s> %u </span>", countColor?countColor:"", node->unreadCount);
 			break;
 		case NODE_CAPABILITY_SHOW_ITEM_COUNT:
-			label = g_markup_printf_escaped ("%s", node_get_title (node));
 			count = g_strdup_printf ("<span weight='bold' %s> %u </span>", countColor?countColor:"", node->itemCount);
 		     	break;
 		default:
-			label = g_markup_printf_escaped ("%s", node_get_title (node));
 			break;
 	}
 
@@ -376,11 +374,56 @@ feed_list_node_rename (nodePtr node)
 	GtkWidget	*nameentry;
 	
 	if (!nodenamedialog || !G_IS_OBJECT (nodenamedialog))
-		nodenamedialog = liferea_dialog_new (NULL, "nodenamedialog");
+		nodenamedialog = liferea_dialog_new ("rename_node");
 
 	nameentry = liferea_dialog_lookup (nodenamedialog, "nameentry");
 	gtk_entry_set_text (GTK_ENTRY (nameentry), node_get_title (node));
 	g_signal_connect (G_OBJECT (nodenamedialog), "response", 
 	                  G_CALLBACK (on_nodenamedialog_response), node);
 	gtk_widget_show (nodenamedialog);
+}
+
+/* node deletion dialog */
+
+static void
+feed_list_node_remove_cb (GtkDialog *dialog, gint response_id, gpointer user_data)
+{	
+	if (GTK_RESPONSE_ACCEPT == response_id)
+		feedlist_remove_node ((nodePtr)user_data);
+
+	gtk_widget_destroy (GTK_WIDGET (dialog));
+}
+
+void
+feed_list_node_remove (nodePtr node)
+{
+	GtkWidget	*dialog;
+	GtkWindow	*mainwindow;
+	gchar		*text;
+	
+	g_assert (node == feedlist_get_selected ());
+
+	liferea_shell_set_status_bar ("%s \"%s\"", _("Deleting entry"), node_get_title (node));
+	text = g_strdup_printf (IS_FOLDER (node)?_("Are you sure that you want to delete \"%s\" and its contents?"):_("Are you sure that you want to delete \"%s\"?"), node_get_title (node));
+
+	mainwindow = GTK_WINDOW (liferea_shell_get_window ());
+	dialog = gtk_message_dialog_new (mainwindow,
+	                                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+	                                 GTK_MESSAGE_QUESTION,
+	                                 GTK_BUTTONS_NONE,
+	                                 "%s", text);
+	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+	                        _("_Cancel"), GTK_RESPONSE_CANCEL,
+	                        _("_Delete"), GTK_RESPONSE_ACCEPT,
+	                        NULL);
+	gtk_window_set_title (GTK_WINDOW (dialog), _("Deletion Confirmation"));
+	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), mainwindow);
+
+	g_free (text);
+	
+	gtk_widget_show_all (dialog);
+
+	g_signal_connect (G_OBJECT (dialog), "response",
+	                  G_CALLBACK (feed_list_node_remove_cb), node);
 }

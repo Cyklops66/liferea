@@ -652,8 +652,8 @@ htmlview.o: htmlview.c /usr/include/stdc-predef.h /usr/include/string.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  /usr/include/gtk-3.0/gtk/gtk-autocleanups.h subscription_type.h \
  subscription.h update.h folder.h htmlview.h ui/itemview.h item.h \
- itemset.h node.h ui/liferea_htmlview.h ui/liferea_htmlview.h itemlist.h \
- item_loader.h render.h vfolder.h
+ itemset.h node.h ui/liferea_htmlview.h net.h update.h \
+ ui/liferea_htmlview.h itemlist.h item_loader.h render.h vfolder.h
 
 /usr/include/stdc-predef.h:
 
@@ -2188,6 +2188,10 @@ itemset.h:
 node.h:
 
 ui/liferea_htmlview.h:
+
+net.h:
+
+update.h:
 
 ui/liferea_htmlview.h:
 

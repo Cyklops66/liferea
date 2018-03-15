@@ -91,8 +91,6 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 bin_PROGRAMS = liferea$(EXEEXT)
-@WITH_LIBNOTIFY_TRUE@am__append_1 = notification/libnotify.a $(LIBNOTIFY_LIBS)
-@WITH_LIBINDICATE_TRUE@am__append_2 = $(LIBINDICATE_LIBS)
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -109,29 +107,25 @@ PROGRAMS = $(bin_PROGRAMS)
 am_liferea_OBJECTS = auth.$(OBJEXT) auth_activatable.$(OBJEXT) \
 	browser.$(OBJEXT) browser_history.$(OBJEXT) comments.$(OBJEXT) \
 	common.$(OBJEXT) conf.$(OBJEXT) date.$(OBJEXT) db.$(OBJEXT) \
-	dbus.$(OBJEXT) debug.$(OBJEXT) e-date.$(OBJEXT) \
-	enclosure.$(OBJEXT) export.$(OBJEXT) favicon.$(OBJEXT) \
-	feed.$(OBJEXT) feed_parser.$(OBJEXT) feedlist.$(OBJEXT) \
-	folder.$(OBJEXT) html.$(OBJEXT) htmlview.$(OBJEXT) \
-	item.$(OBJEXT) item_history.$(OBJEXT) item_loader.$(OBJEXT) \
+	dbus.$(OBJEXT) debug.$(OBJEXT) enclosure.$(OBJEXT) \
+	export.$(OBJEXT) favicon.$(OBJEXT) feed.$(OBJEXT) \
+	feed_parser.$(OBJEXT) feedlist.$(OBJEXT) folder.$(OBJEXT) \
+	html.$(OBJEXT) htmlview.$(OBJEXT) item.$(OBJEXT) \
+	item_history.$(OBJEXT) item_loader.$(OBJEXT) \
 	item_state.$(OBJEXT) itemset.$(OBJEXT) itemlist.$(OBJEXT) \
-	json.$(OBJEXT) metadata.$(OBJEXT) migrate.$(OBJEXT) \
-	net.$(OBJEXT) net_monitor.$(OBJEXT) newsbin.$(OBJEXT) \
-	node.$(OBJEXT) node_type.$(OBJEXT) notification.$(OBJEXT) \
-	plugins_engine.$(OBJEXT) render.$(OBJEXT) rule.$(OBJEXT) \
-	social.$(OBJEXT) subscription.$(OBJEXT) update.$(OBJEXT) \
-	main.$(OBJEXT) vfolder.$(OBJEXT) vfolder_loader.$(OBJEXT) \
-	xml.$(OBJEXT)
+	json.$(OBJEXT) liferea_application.$(OBJEXT) \
+	metadata.$(OBJEXT) migrate.$(OBJEXT) net.$(OBJEXT) \
+	net_monitor.$(OBJEXT) newsbin.$(OBJEXT) node.$(OBJEXT) \
+	node_type.$(OBJEXT) plugins_engine.$(OBJEXT) render.$(OBJEXT) \
+	rule.$(OBJEXT) social.$(OBJEXT) subscription.$(OBJEXT) \
+	update.$(OBJEXT) main.$(OBJEXT) vfolder.$(OBJEXT) \
+	vfolder_loader.$(OBJEXT) xml.$(OBJEXT)
 liferea_OBJECTS = $(am_liferea_OBJECTS)
 am__DEPENDENCIES_1 =
-@WITH_LIBNOTIFY_TRUE@am__DEPENDENCIES_2 = notification/libnotify.a \
-@WITH_LIBNOTIFY_TRUE@	$(am__DEPENDENCIES_1)
-@WITH_LIBINDICATE_TRUE@am__DEPENDENCIES_3 = $(am__DEPENDENCIES_1)
 liferea_DEPENDENCIES = parsers/libliparsers.a \
 	fl_sources/libliflsources.a ui/libliui.a webkit/libwebkit.a \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
-	$(am__DEPENDENCIES_3)
+	$(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -331,10 +325,6 @@ INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
-LIBINDICATE_CFLAGS = @LIBINDICATE_CFLAGS@
-LIBINDICATE_LIBS = @LIBINDICATE_LIBS@
-LIBNOTIFY_CFLAGS = @LIBNOTIFY_CFLAGS@
-LIBNOTIFY_LIBS = @LIBNOTIFY_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
@@ -379,6 +369,8 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
+WEB_EXTENSION_CFLAGS = @WEB_EXTENSION_CFLAGS@
+WEB_EXTENSION_LIBS = @WEB_EXTENSION_LIBS@
 XGETTEXT = @XGETTEXT@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
@@ -435,7 +427,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = parsers notification ui fl_sources webkit .
+SUBDIRS = parsers ui fl_sources webkit tests .
 AM_CPPFLAGS = \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
 	-DPACKAGE_LIB_DIR=\""$(pkglibdir)"\" \
@@ -458,7 +450,6 @@ liferea_SOURCES = \
 	db.c db.h \
 	dbus.c dbus.h \
 	debug.c debug.h \
-	e-date.c e-date.h \
 	enclosure.c enclosure.h \
 	export.c export.h \
 	favicon.c favicon.h \
@@ -475,6 +466,7 @@ liferea_SOURCES = \
 	itemset.c itemset.h \
 	itemlist.c itemlist.h \
 	json.c json.h \
+	liferea_application.c liferea_application.h \
 	metadata.c metadata.h \
 	migrate.c migrate.h \
 	net.c net.h \
@@ -483,7 +475,6 @@ liferea_SOURCES = \
 	node.c node.h \
 	node_type.c node_type.h \
 	node_view.h \
-	notification.c notification.h \
 	plugins_engine.c plugins_engine.h \
 	render.c render.h \
 	rule.c rule.h \
@@ -496,10 +487,16 @@ liferea_SOURCES = \
 	vfolder_loader.c vfolder_loader.h \
 	xml.c xml.h
 
-liferea_LDADD = parsers/libliparsers.a fl_sources/libliflsources.a \
-	ui/libliui.a webkit/libwebkit.a $(PACKAGE_LIBS) $(INTLLIBS) \
-	$(WEBKIT_LIBS) $(INTROSPECTION_LIBS) $(am__append_1) \
-	$(am__append_2)
+liferea_LDADD = parsers/libliparsers.a \
+		fl_sources/libliflsources.a \
+		ui/libliui.a \
+		webkit/libwebkit.a \
+		$(PACKAGE_LIBS) \
+		$(INTLLIBS) \
+		$(WEBKIT_LIBS) \
+		$(INTROSPECTION_LIBS) \
+		-lm
+
 EXTRA_DIST = $(srcdir)/liferea-add-feed.in
 DISTCLEANFILES = $(srcdir)/liferea-add-feed
 AM_INSTALLCHECK_STD_OPTIONS_EXEMPT = liferea-add-feed
@@ -507,25 +504,39 @@ INTROSPECTION_GIRS = Liferea-3.0.gir
 INTROSPECTION_SCANNER_ARGS = -I$(top_srcdir)/src --warn-all --accept-unprefixed --identifier-prefix=Liferea --verbose
 Liferea_3_0_gir_NAMESPACE = Liferea
 Liferea_3_0_gir_VERSION = 3.0
-Liferea_3_0_gir_PROGRAM = $(builddir)/liferea
+Liferea_3_0_gir_PROGRAM = $(builddir)/liferea$(EXEEXT)
 Liferea_3_0_gir_FILES = \
 	auth.c auth.h \
 	auth_activatable.c auth_activatable.h \
 	enclosure.h \
+	feedlist.c feedlist.h \
+	item.h \
+	itemlist.c itemlist.h \
+	itemset.c itemset.h \
+	node.h node.c \
+	node_view.h \
+	social.c social.h \
+	subscription_type.h \
+	ui/browser_tabs.c ui/browser_tabs.h \
+	ui/icons.c ui/icons.h \
 	ui/itemview.c ui/itemview.h \
+	ui/item_list_view.c ui/item_list_view.h \
+	ui/liferea_htmlview.c ui/liferea_htmlview.h \
 	ui/liferea_shell.c ui/liferea_shell.h \
 	ui/liferea_shell_activatable.c ui/liferea_shell_activatable.h \
 	ui/media_player.c ui/media_player.h \
-	ui/media_player_activatable.c ui/media_player_activatable.h
+	ui/media_player_activatable.c ui/media_player_activatable.h \
+	fl_sources/node_source.c fl_sources/node_source.h \
+	fl_sources/node_source_activatable.c fl_sources/node_source_activatable.h
 
-Liferea_3_0_gir_INCLUDES = Gtk-3.0 
-girdir = $(datadir)/liferea/gir-1.0
-gir_DATA = $(INTROSPECTION_GIRS)
-typelibdir = $(libdir)/liferea/girepository-1.0
-typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
-CLEANFILES = \
-	$(gir_DATA)	\
-	$(typelib_DATA)
+Liferea_3_0_gir_INCLUDES = Gtk-3.0 libxml2-2.0
+@HAVE_INTROSPECTION_TRUE@girdir = $(datadir)/liferea/gir-1.0
+@HAVE_INTROSPECTION_TRUE@gir_DATA = $(INTROSPECTION_GIRS)
+@HAVE_INTROSPECTION_TRUE@typelibdir = $(libdir)/liferea/girepository-1.0
+@HAVE_INTROSPECTION_TRUE@typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
+@HAVE_INTROSPECTION_TRUE@CLEANFILES = \
+@HAVE_INTROSPECTION_TRUE@	$(gir_DATA)	\
+@HAVE_INTROSPECTION_TRUE@	$(typelib_DATA)
 
 all: all-recursive
 
@@ -699,7 +710,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/db.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dbus.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/debug.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/e-date.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/enclosure.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/export.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/favicon.Po@am__quote@
@@ -716,6 +726,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/itemlist.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/itemset.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/json.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/liferea_application.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/metadata.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/migrate.Po@am__quote@
@@ -724,7 +735,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/newsbin.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/node.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/node_type.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/notification.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugins_engine.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/render.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rule.Po@am__quote@
@@ -1094,7 +1104,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-binSCRIPTS \
 
 -include $(INTROSPECTION_MAKEFILE)
 
-Liferea-3.0.gir: liferea
+Liferea-3.0.gir: liferea$(EXEEXT)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

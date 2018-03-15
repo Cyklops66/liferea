@@ -2,10 +2,20 @@
 
 SUBDIRS = doc man opml pixmaps po src xslt glade
 
-desktop_in_files = liferea.desktop.in
+desktop_in_files = net.sourceforge.liferea.desktop.in
 desktopdir = $(datadir)/applications
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
+
+dbusservicedir = $(datadir)/dbus-1/services
+dbusservice_DATA = net.sourceforge.liferea.service
+
+net.sourceforge.liferea.service: Makefile
+	$(AM_V_GEN) (echo '[D-BUS Service]'; \
+		echo 'Name=net.sourceforge.liferea'; \
+		echo 'Exec=${bindir}/liferea --gapplication-service') > $@.tmp && \
+		mv $@.tmp $@
+
 
 appdatadir = $(datadir)/appdata
 appdata_in_files = $(PACKAGE_TARNAME).appdata.xml.in
@@ -24,10 +34,18 @@ dtd_DATA = dtd/html.ent
 
 plugindir = $(pkglibdir)/plugins
 plugin_DATA = \
+	plugins/bold-unread.py \
+	plugins/bold-unread.plugin \
 	plugins/gnome-keyring.py \
 	plugins/gnome-keyring.plugin \
+	plugins/libnotify.py \
+	plugins/libnotify.plugin \
 	plugins/media-player.py \
-	plugins/media-player.plugin
+	plugins/media-player.plugin \
+	plugins/plugin-installer.py \
+	plugins/plugin-installer.plugin \
+	plugins/trayicon.py \
+	plugins/trayicon.plugin
 
 gsettings_SCHEMAS = net.sf.liferea.gschema.xml
 @INTLTOOL_XML_NOMERGE_RULE@
@@ -57,7 +75,7 @@ DISTCLEANFILES = \
 	$(gsettings_SCHEMAS)
 
 CLEANFILES = \
-	$(gsettings_SCHEMAS)
+	$(gsettings_SCHEMAS) \
 	$(appdata_DATA) 
 
 po/liferea.pot:

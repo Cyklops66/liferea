@@ -1,7 +1,7 @@
-/**
- * @file icons.c  Using icons from theme and package pixmaps
+/*
+ * @file icons.h  Using icons from theme and package pixmaps
  *
- * Copyright (C) 2010 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2010-2013 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,27 +43,34 @@ typedef enum {
 } lifereaIcon;
 
 /**
+ * icons_load: (skip)
+ *
  * Load all icons from theme and Liferea pixmaps.
  *
- * Must be called once before ui_common_get_icon() may be used!
+ * Must be called once before icon_get() may be used!
+ * Must be called only after GTK theme was initialized!
  */
 void icons_load (void);
 
 /**
- * Returns a GdkPixbuf for the requested item.
+ * icon_get:
+ * Returns a GIcon for the requested item.
  *
- * @param icon	the icon
+ * @icon:	the icon
  *
- * @returns GdkPixbuf
+ * Returns: (transfer none): GIcon
  */
-const GdkPixbuf * icon_get (lifereaIcon icon);
+const GIcon * icon_get (lifereaIcon icon);
 
 /**
- * Takes a filename and tries to load the image into a GdkPixbuf. 
+ * icon_create_from_file:
+ * @filename:	the name of the file
  *
- * @param filename	the filename
+ * Takes a file name relative to "pixmaps" directory and tries to load the 
+ * image into a GdkPixbuf. Can be used to load icons not in lifereaIcon
+ * on demand.
  *
- * @returns a new pixbuf or NULL
+ * Returns: (transfer full): a new pixbuf or NULL
  */
 GdkPixbuf * icon_create_from_file (const gchar *filename);
 

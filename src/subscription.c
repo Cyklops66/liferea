@@ -1,7 +1,7 @@
 /**
  * @file subscription.c  common subscription handling
  * 
- * Copyright (C) 2003-2012 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2003-2015 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -133,7 +133,7 @@ subscription_favicon_downloaded (gpointer user_data)
 {
 	nodePtr	node = (nodePtr)user_data;
 
-	node_set_icon (node, favicon_load_from_cache (node->id));
+	node_load_icon (node);
 	feed_list_node_update (node->id);
 }
 
@@ -205,8 +205,8 @@ subscription_process_update_result (const struct updateResult * const result, gp
 
 	g_assert (subscription->updateJob);
 	/* update the subscription URL on permanent redirects */
-	if ((301 == result->httpstatus) && result->source && !g_str_equal (result->source, subscription->updateJob->request->source)) {
-		debug2 (DEBUG_UPDATE, "The URL of \"%s\" has changed permanently and was updated with \"%s\"", node_get_title(node), result->source);
+	if ((301 == result->returncode || 308 == result->returncode) && result->source && !g_str_equal (result->source, subscription->updateJob->request->source)) {
+		debug2 (DEBUG_UPDATE, "The URL of \"%s\" has changed permanently and was updated to \"%s\"", node_get_title(node), result->source);
 		subscription_set_source (subscription, result->source);
 		liferea_shell_set_status_bar (_("The URL of \"%s\" has changed permanently and was updated"), node_get_title(node));
 	}
@@ -239,20 +239,22 @@ subscription_process_update_result (const struct updateResult * const result, gp
 		subscription_update_favicon (subscription);
 	
 	/* 4. generic postprocessing */
-
 	update_state_set_lastmodified (subscription->updateState, update_state_get_lastmodified (result->updateState));
 	update_state_set_cookies (subscription->updateState, update_state_get_cookies (result->updateState));
 	update_state_set_etag (subscription->updateState, update_state_get_etag (result->updateState));
 	g_get_current_time (&subscription->updateState->lastPoll);
-	
+
+	// FIXME: use new-items signal in itemview class        
 	itemview_update_node_info (subscription->node);
 	itemview_update ();
 
-	feed_list_node_update (subscription->node->id);
-
 	db_subscription_update (subscription);
 	db_node_update (subscription->node);
-	feedlist_schedule_save ();
+
+	if (processing && subscription->node->newCount > 0) {
+		feedlist_new_items (node->newCount);
+		feedlist_node_was_updated (node);
+	}
 }
 
 void

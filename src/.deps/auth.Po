@@ -279,7 +279,9 @@ auth.o: auth.c /usr/include/stdc-predef.h auth.h \
  /usr/include/gobject-introspection-1.0/gistructinfo.h \
  /usr/include/gobject-introspection-1.0/gitypeinfo.h \
  /usr/include/gobject-introspection-1.0/giunioninfo.h \
- /usr/include/gobject-introspection-1.0/givfuncinfo.h subscription.h \
+ /usr/include/gobject-introspection-1.0/givfuncinfo.h \
+ /usr/include/libpeas-1.0/libpeas/peas-extension-set.h \
+ /usr/include/libpeas-1.0/libpeas/peas-engine.h subscription.h \
  /usr/include/libxml2/libxml/parser.h \
  /usr/include/libxml2/libxml/xmlversion.h \
  /usr/include/libxml2/libxml/xmlexports.h \
@@ -315,9 +317,7 @@ auth.o: auth.c /usr/include/stdc-predef.h auth.h \
  /usr/include/libxml2/libxml/SAX2.h \
  /usr/include/libxml2/libxml/xmlmemory.h \
  /usr/include/libxml2/libxml/threads.h node.h itemset.h item.h rule.h \
- node_view.h update.h /usr/include/libpeas-1.0/libpeas/peas-activatable.h \
- /usr/include/libpeas-1.0/libpeas/peas-extension-set.h \
- /usr/include/libpeas-1.0/libpeas/peas-engine.h
+ node_view.h update.h /usr/include/libpeas-1.0/libpeas/peas-activatable.h
 
 /usr/include/stdc-predef.h:
 
@@ -993,6 +993,10 @@ plugins_engine.h:
 
 /usr/include/gobject-introspection-1.0/givfuncinfo.h:
 
+/usr/include/libpeas-1.0/libpeas/peas-extension-set.h:
+
+/usr/include/libpeas-1.0/libpeas/peas-engine.h:
+
 subscription.h:
 
 /usr/include/libxml2/libxml/parser.h:
@@ -1120,7 +1124,3 @@ node_view.h:
 update.h:
 
 /usr/include/libpeas-1.0/libpeas/peas-activatable.h:
-
-/usr/include/libpeas-1.0/libpeas/peas-extension-set.h:
-
-/usr/include/libpeas-1.0/libpeas/peas-engine.h:

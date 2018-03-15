@@ -1,7 +1,7 @@
 /**
  * @file date.h date formatting and parsing routines for Liferea
  *
- * Copyright (C) 2008-2009 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2008-2009 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ gchar * date_format (time_t date, const gchar *date_format);
  *
  * @returns timestamp
  */
-time_t date_parse_ISO8601 (const gchar *date);
+gint64 date_parse_ISO8601 (const gchar *date);
 
 /**
  * Parses a RFC822 format date. This FAILS if a timezone string is
@@ -54,7 +54,7 @@ time_t date_parse_ISO8601 (const gchar *date);
  *
  * @returns timestamp (GMT, no daylight savings time)
  */
-time_t date_parse_RFC822 (const gchar *date);
+gint64 date_parse_RFC822 (const gchar *date);
 
 
 #endif

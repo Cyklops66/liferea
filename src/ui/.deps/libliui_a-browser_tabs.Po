@@ -615,10 +615,11 @@ libliui_a-browser_tabs.o: browser_tabs.c /usr/include/stdc-predef.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  /usr/include/gtk-3.0/gtk/gtk-autocleanups.h \
- ../../src/ui/liferea_htmlview.h /usr/include/string.h \
- /usr/include/bits/string.h /usr/include/bits/string2.h \
- /usr/include/stdlib.h /usr/include/bits/string3.h \
- /usr/include/bits/strings_fortified.h ../../src/common.h ../../config.h \
+ ../../src/ui/liferea_htmlview.h ../../src/net.h ../../src/update.h \
+ /usr/include/string.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/stdlib.h \
+ /usr/include/bits/string3.h /usr/include/bits/strings_fortified.h \
+ ../../src/common.h ../../config.h \
  /usr/include/libxml2/libxml/xmlmemory.h \
  /usr/include/libxml2/libxml/xmlversion.h \
  /usr/include/libxml2/libxml/xmlexports.h \
@@ -2038,6 +2039,10 @@ libliui_a-browser_tabs.o: browser_tabs.c /usr/include/stdc-predef.h \
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
 
 ../../src/ui/liferea_htmlview.h:
+
+../../src/net.h:
+
+../../src/update.h:
 
 /usr/include/string.h:
 

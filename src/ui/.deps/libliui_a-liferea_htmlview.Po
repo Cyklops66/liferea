@@ -614,12 +614,13 @@ libliui_a-liferea_htmlview.o: liferea_htmlview.c \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h /usr/include/string.h \
- /usr/include/bits/string.h /usr/include/bits/string2.h \
- /usr/include/stdlib.h /usr/include/bits/string3.h \
- /usr/include/bits/strings_fortified.h /usr/include/sys/wait.h \
- /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
- ../../src/browser.h ../../src/browser_history.h ../../src/comments.h \
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h ../../src/net.h \
+ ../../src/update.h /usr/include/string.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/stdlib.h \
+ /usr/include/bits/string3.h /usr/include/bits/strings_fortified.h \
+ /usr/include/sys/wait.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h ../../src/browser.h \
+ ../../src/browser_history.h ../../src/comments.h \
  /usr/include/libxml2/libxml/xmlmemory.h \
  /usr/include/libxml2/libxml/xmlversion.h \
  /usr/include/libxml2/libxml/xmlexports.h \
@@ -655,12 +656,12 @@ libliui_a-liferea_htmlview.o: liferea_htmlview.c \
  ../../src/feed.h ../../src/node_type.h ../../src/node.h \
  ../../src/itemset.h ../../src/rule.h ../../src/node_view.h \
  ../../src/subscription_type.h ../../src/subscription.h \
- ../../src/update.h ../../src/feedlist.h ../../src/net.h \
- ../../src/net_monitor.h ../../src/social.h ../../src/render.h \
- ../../src/htmlview.h ../../src/ui/itemview.h ../../src/item.h \
- ../../src/itemset.h ../../src/node.h ../../src/ui/liferea_htmlview.h \
- ../../src/ui/browser_tabs.h ../../src/ui/liferea_htmlview.h \
- ../../src/ui/item_list_view.h ../../src/node_view.h
+ ../../src/feedlist.h ../../src/net_monitor.h ../../src/social.h \
+ ../../src/render.h ../../src/htmlview.h ../../src/ui/itemview.h \
+ ../../src/item.h ../../src/itemset.h ../../src/node.h \
+ ../../src/ui/liferea_htmlview.h ../../src/ui/browser_tabs.h \
+ ../../src/ui/liferea_htmlview.h ../../src/ui/item_list_view.h \
+ ../../src/node_view.h
 
 /usr/include/stdc-predef.h:
 
@@ -2044,6 +2045,10 @@ libliui_a-liferea_htmlview.o: liferea_htmlview.c \
 
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
 
+../../src/net.h:
+
+../../src/update.h:
+
 /usr/include/string.h:
 
 /usr/include/bits/string.h:
@@ -2192,11 +2197,7 @@ libliui_a-liferea_htmlview.o: liferea_htmlview.c \
 
 ../../src/subscription.h:
 
-../../src/update.h:
-
 ../../src/feedlist.h:
-
-../../src/net.h:
 
 ../../src/net_monitor.h:
 

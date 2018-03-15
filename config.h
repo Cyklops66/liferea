@@ -33,12 +33,6 @@
 /* Define if your <locale.h> file defines LC_MESSAGES. */
 #define HAVE_LC_MESSAGES 1
 
-/* Define if libindicate support is enabled */
-#define HAVE_LIBINDICATE 1
-
-/* Define if libnotify support is enabled */
-#define HAVE_LIBNOTIFY 1
-
 /* Define to 1 if you have the <locale.h> header file. */
 #define HAVE_LOCALE_H 1
 
@@ -88,7 +82,7 @@
 #define PACKAGE_NAME "liferea"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "liferea 1.10.19"
+#define PACKAGE_STRING "liferea 1.12.2"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "liferea"
@@ -97,13 +91,13 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.10.19"
+#define PACKAGE_VERSION "1.12.2"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "1.10.19"
+#define VERSION "1.12.2"
 
 /* Enable large inode numbers on Mac OS X 10.5.  */
 #ifndef _DARWIN_USE_64_BIT_INODE

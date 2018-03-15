@@ -1,7 +1,7 @@
-/**
+/*
  * @file liferea_htmlview.c  Liferea embedded HTML rendering
  *
- * Copyright (C) 2003-2012 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2003-2015 Lars Windolf <lars.windolf@gmx.de>
  * Copyright (C) 2005-2006 Nathan J. Conrad <t98502@users.sourceforge.net> 
  * 
  * This program is free software; you can redistribute it and/or modify
@@ -22,7 +22,9 @@
 #include "ui/liferea_htmlview.h"
 
 #include <string.h>
+#if !defined (G_OS_WIN32) || defined (HAVE_SYS_WAIT_H)
 #include <sys/wait.h>
+#endif
 #include <glib.h>
 
 #include "browser.h"
@@ -34,7 +36,6 @@
 #include "enclosure.h"
 #include "feed.h"
 #include "feedlist.h"
-#include "net.h"
 #include "net_monitor.h"
 #include "social.h"
 #include "render.h"
@@ -58,19 +59,19 @@
 #define LIFEREA_HTMLVIEW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), LIFEREA_HTMLVIEW_TYPE, LifereaHtmlViewPrivate))
 
 struct LifereaHtmlViewPrivate {
-	GtkWidget	*renderWidget;		/**< The HTML widget (e.g. Webkit widget) */
-	GtkWidget	*container;		/**< Outer container including render widget and toolbar */
-	GtkWidget	*toolbar;		/**< The navigation toolbar */
+	GtkWidget	*renderWidget;		/*<< The HTML widget (e.g. Webkit widget) */
+	GtkWidget	*container;		/*<< Outer container including render widget and toolbar */
+	GtkWidget	*toolbar;		/*<< The navigation toolbar */
 
-	GtkWidget	*forward;		/**< The forward button */
-	GtkWidget	*back;			/**< The back button */
-	GtkWidget	*urlentry;		/**< The URL entry widget */
-	browserHistory	*history;		/**< The browser history */
+	GtkWidget	*forward;		/*<< The forward button */
+	GtkWidget	*back;			/*<< The back button */
+	GtkWidget	*urlentry;		/*<< The URL entry widget */
+	browserHistory	*history;		/*<< The browser history */
 
-	gboolean	internal;		/**< TRUE if internal view presenting generated HTML with special links */
-	gboolean	forceInternalBrowsing;	/**< TRUE if clicked links should be force loaded within this view (regardless of global preference) */
+	gboolean	internal;		/*<< TRUE if internal view presenting generated HTML with special links */
+	gboolean	forceInternalBrowsing;	/*<< TRUE if clicked links should be force loaded within this view (regardless of global preference) */
 	
-	htmlviewImplPtr impl;			/**< Browser widget support implementation */
+	htmlviewImplPtr impl;			/*<< Browser widget support implementation */
 };
 
 enum {
@@ -78,6 +79,11 @@ enum {
 	TITLE_CHANGED,
 	LOCATION_CHANGED,
 	LAST_SIGNAL
+};
+
+enum {
+	PROP_NONE,
+	PROP_RENDER_WIDGET
 };
 
 /* LifereaHtmlView toolbar callbacks */
@@ -100,13 +106,22 @@ on_htmlview_history_back (GtkWidget *widget, gpointer user_data)
 	LifereaHtmlView	*htmlview = LIFEREA_HTMLVIEW (user_data);
 	gchar		*url;
 
+	/* Going back is a bit more complex than forward as we want to switch
+	   from inline browsing back to headlines when we are in the item view.
+	   So we expect an URL or NULL for switching back to the headline */
 	url = browser_history_back (htmlview->priv->history);
+	if (url) {
+		gtk_widget_set_sensitive (htmlview->priv->forward, browser_history_can_go_forward (htmlview->priv->history));
+		gtk_widget_set_sensitive (htmlview->priv->back,    browser_history_can_go_back (htmlview->priv->history));
 
-	gtk_widget_set_sensitive (htmlview->priv->forward, browser_history_can_go_forward (htmlview->priv->history));
-	gtk_widget_set_sensitive (htmlview->priv->back,    browser_history_can_go_back (htmlview->priv->history));
-
-	liferea_htmlview_launch_URL_internal (htmlview, url);
-	gtk_entry_set_text (GTK_ENTRY (htmlview->priv->urlentry), url);
+		liferea_htmlview_launch_URL_internal (htmlview, url);
+		gtk_entry_set_text (GTK_ENTRY (htmlview->priv->urlentry), url);
+	} else {
+		gtk_widget_hide (htmlview->priv->toolbar);
+		liferea_htmlview_clear (htmlview);
+		itemview_update_all_items ();
+		itemview_update ();
+	}
 }
 
 static void
@@ -139,10 +154,26 @@ liferea_htmlview_finalize (GObject *object)
 	LifereaHtmlView *htmlview = LIFEREA_HTMLVIEW (object);
 
 	browser_history_free (htmlview->priv->history);
+	g_clear_object (&htmlview->priv->container);
 
 	g_signal_handlers_disconnect_by_data (network_monitor_get (), object);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+static void
+liferea_htmlview_get_property (GObject *gobject, guint prop_id, GValue *value, GParamSpec *pspec)
+{
+	LifereaHtmlView *self = LIFEREA_HTMLVIEW(gobject);
+
+	switch (prop_id) {
+		case PROP_RENDER_WIDGET:
+			g_value_set_object (value, self->priv->renderWidget);
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, prop_id, pspec);
+			break;
+	}
 }
 
 static void
@@ -152,7 +183,19 @@ liferea_htmlview_class_init (LifereaHtmlViewClass *klass)
 
 	parent_class = g_type_class_peek_parent (klass);
 
+	object_class->get_property = liferea_htmlview_get_property;
 	object_class->finalize = liferea_htmlview_finalize;
+
+	/* LifereaHtmlView:renderWidget: */
+	g_object_class_install_property (
+			object_class,
+			PROP_RENDER_WIDGET,
+			g_param_spec_object (
+				"renderwidget",
+				"GtkWidget",
+				"GtkWidget object",
+				GTK_TYPE_WIDGET,
+				G_PARAM_READABLE));
 	
 	liferea_htmlview_signals[STATUSBAR_CHANGED] = 
 		g_signal_new ("statusbar-changed", 
@@ -205,12 +248,13 @@ liferea_htmlview_init (LifereaHtmlView *htmlview)
 	htmlview->priv->impl = htmlview_get_impl ();
 	htmlview->priv->renderWidget = RENDERER (htmlview)->create (htmlview);
 	htmlview->priv->container = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+	g_object_ref_sink (htmlview->priv->container);
 	htmlview->priv->history = browser_history_new ();
 	htmlview->priv->toolbar = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 	
 	widget = gtk_button_new ();	
 	gtk_button_set_relief (GTK_BUTTON (widget), GTK_RELIEF_NONE);
-	image = gtk_image_new_from_stock ("gtk-go-back", GTK_ICON_SIZE_BUTTON);
+	image = gtk_image_new_from_icon_name ("go-previous", GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show (image);
 	gtk_container_add (GTK_CONTAINER (widget), image);
 	gtk_box_pack_start (GTK_BOX (htmlview->priv->toolbar), widget, FALSE, FALSE, 0);
@@ -220,7 +264,7 @@ liferea_htmlview_init (LifereaHtmlView *htmlview)
 
 	widget = gtk_button_new ();
 	gtk_button_set_relief (GTK_BUTTON(widget), GTK_RELIEF_NONE);
-	image = gtk_image_new_from_stock ("gtk-go-forward", GTK_ICON_SIZE_BUTTON);
+	image = gtk_image_new_from_icon_name ("go-next", GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show (image);
 	gtk_container_add (GTK_CONTAINER (widget), image);
 	gtk_box_pack_start (GTK_BOX (htmlview->priv->toolbar), widget, FALSE, FALSE, 0);
@@ -259,10 +303,18 @@ liferea_htmlview_proxy_changed (NetworkMonitor *nm, gpointer userdata)
 {
 	LifereaHtmlView *htmlview = LIFEREA_HTMLVIEW (userdata);
 
-	(RENDERER (htmlview)->setProxy) (network_get_proxy_host (),
-	                                 network_get_proxy_port (),
-	                                 network_get_proxy_username (),
-	                                 network_get_proxy_password ());
+	if (RENDERER (htmlview)->setProxy)
+		(RENDERER (htmlview)->setProxy) (network_get_proxy_detect_mode (),
+						 network_get_proxy_host (),
+						 network_get_proxy_port (),
+						 network_get_proxy_username (),
+						 network_get_proxy_password ());
+}
+
+void
+liferea_htmlview_set_headline_view (LifereaHtmlView *htmlview)
+{
+	htmlview->priv->history->headline = TRUE;
 }
 
 LifereaHtmlView *
@@ -282,10 +334,8 @@ liferea_htmlview_new (gboolean forceInternalBrowsing)
 	                  G_CALLBACK (liferea_htmlview_proxy_changed),
 	                  htmlview);
 
-	if (NULL != network_get_proxy_host ()) {
-		debug0 (DEBUG_NET, "Setting initial HTML widget proxy...");
-		liferea_htmlview_proxy_changed (network_monitor_get (), htmlview);
-	}
+	debug0 (DEBUG_NET, "Setting initial HTML widget proxy...");
+	liferea_htmlview_proxy_changed (network_monitor_get (), htmlview);
 	
 	return htmlview;
 }
@@ -377,6 +427,10 @@ liferea_htmlview_title_changed (LifereaHtmlView *htmlview, const gchar *title)
 void
 liferea_htmlview_location_changed (LifereaHtmlView *htmlview, const gchar *location)
 {
+	if (!g_str_has_prefix (location, "liferea")) {
+		/* A URI different from the locally generated html base url is being loaded. */
+		htmlview->priv->internal = FALSE;
+	}
 	if (!htmlview->priv->internal) {
 		browser_history_add_location (htmlview->priv->history, location);
 
@@ -449,8 +503,6 @@ liferea_htmlview_handle_URL (LifereaHtmlView *htmlview, const gchar *url)
 	}
 	
 	if(htmlview->priv->forceInternalBrowsing || browse_inside_application) {	   
-	   	/* before loading external content suppress internal link schema again */
-		htmlview->priv->internal = FALSE;
 		
 		return FALSE;
 	} else {
@@ -463,10 +515,6 @@ liferea_htmlview_handle_URL (LifereaHtmlView *htmlview, const gchar *url)
 void
 liferea_htmlview_launch_URL_internal (LifereaHtmlView *htmlview, const gchar *url)
 {
-	/* before loading untrusted URLs suppress internal link schema */
-	htmlview->priv->internal = FALSE;
-
-	browser_history_add_location (htmlview->priv->history, (gchar *)url);
 
 	gtk_widget_set_sensitive (htmlview->priv->forward, browser_history_can_go_forward (htmlview->priv->history));
 	gtk_widget_set_sensitive (htmlview->priv->back,    browser_history_can_go_back (htmlview->priv->history));
@@ -488,10 +536,10 @@ liferea_htmlview_get_zoom (LifereaHtmlView *htmlview)
 	return (RENDERER (htmlview)->zoomLevelGet) (htmlview->priv->renderWidget);
 }
 
-gboolean
+void
 liferea_htmlview_scroll (LifereaHtmlView *htmlview)
 {
-	return (RENDERER (htmlview)->scrollPagedown) (htmlview->priv->renderWidget);
+	(RENDERER (htmlview)->scrollPagedown) (htmlview->priv->renderWidget);
 }
 
 void
@@ -500,161 +548,4 @@ liferea_htmlview_do_zoom (LifereaHtmlView *htmlview, gboolean in)
 	gfloat factor = in?1.2:0.8;
 	
 	liferea_htmlview_set_zoom (htmlview, factor * liferea_htmlview_get_zoom (htmlview));
-}
-
-/* popup callbacks and popup handling */
-
-static void
-on_popup_launch_link_activate (GtkWidget *widget, gpointer user_data)
-{
-	itemview_launch_URL ((gchar *)user_data, TRUE /* use internal browser */);
-}
-
-static void
-on_popup_launch_link_external_activate (GtkWidget *widget, gpointer user_data)
-{
-	browser_launch_URL_external ((gchar *)user_data);
-}
-
-static void
-on_popup_copy_activate (GtkWidget *widget, LifereaHtmlView *htmlview)
-{
-	(RENDERER (htmlview)->copySelection) (htmlview->priv->renderWidget); 
-}
-
-static void
-on_popup_copy_url_activate (GtkWidget *widget, gpointer user_data)
-{
-	GtkClipboard	*clipboard;
-	gchar		*link = common_uri_sanitize ((gchar *)user_data);
-
-	clipboard = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
-	gtk_clipboard_set_text (clipboard, link, -1);
- 
-	clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-	gtk_clipboard_set_text (clipboard, link, -1);
-
-	g_free (link);
-}
-
-static void
-on_popup_save_url_activate (GtkWidget *widget, gpointer user_data)
-{
-	enclosure_download (NULL, (const gchar *)user_data, TRUE);
-}
-
-static void
-on_popup_subscribe_url_activate (GtkWidget *widget, gpointer user_data)
-{
-	feedlist_add_subscription ((gchar *)user_data, NULL, NULL, 0);
-}
-
-static void
-on_popup_zoomin_activate (GtkWidget *widget, gpointer user_data)
-{
-	liferea_htmlview_do_zoom (LIFEREA_HTMLVIEW (user_data), TRUE);
-}
-
-static void
-on_popup_zoomout_activate (GtkWidget *widget, gpointer user_data)
-{
-	liferea_htmlview_do_zoom (LIFEREA_HTMLVIEW (user_data), FALSE);
-}
-
-static void
-on_popup_open_link_in_tab_activate (GtkWidget *widget, gpointer user_data)
-{
-	browser_tabs_add_new ((gchar *)user_data, (gchar *)user_data, FALSE);
-}
-
-static void
-on_popup_social_bm_link_activate (GtkWidget *widget, gpointer user_data)
-{	
-	gchar *url = social_get_bookmark_url ((gchar *)user_data, "");
-	(void)browser_tabs_add_new (url, url, TRUE);
-	g_free (url);
-}
-
-static GtkWidget *
-menu_add_option (GtkMenu *menu, const gchar *label, const gchar *stock, gpointer cb, gpointer user_data)
-{
-	GtkWidget *item, *image;
-
-	if (label) {
-		image = gtk_image_new_from_stock (stock, GTK_ICON_SIZE_MENU);
-		item = gtk_image_menu_item_new_with_mnemonic (label);
-		gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
-	}
-	else
-		item = gtk_image_menu_item_new_from_stock (stock, NULL);
-	g_signal_connect (item, "activate", G_CALLBACK (cb), user_data);
-	gtk_widget_show (item);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-	return item;
-}
-
-static void
-menu_add_separator (GtkMenu *menu)
-{
-	GtkWidget *widget;
-	
-	widget = gtk_separator_menu_item_new ();
-	gtk_widget_show (widget);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), widget);
-}
-
-void
-liferea_htmlview_prepare_context_menu (LifereaHtmlView *htmlview, GtkMenu *menu, const gchar *linkUri, const gchar *imageUri)
-{
-	GList *item, *items;
-	gboolean link = (linkUri != NULL);
-	gboolean image = (imageUri != NULL);
-
-	/* first drop all menu items that are provided by the browser widget (necessary for WebKit) */
-	item = items = gtk_container_get_children (GTK_CONTAINER (menu));
-	while (item) {
-		gtk_widget_destroy (GTK_WIDGET (item->data));
-		item = g_list_next (item);
-	}
-	g_list_free (items);
-
-	/* do not expose internal links */
-	if (linkUri && liferea_htmlview_is_special_url (linkUri) && !g_str_has_prefix (linkUri, "javascript:") && !g_str_has_prefix (linkUri, "data:"))
-		link = FALSE;
-
-	/* and now add all we want to see */
-	if (link) {
-		gchar *path;
-		menu_add_option (menu, _("Open Link In _Tab"), NULL, G_CALLBACK (on_popup_open_link_in_tab_activate), (gpointer)linkUri);
-		menu_add_option (menu, _("_Open Link In Browser"), NULL, G_CALLBACK (on_popup_launch_link_activate), (gpointer)linkUri);
-		menu_add_option (menu, _("_Open Link In External Browser"), NULL, G_CALLBACK (on_popup_launch_link_external_activate), (gpointer)linkUri);
-		menu_add_separator (menu);
-		
-		path = g_strdup_printf (_("_Bookmark Link at %s"), social_get_bookmark_site ());
-		menu_add_option (menu, path, NULL, on_popup_social_bm_link_activate, (gpointer)linkUri);
-		g_free (path);
-
-		menu_add_option (menu, _("_Copy Link Location"), "gtk-copy", G_CALLBACK (on_popup_copy_url_activate), (gpointer)linkUri);
-	}
-	if (image)
-		menu_add_option (menu, _("_Copy Image Location"), "gtk-copy", G_CALLBACK (on_popup_copy_url_activate), (gpointer)imageUri);
-	if (link)
-		menu_add_option (menu, _("S_ave Link As"), "gtk-save", G_CALLBACK (on_popup_save_url_activate), (gpointer)linkUri);
-	if (image)
-		menu_add_option (menu, _("S_ave Image As"), "gtk-save", G_CALLBACK (on_popup_save_url_activate), (gpointer)imageUri);
-	if (link) {	
-		menu_add_separator (menu);
-		menu_add_option (menu, _("_Subscribe..."), "gtk-add", G_CALLBACK (on_popup_subscribe_url_activate), (gpointer)linkUri);
-	}
-	
-	if(!link && !image) {
-		GtkWidget *item;
-		item = menu_add_option (menu, NULL, GTK_STOCK_COPY, G_CALLBACK (on_popup_copy_activate), htmlview);
-		if (!(RENDERER (htmlview)->hasSelection) (htmlview->priv->renderWidget)) 
-			gtk_widget_set_sensitive (item, FALSE);
-
-		menu_add_separator (menu);
-		menu_add_option (menu, _("_Increase Text Size"), "gtk-zoom-in", G_CALLBACK (on_popup_zoomin_activate), htmlview);
-		menu_add_option (menu, _("_Decrease Text Size"), "gtk-zoom-out", G_CALLBACK (on_popup_zoomout_activate), htmlview);
-	}
 }

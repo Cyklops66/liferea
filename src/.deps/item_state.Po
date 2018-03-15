@@ -646,7 +646,8 @@ item_state.o: item_state.c /usr/include/stdc-predef.h db.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  /usr/include/gtk-3.0/gtk/gtk-autocleanups.h item_loader.h vfolder.h \
- node_type.h fl_sources/node_source.h node.h node_type.h
+ node_type.h fl_sources/node_source.h node.h node_type.h \
+ subscription_type.h subscription.h fl_sources/google_reader_api.h
 
 /usr/include/stdc-predef.h:
 
@@ -2159,3 +2160,9 @@ fl_sources/node_source.h:
 node.h:
 
 node_type.h:
+
+subscription_type.h:
+
+subscription.h:
+
+fl_sources/google_reader_api.h:

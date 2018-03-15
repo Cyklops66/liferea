@@ -132,8 +132,8 @@ libliflsources_a-ttrss_source_feed.o: ttrss_source_feed.c \
  /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
  ../../src/db.h ../../src/item.h ../../src/itemset.h ../../src/rule.h \
  ../../src/subscription.h ../../src/node.h ../../src/node_view.h \
- ../../src/update.h ../../src/debug.h ../../src/feedlist.h \
- /usr/include/glib-2.0/glib-object.h \
+ ../../src/update.h ../../src/debug.h ../../src/enclosure.h \
+ ../../src/feedlist.h /usr/include/glib-2.0/glib-object.h \
  /usr/include/glib-2.0/gobject/gbinding.h \
  /usr/include/glib-2.0/gobject/gobject.h \
  /usr/include/glib-2.0/gobject/gtype.h \
@@ -668,9 +668,10 @@ libliflsources_a-ttrss_source_feed.o: ttrss_source_feed.c \
  /usr/include/json-glib-1.0/json-glib/json-gvariant.h \
  ../../src/metadata.h ../../src/feed_parser.h ../../src/feed.h \
  ../../src/node_type.h ../../src/subscription_type.h \
- ../../src/subscription.h ../../src/xml.h ../../src/notification.h \
+ ../../src/subscription.h ../../src/xml.h \
  ../../src/fl_sources/ttrss_source.h ../../src/fl_sources/node_source.h \
- ../../src/node.h ../../src/node_type.h
+ ../../src/node.h ../../src/node_type.h ../../src/subscription_type.h \
+ ../../src/fl_sources/google_reader_api.h
 
 /usr/include/stdc-predef.h:
 
@@ -1093,6 +1094,8 @@ libliflsources_a-ttrss_source_feed.o: ttrss_source_feed.c \
 ../../src/update.h:
 
 ../../src/debug.h:
+
+../../src/enclosure.h:
 
 ../../src/feedlist.h:
 
@@ -2238,8 +2241,6 @@ libliflsources_a-ttrss_source_feed.o: ttrss_source_feed.c \
 
 ../../src/xml.h:
 
-../../src/notification.h:
-
 ../../src/fl_sources/ttrss_source.h:
 
 ../../src/fl_sources/node_source.h:
@@ -2247,3 +2248,7 @@ libliflsources_a-ttrss_source_feed.o: ttrss_source_feed.c \
 ../../src/node.h:
 
 ../../src/node_type.h:
+
+../../src/subscription_type.h:
+
+../../src/fl_sources/google_reader_api.h:

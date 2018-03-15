@@ -656,7 +656,8 @@ libliui_a-ui_dnd.o: ui_dnd.c /usr/include/stdc-predef.h \
  ../../src/debug.h ../../src/ui/item_list_view.h ../../src/item.h \
  ../../src/node_view.h ../../src/ui/feed_list_view.h \
  ../../src/ui/feed_list_node.h ../../src/node.h ../../src/ui/ui_dnd.h \
- ../../src/fl_sources/node_source.h ../../src/node_type.h
+ ../../src/fl_sources/node_source.h ../../src/node_type.h \
+ ../../src/subscription_type.h ../../src/fl_sources/google_reader_api.h
 
 /usr/include/stdc-predef.h:
 
@@ -2199,3 +2200,7 @@ libliui_a-ui_dnd.o: ui_dnd.c /usr/include/stdc-predef.h \
 ../../src/fl_sources/node_source.h:
 
 ../../src/node_type.h:
+
+../../src/subscription_type.h:
+
+../../src/fl_sources/google_reader_api.h:

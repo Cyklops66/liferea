@@ -653,10 +653,11 @@ libliflsources_a-theoldreader_source_feed.o: theoldreader_source_feed.c \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  /usr/include/gtk-3.0/gtk/gtk-autocleanups.h \
  ../../src/subscription_type.h ../../src/subscription.h \
- ../../src/update.h ../../src/feedlist.h theoldreader_source.h \
+ ../../src/update.h ../../src/feedlist.h google_reader_api_edit.h \
  ../../src/fl_sources/node_source.h ../../src/node.h \
- ../../src/node_type.h ../../src/subscription.h \
- theoldreader_source_edit.h ../../src/metadata.h ../../src/db.h \
+ ../../src/node_type.h ../../src/subscription_type.h \
+ ../../src/fl_sources/google_reader_api.h theoldreader_source.h \
+ ../../src/subscription.h ../../src/metadata.h ../../src/db.h \
  ../../src/item_state.h
 
 /usr/include/stdc-predef.h:
@@ -2187,7 +2188,7 @@ libliflsources_a-theoldreader_source_feed.o: theoldreader_source_feed.c \
 
 ../../src/feedlist.h:
 
-theoldreader_source.h:
+google_reader_api_edit.h:
 
 ../../src/fl_sources/node_source.h:
 
@@ -2195,9 +2196,13 @@ theoldreader_source.h:
 
 ../../src/node_type.h:
 
-../../src/subscription.h:
+../../src/subscription_type.h:
 
-theoldreader_source_edit.h:
+../../src/fl_sources/google_reader_api.h:
+
+theoldreader_source.h:
+
+../../src/subscription.h:
 
 ../../src/metadata.h:
 

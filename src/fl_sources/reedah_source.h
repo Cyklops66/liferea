@@ -1,7 +1,7 @@
 /**
- * @file reedah_source.h Google Reader feed list source support
+ * @file reedah_source.h  Reedah feed list source support
  * 
- * Copyright (C) 2007-2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2007-2014 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,18 +24,14 @@
 #include "fl_sources/node_source.h"
 
 /**
- * A nodeSource specific for Google Reader
+ * A nodeSource specific for Reedah
  */
 typedef struct ReedahSource {
 	nodePtr		root;		/**< the root node in the feed list */
-	gchar		*authHeaderValue; /**< the Google Authorization token */
-	GQueue		*actionQueue;
-	gint		loginState;	/**< The current login state */
-	gint		authFailures;	/**< Number of authentication failures */
 
 	/**
-	 * A map from a subscription source to a timestamp when it was last 
-	 * updated (provided by Google).
+	 * A map from a subscription source to a timestamp when it was last
+	 * updated according to API
 	 */
 	GHashTable      *lastTimestampMap; 
 
@@ -45,162 +41,32 @@ typedef struct ReedahSource {
 	GTimeVal        lastQuickUpdate;
 } *ReedahSourcePtr;
 
-enum { 
-	REEDAH_SOURCE_STATE_NONE = 0,		/**< no authentication tried so far */
-	REEDAH_SOURCE_STATE_IN_PROGRESS,	/**< authentication in progress */
-	REEDAH_SOURCE_STATE_ACTIVE,		/**< authentication succeeded */
-	REEDAH_SOURCE_STATE_NO_AUTH,		/**< authentication has failed */
-	REEDAH_SOURCE_STATE_MIGRATE,		/**< source will be migrated, do not do anything anymore! */
-};
-
-enum { 
-	/**
-	 * Update only the subscription list, and not each node underneath it.
-	 * Note: Uses higher 16 bits to avoid conflict.
-	 */
-	REEDAH_SOURCE_UPDATE_ONLY_LIST = (1<<16),
-	/**
-	 * Only login, do not do any updates. 
-	 */
-	REEDAH_SOURCE_UPDATE_ONLY_LOGIN = (1<<17)
-};
-
 /**
- * Number of auth failures after which we stop bothering the user while
- * auto-updating until he manually updates again.
- */
-#define REEDAH_SOURCE_MAX_AUTH_FAILURES		3
-
-/**
- * Google Source API URL's
- * In each of the following, the _URL indicates the URL to use, and _POST
- * indicates the corresponging postdata to send.
+ * API documentation, Reedah is closely modelled after Google Reader, the
+ * differences are outlined under the first link, the second is a documentation
+ * of the original Google Reader API.
+ *
+ * @see https://www.reedah.com/developers.php
  * @see http://code.google.com/p/pyrfeed/wiki/GoogleReaderAPI
- * However as of now, the GoogleReaderAPI documentation seems outdated, some of
- * mark read/unread API does not work as mentioned in the documentation.
  */
 
 /**
- * Google Reader Login api.
- * @param Email The google account email id.
- * @param Passwd The google account password.
+ * Reedah Login API.
+ * @param Email The account email id.
+ * @param Passwd The account password.
  * @return The return data has a line "Auth=xxxx" which will be used as an
  *         Authorization header in future requests. 
  */ 
 #define REEDAH_READER_LOGIN_URL "https://www.reedah.com/accounts/ClientLogin" 
 #define REEDAH_READER_LOGIN_POST "service=reader&Email=%s&Passwd=%s&source=liferea&continue=http://www.reedah.com"
 
-/**
- * Acts like a feed, indicating all the posts shared by the Google Reader
- * friends. Does not take any params, but the Authorization header needs to be set.
- */
-#define REEDAH_READER_BROADCAST_FRIENDS_URL "http://www.reedah.com/reader/atom/user/-/state/com.google/broadcast-friends" 
-
-/**
- * Get a list of subscriptions.
- */
-#define REEDAH_READER_SUBSCRIPTION_LIST_URL "http://www.reedah.com/reader/api/0/subscription/list"
-
-/**
- * Get a token for an edit operation. (@todo A token can actually be used
- * for multiple transactions.)
- */
-#define REEDAH_READER_TOKEN_URL "http://www.reedah.com/reader/api/0/token"
-
-/**
- * Add a subscription
- * @param URL The feed URL, or the page URL for feed autodiscovery.
- * @param T   a token obtained using REEDAH_READER_TOKEN_URL
- */
-#define REEDAH_READER_ADD_SUBSCRIPTION_URL "http://www.reedah.com/reader/api/0/subscription/edit?client=liferea"
-#define REEDAH_READER_ADD_SUBSCRIPTION_POST "s=feed%%2F%s&i=null&ac=subscribe&T=%s"
-
-/**
- * Unsubscribe from a subscription.
- * @param url The feed URL
- * @param T   a token obtained using REEDAH_READER_TOKEN_URL
- */
-#define REEDAH_READER_REMOVE_SUBSCRIPTION_URL "http://www.reedah.com/reader/api/0/subscription/edit?client=liferea"
-#define REEDAH_READER_REMOVE_SUBSCRIPTION_POST "s=feed%%2F%s&i=null&ac=unsubscribe&T=%s"
-
-/**
- * A list of subscriptions with the unread counters, and the last updated
- * timestamps.
- */
-#define REEDAH_READER_UNREAD_COUNTS_URL "http://www.reedah.com/reader/api/0/unread-count?all=true&client=liferea"
-
-/**
- * Edit the tags associated with an item. The parameters to this _have_ to be
- * sent as post data. 
- */
-#define REEDAH_READER_EDIT_TAG_URL "http://www.reedah.com/reader/api/0/edit-tag?client=liferea"
-
-/**
- * Postdata for adding a tag when using REEDAH_READER_EDIT_TAG_URL.
- * @param i The guid of the item.
- * @param prefix The prefix to 's'. For normal feeds this will be "feed", for
- *          links etc, this should be "user".
- * @param s The URL of the subscription containing the item. (Note that the 
- *          following string adds the "feed/" prefix to this.)
- * @param a The tag to add. 
- * @param T a token obtained using REEDAH_READER_TOKEN_URL
- */
-#define REEDAH_READER_EDIT_TAG_ADD_TAG "i=%s&s=%s%%2F%s&a=%s&ac=edit-tags&T=%s&async=true"
-
-/**
- * Postdata for removing  a tag, when using REEDAH_READER_EDIT_TAG_URL. Do
- * not use for removing the "read" tag, see REEDAH_READER_EDIT_TAG_AR_TAG 
- * for that.
- *
- * @param i The guid of the item.
- * @param prefix The prefix to 's'. @see REEDAH_READER_EDIT_TAG_ADD_TAG
- * @param s The URL of the subscription containing the item. (Note that the 
- *          final value of s is feed + "/" + this string)
- * @param r The tag to remove
- * @param T a token obtained using REEDAH_READER_TOKEN_URL
- */
-#define REEDAH_READER_EDIT_TAG_REMOVE_TAG "i=%s&s=%s%%2F%s&r=%s&ac=edit-tags&T=%s&async=true"
-
-/**
- * Postdata for adding a tag, and removing another tag at the same time, 
- * when using REEDAH_READER_EDIT_TAG_URL.
- * @param i The guid of the item.
- * @param prefix The prefix to 's'. @see REEDAH_READER_EDIT_TAG_ADD_TAG
- * @param s The URL of the subscription containing the item. (Note that the 
- *          final value of s is feed + "/" + this string)
- * @param a The tag to add. 
- * @param r The tag to remove
- * @param T a token obtained using REEDAH_READER_TOKEN_URL
- */
-#define REEDAH_READER_EDIT_TAG_AR_TAG "i=%s&s=%s%%2F%s&a=%s&r=%s&ac=edit-tags&T=%s&async=true"
-
-/**
- * Postdata for adding a tag, and removing another tag at the same time, for a 
- * _link_ item, when using REEDAH_READER_EDIT_TAG_URL
- * @param i The guid of the link (as provided by google)
- * @param a The tag to add
- * @param r The tag to remove
- * @param T a token obtained using REEDAH_READER_TOKEN_URL
- */
-#define REEDAH_READER_EDIT_TAG_ADD_TAG_FOR_LINK "i=%s&s=user%2F-%2Fsource%2Fcom.google%2Flink&a=%s&r=%s&ac=edit-tags&T=%s&async=true"
-
-/** A set of tags (states) defined by Google reader */
-
-#define REEDAH_READER_TAG_KEPT_UNREAD          "user/-/state/com.google/kept-unread"
-#define REEDAH_READER_TAG_READ                 "user/-/state/com.google/read"
-#define REEDAH_READER_TAG_TRACKING_KEPT_UNREAD "user/-/state/com.google/tracking-kept-unread"
-#define REEDAH_READER_TAG_STARRED              "user/-/state/com.google/starred"
-
 /** Interval (in seconds) for doing a Quick Update: 10min */
 #define REEDAH_SOURCE_QUICK_UPDATE_INTERVAL 600
 
 /**
- * @returns Google Reader source type implementation info.
+ * @returns Reedah source type implementation info.
  */
 nodeSourceTypePtr reedah_source_get_type (void);
-
-extern struct subscriptionType reedahSourceFeedSubscriptionType;
-extern struct subscriptionType reedahSourceOpmlSubscriptionType;
 
 /**
  * Find a child node with the given feed source URL.

@@ -2,7 +2,7 @@
  * @file feed_list_node.h  Handling feed list nodes
  * 
  * Copyright (C) 2004-2006 Nathan J. Conrad <t98502@users.sourceforge.net>
- * Copyright (C) 2004-2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2004-2013 Lars Windolf <lars.windolf@gmx.de>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
  *
  * @param nodeId	the node id
  */
-GtkTreeIter * feed_list_node_to_iter(const gchar *nodeId);
+GtkTreeIter * feed_list_node_to_iter (const gchar *nodeId);
 
 /**
  * Updates the tree iter of a given node.
@@ -38,7 +38,7 @@ GtkTreeIter * feed_list_node_to_iter(const gchar *nodeId);
  * @param nodeId	the node
  * @param iter		the new iter
  */
-void feed_list_node_update_iter(const gchar *nodeId, GtkTreeIter *iter);
+void feed_list_node_update_iter (const gchar *nodeId, GtkTreeIter *iter);
 
 /**
  * Add a node to the feedlist tree view
@@ -57,21 +57,21 @@ void feed_list_node_reload_feedlist (void);
  *
  * @param node	the node to free
  */
-void feed_list_node_remove_node(nodePtr node);
+void feed_list_node_remove_node (nodePtr node);
 
 /**
  * Adds an "empty" node to the given tree iter.
  *
  * @param parent	a tree iter
  */
-void feed_list_node_add_empty_node(GtkTreeIter *parent);
+void feed_list_node_add_empty_node (GtkTreeIter *parent);
 
 /**
  * Removes an "empty" node from the given tree iter.
  *
  * @param parent	a tree iter
  */
-void feed_list_node_remove_empty_node(GtkTreeIter *parent);
+void feed_list_node_remove_empty_node (GtkTreeIter *parent);
 
 /**
  * Determines the expansion state of a feed list tree node.
@@ -80,7 +80,7 @@ void feed_list_node_remove_empty_node(GtkTreeIter *parent);
  *
  * @returns TRUE if the node is expanded
  */
-gboolean feed_list_node_is_expanded(const gchar *nodeId);
+gboolean feed_list_node_is_expanded (const gchar *nodeId);
 
 /**
  * Change the expansion/collapsing of the given folder node.
@@ -88,20 +88,30 @@ gboolean feed_list_node_is_expanded(const gchar *nodeId);
  * @param folder	the folder node
  * @param expanded	new expansion state
  */
-void feed_list_node_set_expansion(nodePtr folder, gboolean expanded);
+void feed_list_node_set_expansion (nodePtr folder, gboolean expanded);
 
 /**
  * Updates the tree view entry of the given node.
  *
  * @param nodeId	the node id
  */
-void feed_list_node_update(const gchar *nodeId);
+void feed_list_node_update (const gchar *nodeId);
 
 /**
  * Open dialog to rename a given node.
  *
  * @param node		the node to rename
  */
-void feed_list_node_rename(nodePtr node);
+void feed_list_node_rename (nodePtr node);
+
+/**
+ * Prompt the user for confirmation of a folder or feed, and
+ * recursively remove the feed or folder if the user accepts. This
+ * function does not block, so the folder/feeds will not have
+ * been deleted when this function returns.
+ *
+ * @param node	the node to remove
+ */
+void feed_list_node_remove (nodePtr node);
 
 #endif

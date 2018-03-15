@@ -2,7 +2,7 @@
  * @file metadata.c  handling of typed item and feed meta data
  *
  * Copyright (C) 2004-2006 Nathan J. Conrad <t98502@users.sourceforge.net>
- * Copyright (C) 2004-2010 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2004-2014 Lars Windolf <lars.windolf@gmx.de>
  * Copyright (C) 2015 Rich Coe <rcoe@wi.rr.com>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -105,6 +105,7 @@ metadata_init (void)
 	
 	/* for trackback URL */
 	metadata_type_register ("related",		METADATA_TYPE_URL);
+	metadata_type_register ("via",                  METADATA_TYPE_URL);
 
 	/* for georss:point */
 	metadata_type_register ("point", 		METADATA_TYPE_TEXT);
@@ -306,11 +307,10 @@ metadata_list_copy (GSList *list)
 void
 metadata_list_free (GSList *metadata)
 {
-	GSList		*iter = metadata;
-	struct pair	*p;
+	GSList *iter = metadata;
 	
 	while (iter) {
-		p = (struct pair*)iter->data;
+		struct pair *p = (struct pair*)iter->data;
                 g_slist_free_full (p->data, g_free);
 		g_free (p->strid);
 		g_free (p);

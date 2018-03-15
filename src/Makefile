@@ -91,8 +91,6 @@ POST_UNINSTALL = :
 build_triplet = x86_64-pc-linux-gnu
 host_triplet = x86_64-pc-linux-gnu
 bin_PROGRAMS = liferea$(EXEEXT)
-am__append_1 = notification/libnotify.a $(LIBNOTIFY_LIBS)
-am__append_2 = $(LIBINDICATE_LIBS)
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -109,29 +107,25 @@ PROGRAMS = $(bin_PROGRAMS)
 am_liferea_OBJECTS = auth.$(OBJEXT) auth_activatable.$(OBJEXT) \
 	browser.$(OBJEXT) browser_history.$(OBJEXT) comments.$(OBJEXT) \
 	common.$(OBJEXT) conf.$(OBJEXT) date.$(OBJEXT) db.$(OBJEXT) \
-	dbus.$(OBJEXT) debug.$(OBJEXT) e-date.$(OBJEXT) \
-	enclosure.$(OBJEXT) export.$(OBJEXT) favicon.$(OBJEXT) \
-	feed.$(OBJEXT) feed_parser.$(OBJEXT) feedlist.$(OBJEXT) \
-	folder.$(OBJEXT) html.$(OBJEXT) htmlview.$(OBJEXT) \
-	item.$(OBJEXT) item_history.$(OBJEXT) item_loader.$(OBJEXT) \
+	dbus.$(OBJEXT) debug.$(OBJEXT) enclosure.$(OBJEXT) \
+	export.$(OBJEXT) favicon.$(OBJEXT) feed.$(OBJEXT) \
+	feed_parser.$(OBJEXT) feedlist.$(OBJEXT) folder.$(OBJEXT) \
+	html.$(OBJEXT) htmlview.$(OBJEXT) item.$(OBJEXT) \
+	item_history.$(OBJEXT) item_loader.$(OBJEXT) \
 	item_state.$(OBJEXT) itemset.$(OBJEXT) itemlist.$(OBJEXT) \
-	json.$(OBJEXT) metadata.$(OBJEXT) migrate.$(OBJEXT) \
-	net.$(OBJEXT) net_monitor.$(OBJEXT) newsbin.$(OBJEXT) \
-	node.$(OBJEXT) node_type.$(OBJEXT) notification.$(OBJEXT) \
-	plugins_engine.$(OBJEXT) render.$(OBJEXT) rule.$(OBJEXT) \
-	social.$(OBJEXT) subscription.$(OBJEXT) update.$(OBJEXT) \
-	main.$(OBJEXT) vfolder.$(OBJEXT) vfolder_loader.$(OBJEXT) \
-	xml.$(OBJEXT)
+	json.$(OBJEXT) liferea_application.$(OBJEXT) \
+	metadata.$(OBJEXT) migrate.$(OBJEXT) net.$(OBJEXT) \
+	net_monitor.$(OBJEXT) newsbin.$(OBJEXT) node.$(OBJEXT) \
+	node_type.$(OBJEXT) plugins_engine.$(OBJEXT) render.$(OBJEXT) \
+	rule.$(OBJEXT) social.$(OBJEXT) subscription.$(OBJEXT) \
+	update.$(OBJEXT) main.$(OBJEXT) vfolder.$(OBJEXT) \
+	vfolder_loader.$(OBJEXT) xml.$(OBJEXT)
 liferea_OBJECTS = $(am_liferea_OBJECTS)
 am__DEPENDENCIES_1 =
-am__DEPENDENCIES_2 = notification/libnotify.a \
-	$(am__DEPENDENCIES_1)
-am__DEPENDENCIES_3 = $(am__DEPENDENCIES_1)
 liferea_DEPENDENCIES = parsers/libliparsers.a \
 	fl_sources/libliflsources.a ui/libliui.a webkit/libwebkit.a \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
-	$(am__DEPENDENCIES_3)
+	$(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
@@ -270,14 +264,14 @@ am__relativize = \
     dir1=`echo "$$dir1" | sed -e "$$sed_rest"`; \
   done; \
   reldir="$$dir2"
-ACLOCAL = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing aclocal-1.15
 ALL_LINGUAS = 
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 AR = ar
-AUTOCONF = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing autoconf
-AUTOHEADER = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing autoheader
-AUTOMAKE = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing automake-1.15
+AUTOCONF = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing autoconf
+AUTOHEADER = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing autoheader
+AUTOMAKE = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing automake-1.15
 AWK = gawk
 CATALOGS = 
 CATOBJEXT = .gmo
@@ -331,10 +325,6 @@ INTROSPECTION_SCANNER = /usr/bin/g-ir-scanner
 INTROSPECTION_TYPELIBDIR = /usr/lib64/girepository-1.0
 LD = /usr/x86_64-pc-linux-gnu/bin/ld -m elf_x86_64
 LDFLAGS = 
-LIBINDICATE_CFLAGS = -pthread -I/usr/include/libindicate-gtk3-0.7 -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libdrm -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/libindicate-0.7 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/libdbusmenu-glib-0.4
-LIBINDICATE_LIBS = -lindicate-gtk3 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lindicate -lgobject-2.0 -lglib-2.0 -ldbusmenu-glib
-LIBNOTIFY_CFLAGS = -pthread -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include
-LIBNOTIFY_LIBS = -lnotify -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0
 LIBOBJS = 
 LIBS = 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
@@ -342,7 +332,7 @@ LIPO =
 LN_S = ln -s
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
-MAKEINFO = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing makeinfo
+MAKEINFO = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
 MKINSTALLDIRS = ./mkinstalldirs
@@ -360,10 +350,10 @@ PACKAGE_BUGREPORT = liferea-devel@lists.sourceforge.net
 PACKAGE_CFLAGS = -pthread -I/usr/include/webkitgtk-4.0 -I/usr/include/libsoup-2.4 -I/usr/include/libxml2 -I/usr/include/webkitgtk-4.0 -I/usr/include/json-glib-1.0 -I/usr/include/libpeas-1.0 -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libdrm -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/libpeas-1.0 -I/usr/include/gobject-introspection-1.0 -I/usr/lib64/libffi-3.2.1/include -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/gsettings-desktop-schemas
 PACKAGE_LIBS = -lxslt -lxml2 -lm -lxml2 -lsqlite3 -lgthread-2.0 -pthread -lwebkit2gtk-4.0 -lsoup-2.4 -ljavascriptcoregtk-4.0 -ljson-glib-1.0 -lpeas-gtk-1.0 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lpeas-1.0 -Wl,--export-dynamic -lgmodule-2.0 -pthread -lgio-2.0 -lgirepository-1.0 -lgobject-2.0 -lglib-2.0
 PACKAGE_NAME = liferea
-PACKAGE_STRING = liferea 1.10.19
+PACKAGE_STRING = liferea 1.12.2
 PACKAGE_TARNAME = liferea
 PACKAGE_URL = 
-PACKAGE_VERSION = 1.10.19
+PACKAGE_VERSION = 1.12.2
 PATH_SEPARATOR = :
 PKG_CONFIG = /usr/bin/pkg-config
 PKG_CONFIG_LIBDIR = 
@@ -378,12 +368,14 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 USE_NLS = yes
-VERSION = 1.10.19
+VERSION = 1.12.2
+WEB_EXTENSION_CFLAGS = -pthread -I/usr/include/webkitgtk-4.0 -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libdrm -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/libsoup-2.4 -I/usr/include/libxml2 -I/usr/include/webkitgtk-4.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include
+WEB_EXTENSION_LIBS = -lwebkit2gtk-4.0 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lsoup-2.4 -lgio-2.0 -lgobject-2.0 -ljavascriptcoregtk-4.0 -lglib-2.0
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /home/unixjunkie/liferea-1.10.19/src
-abs_srcdir = /home/unixjunkie/liferea-1.10.19/src
-abs_top_builddir = /home/unixjunkie/liferea-1.10.19
-abs_top_srcdir = /home/unixjunkie/liferea-1.10.19
+abs_builddir = /home/unixjunkie/liferea-1.12.2/src
+abs_srcdir = /home/unixjunkie/liferea-1.12.2/src
+abs_top_builddir = /home/unixjunkie/liferea-1.12.2
+abs_top_srcdir = /home/unixjunkie/liferea-1.12.2
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_DUMPBIN = 
@@ -413,7 +405,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/unixjunkie/liferea-1.10.19/install-sh
+install_sh = ${SHELL} /home/unixjunkie/liferea-1.12.2/install-sh
 intltool__v_merge_options_ = $(intltool__v_merge_options_$(AM_DEFAULT_VERBOSITY))
 intltool__v_merge_options_0 = -q
 libdir = ${exec_prefix}/lib
@@ -435,7 +427,7 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-SUBDIRS = parsers notification ui fl_sources webkit .
+SUBDIRS = parsers ui fl_sources webkit tests .
 AM_CPPFLAGS = \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
 	-DPACKAGE_LIB_DIR=\""$(pkglibdir)"\" \
@@ -458,7 +450,6 @@ liferea_SOURCES = \
 	db.c db.h \
 	dbus.c dbus.h \
 	debug.c debug.h \
-	e-date.c e-date.h \
 	enclosure.c enclosure.h \
 	export.c export.h \
 	favicon.c favicon.h \
@@ -475,6 +466,7 @@ liferea_SOURCES = \
 	itemset.c itemset.h \
 	itemlist.c itemlist.h \
 	json.c json.h \
+	liferea_application.c liferea_application.h \
 	metadata.c metadata.h \
 	migrate.c migrate.h \
 	net.c net.h \
@@ -483,7 +475,6 @@ liferea_SOURCES = \
 	node.c node.h \
 	node_type.c node_type.h \
 	node_view.h \
-	notification.c notification.h \
 	plugins_engine.c plugins_engine.h \
 	render.c render.h \
 	rule.c rule.h \
@@ -496,10 +487,16 @@ liferea_SOURCES = \
 	vfolder_loader.c vfolder_loader.h \
 	xml.c xml.h
 
-liferea_LDADD = parsers/libliparsers.a fl_sources/libliflsources.a \
-	ui/libliui.a webkit/libwebkit.a $(PACKAGE_LIBS) $(INTLLIBS) \
-	$(WEBKIT_LIBS) $(INTROSPECTION_LIBS) $(am__append_1) \
-	$(am__append_2)
+liferea_LDADD = parsers/libliparsers.a \
+		fl_sources/libliflsources.a \
+		ui/libliui.a \
+		webkit/libwebkit.a \
+		$(PACKAGE_LIBS) \
+		$(INTLLIBS) \
+		$(WEBKIT_LIBS) \
+		$(INTROSPECTION_LIBS) \
+		-lm
+
 EXTRA_DIST = $(srcdir)/liferea-add-feed.in
 DISTCLEANFILES = $(srcdir)/liferea-add-feed
 AM_INSTALLCHECK_STD_OPTIONS_EXEMPT = liferea-add-feed
@@ -507,18 +504,32 @@ INTROSPECTION_GIRS = Liferea-3.0.gir
 INTROSPECTION_SCANNER_ARGS = -I$(top_srcdir)/src --warn-all --accept-unprefixed --identifier-prefix=Liferea --verbose
 Liferea_3_0_gir_NAMESPACE = Liferea
 Liferea_3_0_gir_VERSION = 3.0
-Liferea_3_0_gir_PROGRAM = $(builddir)/liferea
+Liferea_3_0_gir_PROGRAM = $(builddir)/liferea$(EXEEXT)
 Liferea_3_0_gir_FILES = \
 	auth.c auth.h \
 	auth_activatable.c auth_activatable.h \
 	enclosure.h \
+	feedlist.c feedlist.h \
+	item.h \
+	itemlist.c itemlist.h \
+	itemset.c itemset.h \
+	node.h node.c \
+	node_view.h \
+	social.c social.h \
+	subscription_type.h \
+	ui/browser_tabs.c ui/browser_tabs.h \
+	ui/icons.c ui/icons.h \
 	ui/itemview.c ui/itemview.h \
+	ui/item_list_view.c ui/item_list_view.h \
+	ui/liferea_htmlview.c ui/liferea_htmlview.h \
 	ui/liferea_shell.c ui/liferea_shell.h \
 	ui/liferea_shell_activatable.c ui/liferea_shell_activatable.h \
 	ui/media_player.c ui/media_player.h \
-	ui/media_player_activatable.c ui/media_player_activatable.h
+	ui/media_player_activatable.c ui/media_player_activatable.h \
+	fl_sources/node_source.c fl_sources/node_source.h \
+	fl_sources/node_source_activatable.c fl_sources/node_source_activatable.h
 
-Liferea_3_0_gir_INCLUDES = Gtk-3.0 
+Liferea_3_0_gir_INCLUDES = Gtk-3.0 libxml2-2.0
 girdir = $(datadir)/liferea/gir-1.0
 gir_DATA = $(INTROSPECTION_GIRS)
 typelibdir = $(libdir)/liferea/girepository-1.0
@@ -699,7 +710,6 @@ include ./$(DEPDIR)/date.Po
 include ./$(DEPDIR)/db.Po
 include ./$(DEPDIR)/dbus.Po
 include ./$(DEPDIR)/debug.Po
-include ./$(DEPDIR)/e-date.Po
 include ./$(DEPDIR)/enclosure.Po
 include ./$(DEPDIR)/export.Po
 include ./$(DEPDIR)/favicon.Po
@@ -716,6 +726,7 @@ include ./$(DEPDIR)/item_state.Po
 include ./$(DEPDIR)/itemlist.Po
 include ./$(DEPDIR)/itemset.Po
 include ./$(DEPDIR)/json.Po
+include ./$(DEPDIR)/liferea_application.Po
 include ./$(DEPDIR)/main.Po
 include ./$(DEPDIR)/metadata.Po
 include ./$(DEPDIR)/migrate.Po
@@ -724,7 +735,6 @@ include ./$(DEPDIR)/net_monitor.Po
 include ./$(DEPDIR)/newsbin.Po
 include ./$(DEPDIR)/node.Po
 include ./$(DEPDIR)/node_type.Po
-include ./$(DEPDIR)/notification.Po
 include ./$(DEPDIR)/plugins_engine.Po
 include ./$(DEPDIR)/render.Po
 include ./$(DEPDIR)/rule.Po
@@ -1094,7 +1104,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-binSCRIPTS \
 
 -include $(INTROSPECTION_MAKEFILE)
 
-Liferea-3.0.gir: liferea
+Liferea-3.0.gir: liferea$(EXEEXT)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

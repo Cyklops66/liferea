@@ -1,13 +1,11 @@
-export.o: export.c /usr/include/stdc-predef.h /usr/include/sys/stat.h \
- /usr/include/features.h /usr/include/sys/cdefs.h \
- /usr/include/bits/wordsize.h /usr/include/bits/long-double.h \
- /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
- /usr/include/bits/types.h /usr/include/bits/typesizes.h \
- /usr/include/bits/types/struct_timespec.h \
- /usr/include/bits/types/time_t.h /usr/include/bits/stat.h export.h \
+export.o: export.c /usr/include/stdc-predef.h export.h \
  /usr/include/libxml2/libxml/xmlmemory.h /usr/include/stdio.h \
- /usr/include/bits/libc-header-start.h \
+ /usr/include/bits/libc-header-start.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/bits/long-double.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stdarg.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
@@ -45,18 +43,20 @@ export.o: export.c /usr/include/stdc-predef.h /usr/include/sys/stat.h \
  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
  /usr/include/bits/waitstatus.h /usr/include/sys/types.h \
  /usr/include/bits/types/clock_t.h /usr/include/bits/types/clockid_t.h \
- /usr/include/bits/types/timer_t.h /usr/include/endian.h \
- /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
- /usr/include/bits/byteswap-16.h /usr/include/bits/uintn-identity.h \
- /usr/include/sys/select.h /usr/include/bits/select.h \
- /usr/include/bits/sigset.h /usr/include/bits/types/struct_timeval.h \
- /usr/include/bits/select2.h /usr/include/sys/sysmacros.h \
- /usr/include/bits/sysmacros.h /usr/include/bits/pthreadtypes.h \
- /usr/include/alloca.h /usr/include/bits/stdlib-bsearch.h \
- /usr/include/bits/stdlib-float.h /usr/include/bits/stdlib.h \
- /usr/include/libxml2/libxml/xlink.h /usr/include/libxml2/libxml/SAX2.h \
- node.h itemset.h item.h /usr/include/glib-2.0/glib.h \
- /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
+ /usr/include/bits/types/time_t.h /usr/include/bits/types/timer_t.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/byteswap-16.h \
+ /usr/include/bits/uintn-identity.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/types/struct_timeval.h \
+ /usr/include/bits/types/struct_timespec.h /usr/include/bits/select2.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
+ /usr/include/bits/stdlib.h /usr/include/libxml2/libxml/xlink.h \
+ /usr/include/libxml2/libxml/SAX2.h node.h itemset.h item.h \
+ /usr/include/glib-2.0/glib.h /usr/include/glib-2.0/glib/galloca.h \
+ /usr/include/glib-2.0/glib/gtypes.h \
  /usr/lib64/glib-2.0/include/glibconfig.h \
  /usr/include/glib-2.0/glib/gmacros.h \
  /usr/include/glib-2.0/glib/gversionmacros.h /usr/include/time.h \
@@ -126,8 +126,12 @@ export.o: export.c /usr/include/stdc-predef.h /usr/include/sys/stat.h \
  /usr/include/glib-2.0/glib/deprecated/gthread.h /usr/include/pthread.h \
  /usr/include/sched.h /usr/include/bits/sched.h \
  /usr/include/bits/setjmp.h \
- /usr/include/glib-2.0/glib/glib-autocleanups.h rule.h node_view.h auth.h \
- common.h ../config.h /usr/include/string.h /usr/include/bits/string.h \
+ /usr/include/glib-2.0/glib/glib-autocleanups.h rule.h node_view.h \
+ /usr/include/errno.h /usr/include/bits/errno.h \
+ /usr/include/linux/errno.h /usr/include/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
+ /usr/include/sys/stat.h /usr/include/bits/stat.h auth.h common.h \
+ ../config.h /usr/include/string.h /usr/include/bits/string.h \
  /usr/include/bits/string2.h /usr/include/bits/string3.h \
  /usr/include/bits/strings_fortified.h /usr/include/libintl.h \
  /usr/include/locale.h /usr/include/bits/locale.h db.h subscription.h \
@@ -654,7 +658,13 @@ export.o: export.c /usr/include/stdc-predef.h /usr/include/sys/stat.h \
 
 /usr/include/stdc-predef.h:
 
-/usr/include/sys/stat.h:
+export.h:
+
+/usr/include/libxml2/libxml/xmlmemory.h:
+
+/usr/include/stdio.h:
+
+/usr/include/bits/libc-header-start.h:
 
 /usr/include/features.h:
 
@@ -668,25 +678,11 @@ export.o: export.c /usr/include/stdc-predef.h /usr/include/sys/stat.h \
 
 /usr/include/gnu/stubs-64.h:
 
+/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stddef.h:
+
 /usr/include/bits/types.h:
 
 /usr/include/bits/typesizes.h:
-
-/usr/include/bits/types/struct_timespec.h:
-
-/usr/include/bits/types/time_t.h:
-
-/usr/include/bits/stat.h:
-
-export.h:
-
-/usr/include/libxml2/libxml/xmlmemory.h:
-
-/usr/include/stdio.h:
-
-/usr/include/bits/libc-header-start.h:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/6.4.0/include/stddef.h:
 
 /usr/include/libio.h:
 
@@ -808,6 +804,8 @@ export.h:
 
 /usr/include/bits/types/clockid_t.h:
 
+/usr/include/bits/types/time_t.h:
+
 /usr/include/bits/types/timer_t.h:
 
 /usr/include/endian.h:
@@ -827,6 +825,8 @@ export.h:
 /usr/include/bits/sigset.h:
 
 /usr/include/bits/types/struct_timeval.h:
+
+/usr/include/bits/types/struct_timespec.h:
 
 /usr/include/bits/select2.h:
 
@@ -1051,6 +1051,22 @@ item.h:
 rule.h:
 
 node_view.h:
+
+/usr/include/errno.h:
+
+/usr/include/bits/errno.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/asm/errno.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/include/sys/stat.h:
+
+/usr/include/bits/stat.h:
 
 auth.h:
 

@@ -1,8 +1,8 @@
 /**
- * @file html.c  HTML favicon and feed link auto discovery
+ * @file html.c  HTML parsing
  * 
  * Copyright (C) 2004 ahmed el-helw <ahmedre@cc.gatech.edu>
- * Copyright (C) 2004-2009 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2004-2017 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,22 +31,25 @@
 enum {
 	LINK_FAVICON,
 	LINK_RSS_ALTERNATE,
+	LINK_AMPHTML
 };
 
+/**
+ * Fetch attribute of a html tag string
+ */
 static gchar *
-checkLinkRef (const gchar* str, gint linkType)
-{
+getAttrib (const gchar* str, gchar *attrib_name) {
 	gchar		*res;
 	const gchar	*tmp, *tmp2;
 	size_t		len = 0;
-	gchar		quote; 
-	
-	/*debug1(DEBUG_PARSING, "checking link %s", str); */
-	tmp = common_strcasestr (str, "href=");
+	gchar		quote;
+
+	/*debug1(DEBUG_PARSING, "fetching href %s", str); */
+	tmp = common_strcasestr (str, attrib_name);
 	if (!tmp)
 		return NULL;
 	tmp += 5;
-	
+
 	/* skip spaces up to the first quote. This is really slightly
 	 wrong.  SGML allows unquoted atributes, but not if they contain
 	 slashes, so 99% of all URIs will require quotes. */
@@ -63,6 +66,15 @@ checkLinkRef (const gchar* str, gint linkType)
 		tmp2++, len++;
 
 	res = g_strndup (tmp, len);
+	return res;
+}
+
+static gchar *
+checkLinkRef (const gchar* str, gint linkType)
+{
+	gchar		*res;
+
+	res = getAttrib(str, "href");
 
 	if (linkType == LINK_FAVICON) {
 		/* The type attribute is optional, so don't check for it,
@@ -84,9 +96,59 @@ checkLinkRef (const gchar* str, gint linkType)
 		     (common_strcasestr (str, "rdf+xml") != NULL) ||
 		     (common_strcasestr (str, "atom+xml") != NULL)))
 			return res;
+	} else if (linkType == LINK_AMPHTML) {
+		if (common_strcasestr (str, "amphtml") != NULL)
+			return res;
 	}
 	g_free (res);
 	return NULL;
+}
+
+/**
+ * Search tag in a html content, return link of the tag pointed by href
+ */
+static gchar *
+search_tag_link(const gchar* data, const gchar *tagName, gchar** tagEnd)
+{
+	gchar	*ptr;
+	const gchar	*tmp = data;
+	gchar	*result = NULL;
+	gchar	*res;
+	gchar	*tstr;
+	gchar	*endptr;
+	gchar   *tagname_start;
+
+	if (tagEnd)
+		*tagEnd = NULL;
+
+	tagname_start = g_strconcat("<", tagName, NULL);
+	ptr = common_strcasestr (tmp, tagname_start);
+	g_free(tagname_start);
+
+	if (!ptr)
+		return NULL;
+
+	endptr = strchr (ptr, '>');
+	if (!endptr)
+		return NULL;
+	*endptr = '\0';
+	tstr = g_strdup (ptr);
+	*endptr = '>';
+	res = getAttrib(tstr, "href");
+	g_free (tstr);
+	result = res;
+
+	if (tagEnd) {
+		endptr++;
+		*tagEnd = endptr;
+	}
+
+	if (result) {
+		/* URIs can contain escaped things....
+		 * All ampersands must be escaped, for example */
+		result = unhtmlize (result);
+	}
+	return result;
 }
 
 static gchar *
@@ -100,7 +162,7 @@ search_links (const gchar* data, gint linkType)
 	gchar	*endptr;
 	
 	while (1) {
-		ptr = common_strcasestr (tmp, "<link ");
+		ptr = common_strcasestr (tmp, "<link");
 		if (!ptr)
 			return NULL;
 		
@@ -139,7 +201,12 @@ search_links (const gchar* data, gint linkType)
 gchar *
 html_auto_discover_feed (const gchar* data, const gchar *baseUri)
 {
-	gchar	*res, *tmp;
+	gchar		*res, *tmp;
+	const gchar	*baseU;
+
+	baseU = search_tag_link(data, "base", NULL);
+	if (!baseU)
+		baseU = baseUri;
 
 	debug0 (DEBUG_UPDATE, "searching through link tags");
 	res = search_links (data, LINK_RSS_ALTERNATE);
@@ -148,7 +215,7 @@ html_auto_discover_feed (const gchar* data, const gchar *baseUri)
 	if (res) {
 		/* turn relative URIs into absolute URIs */
 		tmp = res;
-		res = common_build_url (res, baseUri);
+		res = common_build_url (res, baseU);
 		g_free (tmp);
 	}
 
@@ -172,4 +239,81 @@ html_discover_favicon (const gchar * data, const gchar * baseUri)
 	}
 	
 	return res;
+}
+
+/* Black and whitelisting patterns inspired by Mozillas Reader mode matching */
+static GRegex *unlikelyCandidates = NULL;
+static GRegex *maybeCandidates = NULL;
+
+#define UNLIKELY_CANDIDATES "author|author-line|published|banner|breadcrumbs|combx|comment|community|cover-wrap|disqus|extra|foot|header|legends|menu|modal|related|remark|replies|rss|shoutbox|sidebar|skyscraper|social|sponsor|supplemental|ad-break|agegate|pagination|pager|popup|yom-remote"
+#define MAYBE_CANDIDATES    "and|article|body|column|main|shadow"
+
+static void
+html_article_clean (xmlNodePtr node)
+{
+	xmlNodePtr	cur;
+	GError		*err = NULL;
+
+	// Setup regexes
+	if (!unlikelyCandidates) {
+		unlikelyCandidates = g_regex_new (UNLIKELY_CANDIDATES, G_REGEX_CASELESS | G_REGEX_UNGREEDY | G_REGEX_DOTALL | G_REGEX_OPTIMIZE, 0, &err);
+		maybeCandidates    = g_regex_new (MAYBE_CANDIDATES   , G_REGEX_CASELESS | G_REGEX_UNGREEDY | G_REGEX_DOTALL | G_REGEX_OPTIMIZE, 0, &err);
+	}
+
+	cur = node->xmlChildrenNode;
+	while (cur) {
+		gchar		*class, *id;
+		xmlNodePtr	unlink = NULL;
+
+	 	if (!cur->name || cur->type != XML_ELEMENT_NODE) {
+			cur = cur->next;
+			continue;
+		}
+
+		if (g_str_equal (cur->name , "h1"))
+			unlink = cur;
+		
+		class = xml_get_attribute (cur, "class");
+		id    = xml_get_attribute (cur, "id");
+		if ((class && g_regex_match (unlikelyCandidates, class, 0, NULL) &&
+                             !g_regex_match (maybeCandidates, class, 0, NULL)) ||
+                    (id && g_regex_match (unlikelyCandidates, id, 0, NULL) &&
+		          !g_regex_match (maybeCandidates, id, 0, NULL)))
+			unlink = cur;
+
+		if (!unlink)
+			html_article_clean (cur);
+
+		cur = cur->next;
+
+		if (unlink)
+			xmlUnlinkNode (unlink);
+
+		g_free (class);
+		g_free (id);
+	}
+}
+
+gchar *
+html_get_article (const gchar *data, const gchar *baseUri) {
+	xmlDocPtr	doc;
+	xmlNodePtr	node;
+
+	doc = xhtml_parse ((gchar *)data, (size_t)strlen(data));
+	if (!doc)
+		return NULL;
+
+	// Find article, we only expect a single article...
+	node = xpath_find (xmlDocGetRootElement (doc), "//article");
+	if (!node)
+		return NULL;
+
+	html_article_clean (node);
+
+	return xhtml_extract (node, 1, baseUri);
+}
+
+gchar *
+html_get_amp_url (const gchar *data) {
+	return search_links (data, LINK_AMPHTML);
 }

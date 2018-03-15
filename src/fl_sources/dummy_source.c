@@ -1,7 +1,7 @@
 /**
  * @file dummy_source.c  dummy feed list source
  * 
- * Copyright (C) 2006-2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2006-2014 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,26 +38,14 @@ static void dummy_source_deinit(void) { }
 /* feed list provider plugin definition */
 
 static struct nodeSourceType nst = {
-	NODE_SOURCE_TYPE_DUMMY_ID,
-	"Dummy Feed List Source",
-	"The dummy feed list source. Should never be added manually. If you see this then something went wrong!",
-	0,
-	dummy_source_init,
-	dummy_source_deinit,
-	NULL,
-	NULL,
-	dummy_source_import,
-	dummy_source_noop,		/* export */
-	dummy_source_get_feedlist,
-	dummy_source_noop,		/* update */
-	dummy_source_noop,		/* auto_update */
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL
+	.id			= NODE_SOURCE_TYPE_DUMMY_ID,
+	.name			= "Dummy Feed List Source",
+	.source_type_init	= dummy_source_init,
+	.source_type_deinit	= dummy_source_deinit,
+	.source_import		= dummy_source_import,
+	.source_export		= dummy_source_noop,
+	.source_get_feedlist	= dummy_source_get_feedlist,
+	.source_auto_update	= dummy_source_noop
 };
 
 nodeSourceTypePtr dummy_source_get_type(void) { return &nst; }

@@ -1,7 +1,7 @@
 /**
  * @file feed_list_view.c  the feed list in a GtkTreeView
  *
- * Copyright (C) 2004-2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2004-2013 Lars Windolf <lars.windolf@gmx.de>
  * Copyright (C) 2004-2006 Nathan J. Conrad <t98502@users.sourceforge.net>
  * Copyright (C) 2005 Raphael Slinckx <raphael@slinckx.net>
  * 
@@ -53,7 +53,7 @@ feed_list_view_row_changed_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIt
 	
 	gtk_tree_model_get (model, iter, FS_PTR, &node, -1);
 	if (node)
-		feed_list_node_update_iter(node->id, iter);
+		feed_list_node_update_iter (node->id, iter);
 }
 
 static void
@@ -74,7 +74,7 @@ feed_list_view_selection_changed_cb (GtkTreeSelection *selection, gpointer data)
 		feedlist_selection_changed (node);
 
 		/* 2.) Refilter the GtkTreeView to get rid of nodes with 0 unread 
-		       messages when in reduced mode. */
+		   messages when in reduced mode. */
 		gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (filter));
 		
 		if (node) {
@@ -120,7 +120,7 @@ feed_list_view_key_press_cb (GtkWidget *widget, GdkEventKey *event, gpointer dat
 			if (event->state & GDK_SHIFT_MASK)
 				feedlist_remove_node (node);
 			else
-				feed_list_view_delete_prompt (node);
+				feed_list_node_remove (node);
 			return TRUE;
 		}
 	}
@@ -210,14 +210,22 @@ feed_list_view_sort_folder_compare (gconstpointer a, gconstpointer b)
 {
 	nodePtr n1 = (nodePtr)a;
 	nodePtr n2 = (nodePtr)b;	
+
+	gchar *s1 = g_utf8_casefold (n1->title, -1);
+	gchar *s2 = g_utf8_casefold (n2->title, -1);
 	
-	return strcmp (n1->title, n2->title);
+	gint result = strcmp (s1, s2);
+
+	g_free (s1);
+	g_free (s2);
+
+	return result;
 }
 
 void
 feed_list_view_sort_folder (nodePtr folder)
 {
-	GtkTreeView	*treeview;
+	GtkTreeView             *treeview;
 
 	treeview = GTK_TREE_VIEW (liferea_shell_lookup ("feedlist"));
 	/* Unset the model from the view before clearing it and rebuilding it.*/
@@ -246,7 +254,7 @@ feed_list_view_init (GtkTreeView *treeview)
 	/* Set up store */
 	feedstore = gtk_tree_store_new (FS_LEN,
 	                                G_TYPE_STRING,
-	                                GDK_TYPE_PIXBUF,
+	                                G_TYPE_ICON,
 	                                G_TYPE_POINTER,
 	                                G_TYPE_UINT,
 					G_TYPE_STRING);
@@ -255,7 +263,7 @@ feed_list_view_init (GtkTreeView *treeview)
 
 	/* Prepare filter */
 	filter = gtk_tree_model_filter_new (GTK_TREE_MODEL(feedstore), NULL);
-	gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER(filter),
+	gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter),
 	                                        feed_list_view_filter_visible_function,
 	                                        NULL,
 	                                        NULL);
@@ -276,13 +284,13 @@ feed_list_view_init (GtkTreeView *treeview)
 	gtk_tree_view_column_pack_start (column, titleRenderer, TRUE);
 	gtk_tree_view_column_pack_end (column2, countRenderer, FALSE);
 	
-	gtk_tree_view_column_add_attribute (column, iconRenderer, "pixbuf", FS_ICON);
+	gtk_tree_view_column_add_attribute (column, iconRenderer, "gicon", FS_ICON);
 	gtk_tree_view_column_add_attribute (column, titleRenderer, "markup", FS_LABEL);
 	gtk_tree_view_column_add_attribute (column2, countRenderer, "markup", FS_COUNT);
 
 	gtk_tree_view_column_set_expand (column, TRUE);	
-	gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
-	gtk_tree_view_column_set_sizing (column2, GTK_TREE_VIEW_COLUMN_AUTOSIZE);
+	gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_GROW_ONLY);
+	gtk_tree_view_column_set_sizing (column2, GTK_TREE_VIEW_COLUMN_GROW_ONLY);
 	gtk_tree_view_append_column (treeview, column);
 	gtk_tree_view_append_column (treeview, column2);
 	
@@ -344,51 +352,6 @@ feed_list_view_select (nodePtr node)
 	}
 }
 
-/* delete feed callbacks */
-
-static void
-feed_list_view_delete_response_cb (GtkDialog *dialog, gint response_id, gpointer user_data)
-{	
-	if (GTK_RESPONSE_ACCEPT == response_id)
-		feedlist_remove_node ((nodePtr)user_data);
-
-	gtk_widget_destroy (GTK_WIDGET (dialog));
-}
-
-void
-feed_list_view_delete_prompt (nodePtr node)
-{
-	GtkWidget	*dialog;
-	GtkWindow	*mainwindow;
-	gchar		*text;
-	
-	g_assert (node == feedlist_get_selected ());
-
-	liferea_shell_set_status_bar ("%s \"%s\"", _("Deleting entry"), node_get_title (node));
-	text = g_strdup_printf (IS_FOLDER (node)?_("Are you sure that you want to delete \"%s\" and its contents?"):_("Are you sure that you want to delete \"%s\"?"), node_get_title (node));
-
-	mainwindow = GTK_WINDOW (liferea_shell_get_window ());
-	dialog = gtk_message_dialog_new (mainwindow,
-	                                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
-	                                 GTK_MESSAGE_QUESTION,
-	                                 GTK_BUTTONS_NONE,
-	                                 "%s", text);
-	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-	                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-	                        GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
-	                        NULL);
-	gtk_window_set_title (GTK_WINDOW (dialog), _("Deletion Confirmation"));
-	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-	gtk_window_set_transient_for (GTK_WINDOW (dialog), mainwindow);
-
-	g_free (text);
-	
-	gtk_widget_show_all (dialog);
-
-	g_signal_connect (G_OBJECT (dialog), "response",
-	                  G_CALLBACK (feed_list_view_delete_response_cb), node);
-}
-
 void
 on_menu_properties (GtkMenuItem *menuitem, gpointer user_data)
 {
@@ -397,9 +360,10 @@ on_menu_properties (GtkMenuItem *menuitem, gpointer user_data)
 	NODE_TYPE (node)->request_properties (node);
 }
 
-void on_menu_delete(GtkWidget *widget, gpointer user_data)
+void
+on_menu_delete(GtkWidget *widget, gpointer user_data)
 {
-	feed_list_view_delete_prompt (feedlist_get_selected());
+	feed_list_node_remove (feedlist_get_selected ());
 }
 
 static void

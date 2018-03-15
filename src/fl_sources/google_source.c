@@ -1,7 +1,7 @@
 /**
  * @file google_source.c  Google reader feed list source support
  * 
- * Copyright (C) 2007-2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2007-2013 Lars Windolf <lars.windolf@gmx.de>
  * Copyright (C) 2008 Arnold Noronha <arnstein87@gmail.com>
  * Copyright (C) 2011 Peter Oliver
  * Copyright (C) 2011 Sergey Snitsaruk <narren96c@gmail.com>
@@ -63,11 +63,6 @@ google_source_free (GoogleSourcePtr gsource)
 /* node source type implementation */
 
 static void
-google_source_update (nodePtr node)
-{
-}
-
-static void
 google_source_auto_update (nodePtr node)
 {
 }
@@ -82,44 +77,12 @@ google_source_init (void)
 static void google_source_deinit (void) { }
 
 static void
-google_source_import_node (nodePtr node)
-{
-	GSList *iter; 
-	for (iter = node->children; iter; iter = g_slist_next(iter)) {
-		nodePtr subnode = iter->data;
-		if (subnode->type->capabilities
-		    & NODE_CAPABILITY_SUBFOLDERS)
-			google_source_import_node (subnode);
-	}
-}
-
-static void
 google_source_import (nodePtr node)
 {
 	opml_source_import (node);
 	
 	if (!node->data)
 		node->data = (gpointer) google_source_new (node);
-
-	google_source_import_node (node);
-}
-
-static void
-google_source_export (nodePtr node)
-{
-	opml_source_export (node);
-}
-
-static gchar *
-google_source_get_feedlist (nodePtr node)
-{
-	return opml_source_get_feedlist (node);
-}
-
-static void 
-google_source_remove (nodePtr node)
-{ 
-	opml_source_remove (node);
 }
 
 static void
@@ -146,17 +109,14 @@ google_source_convert_to_local (nodePtr node)
 static struct nodeSourceType nst = {
 	.id                  = "fl_google",
 	.name                = N_("Google Reader"),
-	.description         = N_("Integrate the feed list of your Google Reader account. Liferea will "
-	                          "present your Google Reader subscriptions, and will synchronize your feed list and reading lists."),
 	.capabilities        = NODE_SOURCE_CAPABILITY_CONVERT_TO_LOCAL,
 	.source_type_init    = google_source_init,
 	.source_type_deinit  = google_source_deinit,
 	.source_new          = NULL,
-	.source_delete       = google_source_remove,
+	.source_delete       = opml_source_remove,
 	.source_import       = google_source_import,
-	.source_export       = google_source_export,
-	.source_get_feedlist = google_source_get_feedlist,
-	.source_update       = google_source_update,
+	.source_export       = opml_source_export,
+	.source_get_feedlist = opml_source_get_feedlist,
 	.source_auto_update  = google_source_auto_update,
 	.free                = google_source_cleanup,
 	.item_set_flag       = NULL,
@@ -170,5 +130,7 @@ static struct nodeSourceType nst = {
 nodeSourceTypePtr
 google_source_get_type (void)
 {
+	nst.feedSubscriptionType = feed_get_subscription_type ();
+
 	return &nst;
 }

@@ -157,9 +157,10 @@ am__uninstall_files_from_dir = { \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
 am__installdirs = "$(DESTDIR)$(appdatadir)" "$(DESTDIR)$(cssdir)" \
-	"$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(data_convertdir)" \
-	"$(DESTDIR)$(dtddir)" "$(DESTDIR)$(plugindir)"
-DATA = $(appdata_DATA) $(css_DATA) $(desktop_DATA) \
+	"$(DESTDIR)$(dbusservicedir)" "$(DESTDIR)$(desktopdir)" \
+	"$(DESTDIR)$(data_convertdir)" "$(DESTDIR)$(dtddir)" \
+	"$(DESTDIR)$(plugindir)"
+DATA = $(appdata_DATA) $(css_DATA) $(dbusservice_DATA) $(desktop_DATA) \
 	$(dist_data_convert_DATA) $(dtd_DATA) $(plugin_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
@@ -193,8 +194,8 @@ CSCOPE = cscope
 DIST_SUBDIRS = $(SUBDIRS)
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(srcdir)/net.sf.liferea.gschema.xml.in AUTHORS COPYING \
-	ChangeLog INSTALL README ar-lib compile config.guess \
-	config.sub install-sh ltmain.sh missing
+	ChangeLog INSTALL ar-lib compile config.guess config.sub \
+	install-sh ltmain.sh missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -237,14 +238,14 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing aclocal-1.15
 ALL_LINGUAS = 
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 AR = ar
-AUTOCONF = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing autoconf
-AUTOHEADER = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing autoheader
-AUTOMAKE = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing automake-1.15
+AUTOCONF = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing autoconf
+AUTOHEADER = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing autoheader
+AUTOMAKE = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing automake-1.15
 AWK = gawk
 CATALOGS = 
 CATOBJEXT = .gmo
@@ -298,10 +299,6 @@ INTROSPECTION_SCANNER = /usr/bin/g-ir-scanner
 INTROSPECTION_TYPELIBDIR = /usr/lib64/girepository-1.0
 LD = /usr/x86_64-pc-linux-gnu/bin/ld -m elf_x86_64
 LDFLAGS = 
-LIBINDICATE_CFLAGS = -pthread -I/usr/include/libindicate-gtk3-0.7 -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libdrm -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/libindicate-0.7 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/libdbusmenu-glib-0.4
-LIBINDICATE_LIBS = -lindicate-gtk3 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lindicate -lgobject-2.0 -lglib-2.0 -ldbusmenu-glib
-LIBNOTIFY_CFLAGS = -pthread -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include
-LIBNOTIFY_LIBS = -lnotify -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0
 LIBOBJS = 
 LIBS = 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
@@ -309,7 +306,7 @@ LIPO =
 LN_S = ln -s
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
-MAKEINFO = ${SHELL} /home/unixjunkie/liferea-1.10.19/missing makeinfo
+MAKEINFO = ${SHELL} /home/unixjunkie/liferea-1.12.2/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
 MKINSTALLDIRS = ./mkinstalldirs
@@ -327,10 +324,10 @@ PACKAGE_BUGREPORT = liferea-devel@lists.sourceforge.net
 PACKAGE_CFLAGS = -pthread -I/usr/include/webkitgtk-4.0 -I/usr/include/libsoup-2.4 -I/usr/include/libxml2 -I/usr/include/webkitgtk-4.0 -I/usr/include/json-glib-1.0 -I/usr/include/libpeas-1.0 -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libdrm -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/libpeas-1.0 -I/usr/include/gobject-introspection-1.0 -I/usr/lib64/libffi-3.2.1/include -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/gsettings-desktop-schemas
 PACKAGE_LIBS = -lxslt -lxml2 -lm -lxml2 -lsqlite3 -lgthread-2.0 -pthread -lwebkit2gtk-4.0 -lsoup-2.4 -ljavascriptcoregtk-4.0 -ljson-glib-1.0 -lpeas-gtk-1.0 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lpeas-1.0 -Wl,--export-dynamic -lgmodule-2.0 -pthread -lgio-2.0 -lgirepository-1.0 -lgobject-2.0 -lglib-2.0
 PACKAGE_NAME = liferea
-PACKAGE_STRING = liferea 1.10.19
+PACKAGE_STRING = liferea 1.12.2
 PACKAGE_TARNAME = liferea
 PACKAGE_URL = 
-PACKAGE_VERSION = 1.10.19
+PACKAGE_VERSION = 1.12.2
 PATH_SEPARATOR = :
 PKG_CONFIG = /usr/bin/pkg-config
 PKG_CONFIG_LIBDIR = 
@@ -345,12 +342,14 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = strip
 USE_NLS = yes
-VERSION = 1.10.19
+VERSION = 1.12.2
+WEB_EXTENSION_CFLAGS = -pthread -I/usr/include/webkitgtk-4.0 -I/usr/include/gtk-3.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include -I/usr/include/gtk-3.0 -I/usr/include/gio-unix-2.0/ -I/usr/include/cairo -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/freetype2 -I/usr/include/libdrm -I/usr/include/libpng16 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/libpng16 -I/usr/include/libsoup-2.4 -I/usr/include/libxml2 -I/usr/include/webkitgtk-4.0 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include
+WEB_EXTENSION_LIBS = -lwebkit2gtk-4.0 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lsoup-2.4 -lgio-2.0 -lgobject-2.0 -ljavascriptcoregtk-4.0 -lglib-2.0
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /home/unixjunkie/liferea-1.10.19
-abs_srcdir = /home/unixjunkie/liferea-1.10.19
-abs_top_builddir = /home/unixjunkie/liferea-1.10.19
-abs_top_srcdir = /home/unixjunkie/liferea-1.10.19
+abs_builddir = /home/unixjunkie/liferea-1.12.2
+abs_srcdir = /home/unixjunkie/liferea-1.12.2
+abs_top_builddir = /home/unixjunkie/liferea-1.12.2
+abs_top_srcdir = /home/unixjunkie/liferea-1.12.2
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_DUMPBIN = 
@@ -380,7 +379,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/unixjunkie/liferea-1.10.19/install-sh
+install_sh = ${SHELL} /home/unixjunkie/liferea-1.12.2/install-sh
 intltool__v_merge_options_ = $(intltool__v_merge_options_$(AM_DEFAULT_VERBOSITY))
 intltool__v_merge_options_0 = -q
 libdir = ${exec_prefix}/lib
@@ -403,9 +402,11 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 SUBDIRS = doc man opml pixmaps po src xslt glade
-desktop_in_files = liferea.desktop.in
+desktop_in_files = net.sourceforge.liferea.desktop.in
 desktopdir = $(datadir)/applications
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+dbusservicedir = $(datadir)/dbus-1/services
+dbusservice_DATA = net.sourceforge.liferea.service
 appdatadir = $(datadir)/appdata
 appdata_in_files = $(PACKAGE_TARNAME).appdata.xml.in
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
@@ -419,10 +420,18 @@ dtddir = $(pkgdatadir)/dtd
 dtd_DATA = dtd/html.ent
 plugindir = $(pkglibdir)/plugins
 plugin_DATA = \
+	plugins/bold-unread.py \
+	plugins/bold-unread.plugin \
 	plugins/gnome-keyring.py \
 	plugins/gnome-keyring.plugin \
+	plugins/libnotify.py \
+	plugins/libnotify.plugin \
 	plugins/media-player.py \
-	plugins/media-player.plugin
+	plugins/media-player.plugin \
+	plugins/plugin-installer.py \
+	plugins/plugin-installer.plugin \
+	plugins/trayicon.py \
+	plugins/trayicon.plugin
 
 gsettings_SCHEMAS = net.sf.liferea.gschema.xml
 data_convertdir = $(datadir)/GConf/gsettings
@@ -448,7 +457,8 @@ DISTCLEANFILES = \
 	$(gsettings_SCHEMAS)
 
 CLEANFILES = \
-	$(gsettings_SCHEMAS)
+	$(gsettings_SCHEMAS) \
+	$(appdata_DATA) 
 
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
@@ -555,6 +565,27 @@ uninstall-cssDATA:
 	@list='$(css_DATA)'; test -n "$(cssdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(cssdir)'; $(am__uninstall_files_from_dir)
+install-dbusserviceDATA: $(dbusservice_DATA)
+	@$(NORMAL_INSTALL)
+	@list='$(dbusservice_DATA)'; test -n "$(dbusservicedir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(dbusservicedir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(dbusservicedir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(dbusservicedir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(dbusservicedir)" || exit $$?; \
+	done
+
+uninstall-dbusserviceDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(dbusservice_DATA)'; test -n "$(dbusservicedir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(dbusservicedir)'; $(am__uninstall_files_from_dir)
 install-desktopDATA: $(desktop_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(desktop_DATA)'; test -n "$(desktopdir)" || list=; \
@@ -939,7 +970,7 @@ check: check-recursive
 all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(appdatadir)" "$(DESTDIR)$(cssdir)" "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(data_convertdir)" "$(DESTDIR)$(dtddir)" "$(DESTDIR)$(plugindir)"; do \
+	for dir in "$(DESTDIR)$(appdatadir)" "$(DESTDIR)$(cssdir)" "$(DESTDIR)$(dbusservicedir)" "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(data_convertdir)" "$(DESTDIR)$(dtddir)" "$(DESTDIR)$(plugindir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -997,8 +1028,9 @@ info: info-recursive
 info-am:
 
 install-data-am: install-appdataDATA install-cssDATA \
-	install-desktopDATA install-dist_data_convertDATA \
-	install-dtdDATA install-pluginDATA
+	install-dbusserviceDATA install-desktopDATA \
+	install-dist_data_convertDATA install-dtdDATA \
+	install-pluginDATA
 
 install-dvi: install-dvi-recursive
 
@@ -1045,8 +1077,9 @@ ps: ps-recursive
 ps-am:
 
 uninstall-am: uninstall-appdataDATA uninstall-cssDATA \
-	uninstall-desktopDATA uninstall-dist_data_convertDATA \
-	uninstall-dtdDATA uninstall-pluginDATA
+	uninstall-dbusserviceDATA uninstall-desktopDATA \
+	uninstall-dist_data_convertDATA uninstall-dtdDATA \
+	uninstall-pluginDATA
 
 .MAKE: $(am__recursive_targets) all install-am install-strip
 
@@ -1058,22 +1091,29 @@ uninstall-am: uninstall-appdataDATA uninstall-cssDATA \
 	distclean-hdr distclean-libtool distclean-tags distcleancheck \
 	distdir distuninstallcheck dvi dvi-am html html-am info \
 	info-am install install-am install-appdataDATA install-cssDATA \
-	install-data install-data-am install-desktopDATA \
-	install-dist_data_convertDATA install-dtdDATA install-dvi \
-	install-dvi-am install-exec install-exec-am install-html \
-	install-html-am install-info install-info-am install-man \
-	install-pdf install-pdf-am install-pluginDATA install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-am uninstall \
-	uninstall-am uninstall-appdataDATA uninstall-cssDATA \
+	install-data install-data-am install-dbusserviceDATA \
+	install-desktopDATA install-dist_data_convertDATA \
+	install-dtdDATA install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-man install-pdf install-pdf-am \
+	install-pluginDATA install-ps install-ps-am install-strip \
+	installcheck installcheck-am installdirs installdirs-am \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-am uninstall uninstall-am uninstall-appdataDATA \
+	uninstall-cssDATA uninstall-dbusserviceDATA \
 	uninstall-desktopDATA uninstall-dist_data_convertDATA \
 	uninstall-dtdDATA uninstall-pluginDATA
 
 .PRECIOUS: Makefile
 
 %.desktop:   %.desktop.in   $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; $(INTLTOOL_V_MERGE)LC_ALL=C $(INTLTOOL_MERGE) $(INTLTOOL_V_MERGE_OPTIONS) -d -u -c $(top_builddir)/po/.intltool-merge-cache $(top_srcdir)/po $< $@
+
+net.sourceforge.liferea.service: Makefile
+	$(AM_V_GEN) (echo '[D-BUS Service]'; \
+		echo 'Name=net.sourceforge.liferea'; \
+		echo 'Exec=${bindir}/liferea --gapplication-service') > $@.tmp && \
+		mv $@.tmp $@
 
 %.xml:       %.xml.in       $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; $(INTLTOOL_V_MERGE)LC_ALL=C $(INTLTOOL_MERGE) $(INTLTOOL_V_MERGE_OPTIONS) -x -u -c $(top_builddir)/po/.intltool-merge-cache $(top_srcdir)/po $< $@
 %.xml:       %.xml.in       $(INTLTOOL_MERGE) ; $(INTLTOOL_V_MERGE)LC_ALL=C $(INTLTOOL_MERGE) $(INTLTOOL_V_MERGE_OPTIONS) -x -u --no-translations $< $@
@@ -1118,7 +1158,6 @@ $(gsettings__enum_file): $(gsettings_ENUM_FILES)
 	$(AM_V_GEN) glib-mkenums --comments '<!-- @comment@ -->' --fhead "<schemalist>" --vhead "  <@type@ id='$(gsettings_ENUM_NAMESPACE).@EnumName@'>" --vprod "    <value nick='@valuenick@' value='@valuenum@'/>" --vtail "  </@type@>" --ftail "</schemalist>" $^ > $@.tmp && mv $@.tmp $@
 endif
 
-	$(appdata_DATA) 
 
 po/liferea.pot:
 	cd po && $(MAKE) liferea.pot

@@ -657,10 +657,11 @@ libliui_a-feed_list_view.o: feed_list_view.c /usr/include/stdc-predef.h \
  ../../src/debug.h ../../src/feedlist.h ../../src/folder.h \
  ../../src/net_monitor.h ../../src/newsbin.h ../../src/vfolder.h \
  ../../src/ui/browser_tabs.h ../../src/ui/liferea_htmlview.h \
- ../../src/ui/liferea_shell.h ../../src/node.h \
+ ../../src/net.h ../../src/ui/liferea_shell.h ../../src/node.h \
  ../../src/ui/subscription_dialog.h ../../src/subscription.h \
  ../../src/ui/ui_dnd.h ../../src/ui/feed_list_node.h \
- ../../src/fl_sources/node_source.h ../../src/node_type.h
+ ../../src/fl_sources/node_source.h ../../src/node_type.h \
+ ../../src/subscription_type.h ../../src/fl_sources/google_reader_api.h
 
 /usr/include/stdc-predef.h:
 
@@ -2198,6 +2199,8 @@ libliui_a-feed_list_view.o: feed_list_view.c /usr/include/stdc-predef.h \
 
 ../../src/ui/liferea_htmlview.h:
 
+../../src/net.h:
+
 ../../src/ui/liferea_shell.h:
 
 ../../src/node.h:
@@ -2213,3 +2216,7 @@ libliui_a-feed_list_view.o: feed_list_view.c /usr/include/stdc-predef.h \
 ../../src/fl_sources/node_source.h:
 
 ../../src/node_type.h:
+
+../../src/subscription_type.h:
+
+../../src/fl_sources/google_reader_api.h:

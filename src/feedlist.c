@@ -1,7 +1,7 @@
-/**
+/*
  * @file feedlist.c  subscriptions as an hierarchic tree
  *
- * Copyright (C) 2005-2013 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2005-2013 Lars Windolf <lars.windolf@gmx.de>
  * Copyright (C) 2005-2006 Nathan J. Conrad <t98502@users.sourceforge.net>
  *	      
  * This program is free software; you can redistribute it and/or modify
@@ -38,7 +38,6 @@
 #include "ui/itemview.h"
 #include "ui/liferea_shell.h"
 #include "ui/feed_list_node.h"
-#include "ui/ui_tray.h"
 #include "fl_sources/node_source.h"
 
 static void feedlist_save	(void);
@@ -46,24 +45,32 @@ static void feedlist_save	(void);
 #define FEEDLIST_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), FEEDLIST_TYPE, FeedListPrivate))
 
 struct FeedListPrivate {
-	guint		newCount;	/**< overall new item count */
+	guint		newCount;	/*<< overall new item count */
 
-	nodePtr		rootNode;	/**< the feed list root node */
-	nodePtr		selectedNode;	/**< matches the node selected in the feed list tree view, which
+	nodePtr		rootNode;	/*<< the feed list root node */
+	nodePtr		selectedNode;	/*<< matches the node selected in the feed list tree view, which
 					     is not necessarily the displayed one (e.g. folders without recursive
 					     display enabled) */
 
-	guint		saveTimer;	/**< timer id for delayed feed list saving */
-	guint		autoUpdateTimer; /**< timer id for auto update */
+	guint		saveTimer;	/*<< timer id for delayed feed list saving */
+	guint		autoUpdateTimer; /*<< timer id for auto update */
 
-	gboolean	loading;	/**< prevents the feed list being saved before it is completely loaded */
+	gboolean	loading;	/*<< prevents the feed list being saved before it is completely loaded */
+};
+
+enum {
+	NEW_ITEMS,		/*<< node has new items after update */
+	NODE_UPDATED,		/*<< node display info (title, unread count) has changed */
+	LAST_SIGNAL
 };
 
 #define ROOTNODE feedlist->priv->rootNode
 #define SELECTED feedlist->priv->selectedNode
 
+static guint feedlist_signals[LAST_SIGNAL] = { 0 };
+
 static GObjectClass *parent_class = NULL;
-static FeedList *feedlist = NULL;
+FeedList *feedlist = NULL;
 
 G_DEFINE_TYPE (FeedList, feedlist, G_TYPE_OBJECT);
 
@@ -81,13 +88,22 @@ static void
 feedlist_finalize (GObject *object)
 {
 	/* Stop all timer based activity */
-	if (feedlist->priv->autoUpdateTimer)
+	if (feedlist->priv->autoUpdateTimer) {
 		g_source_remove (feedlist->priv->autoUpdateTimer);
-	if (feedlist->priv->saveTimer)
+		feedlist->priv->autoUpdateTimer = 0;
+	}
+	if (feedlist->priv->saveTimer) {
 		g_source_remove (feedlist->priv->saveTimer);
+		feedlist->priv->saveTimer = 0;
+	}
 
 	/* Enforce synchronous save upon exit */
 	feedlist_save ();		
+
+	/* Save last selection for next start */
+	if (feedlist->priv->selectedNode)
+		conf_set_str_value (LAST_NODE_SELECTED, feedlist->priv->selectedNode->id);
+
 	
 	/* And destroy everything */
 	feedlist_foreach (feedlist_free_node);
@@ -108,6 +124,30 @@ feedlist_class_init (FeedListClass *klass)
 	parent_class = g_type_class_peek_parent (klass);
 
 	object_class->finalize = feedlist_finalize;
+
+	feedlist_signals[NEW_ITEMS] = 
+		g_signal_new ("new-items", 
+		G_OBJECT_CLASS_TYPE (object_class),
+		(GSignalFlags)(G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION),
+		0, 
+		NULL,
+		NULL,
+		g_cclosure_marshal_VOID__POINTER,
+		G_TYPE_NONE,
+		1,
+		G_TYPE_POINTER);
+
+	feedlist_signals[NODE_UPDATED] = 
+		g_signal_new ("node-updated", 
+		G_OBJECT_CLASS_TYPE (object_class),
+		(GSignalFlags)(G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION),
+		0, 
+		NULL,
+		NULL,
+		g_cclosure_marshal_VOID__STRING,
+		G_TYPE_NONE,
+		1,
+		G_TYPE_STRING);
 
 	g_type_class_add_private (object_class, sizeof(FeedListPrivate));
 }
@@ -170,8 +210,6 @@ feedlist_init (FeedList *fl)
 	/* 3. Ensure folder expansion and unread count*/
 	debug0 (DEBUG_CACHE, "Initializing node state");
 	feedlist_foreach (feedlist_init_node);
-
-	ui_tray_update ();
 
 	/* 4. Check if feeds do need updating. */
 	debug0 (DEBUG_UPDATE, "Performing initial feed update");
@@ -313,6 +351,7 @@ feedlist_mark_all_read (nodePtr node)
 		node_foreach_child (ROOTNODE, node_mark_all_read);
 		
 	feedlist_foreach (feedlist_update_node_counters);
+	itemview_select_item (NULL);
 	itemview_update_all_items ();
 	itemview_update ();
 }
@@ -338,36 +377,12 @@ feedlist_get_new_item_count (void)
 }
 
 void
-feedlist_update_new_item_count (guint addValue)
-{
-	feedlist->priv->newCount += addValue;
-	
-	/* On subsequent feed updates with cache drops
-	   more new items can be reported than effectively
-	   were merged. The simplest way to catch this case
-	   is by checking for new count > unread count here. */
-	if (feedlist->priv->newCount > ROOTNODE->unreadCount)
-		feedlist->priv->newCount = ROOTNODE->unreadCount;
-		
-	ui_tray_update ();
-	liferea_shell_update_unread_stats ();
-}
-
-void
 feedlist_reset_new_item_count (void)
 {
-	if (feedlist->priv->newCount) {
+	if (feedlist->priv->newCount)
 		feedlist->priv->newCount = 0;
-		ui_tray_update ();
-		liferea_shell_update_unread_stats ();
-	}
-}
 
-void
-feedlist_node_was_updated (nodePtr node, guint newCount)
-{
-	node_update_counters (node);
-	feedlist_update_new_item_count (newCount);
+	feedlist_new_items (0);
 }
 
 void
@@ -590,11 +605,12 @@ feedlist_selection_changed (nodePtr node)
 static gboolean
 feedlist_schedule_save_cb (gpointer user_data)
 {
-	/* step 1: request each node to save its state */
+	/* step 1: request each node to save its state, that is 
+	   mostly needed for nodes that are node sources */
 	feedlist_foreach (node_save);
 
 	/* step 2: request saving for the root node and thereby
-	   forcing the root plugin to save the feed list structure */
+	   forcing the default source to write an OPML file */
 	NODE_SOURCE_TYPE (ROOTNODE)->source_export (ROOTNODE);
 	
 	feedlist->priv->saveTimer = 0;
@@ -614,6 +630,32 @@ feedlist_schedule_save (void)
 	   we hope to catch bulks of feed list changes and save 
 	   less often */
 	feedlist->priv->saveTimer = g_timeout_add_seconds (5, feedlist_schedule_save_cb, NULL);
+}
+
+/* Handling updates */
+
+void
+feedlist_new_items (guint newCount)
+{
+	feedlist->priv->newCount += newCount;
+	
+	/* On subsequent feed updates with cache drops
+	   more new items can be reported than effectively
+	   were merged. The simplest way to catch this case
+	   is by checking for new count > unread count here. */
+	if (feedlist->priv->newCount > ROOTNODE->unreadCount)
+		feedlist->priv->newCount = ROOTNODE->unreadCount;
+
+	g_signal_emit_by_name (feedlist, "new-items", feedlist->priv->newCount);
+}
+
+void
+feedlist_node_was_updated (nodePtr node)
+{
+	node_update_counters (node);
+	feedlist_schedule_save ();
+
+	g_signal_emit_by_name (feedlist, "node-updated", node->title);
 }
 
 /* This method is only to be used when exiting the program! */

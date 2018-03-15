@@ -653,7 +653,7 @@ subscription.o: subscription.c /usr/include/stdc-predef.h subscription.h \
  /usr/include/gtk-3.0/gtk/gtk-autocleanups.h feedlist.h metadata.h \
  feed_parser.h feed.h node_type.h subscription_type.h net.h \
  ui/auth_dialog.h subscription.h ui/itemview.h item.h itemset.h node.h \
- ui/liferea_htmlview.h ui/liferea_shell.h ui/feed_list_node.h
+ ui/liferea_htmlview.h net.h ui/liferea_shell.h ui/feed_list_node.h
 
 /usr/include/stdc-predef.h:
 
@@ -2202,6 +2202,8 @@ itemset.h:
 node.h:
 
 ui/liferea_htmlview.h:
+
+net.h:
 
 ui/liferea_shell.h:
 

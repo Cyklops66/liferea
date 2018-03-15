@@ -1,7 +1,7 @@
 /**
  * @file htmlview.h  item view interface for HTML rendering
  * 
- * Copyright (C) 2006-2007 Lars Windolf <lars.lindner@gmail.com>
+ * Copyright (C) 2006-2007 Lars Windolf <lars.windolf@gmx.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,6 +44,14 @@ void	htmlview_clear (void);
  * @param node	the node whose items will be rendered
  */
 void	htmlview_set_displayed_node (nodePtr node);
+
+/**
+ * htmlview_contains_id:
+ * @id: an item id
+ *
+ * Returns: TRUE if the item is in the list of items to be displayed
+ */
+gboolean htmlview_contains_id (gulong id);
 
 /**
  * Adds an item to the HTML view for rendering. The item must belong
